@@ -5,10 +5,11 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource sfxSource;
     public AudioSource loopingSfxSource;
-    public AudioSource typingSource;
+    public AudioSource voiceSource;
 
     public AudioClip[] musicLibrary;
     public AudioClip[] sfxLibrary;
+    public AudioClip[] voiceLibrary;
 
     public static AudioManager instance;
 
@@ -39,7 +40,7 @@ public class AudioManager : MonoBehaviour
         musicSource = sources[0];
         sfxSource = sources[1];
         loopingSfxSource = sources[2];
-        typingSource = sources[3];
+        voiceSource = sources[3];
 
         musicSource.playOnAwake = false;
         musicSource.loop = true;
@@ -49,9 +50,32 @@ public class AudioManager : MonoBehaviour
 
         loopingSfxSource.playOnAwake = false;
         loopingSfxSource.loop = true;
-        
-        typingSource.playOnAwake = false;
-        typingSource.loop = false;
+
+        voiceSource.playOnAwake = false;
+        voiceSource.loop = false;
+    }
+
+    public void PlayMusic(int index, float volume = 1f)
+    {
+        if (index >= 0 && index < musicLibrary.Length && musicLibrary[index] != null)
+        {
+            if (musicSource.clip == musicLibrary[index] && musicSource.isPlaying)
+            {
+                musicSource.volume = volume;
+                return;
+            }
+
+            musicSource.clip = musicLibrary[index];
+            musicSource.loop = true;
+            musicSource.volume = volume;
+            musicSource.Play();
+        }
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+        musicSource.clip = null;
     }
 
     public void PlaySFX(int index, float volume = 1f)
@@ -64,6 +88,28 @@ public class AudioManager : MonoBehaviour
         {
             Debug.LogWarning("Audio Manager: SFX index " + index + " is out of bounds!");
         }
+    }
+
+    public bool isSFXPlaying()
+    {
+        return sfxSource.isPlaying;
+    }
+
+    public void PlayVoice(int index, float volume = 1f)
+    {
+        if (index >= 0 && index < voiceLibrary.Length && voiceLibrary[index] != null)
+        {
+            voiceSource.PlayOneShot(voiceLibrary[index], volume);
+        }
+        else
+        {
+            Debug.LogWarning("Audio Manager: Voice index " + index + " is out of bounds!");
+        }
+    }
+
+    public bool isVoicePlaying()
+    {
+        return voiceSource.isPlaying;
     }
 
     public void PlayLoopingSFX(int index, float volume = 1f)
@@ -84,23 +130,6 @@ public class AudioManager : MonoBehaviour
         loopingSfxSource.Stop();
     }
 
-    public void PlayMusic(int index, float volume = 1f)
-    {
-        if (index >= 0 && index < musicLibrary.Length && musicLibrary[index] != null)
-        {
-            if (musicSource.clip == musicLibrary[index] && musicSource.isPlaying)
-            {
-                musicSource.volume = volume;
-                return;
-            }
-
-            musicSource.clip = musicLibrary[index];
-            musicSource.loop = true;
-            musicSource.volume = volume;
-            musicSource.Play();
-        }
-    }
-
     public float GetSFXLength(int index)
     {
         if (index >= 0 && index < sfxLibrary.Length && sfxLibrary[index] != null)
@@ -109,25 +138,7 @@ public class AudioManager : MonoBehaviour
         }
         return 0f; 
     }
-    
-    public void PlayTypingSFX(int index, float volume = 0.08f)
-    {
-        if (index >= 0 && index < sfxLibrary.Length && sfxLibrary[index] != null)
-        {
-            typingSource.Stop();
-            typingSource.clip = sfxLibrary[index];
-            typingSource.volume = volume;
-            typingSource.Play();
-        }
-    }
 
-    public void StopTypingSFX()
-    {
-        if (typingSource != null)
-        {
-            typingSource.Stop();
-        }
-    }
     
     public void PlaySFXPanned(int index, float volume = 1f, float pan = 0f)
     {
