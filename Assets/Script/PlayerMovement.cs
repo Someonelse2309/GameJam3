@@ -10,6 +10,14 @@ public class PlayerMovement : MonoBehaviour
 
     public VirtualJoystick joystick; // Drag JoystickBase ke slot ini via Inspector
 
+    void Awake()
+{
+    // Matikan VSync agar targetFrameRate berjalan presisi
+    QualitySettings.vSyncCount = 0;
+    
+    // Atur target frame rate ke 60 FPS (atau 120 untuk layar ProMotion iPhone/Mac)
+    Application.targetFrameRate = 60;
+}
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
