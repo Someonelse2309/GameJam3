@@ -4,6 +4,21 @@
             "Title" : "Ripples",
             "Creator" : "Kevin MacLeod",
             "Link" : "incompetech.com"
+        },
+        "2" : {
+            "Title" : "Kafka's TP Roll",
+            "Creator" : "Gigakoops",
+            "Link" : "https://freemusicarchive.org/music/gigakoops/blood-tastes-better-than-water/kafkas-tp-roll/"
+        },
+        "3" : {
+            "Title" : "Senbazuru",
+            "Creator" : "Kevin MacLeod",
+            "Link" : "incompetech.com"
+        },
+        "4" : {
+            "Title" : "The Balkan Night Train",
+            "Creator" : "Dieter van der Westen",
+            "Link" : "https://freemusicarchive.org/music/dieter-van-der-westen/berlin-to-bamako/the-balkan-night-train/"
         }
     },
     "SFX" : {

@@ -717,7 +717,7 @@ MonoBehaviour:
   musicSource: {fileID: 1933678744}
   sfxSource: {fileID: 2093078608}
   loopingSfxSource: {fileID: 955356560}
-  voiceSource: {fileID: 376884701}
+  voiceSource: {fileID: 0}
   musicLibrary:
   - {fileID: 8300000, guid: 41375d96547a143f99777a19db5f0b9e, type: 3}
   sfxLibrary:
@@ -940,6 +940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885bb2f17e6964b1f8d73e295b1cba3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Story
+  subtitleText: {fileID: 0}
+  index: 0
 --- !u!4 &1970164820
 Transform:
   m_ObjectHideFlags: 0
