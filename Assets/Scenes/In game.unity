@@ -23134,6 +23134,7 @@ GameObject:
   - component: {fileID: 947877681}
   - component: {fileID: 947877685}
   - component: {fileID: 947877686}
+  - component: {fileID: 947877687}
   m_Layer: 0
   m_Name: Warrior_SheetnoEffect_26
   m_TagString: Player
@@ -23176,9 +23177,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947877680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 867bcb446dcd64aa0838c153edd80881, type: 2}
+  m_Controller: {fileID: 9100000, guid: cdf10cd5bb0844c1fae6aba0be355dc5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -23239,7 +23240,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4739410361002896916, guid: 3accdbde4e56f5c4e9cfa311b8cef55f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 557c13ea9068e46bebbf941bc54712f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -23259,7 +23260,7 @@ Transform:
   m_GameObject: {fileID: 947877680}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.28, y: 0.49, z: 0}
+  m_LocalPosition: {x: -3.98, y: 0.42, z: 0}
   m_LocalScale: {x: 1.77, y: 1.77, z: 1.77}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -23279,7 +23280,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 2
-  joystick: {fileID: 1499023145}
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: 21300000, guid: 557c13ea9068e46bebbf941bc54712f8, type: 3}
+  walkSprites:
+  - {fileID: 21300000, guid: 720aa3f4ea24d406f9dd8fe06d6f6423, type: 3}
+  - {fileID: 21300000, guid: a3a755f7aa5624ebdb9de8fa4d444fa6, type: 3}
+  - {fileID: 21300000, guid: 145bcc9dbcf794c06a50b597be9460bc, type: 3}
+  frameRate: 0.12
 --- !u!70 &947877686
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -23317,6 +23325,22 @@ CapsuleCollider2D:
   m_Offset: {x: -0.11, y: 0}
   m_Size: {x: 0.16, y: 0.2}
   m_Direction: 0
+--- !u!114 &947877687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947877680}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2e93deaad3346e69b009e9a1396523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoofCutoutController
+  roofMaterial: {fileID: 2100000, guid: b226e3b95353f4f1ab4451a083e08a6d, type: 2}
+  targetTilemap: {fileID: 207294071}
+  radius: 2
+  feather: 0.5
 --- !u!224 &953037768 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
@@ -25144,17 +25168,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1499023145 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6877845425145365849, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-  m_PrefabInstance: {fileID: 8567338900648286079}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3679ccf1861da4756bf1ba7a5a483553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VirtualJoystick
 --- !u!1 &1663507819
 GameObject:
   m_ObjectHideFlags: 0
@@ -25395,7 +25408,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -876546973899608171, guid: 8ac9b434fb4ce4ab6b05b1805c6efd88, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31408,7 +31421,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.06, y: 0, z: 0}
-  m_LocalScale: {x: 6.79, y: 6.79, z: 2.2633333}
+  m_LocalScale: {x: 4.59, y: 4.59, z: 1.5300001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 947877684}
@@ -31462,7 +31475,7 @@ SpriteMask:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_MaskAlphaCutoff: 1
+  m_MaskAlphaCutoff: 0.985
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0

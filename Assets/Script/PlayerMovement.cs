@@ -3,51 +3,70 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+
+    [Header("Components")]
+    public SpriteRenderer spriteRenderer;
+
+    [Header("Sprite Animation Frames")]
+    public Sprite[] idleSprites;
+    public Sprite[] walkSprites;
+    public float frameRate = 0.12f; // Kecepatan animasi (detik per frame)
+
     private Rigidbody2D rb;
-    private Animator anim;
-    private SpriteRenderer spriteRenderer;
     private Vector2 movement;
+    private float animTimer;
+    private int currentFrame;
+    private Sprite[] lastAnimation;
 
-    public VirtualJoystick joystick; // Drag JoystickBase ke slot ini via Inspector
-
-    void Awake()
-{
-    // Matikan VSync agar targetFrameRate berjalan presisi
-    QualitySettings.vSyncCount = 0;
-    
-    // Atur target frame rate ke 60 FPS (atau 120 untuk layar ProMotion iPhone/Mac)
-    Application.targetFrameRate = 60;
-}
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        // 1. Input Gerak
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+        movement = movement.normalized;
 
-        // Jika analog disentuh, utamakan input analog
-        if (joystick != null && joystick.InputVector != Vector2.zero)
-        {
-            moveX = joystick.InputVector.x;
-            moveY = joystick.InputVector.y;
-        }
-
-        movement = new Vector2(moveX, moveY).normalized;
-
-        bool isMoving = movement.sqrMagnitude > 0;
-        anim.SetBool("isMoving", isMoving); // Diperbaiki dari animator ke anim
-
+        // 2. Flip Badan Kiri / Kanan
         if (movement.x < 0) spriteRenderer.flipX = true;
         else if (movement.x > 0) spriteRenderer.flipX = false;
+
+        // 3. Jalankan Animasi lewat Code
+        HandleAnimation();
+    }
+
+    void HandleAnimation()
+    {
+        // Tentukan daftar sprite mana yang dipakai (Jalan atau Diam)
+        Sprite[] currentAnimation = (movement.sqrMagnitude > 0) ? walkSprites : idleSprites;
+
+        // Reset frame index jika berganti status (misal dari diam ke jalan)
+        if (currentAnimation != lastAnimation)
+        {
+            currentFrame = 0;
+            animTimer = 0f;
+            lastAnimation = currentAnimation;
+        }
+
+        // Timer untuk berpindah frame
+        if (currentAnimation != null && currentAnimation.Length > 0)
+        {
+            animTimer += Time.deltaTime;
+            if (animTimer >= frameRate)
+            {
+                animTimer = 0f;
+                currentFrame = (currentFrame + 1) % currentAnimation.Length;
+                spriteRenderer.sprite = currentAnimation[currentFrame];
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }
