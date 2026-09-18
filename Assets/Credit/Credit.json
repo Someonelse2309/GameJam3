@@ -28,6 +28,11 @@
             "Title" : "Pixel FX - Fire",
             "Creator" : "Admurin",
             "Link" : "https://assetstore.unity.com/packages/vfx/pixel-fx-fire-221146"
+        },
+        "3" : {
+            "Title" : "Pixel Interior",
+            "Creator" : "bitglow",
+            "Link" : "https://bitglow.itch.io/pixelinterior-livingroomkitchen"
         }
     }
 }
