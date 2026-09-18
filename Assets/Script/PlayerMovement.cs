@@ -7,12 +7,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Components")]
     public SpriteRenderer spriteRenderer;
 
+    [Header("UI Controls")]
+    public VirtualJoystick joystick; // Langsung menggunakan class VirtualJoystick
+
     [Header("Sprite Animation Frames")]
     public Sprite[] idleSprites;
     public Sprite[] walkSprites;
     public Sprite[] attackSprites;
     public Sprite[] shurikenSprites;
-    public float frameRate = 0.12f; // Kecepatan animasi (detik per frame)
+    public float frameRate = 0.12f;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -20,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     private int currentFrame;
     private Sprite[] lastAnimation;
 
-    // State Aksi
     private bool isAttacking = false;
     private bool isThrowingShuriken = false;
 
@@ -42,24 +44,71 @@ public class PlayerMovement : MonoBehaviour
             TriggerAction(shurikenSprites, false, true);
         }
 
-        // 2. Input Gerak (Karakter diam saat menyerang)
+        // 2. Input Gerak
         if (!isAttacking && !isThrowingShuriken)
         {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
-            movement = movement.normalized;
+            float moveX = Input.GetAxisRaw("Horizontal");
+            float moveY = Input.GetAxisRaw("Vertical");
+
+            if (joystick != null)
+            {
+                float jX = GetJoystickAxis("Horizontal");
+                float jY = GetJoystickAxis("Vertical");
+
+                if (Mathf.Abs(jX) > 0.05f || Mathf.Abs(jY) > 0.05f)
+                {
+                    moveX = jX;
+                    moveY = jY;
+                }
+            }
+
+            movement.x = moveX;
+            movement.y = moveY;
+
+            if (movement.sqrMagnitude > 1f)
+            {
+                movement = movement.normalized;
+            }
         }
         else
         {
             movement = Vector2.zero;
         }
 
-        // 3. Flip Badan Kiri / Kanan
+        // 3. Flip Badan
         if (movement.x < 0) spriteRenderer.flipX = true;
         else if (movement.x > 0) spriteRenderer.flipX = false;
 
-        // 4. Jalankan Animasi lewat Code
+        // 4. Jalankan Animasi
         HandleAnimation();
+    }
+
+    float GetJoystickAxis(string axis)
+    {
+        if (joystick == null) return 0f;
+
+        // Coba baca properti atau variabel umum pada VirtualJoystick
+        var prop = joystick.GetType().GetProperty(axis) ?? joystick.GetType().GetProperty(axis.ToLower());
+        if (prop != null) return (float)prop.GetValue(joystick);
+
+        var field = joystick.GetType().GetField(axis) ?? joystick.GetType().GetField(axis.ToLower());
+        if (field != null) return (float)field.GetValue(joystick);
+
+        var vecProp = joystick.GetType().GetProperty("InputVector") ?? joystick.GetType().GetProperty("inputVector");
+        if (vecProp != null)
+        {
+            Vector2 vec = (Vector2)vecProp.GetValue(joystick);
+            return axis == "Horizontal" ? vec.x : vec.y;
+        }
+
+        var vecField = joystick.GetType().GetField("InputVector") ?? joystick.GetType().GetField("inputVector");
+        if (vecField != null)
+        {
+            Vector2 vec = (Vector2)vecField.GetValue(joystick);
+            return axis == "Horizontal" ? vec.x : vec.y;
+        }
+
+        return 0f;
     }
 
     void TriggerAction(Sprite[] actionSprites, bool attacking, bool throwing)
@@ -77,21 +126,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Sprite[] currentAnimation;
 
-        // Prioritas: Attack / Shuriken > Walk > Idle
-        if (isAttacking)
-        {
-            currentAnimation = attackSprites;
-        }
-        else if (isThrowingShuriken)
-        {
-            currentAnimation = shurikenSprites;
-        }
-        else
-        {
-            currentAnimation = (movement.sqrMagnitude > 0) ? walkSprites : idleSprites;
-        }
+        if (isAttacking) currentAnimation = attackSprites;
+        else if (isThrowingShuriken) currentAnimation = shurikenSprites;
+        else currentAnimation = (movement.sqrMagnitude > 0) ? walkSprites : idleSprites;
 
-        // Reset frame index jika berganti status
         if (currentAnimation != lastAnimation)
         {
             currentFrame = 0;
@@ -99,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
             lastAnimation = currentAnimation;
         }
 
-        // Timer untuk berpindah frame
         if (currentAnimation != null && currentAnimation.Length > 0)
         {
             animTimer += Time.deltaTime;
@@ -108,7 +145,6 @@ public class PlayerMovement : MonoBehaviour
                 animTimer = 0f;
                 currentFrame++;
 
-                // Jika animasi aksi selesai 1 putaran, balik ke Idle/Walk
                 if (currentFrame >= currentAnimation.Length)
                 {
                     if (isAttacking || isThrowingShuriken)
@@ -118,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
                         currentFrame = 0;
                         return;
                     }
-                    currentFrame = 0; // Looping untuk Idle/Walk
+                    currentFrame = 0;
                 }
 
                 spriteRenderer.sprite = currentAnimation[currentFrame];

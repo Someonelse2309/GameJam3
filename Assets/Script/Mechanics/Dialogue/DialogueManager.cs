@@ -16,13 +16,22 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive = false;
 
     void Awake()
-{
-    Instance = this;
-    if (dialoguePanel != null)
     {
-        dialoguePanel.SetActive(false);
+        Instance = this;
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(false);
+        }
     }
-}
+
+    void Update()
+    {
+        // Lanjut ke kalimat berikutnya saat dialog aktif dan menekan tombol E atau Spasi
+        if (isDialogueActive && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
+        {
+            DisplayNextSentence();
+        }
+    }
 
     public void StartDialogue(DialogueSentence[] dialogue)
     {
