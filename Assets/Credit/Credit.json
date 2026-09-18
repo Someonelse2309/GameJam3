@@ -24,6 +24,26 @@
             "Title" : "Language of Lies",
             "Creator" : "PEG & The Rejected",
             "Link" : "https://freemusicarchive.org/music/PEG__The_Rejected/4th_Wave/PEG__the_Rejecteds_4th_Wave_-_Language_of_Lies/"
+        }, 
+        "6" : {
+            "Title" : " do not murmur do not cry...I give thanks to God",
+            "Creator" : "Kirill Bugaenko",
+            "Link" : "https://freemusicarchive.org/music/kirill-bugaenko/single/i-do-not-murmur-i-do-not-cry-i-give-thanks-to-god/"
+        },
+        "7" : {
+            "Title" : "Vibing Over Venus",
+            "Creator" : "Kevin MacLeod",
+            "Link" : "incompetech.com"
+        },
+        "8" : {
+            "Title" : "Sunday Dub",
+            "Creator" : "Kevin MacLeod",
+            "Link" : "incompetech.com"
+        },
+        "9" : {
+            "Title" : "New Hero in Town",
+            "Creator" : "Kevin MacLeod",
+            "Link" : "incompetech.com"
         }
     },
     "SFX" : {
@@ -36,6 +56,21 @@
             "Title" : "Heathers Gunshot Effect2",
             "Creator" : "okieactor",
             "Link" : "https://freesound.org/people/okieactor/sounds/415912/"
+        },
+        "3" : {
+            "Title" : "Walking",
+            "Creator" : "markagames",
+            "Link" : "https://freesound.org/people/markagames/sounds/444666/"
+        },
+        "4" : {
+            "Title" : "Ambulance Sirene Spain Almeria",
+            "Creator" : "Lommacat",
+            "Link" : "https://freesound.org/people/Lommacat/sounds/724014/"
+        },
+        "5" : {
+            "Title" : "KG gun cock 02",
+            "Creator" : "martian",
+            "Link" : "https://freesound.org/people/martian/sounds/182276/"
         }
     },
     "Visual" : {
