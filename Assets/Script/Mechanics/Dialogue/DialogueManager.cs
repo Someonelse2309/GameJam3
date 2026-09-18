@@ -1,7 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+
+[System.Serializable]
+public class CharacterProfile
+{
+    public string characterName;
+    public Sprite portrait;
+}
 
 public class DialogueManager : MonoBehaviour
 {
@@ -11,29 +19,45 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialoguePanel;
     public TMP_Text nameText;
     public TMP_Text dialogueText;
+    public Image profileImage;
 
-    private Queue<DialogueSentence> sentences = new Queue<DialogueSentence>();
+    [Header("Character Profiles Database")]
+    public List<CharacterProfile> characterProfiles; // Daftarkan PP karakter di sini sekali saja
+
+    private Queue<DialogueLine> sentences = new Queue<DialogueLine>();
+    private Dictionary<string, Sprite> profileDict = new Dictionary<string, Sprite>();
     private bool isDialogueActive = false;
 
     void Awake()
     {
         Instance = this;
-        if (dialoguePanel != null)
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+
+        // Buat Kamus Data Profil Karakter
+        InitProfileDictionary();
+    }
+
+    void InitProfileDictionary()
+    {
+        profileDict.Clear();
+        foreach (var profile in characterProfiles)
         {
-            dialoguePanel.SetActive(false);
+            if (!string.IsNullOrEmpty(profile.characterName) && !profileDict.ContainsKey(profile.characterName))
+            {
+                profileDict.Add(profile.characterName, profile.portrait);
+            }
         }
     }
 
     void Update()
     {
-        // Lanjut ke kalimat berikutnya saat dialog aktif dan menekan tombol E atau Spasi
         if (isDialogueActive && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
         {
             DisplayNextSentence();
         }
     }
 
-    public void StartDialogue(DialogueSentence[] dialogue)
+    public void StartDialogue(DialogueLine[] dialogue)
     {
         if (isDialogueActive)
         {
@@ -45,9 +69,9 @@ public class DialogueManager : MonoBehaviour
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
         sentences.Clear();
 
-        foreach (DialogueSentence sentence in dialogue)
+        foreach (DialogueLine line in dialogue)
         {
-            sentences.Enqueue(sentence);
+            sentences.Enqueue(line);
         }
 
         DisplayNextSentence();
@@ -61,9 +85,38 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        DialogueSentence current = sentences.Dequeue();
-        if (nameText != null) nameText.text = current.speakerName;
-        
+        DialogueLine current = sentences.Dequeue();
+
+        // 1. Set Nama Karakter
+        if (nameText != null) nameText.text = current.characterName;
+
+        // 2. Cari Foto Profil Otomatis Berdasarkan Nama
+        Sprite portraitSprite = null;
+
+        // Gunakan custom portrait jika diisi khusus pada line, jika tidak cari di database
+        if (current.characterPortrait != null)
+        {
+            portraitSprite = current.characterPortrait;
+        }
+        else if (!string.IsNullOrEmpty(current.characterName) && profileDict.TryGetValue(current.characterName, out Sprite foundSprite))
+        {
+            portraitSprite = foundSprite;
+        }
+
+        // 3. Tampilkan Foto Profil
+        if (profileImage != null)
+        {
+            if (portraitSprite != null)
+            {
+                profileImage.sprite = portraitSprite;
+                profileImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                profileImage.gameObject.SetActive(false);
+            }
+        }
+
         StopAllCoroutines();
         StartCoroutine(TypeSentence(current.sentence));
     }

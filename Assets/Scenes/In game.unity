@@ -119,6 +119,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &66371543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66371544}
+  - component: {fileID: 66371546}
+  - component: {fileID: 66371545}
+  m_Layer: 5
+  m_Name: ProfileImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &66371544
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66371543}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 491048958}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -300, y: 2}
+  m_SizeDelta: {x: 100, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &66371545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66371543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &66371546
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66371543}
+  m_CullTransparentMesh: 1
 --- !u!1 &171087459
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,6 +4433,7 @@ RectTransform:
   m_Children:
   - {fileID: 1918078041}
   - {fileID: 1541575104}
+  - {fileID: 66371544}
   m_Father: {fileID: 953037768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -23930,7 +24006,7 @@ Transform:
   m_GameObject: {fileID: 991046959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.6, y: 2.35, z: 0}
+  m_LocalPosition: {x: 1.54, y: 0.903, z: 0}
   m_LocalScale: {x: 1.59, y: 1.5900002, z: 1.5900002}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -23995,24 +24071,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   autoTriggerOnApproach: 1
-  dialogueSentences:
-  - speakerName: Tanaka Koji
+  dialogueLines:
+  - characterName: Tanaka Koji
+    characterPortrait: {fileID: -4629523976892568963, guid: ea69db05687ad44c083ff476a8172dbc, type: 3}
     sentence: Well well well, look what we have here
-  - speakerName: Tanaka Koji
+  - characterName: Tanaka Koji
+    characterPortrait: {fileID: 0}
     sentence: "\u9B3C\u6BBA\u3057 (Onikoroshi)\u2026. The ghost slayer\u2026."
-  - speakerName: Tanaka Koji
+  - characterName: Tanaka Koji
+    characterPortrait: {fileID: 0}
     sentence: "I thought you left this life behind\u2026."
-  - speakerName: Michelle Sato
+  - characterName: Michelle Sato
+    characterPortrait: {fileID: 0}
     sentence: "I need your help\u2026."
-  - speakerName: Tanaka Koji
+  - characterName: Tanaka Koji
+    characterPortrait: {fileID: 0}
     sentence: "Why should I? You should just go home an\u2026."
-  - speakerName: Michelle Sato
+  - characterName: Michelle Sato
+    characterPortrait: {fileID: 0}
     sentence: You owe me one, Remember Nagoya?
-  - speakerName: Tanaka Koji
+  - characterName: Tanaka Koji
+    characterPortrait: {fileID: 0}
     sentence: "I remember\u2026"
-  - speakerName: Tanaka Koji
+  - characterName: Tanaka Koji
+    characterPortrait: {fileID: 0}
     sentence: "But I\u2019m hungry\u2026"
-  - speakerName: Tanaka Koji
+  - characterName: Tanaka Koji
+    characterPortrait: {fileID: 0}
     sentence: "Get me something to eat, and we\u2019ll talk\u2026"
 --- !u!1 &1201627116
 GameObject:
@@ -24088,7 +24173,7 @@ SpriteRenderer:
   m_Size: {x: 0.4, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!4 &1201627118
@@ -24153,6 +24238,12 @@ MonoBehaviour:
   dialoguePanel: {fileID: 491048957}
   nameText: {fileID: 1918078042}
   dialogueText: {fileID: 1541575105}
+  profileImage: {fileID: 66371545}
+  characterProfiles:
+  - characterName: Tanaka Koji
+    portrait: {fileID: -4629523976892568963, guid: ea69db05687ad44c083ff476a8172dbc, type: 3}
+  - characterName: Michelle Sato
+    portrait: {fileID: 21300000, guid: a3a755f7aa5624ebdb9de8fa4d444fa6, type: 3}
 --- !u!1 &1248010830
 GameObject:
   m_ObjectHideFlags: 0
