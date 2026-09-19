@@ -42,7 +42,7 @@ public class PlayerAnimateEP1 : MonoBehaviour
     private void Update()
     {
         // Cek dialogue
-        if (DialogueManager.instance != null && DialogueManager.instance.IsDialogueActive())
+        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
         {
             if (idleSprites != null && idleSprites.Length > 0)
                 spriteRenderer.sprite = idleSprites[0];

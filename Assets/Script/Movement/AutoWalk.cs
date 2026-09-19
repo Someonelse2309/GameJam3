@@ -21,8 +21,8 @@ public class AutoWalk : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("Events")]
-    public DialogueData dialogueToPlayOnStart;
-    public DialogueData dialogueToPlayOnReach; // Dialogue saat sampai di titik akhir
+    public DialogueDataEP1 dialogueToPlayOnStart;
+    public DialogueDataEP1 dialogueToPlayOnReach;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class AutoWalk : MonoBehaviour
     void Update()
     {
         // Pause saat dialogue aktif
-        if (DialogueManager.instance != null && DialogueManager.instance.IsDialogueActive())
+        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
         {
             if (isWalking)
             {
@@ -50,7 +50,7 @@ public class AutoWalk : MonoBehaviour
         }
 
         // Resume kalau dialogue selesai
-        if (isPaused && (DialogueManager.instance == null || !DialogueManager.instance.IsDialogueActive()))
+        if (isPaused && (DialogueManagerEP1.instanceEP1 == null || !DialogueManagerEP1.instanceEP1.IsDialogueActive()))
         {
             isPaused = false;
             ResumeWalking();
@@ -132,9 +132,9 @@ public class AutoWalk : MonoBehaviour
         }
 
         // Play dialogue kalau ada
-        if (dialogueToPlayOnReach != null && DialogueManager.instance != null)
+        if (dialogueToPlayOnReach != null && DialogueManagerEP1.instanceEP1 != null)
         {
-            DialogueManager.instance.StartDialogue(dialogueToPlayOnReach);
+            DialogueManagerEP1.instanceEP1.StartDialogue(dialogueToPlayOnReach);
         }
     }
 
@@ -159,9 +159,9 @@ public class AutoWalk : MonoBehaviour
         isPaused = false;
 
         // Play dialogue kalau ada
-        if (dialogueToPlayOnStart != null && DialogueManager.instance != null)
+        if (dialogueToPlayOnStart != null && DialogueManagerEP1.instanceEP1 != null)
         {
-            DialogueManager.instance.StartDialogue(dialogueToPlayOnStart);
+            DialogueManagerEP1.instanceEP1.StartDialogue(dialogueToPlayOnStart);
         }
     }
 

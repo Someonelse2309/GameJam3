@@ -27,7 +27,7 @@ public class PlayerMovementEP1 : MonoBehaviour
     void Update()
     {
         // Tidak bisa gerak saat dialogue aktif
-        if (DialogueManager.instance != null && DialogueManager.instance.IsDialogueActive())
+        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
         {
             movement = Vector2.zero;
             return;

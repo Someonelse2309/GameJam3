@@ -11,12 +11,12 @@ public class DialogueTriggerIndicator : MonoBehaviour
     public Color color = Color.yellow;
 
     private SpriteRenderer sr;
-    private DialogueTrigger dialogueTrigger;
+    private DialogueTriggerEP1 dialogueTrigger;
     private float time = 0f;
 
     void Start()
     {
-        dialogueTrigger = GetComponent<DialogueTrigger>();
+        dialogueTrigger = GetComponent<DialogueTriggerEP1>();
 
         // Kalau indicatorObject belum di-assign, buat sendiri
         if (indicatorObject == null)
@@ -87,7 +87,7 @@ public class DialogueTriggerIndicator : MonoBehaviour
         sr.color = new Color(color.r, color.g, color.b, alpha);
 
         // Hide kalau dialogue aktif
-        if (DialogueManager.instance != null && DialogueManager.instance.IsDialogueActive())
+        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
         {
             sr.enabled = false;
         }

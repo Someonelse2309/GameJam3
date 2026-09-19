@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueTriggerEP1 : MonoBehaviour
 {
-    public DialogueData dialogueData;
+    public DialogueDataEP1 dialogueData;
 
     [Header("Settings")]
     public bool triggerOnce = true;
     public bool deactivateAfterTrigger = false;
 
     [Header("AutoWalk - Character yang auto jalan")]
-    public AutoWalk autoWalkTarget; // AutoWalk yang akan dipanggil
+    public AutoWalk autoWalkTarget;
 
     private bool hasTriggered = false;
 
@@ -17,7 +17,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && CanTrigger())
         {
-            Debug.Log("DialogueTrigger: Player masuk trigger - " + gameObject.name);
+            Debug.Log("DialogueTriggerEP1: Player masuk trigger - " + gameObject.name);
             TriggerDialogue();
         }
     }
@@ -26,34 +26,32 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (CanTrigger())
         {
-            Debug.Log("DialogueTrigger: Triggering dialogue - " + (dialogueData != null ? dialogueData.name : "NULL"));
+            Debug.Log("DialogueTriggerEP1: Triggering dialogue - " + (dialogueData != null ? dialogueData.name : "NULL"));
 
             hasTriggered = true;
 
             if (deactivateAfterTrigger)
                 gameObject.SetActive(false);
 
-            // Start AutoWalk kalau ada
             if (autoWalkTarget != null)
             {
-                Debug.Log("DialogueTrigger: Starting AutoWalk - " + autoWalkTarget.gameObject.name);
+                Debug.Log("DialogueTriggerEP1: Starting AutoWalk - " + autoWalkTarget.gameObject.name);
                 autoWalkTarget.StartWalking();
             }
 
-            // Start Dialogue
-            if (DialogueManager.instance == null)
+            if (DialogueManagerEP1.instanceEP1 == null)
             {
-                Debug.LogError("DialogueTrigger ERROR: DialogueManager.instance NULL!");
+                Debug.LogError("DialogueTriggerEP1 ERROR: DialogueManagerEP1.instanceEP1 NULL!");
                 return;
             }
 
             if (dialogueData == null)
             {
-                Debug.LogError("DialogueTrigger ERROR: dialogueData NULL! Assign Dialogue Data asset ke DialogueTrigger di Inspector.");
+                Debug.LogError("DialogueTriggerEP1 ERROR: dialogueData NULL!");
                 return;
             }
 
-            DialogueManager.instance.StartDialogue(dialogueData);
+            DialogueManagerEP1.instanceEP1.StartDialogue(dialogueData);
         }
     }
 
@@ -61,12 +59,12 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (triggerOnce && hasTriggered)
         {
-            Debug.Log("DialogueTrigger: Sudah pernah trigger, skip.");
+            Debug.Log("DialogueTriggerEP1: Sudah pernah trigger, skip.");
             return false;
         }
-        if (DialogueManager.instance != null && DialogueManager.instance.IsDialogueActive())
+        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
         {
-            Debug.Log("DialogueTrigger: Dialogue sedang aktif, skip.");
+            Debug.Log("DialogueTriggerEP1: Dialogue sedang aktif, skip.");
             return false;
         }
 

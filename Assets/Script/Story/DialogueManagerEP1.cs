@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManagerEP1 : MonoBehaviour
 {
-    public static DialogueManager instance;
+    public static DialogueManagerEP1 instanceEP1;
 
     [Header("UI References")]
     public GameObject dialoguePanel;
@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     public float autoAdvanceDelay = 2f;
     public KeyCode advanceKey = KeyCode.Space;
 
-    private DialogueData currentDialogue;
+    private DialogueDataEP1 currentDialogue;
     private int currentLineIndex = 0;
     private bool isTyping = false;
     private bool isDialogueActive = false;
@@ -28,19 +28,19 @@ public class DialogueManager : MonoBehaviour
 
     public Action OnDialogueStart;
     public Action OnDialogueEnd;
-    public Action<int> OnLineChanged; // Callback saat line berubah (param: line index)
+    public Action<int> OnLineChanged;
 
     private void Awake()
     {
-        if (instance == null)
+        if (instanceEP1 == null)
         {
-            instance = this;
-            Debug.Log("DialogueManager: Instance created");
+            instanceEP1 = this;
+            Debug.Log("DialogueManagerEP1: Instance created");
         }
         else
         {
             Destroy(gameObject);
-            Debug.LogWarning("DialogueManager: Instance already exists, destroying duplicate");
+            Debug.LogWarning("DialogueManagerEP1: Instance already exists, destroying duplicate");
             return;
         }
 
@@ -58,11 +58,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueData dialogue)
+    public void StartDialogue(DialogueDataEP1 dialogue)
     {
         if (dialogue == null || dialogue.lines == null || dialogue.lines.Length == 0)
         {
-            Debug.LogError("DialogueManager.StartDialogue: dialogue NULL atau tidak punya lines!");
+            Debug.LogError("DialogueManagerEP1.StartDialogue: dialogue NULL atau tidak punya lines!");
             return;
         }
 
@@ -83,7 +83,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentDialogue == null || index >= currentDialogue.lines.Length) return;
 
-        DialogueData.DialogueLine line = currentDialogue.lines[index];
+        DialogueDataEP1.DialogueLine line = currentDialogue.lines[index];
 
         if (nameText != null)
             nameText.text = line.speakerName;
@@ -160,7 +160,7 @@ public class DialogueManager : MonoBehaviour
             if (continueIndicator != null)
                 continueIndicator.SetActive(false);
 
-            DialogueData.DialogueLine currentLine = currentDialogue.lines[currentLineIndex];
+            DialogueDataEP1.DialogueLine currentLine = currentDialogue.lines[currentLineIndex];
 
             if (currentLine.delayAfter > 0)
             {
@@ -205,7 +205,7 @@ public class DialogueManager : MonoBehaviour
         if (OnDialogueEnd != null)
             OnDialogueEnd.Invoke();
 
-        Debug.Log("DialogueManager: Dialogue ended");
+        Debug.Log("DialogueManagerEP1: Dialogue ended");
     }
 
     public void ForceEndDialogue()
