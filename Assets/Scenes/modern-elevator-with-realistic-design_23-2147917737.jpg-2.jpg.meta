@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3c745554971d841ad80894c67a6995f8
+guid: ed6b898a9504e4da7ac3909ea41b3afd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 491899051937912484
-    second: NPC Pedagang_Idles_0
+      213: 8772122663783406727
+    second: modern-elevator-with-realistic-design_23-2147917737.jpg-2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -56,9 +56,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationMethod: 0
   spriteTessellationDetail: -1
-  spriteGeometrySubdivision: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -111,40 +109,93 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NPC Pedagang_Idles_0
+      name: modern-elevator-with-realistic-design_23-2147917737.jpg-2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 54
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 68
+        y: 215
+        width: 238
+        height: 338
+      alignment: 9
+      pivot: {x: 0.5239575, y: 0.4999999}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4a65c10e49393d600800000000000000
-      internalID: 491899051937912484
+      spriteID: 78c96f40617dcb970800000000000000
+      internalID: 8772122663783406727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: modern-elevator-with-realistic-design_23-2147917737.jpg-2_1
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 215
+        width: 118
+        height: 317
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2077176051594575875856e5fb5afa9
+      internalID: -1186306677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: modern-elevator-with-realistic-design_23-2147917737.jpg-2_2
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 215
+        width: 114
+        height: 317
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6529774a6addb4fee8efaf4be327b409
+      internalID: 1398731808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: modern-elevator-with-realistic-design_23-2147917737.jpg-2_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 216
+        width: 22
+        height: 317
+      alignment: 9
+      pivot: {x: 0.5493691, y: 0.69530326}
+      border: {x: 0, y: 47, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc2fe3b8d5e804470a093f543d62c1da
+      internalID: -1690256495
       vertices: []
       indices: 
       edges: []
@@ -153,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 52b20bad6ae1248ff8efe3dc7f8cd21b
     internalID: 0
     vertices: []
     indices: 
@@ -163,7 +214,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      NPC Pedagang_Idles_0: 491899051937912484
+      modern-elevator-with-realistic-design_23-2147917737.jpg-2_0: 8772122663783406727
+      modern-elevator-with-realistic-design_23-2147917737.jpg-2_1: -1186306677
+      modern-elevator-with-realistic-design_23-2147917737.jpg-2_2: 1398731808
+      modern-elevator-with-realistic-design_23-2147917737.jpg-2_3: -1690256495
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

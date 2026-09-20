@@ -23834,7 +23834,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   joystick: {fileID: 989174845}
   idleSprites:
-  - {fileID: 21300000, guid: 557c13ea9068e46bebbf941bc54712f8, type: 3}
+  - {fileID: -4091135495242590268, guid: 63d585aede78b44da8f6459d96ce3277, type: 3}
   - {fileID: -5667889710134911916, guid: 0266afad55d3d46d6af6f95970808ee5, type: 3}
   - {fileID: -615432635105407339, guid: 699b03ee0d75c449d91f9d47e99e9abe, type: 3}
   walkSprites:
@@ -23848,7 +23848,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9d1f5e291e8924e04918c7deef123d4b, type: 3}
   - {fileID: 21300000, guid: 7f4fbb6ff93854382a3676afe6c777e7, type: 3}
   - {fileID: 21300000, guid: bac3dd6fc7bd74ff3820ba050fca5add, type: 3}
-  frameRate: 0.12
+  frameRate: 0.15
 --- !u!70 &947877686
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -23930,6 +23930,7 @@ GameObject:
   - component: {fileID: 991046960}
   - component: {fileID: 991046962}
   - component: {fileID: 991046963}
+  - component: {fileID: 991046964}
   m_Layer: 0
   m_Name: NPC_Beggar
   m_TagString: Untagged
@@ -23986,7 +23987,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -4629523976892568963, guid: ea69db05687ad44c083ff476a8172dbc, type: 3}
+  m_Sprite: {fileID: 5549884384000174101, guid: b976c260761cd4347a9685d51b9bc265, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -24099,6 +24100,24 @@ MonoBehaviour:
   - characterName: Tanaka Koji
     characterPortrait: {fileID: 0}
     sentence: "Get me something to eat, and we\u2019ll talk\u2026"
+--- !u!114 &991046964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991046959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5602b3cc0044fefa3f3cd4448d2c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: 5549884384000174101, guid: b976c260761cd4347a9685d51b9bc265, type: 3}
+  - {fileID: 239222265727424508, guid: 3614f3390c81146a894bd4af4e5eabbe, type: 3}
+  - {fileID: -857703140535269667, guid: 8a4f4c16569cd45cc83c0565d012f9d5, type: 3}
+  frameRate: 0.15
 --- !u!1 &1201627116
 GameObject:
   m_ObjectHideFlags: 0
@@ -32631,6 +32650,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3199589276705089571, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 319.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199589276705089571, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 315.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
       propertyPath: m_Pivot.x
       value: 0

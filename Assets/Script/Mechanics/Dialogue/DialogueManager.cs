@@ -29,13 +29,22 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive = false;
 
     void Awake()
-    {
-        Instance = this;
-        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+{
+    Instance = this;
 
-        // Buat Kamus Data Profil Karakter
-        InitProfileDictionary();
+    // Kunci frame rate ke 60 FPS untuk iOS & Android
+    Application.targetFrameRate = 60;
+
+    // Matikan VSync agar targetFrameRate berfungsi dengan benar
+    QualitySettings.vSyncCount = 0;
+
+    if (dialoguePanel != null)
+    {
+        dialoguePanel.SetActive(false);
     }
+
+    InitProfileDictionary();
+}
 
     void InitProfileDictionary()
     {
