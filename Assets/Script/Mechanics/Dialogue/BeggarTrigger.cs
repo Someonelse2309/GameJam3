@@ -4,12 +4,11 @@ public class BeggarTrigger : MonoBehaviour
 {
     public ItemData yakitoriItem;
 
-    public enum QuestState { NotStarted, LookingForFood, ReadyToSubmit, QuestCompleted }
+    public enum QuestState { NotStarted, LookingForFood, QuestCompleted }
     public QuestState currentState = QuestState.NotStarted;
 
     private bool isPlayerNearby = false;
 
-    // Cukup tulis nama dan dialognya saja
     public DialogueSentence[] dialoguePT1 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Well well well, look what we have here" },
@@ -76,6 +75,7 @@ public class BeggarTrigger : MonoBehaviour
         }
         else if (currentState == QuestState.LookingForFood && hasYakitori)
         {
+            // Buka panel submit/serahkan makanan ke beggar
             ItemSubmitUI.Instance.OpenSubmitScreen(yakitoriItem, () =>
             {
                 currentState = QuestState.QuestCompleted;

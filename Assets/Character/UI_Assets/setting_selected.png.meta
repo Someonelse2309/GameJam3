@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 63d585aede78b44da8f6459d96ce3277
+guid: b4fbbc3114ef44a3d8504a0da0a8213d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4091135495242590268
-    second: MC MOM_Idle 1_0
+      213: 3433902125535667390
+    second: setting_selected_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC MOM_Idle 1_0
+      name: setting_selected_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 28
-        height: 32
+        width: 116
+        height: 116
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c7d21e51fd5937c0800000000000000
-      internalID: -4091135495242590268
+      spriteID: eb423022acba7af20800000000000000
+      internalID: 3433902125535667390
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MC MOM_Idle 1_0: -4091135495242590268
+      setting_selected_0: 3433902125535667390
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

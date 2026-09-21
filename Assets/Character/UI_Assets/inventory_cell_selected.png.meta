@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 699b03ee0d75c449d91f9d47e99e9abe
+guid: cd92e70536a9242358120402ce147a6e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -615432635105407339
-    second: MC MOM_Idle 3_0
+      213: -2472243625349622150
+    second: inventory_cell_selected_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC MOM_Idle 3_0
+      name: inventory_cell_selected_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 0
-        width: 27
-        height: 32
+        width: 225
+        height: 225
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59e0c51774b8577f0800000000000000
-      internalID: -615432635105407339
+      spriteID: a76dfc07583d0bdd0800000000000000
+      internalID: -2472243625349622150
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MC MOM_Idle 3_0: -615432635105407339
+      inventory_cell_selected_0: -2472243625349622150
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

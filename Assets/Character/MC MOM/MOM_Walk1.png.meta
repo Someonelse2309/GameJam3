@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: bac3dd6fc7bd74ff3820ba050fca5add
+guid: c7f4f33faacfb49d28e9ab170c26439b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4521413158744506977
-    second: MC MOM_Attack Shuriken 2_0
-  - first:
-      213: 2533208989069077742
-    second: MC MOM_Attack Shuriken 2_1
+      213: 4966434083746747072
+    second: MOM_Walk1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -80,7 +77,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -131,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC MOM_Attack Shuriken 2_0
+      name: MOM_Walk1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 25
-        height: 32
+        width: 103
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,30 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f9db14600b6b041c0800000000000000
-      internalID: -4521413158744506977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MC MOM_Attack Shuriken 2_1
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 12
-        width: 9
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: eece94f6724c72320800000000000000
-      internalID: 2533208989069077742
+      spriteID: 0c21e126c715ce440800000000000000
+      internalID: 4966434083746747072
       vertices: []
       indices: 
       edges: []
@@ -178,7 +153,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -188,8 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MC MOM_Attack Shuriken 2_0: -4521413158744506977
-      MC MOM_Attack Shuriken 2_1: 2533208989069077742
+      MOM_Walk1_0: 4966434083746747072
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

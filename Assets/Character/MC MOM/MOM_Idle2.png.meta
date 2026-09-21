@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a3a755f7aa5624ebdb9de8fa4d444fa6
+guid: 386bd6d995066414f961340a4ea6b173
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9197141719000080724
-    second: MC MOM_Walk 2_0
+      213: 1386449568352103062
+    second: MOM_Idle2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -77,7 +77,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC MOM_Walk 2_0
+      name: MOM_Idle2_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 15
         y: 0
-        width: 27
-        height: 32
+        width: 99
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cae131ac5503d5080800000000000000
-      internalID: -9197141719000080724
+      spriteID: 69aee946988ad3310800000000000000
+      internalID: 1386449568352103062
       vertices: []
       indices: 
       edges: []
@@ -153,7 +153,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MC MOM_Walk 2_0: -9197141719000080724
+      MOM_Idle2_0: 1386449568352103062
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

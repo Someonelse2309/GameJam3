@@ -30,12 +30,13 @@ public class DialogueManager : MonoBehaviour
     private Action onDialogueCompleted;
 
     private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(this);
+{
+    // 1. Nonaktifkan VSync agar targetFrameRate tidak diabaikan
+    QualitySettings.vSyncCount = 0;
 
-        if (dialoguePanel != null) dialoguePanel.SetActive(false);
-    }
+    // 2. Kunci framerate ke 60 FPS
+    Application.targetFrameRate = 60;
+}
 
     private void Update()
     {
