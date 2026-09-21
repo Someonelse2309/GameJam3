@@ -2,42 +2,37 @@ using UnityEngine;
 
 public class BeggarTrigger : MonoBehaviour
 {
-    public bool autoTriggerOnApproach = true;
+    public ItemData yakitoriItem;
 
-    [Header("1. Dialog Awal (Minta Makanan)")]
+    [Header("1. Dialog Minta Makanan")]
     public DialogueLine[] initialDialogue = new DialogueLine[]
     {
         new DialogueLine { characterName = "Tanaka Koji", sentence = "Well well well, look what we have here..." },
-        new DialogueLine { characterName = "Tanaka Koji", sentence = "鬼殺し (Onikoroshi)…. The ghost slayer…." },
-        new DialogueLine { characterName = "Michelle Sato", sentence = "I need your help…." },
-        new DialogueLine { characterName = "Tanaka Koji", sentence = "I'm hungry… Get me some Yakitori, then we'll talk." }
+        new DialogueLine { characterName = "Tanaka Koji", sentence = "I'm hungry... Get me some Yakitori, then we'll talk." }
     };
 
-    [Header("2. Dialog Jika BELUM Bawa Makanan")]
+    [Header("2. Dialog Menolak (Belum Bawa / Batal Kasih)")]
     public DialogueLine[] noFoodDialogue = new DialogueLine[]
     {
-        new DialogueLine { characterName = "Tanaka Koji", sentence = "Where's my Yakitori? I won't tell you anything until I get my food!" }
+        new DialogueLine { characterName = "Tanaka Koji", sentence = "Where's my Yakitori? I won't give info without food!" }
     };
 
-    [Header("3. Dialog Jika SUDAH Bawa Makanan")]
+    [Header("3. Dialog Sukses (Setelah Beri Makanan)")]
     public DialogueLine[] giveFoodDialogue = new DialogueLine[]
     {
         new DialogueLine { characterName = "Michelle Sato", sentence = "Here's your Yakitori." },
         new DialogueLine { characterName = "Tanaka Koji", sentence = "What a feast! Now start listening..." },
-        new DialogueLine { characterName = "Tanaka Koji", sentence = "Aoyama, the one who took your child... He's here in town." },
-        new DialogueLine { characterName = "Tanaka Koji", sentence = "Go to Ito Shun, the blacksmith, to get a weapon." }
+        new DialogueLine { characterName = "Tanaka Koji", sentence = "Aoyama is here in town. Go see Ito Shun the blacksmith for a weapon." }
     };
 
     private bool hasAskedForFood = false;
     private bool questCompleted = false;
-    private bool isPlayerNearby = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && autoTriggerOnApproach)
+        if (collision.CompareTag("Player"))
         {
-            isPlayerNearby = true;
-            StartBeggarDialogue();
+            StartBeggarInteraction();
         }
     }
 
@@ -45,35 +40,41 @@ public class BeggarTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerNearby = false;
-            if (DialogueManager.Instance != null)
-            {
-                DialogueManager.Instance.EndDialogue();
-            }
+            DialogueManager.Instance?.EndDialogue();
         }
     }
 
-    public void StartBeggarDialogue()
+    public void StartBeggarInteraction()
     {
-        if (DialogueManager.Instance == null) return;
+        if (questCompleted) return;
 
-        // Kondisi 3: Punya Yakitori -> Berikan makanan & lanjut cerita
-        if (hasAskedForFood && InventoryManager.Instance != null && InventoryManager.Instance.hasYakitori)
+        if (!hasAskedForFood)
         {
-            InventoryManager.Instance.RemoveYakitori(); // Hapus item dari UI
-            DialogueManager.Instance.StartDialogue(giveFoodDialogue);
-            questCompleted = true;
+            if (DialogueManager.Instance == null) { Debug.LogError("BeggarTrigger: DialogueManager not found in scene"); return; }
+            DialogueManager.Instance.StartDialogue(initialDialogue, () =>
+            {
+                hasAskedForFood = true;
+                if (yakitoriItem == null) { Debug.LogError("BeggarTrigger: yakitoriItem is not assigned in the Inspector"); return; }
+                if (ItemSubmitUI.Instance == null) { Debug.LogWarning("BeggarTrigger: ItemSubmitUI not found in scene — cannot open submit screen"); return; }
+                ItemSubmitUI.Instance.OpenSubmitScreen(yakitoriItem, OnFoodDelivered);
+            });
         }
-        // Kondisi 2: Belum bawa makanan -> Menolak
-        else if (hasAskedForFood && !questCompleted)
+        else
         {
-            DialogueManager.Instance.StartDialogue(noFoodDialogue);
+            if (yakitoriItem == null) { Debug.LogError("BeggarTrigger: yakitoriItem is not assigned in the Inspector"); return; }
+            if (ItemSubmitUI.Instance == null) { Debug.LogWarning("BeggarTrigger: ItemSubmitUI not found in scene — cannot open submit screen"); return; }
+            ItemSubmitUI.Instance.OpenSubmitScreen(yakitoriItem, OnFoodDelivered);
         }
-        // Kondisi 1: Pertama kali bicara -> Minta makanan
-        else if (!hasAskedForFood)
+    }
+
+    private void OnFoodDelivered()
+    {
+        questCompleted = true;
+        ItemSubmitUI.Instance?.CloseScreen();
+        if (DialogueManager.Instance == null) { Debug.LogError("BeggarTrigger: DialogueManager not found in scene"); return; }
+        DialogueManager.Instance.StartDialogue(giveFoodDialogue, () =>
         {
-            DialogueManager.Instance.StartDialogue(initialDialogue);
-            hasAskedForFood = true;
-        }
+            ItemSubmitUI.Instance?.CloseScreen();
+        });
     }
 }

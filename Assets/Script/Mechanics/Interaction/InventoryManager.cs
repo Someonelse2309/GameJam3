@@ -1,43 +1,139 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    [Header("UI Reference")]
-    public Image itemIconImage; // Drag CarriedItemIcon dari Canvas ke sini
+    [Header("Carried Item UI")]
+    public GameObject itemIconImage;
 
-    [Header("Inventory Status")]
-    public bool hasYakitori = false;
+    [Header("Inventory Items")]
+    public List<ItemData> items = new List<ItemData>();
+
+    [Header("UI Pop-up Obtained")]
+    public GameObject obtainedPopupPanel;
+    public Image popupItemIcon;
+    public TextMeshProUGUI popupItemNameText;
+    public float popupDuration = 2.5f; // Pop-up otomatis hilang setelah 2.5 detik
+
+    [Header("UI Inventory Bag")]
+    public GameObject inventoryPanel;
+    public Transform itemSlotContainer;
+    public GameObject itemSlotPrefab;
+
+    private Coroutine popupCoroutine;
 
     void Awake()
     {
         Instance = this;
-        if (itemIconImage != null)
+
+        // Auto-hide semua UI saat game dimulai
+        if (itemIconImage != null) itemIconImage.SetActive(false);
+        if (obtainedPopupPanel != null) obtainedPopupPanel.SetActive(false);
+        if (inventoryPanel != null) inventoryPanel.SetActive(false);
+    }
+
+    public void AddItem(ItemData item)
+    {
+        items.Add(item);
+        ShowItemObtainedPopup(item);
+
+        // Jika tas sedang terbuka, langsung perbarui isinya
+        if (inventoryPanel != null && inventoryPanel.activeSelf)
         {
-            itemIconImage.gameObject.SetActive(false); // Sembunyikan icon saat awal game
+            RefreshInventoryUI();
         }
     }
 
-    // Dipanggil saat mendapat Yakitori dari Pedagang
-    public void GiveYakitori(Sprite yakitoriSprite)
+    public void RemoveItem(ItemData item)
     {
-        hasYakitori = true;
-        if (itemIconImage != null)
+        if (items.Contains(item))
         {
-            if (yakitoriSprite != null) itemIconImage.sprite = yakitoriSprite;
-            itemIconImage.gameObject.SetActive(true); // Tampilkan icon makanan di UI
+            items.Remove(item);
+            if (inventoryPanel != null && inventoryPanel.activeSelf)
+            {
+                RefreshInventoryUI();
+            }
         }
     }
 
-    // Dipanggil saat makanan diberikan ke Beggar
-    public void RemoveYakitori()
+    public bool HasItem(ItemData item)
     {
-        hasYakitori = false;
-        if (itemIconImage != null)
+        return item != null && items.Contains(item);
+    }
+
+    private void ShowItemObtainedPopup(ItemData item)
+    {
+        if (obtainedPopupPanel == null) return;
+
+        if (popupItemIcon != null) popupItemIcon.sprite = item.itemIcon;
+        if (popupItemNameText != null) popupItemNameText.text = "Obtained " + item.itemName;
+
+        obtainedPopupPanel.SetActive(true);
+
+        // Reset timer jika mendapat item berturut-turut
+        if (popupCoroutine != null)
         {
-            itemIconImage.gameObject.SetActive(false); // Sembunyikan icon dari UI
+            StopCoroutine(popupCoroutine);
+        }
+        popupCoroutine = StartCoroutine(HidePopupRoutine());
+    }
+
+    private IEnumerator HidePopupRoutine()
+    {
+        yield return new WaitForSeconds(popupDuration);
+        if (obtainedPopupPanel != null)
+        {
+            obtainedPopupPanel.SetActive(false);
+        }
+    }
+
+    public void CloseObtainedPopup()
+    {
+        if (obtainedPopupPanel != null)
+            obtainedPopupPanel.SetActive(false);
+    }
+
+    public void ToggleInventoryPanel()
+    {
+        if (inventoryPanel == null) return;
+        
+        bool isActive = !inventoryPanel.activeSelf;
+        inventoryPanel.SetActive(isActive);
+
+        if (isActive)
+        {
+            RefreshInventoryUI();
+        }
+    }
+
+    public void RefreshInventoryUI()
+    {
+        if (itemSlotContainer == null) return;
+
+        // Bersihkan slot lama di grid
+        foreach (Transform child in itemSlotContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Buat slot baru untuk setiap item di dalam list
+        foreach (ItemData item in items)
+        {
+            if (itemSlotPrefab != null)
+            {
+                GameObject slot = Instantiate(itemSlotPrefab, itemSlotContainer);
+                Image slotIcon = slot.GetComponentInChildren<Image>();
+                if (slotIcon != null)
+                {
+                    slotIcon.sprite = item.itemIcon;
+                    slotIcon.enabled = true;
+                }
+            }
         }
     }
 }

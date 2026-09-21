@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,7 @@ public class DialogueManager : MonoBehaviour
     private Queue<DialogueLine> sentences = new Queue<DialogueLine>();
     private Dictionary<string, Sprite> profileDict = new Dictionary<string, Sprite>();
     private bool isDialogueActive = false;
+    private Action onDialogueComplete;
 
     void Awake()
 {
@@ -66,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueLine[] dialogue)
+    public void StartDialogue(DialogueLine[] dialogue, Action onComplete = null)
     {
         if (isDialogueActive)
         {
@@ -75,6 +77,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         isDialogueActive = true;
+        onDialogueComplete = onComplete;
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
         sentences.Clear();
 
@@ -144,5 +147,7 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        onDialogueComplete?.Invoke();
+        onDialogueComplete = null;
     }
 }

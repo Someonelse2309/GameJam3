@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PedagangTrigger : MonoBehaviour
 {
-    public Sprite yakitoriSprite; // Drag sprite ikon Yakitori ke sini
+    public ItemData yakitoriItem;
 
     [Header("Dialog Pedagang")]
     public DialogueLine[] pedagangDialogue = new DialogueLine[]
@@ -12,10 +12,11 @@ public class PedagangTrigger : MonoBehaviour
     };
 
     private bool isPlayerNearby = false;
+    private bool hasGivenItem = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !hasGivenItem)
         {
             isPlayerNearby = true;
             BuyYakitori();
@@ -29,10 +30,10 @@ public class PedagangTrigger : MonoBehaviour
             DialogueManager.Instance.StartDialogue(pedagangDialogue);
         }
 
-        // Tambahkan Yakitori ke Inventory & tampilkan di UI
-        if (InventoryManager.Instance != null)
+        if (InventoryManager.Instance != null && yakitoriItem != null)
         {
-            InventoryManager.Instance.GiveYakitori(yakitoriSprite);
+            InventoryManager.Instance.AddItem(yakitoriItem); // Muncul Pop-up Obtained & masuk tas
+            hasGivenItem = true;
         }
     }
 }
