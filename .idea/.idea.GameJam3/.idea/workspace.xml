@@ -10,7 +10,212 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c02bf0e1-070c-44c4-8a50-df43f578aaad" name="Changes" comment="" />
+    <list default="true" id="c02bf0e1-070c-44c4-8a50-df43f578aaad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameJam3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameJam3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Attack 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Attack 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Attack 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Attack 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Idle 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Idle 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Idle 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Idle 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Punch 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Punch 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Punch 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Punch 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Walk 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Walk 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Walk 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Walk 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Walk 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC MOM_Walk 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC_Mom_Controller.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MC_Mom_Controller.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MOM_Idle.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MOM_Idle.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MOM_Punch.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MOM_Punch.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MOM_Walk.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC MOM/MOM_Walk.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Happy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Happy.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Idle 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Idle 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Idle 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Idle 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Walk 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Walk 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Walk 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Walk 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Walk 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/MC/MC_Walk 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/Materials/NPC Beggar_Idle.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/Materials/NPC Beggar_Idle.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/NPC Beggar_Idles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/NPC Beggar_Idles.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/NPC Blacksmith_Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/NPC Blacksmith_Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/NPC Pedagang_Idles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/NPC/NPC Pedagang_Idles.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/blood_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_corruption_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/cd_loading_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/dialog_panel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/dialog_panel.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/dialog_panel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/dialog_panel.svg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/frame_panel 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/frame_panel 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/frame_panel 1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/frame_panel 1.svg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/glitch_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/gunshot_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/hit_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/smoke_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_01 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_01 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_02 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_02 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_03 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_03 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_04 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_04 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_05 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_05 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_06 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/UI_Assets/static_06 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Attack.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Walk 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Walk 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Walk 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Walk 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Walk 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 1_Walk 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Attack 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Attack 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Attack 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Attack 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Walk 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Walk 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Walk 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Walk 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 2_Walk 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Attack 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Attack 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Attack 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Walk 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Walk 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Walk 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Walk 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Walk 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/YAKUZA/Yakuza 3_Walk 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/In Game EP1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/In Game EP1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Movement/AutoWalk.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Movement/AutoWalk.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Movement/FollowTarget.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Movement/FollowTarget.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Movement/PlayerAnimateEP1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Movement/PlayerAnimateEP1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Story/DialogueDataEP1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Story/DialogueDataEP1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Story/DialogueManagerEP1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Story/DialogueManagerEP1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Story/DialogueTriggerEP1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Story/DialogueTriggerEP1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Story/Dialogue_Scene1.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Story/Dialogue_Scene1.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +249,7 @@
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "EP1-fresh",
+    "git-widget-placeholder": "Adiat/EP1",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -65,6 +270,7 @@
       <workItem from="1789663364519" duration="665000" />
       <workItem from="1789667555825" duration="98000" />
       <workItem from="1789706399481" duration="1248000" />
+      <workItem from="1789976412171" duration="603000" />
     </task>
     <servers />
   </component>

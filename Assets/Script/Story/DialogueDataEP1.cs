@@ -10,6 +10,7 @@ public class DialogueDataEP1 : ScriptableObject
         public string text;
         public AudioClip voiceLine; // Optional: voice clip for this line
         public float delayAfter = 0.5f; // Delay after this line finishes
+        public Sprite characterImage; // Avatar for this line
     }
 
     public DialogueLine[] lines;

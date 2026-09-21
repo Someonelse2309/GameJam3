@@ -9,16 +9,20 @@ public class FollowTarget : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer mySR;
     private SpriteRenderer targetSR;
-    private PlayerAnimate myAnimate;
+    private PlayerAnimateEP1 myAnimate;
 
     private Vector3 lastPosition;
     private bool wasMoving = false;
+    private bool isFollowing = true;
+
+    [Header("Control")]
+    public bool disableControl = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         mySR = GetComponent<SpriteRenderer>();
-        myAnimate = GetComponent<PlayerAnimate>();
+        myAnimate = GetComponent<PlayerAnimateEP1>();
 
         if (target != null)
         {
@@ -31,7 +35,8 @@ public class FollowTarget : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target == null) return;
+        // Jangan follow kalau isFollowing = false
+        if (target == null || !isFollowing) return;
 
         // Update posisi
         Vector3 newPos = target.position + initialOffset;
@@ -55,29 +60,40 @@ public class FollowTarget : MonoBehaviour
         // Sync animation - cek apakah bergerak
         if (myAnimate != null)
         {
-            bool isMoving = (transform.position - lastPosition).sqrMagnitude > 0.0001f;
+            float moveThreshold = 0.001f; // Threshold untuk deteksi movement
+            bool isMoving = (transform.position - lastPosition).sqrMagnitude > moveThreshold * moveThreshold;
 
             // Trigger animation kalau state berubah
             if (isMoving != wasMoving)
             {
                 wasMoving = isMoving;
-                // Pause/Resume animation berdasarkan movement
-                if (isMoving)
-                {
-                    myAnimate.ResumeAnimation();
-                }
-                else
-                {
-                    myAnimate.PauseAnimation();
-                    // Set ke frame 0 (idle)
-                    if (myAnimate.normalSprites != null && myAnimate.normalSprites.Length > 0)
-                    {
-                        mySR.sprite = myAnimate.normalSprites[0];
-                    }
-                }
+                // Pakai SetMoving() untuk sync dengan PlayerAnimateEP1
+                myAnimate.SetMoving(isMoving);
             }
         }
 
         lastPosition = transform.position;
+    }
+
+    public void StopFollowing()
+    {
+        isFollowing = false;
+        // Set idle saat berhenti follow
+        if (myAnimate != null)
+        {
+            myAnimate.SetMoving(false);
+        }
+        Debug.Log("FollowTarget: Stopped following");
+    }
+
+    public void StartFollowing()
+    {
+        isFollowing = true;
+        Debug.Log("FollowTarget: Started following");
+    }
+
+    public bool IsFollowing()
+    {
+        return isFollowing;
     }
 }

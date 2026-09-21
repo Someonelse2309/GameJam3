@@ -19,10 +19,12 @@ public class AutoWalk : MonoBehaviour
     private bool isPaused = false;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    private RigidbodyType2D originalBodyType;
 
     [Header("Events")]
     public DialogueDataEP1 dialogueToPlayOnStart;
     public DialogueDataEP1 dialogueToPlayOnReach;
+    public UnityEngine.Events.UnityEvent onAutoWalkComplete;
 
     void Start()
     {
@@ -37,26 +39,8 @@ public class AutoWalk : MonoBehaviour
 
     void Update()
     {
-        // Pause saat dialogue aktif
-        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
-        {
-            if (isWalking)
-            {
-                isPaused = true;
-                isWalking = false;
-                StopRigidbody();
-            }
-            return;
-        }
-
-        // Resume kalau dialogue selesai
-        if (isPaused && (DialogueManagerEP1.instanceEP1 == null || !DialogueManagerEP1.instanceEP1.IsDialogueActive()))
-        {
-            isPaused = false;
-            ResumeWalking();
-        }
-
-        if (!isWalking) return;
+        // Jalan terus meskipun dialogue aktif (karakter auto-walk saat dialogue)
+        if (!isWalking || isPaused) return;
 
         WalkToWaypoint();
     }
@@ -131,6 +115,12 @@ public class AutoWalk : MonoBehaviour
             EnablePlayerControl();
         }
 
+        // Invoke completion event
+        if (onAutoWalkComplete != null)
+        {
+            onAutoWalkComplete.Invoke();
+        }
+
         // Play dialogue kalau ada
         if (dialogueToPlayOnReach != null && DialogueManagerEP1.instanceEP1 != null)
         {
@@ -148,15 +138,19 @@ public class AutoWalk : MonoBehaviour
             DisablePlayerControl();
         }
 
-        // Reset ke waypoint pertama
-        if (waypoints[0] != null)
-        {
-            transform.position = waypoints[0].position;
-        }
-        currentWaypointIndex = 1; // Mulai dari waypoint 1 (waypoint 0 = start position)
+        // Jangan teleport - mulai dari posisi sekarang
+        // currentWaypointIndex = 0 artinya jalan ke waypoints[0] dari posisi sekarang
+        currentWaypointIndex = 0;
 
         isWalking = true;
         isPaused = false;
+
+        // Set Rigidbody ke Kinematic agar tidak nabrak saat AutoWalk
+        if (rb != null)
+        {
+            originalBodyType = rb.bodyType;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
 
         // Play dialogue kalau ada
         if (dialogueToPlayOnStart != null && DialogueManagerEP1.instanceEP1 != null)
@@ -169,6 +163,30 @@ public class AutoWalk : MonoBehaviour
     {
         isWalking = false;
         StopRigidbody();
+
+        // Kembalikan Rigidbody ke type asli
+        if (rb != null)
+        {
+            rb.bodyType = originalBodyType;
+        }
+
+        // Kembalikan player control setelah selesai AutoWalk
+        if (disablePlayerControl && playerToDisable != null)
+        {
+            EnablePlayerControl();
+        }
+    }
+
+    public void SetWaypoints(Transform[] newWaypoints)
+    {
+        if (newWaypoints == null || newWaypoints.Length < 1) return;
+
+        waypoints = newWaypoints;
+        currentWaypointIndex = 0; // Mulai dari posisi sekarang
+        isWalking = false;
+        isPaused = false;
+
+        Debug.Log("AutoWalk: Waypoints set to " + newWaypoints.Length + " waypoints");
     }
 
     public void ResetAndStart()

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueManagerEP1 : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class DialogueManagerEP1 : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public GameObject continueIndicator;
+    public Image characterImage;
 
     [Header("Settings")]
     public float textSpeed = 0.03f;
@@ -25,6 +27,9 @@ public class DialogueManagerEP1 : MonoBehaviour
     private bool isDialogueActive = false;
     private Coroutine typingCoroutine;
     private Coroutine autoAdvanceCoroutine;
+
+    // Track which trigger started this dialogue
+    private DialogueTriggerEP1 currentTrigger;
 
     public Action OnDialogueStart;
     public Action OnDialogueEnd;
@@ -60,6 +65,11 @@ public class DialogueManagerEP1 : MonoBehaviour
 
     public void StartDialogue(DialogueDataEP1 dialogue)
     {
+        StartDialogue(dialogue, null);
+    }
+
+    public void StartDialogue(DialogueDataEP1 dialogue, DialogueTriggerEP1 trigger)
+    {
         if (dialogue == null || dialogue.lines == null || dialogue.lines.Length == 0)
         {
             Debug.LogError("DialogueManagerEP1.StartDialogue: dialogue NULL atau tidak punya lines!");
@@ -69,6 +79,9 @@ public class DialogueManagerEP1 : MonoBehaviour
         currentDialogue = dialogue;
         currentLineIndex = 0;
         isDialogueActive = true;
+        currentTrigger = trigger;
+
+        Debug.Log($"DialogueManagerEP1: StartDialogue - dialogue={dialogue.name}, trigger={trigger?.name}");
 
         if (dialoguePanel != null)
             dialoguePanel.SetActive(true);
@@ -79,14 +92,43 @@ public class DialogueManagerEP1 : MonoBehaviour
         ShowLine(currentLineIndex);
     }
 
+    public DialogueTriggerEP1 GetCurrentTrigger()
+    {
+        return currentTrigger;
+    }
+
     private void ShowLine(int index)
     {
         if (currentDialogue == null || index >= currentDialogue.lines.Length) return;
 
         DialogueDataEP1.DialogueLine line = currentDialogue.lines[index];
 
+        // Safety check
+        if (line == null || string.IsNullOrEmpty(line.text))
+        {
+            Debug.LogWarning($"DialogueManagerEP1: Line {index} is null or empty, skipping");
+            NextLine();
+            return;
+        }
+
         if (nameText != null)
             nameText.text = line.speakerName;
+
+        // Avatar
+        if (characterImage != null)
+        {
+            if (line.characterImage != null)
+            {
+                characterImage.sprite = line.characterImage;
+                characterImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                characterImage.gameObject.SetActive(false);
+            }
+        }
+
+        Debug.Log($"DialogueManagerEP1: Showing line {index} - {line.speakerName}: {line.text}");
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -124,6 +166,7 @@ public class DialogueManagerEP1 : MonoBehaviour
         }
 
         isTyping = false;
+        Debug.Log($"TypeText: Completed typing line (text length: {text.Length})");
 
         if (continueIndicator != null)
         {
@@ -136,7 +179,9 @@ public class DialogueManagerEP1 : MonoBehaviour
 
     private IEnumerator AutoAdvanceAfterDelay(float delay)
     {
+        Debug.Log($"AutoAdvanceAfterDelay: Waiting {delay} seconds");
         yield return new WaitForSeconds(delay);
+        Debug.Log("AutoAdvanceAfterDelay: Delay complete, advancing");
         AdvanceDialogue();
     }
 
@@ -144,6 +189,7 @@ public class DialogueManagerEP1 : MonoBehaviour
     {
         if (isTyping)
         {
+            // Saat typing, langsung tampilkan full text dan stop typing
             if (typingCoroutine != null)
                 StopCoroutine(typingCoroutine);
 
@@ -154,6 +200,13 @@ public class DialogueManagerEP1 : MonoBehaviour
 
             if (continueIndicator != null && autoAdvanceDelay == 0)
                 continueIndicator.SetActive(true);
+
+            // Kalau auto-advance, tunggu delayAfter sebelum next
+            if (autoAdvanceDelay > 0 && currentDialogue != null)
+            {
+                float delay = currentDialogue.lines[currentLineIndex].delayAfter;
+                StartCoroutine(DelayAndNext(delay));
+            }
         }
         else
         {
@@ -182,9 +235,11 @@ public class DialogueManagerEP1 : MonoBehaviour
     private void NextLine()
     {
         currentLineIndex++;
+        Debug.Log($"DialogueManagerEP1: Moving to line {currentLineIndex} (total: {currentDialogue?.lines?.Length})");
 
         if (currentLineIndex >= currentDialogue.lines.Length)
         {
+            Debug.Log("DialogueManagerEP1: All lines complete, ending dialogue");
             EndDialogue();
         }
         else
@@ -199,11 +254,15 @@ public class DialogueManagerEP1 : MonoBehaviour
         currentDialogue = null;
         currentLineIndex = 0;
 
+        Debug.Log($"DialogueManagerEP1: EndDialogue - currentTrigger={currentTrigger?.name}");
+
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
 
         if (OnDialogueEnd != null)
             OnDialogueEnd.Invoke();
+
+        currentTrigger = null; // Clear after invoking
 
         Debug.Log("DialogueManagerEP1: Dialogue ended");
     }

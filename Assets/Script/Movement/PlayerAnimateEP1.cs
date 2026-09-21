@@ -41,17 +41,36 @@ public class PlayerAnimateEP1 : MonoBehaviour
 
     private void Update()
     {
+        // Cek apakah sedang di-follow oleh FollowTarget
+        FollowTarget followTarget = GetComponent<FollowTarget>();
+        bool isFollowing = followTarget != null && followTarget.IsFollowing();
+
+        // Cek apakah AutoWalk aktif
+        AutoWalk autoWalk = GetComponent<AutoWalk>();
+        bool isAutoWalking = autoWalk != null && autoWalk.IsWalking();
+
         // Cek dialogue
         if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
         {
-            if (idleSprites != null && idleSprites.Length > 0)
-                spriteRenderer.sprite = idleSprites[0];
-            SetMoving(false);
+            // Jika AutoWalk aktif atau di-follow, pakai walk animation
+            if (isAutoWalking || isFollowing)
+            {
+                SetMoving(true);
+            }
+            else
+            {
+                if (idleSprites != null && idleSprites.Length > 0)
+                    spriteRenderer.sprite = idleSprites[0];
+                SetMoving(false);
+            }
             return;
         }
 
-        // Auto-detect movement
-        if (autoDetectMovement)
+        // Jangan auto-detect kalau lagi di-follow (FollowTarget yang handle)
+        if (isFollowing) return;
+
+        // Auto-detect movement (untuk player manual control)
+        if (autoDetectMovement && !isAutoWalking)
         {
             Vector3 velocity = transform.position - lastPosition;
             bool moving = velocity.sqrMagnitude > velocityThreshold * velocityThreshold;
