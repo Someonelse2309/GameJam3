@@ -46,6 +46,8 @@ public class CreditsBuilder : MonoBehaviour
 
         // 4. Inject the final generated text into the UI
         creditsText.text = sb.ToString();
+
+        Canvas.ForceUpdateCanvases();
     }
 
     private void FormatSection(StringBuilder sb, string header, Dictionary<string, CreditEntry> category)
@@ -72,7 +74,7 @@ public class CreditsBuilder : MonoBehaviour
         
         sb.AppendLine(); // Extra space between major sections
     }
-    
+
     public void BackToMainMenu()
     {
         // The '?' safely aborts the call if AudioManager is missing
