@@ -51,7 +51,7 @@ public class StoryEP1 : MonoBehaviour
                     () => !AudioManager.instance.isVoicePlaying()
                 );
 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1f);
                 break;
 
             case 3:
@@ -101,7 +101,7 @@ public class StoryEP1 : MonoBehaviour
                     "<color=#4DA6FF>Michelle Sato:</color> " +
                     "<color=#FFFFFF>But I never expect the day to end this way.</color>";
 
-                AudioManager.instance.PlayVoice(4);
+                AudioManager.instance.PlayVoice(5);
 
                 yield return new WaitUntil(
                     () => !AudioManager.instance.isVoicePlaying()
