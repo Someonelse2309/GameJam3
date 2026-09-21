@@ -6,134 +6,102 @@ using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
-    public static InventoryManager Instance;
+    public static InventoryManager Instance { get; private set; }
 
-    [Header("Carried Item UI")]
-    public GameObject itemIconImage;
-
-    [Header("Inventory Items")]
+    [Header("Inventory Data")]
     public List<ItemData> items = new List<ItemData>();
 
-    [Header("UI Pop-up Obtained")]
-    public GameObject obtainedPopupPanel;
-    public Image popupItemIcon;
-    public TextMeshProUGUI popupItemNameText;
-    public float popupDuration = 2.5f; // Pop-up otomatis hilang setelah 2.5 detik
-
-    [Header("UI Inventory Bag")]
+    [Header("Bag UI")]
     public GameObject inventoryPanel;
     public Transform itemSlotContainer;
     public GameObject itemSlotPrefab;
 
+    [Header("Obtained Popup (Toast)")]
+    public GameObject popupPanel;
+    public Image popupItemIcon;
+    public TextMeshProUGUI popupItemNameText;
     private Coroutine popupCoroutine;
 
-    void Awake()
-    {
-        Instance = this;
+    private void Awake()
+{
+    if (Instance == null) Instance = this;
+    else Destroy(this); // Hapus script-nya saja, jangan Destroy(gameObject)
 
-        // Auto-hide semua UI saat game dimulai
-        if (itemIconImage != null) itemIconImage.SetActive(false);
-        if (obtainedPopupPanel != null) obtainedPopupPanel.SetActive(false);
-        if (inventoryPanel != null) inventoryPanel.SetActive(false);
-    }
+    if (inventoryPanel != null) inventoryPanel.SetActive(false);
+    if (popupPanel != null) popupPanel.SetActive(false);
+}
 
     public void AddItem(ItemData item)
     {
+        if (item == null) return;
         items.Add(item);
-        ShowItemObtainedPopup(item);
-
-        // Jika tas sedang terbuka, langsung perbarui isinya
-        if (inventoryPanel != null && inventoryPanel.activeSelf)
-        {
-            RefreshInventoryUI();
-        }
+        ShowObtainedPopup(item);
+        RefreshInventoryUI();
     }
 
     public void RemoveItem(ItemData item)
     {
+        if (item == null) return;
         if (items.Contains(item))
         {
             items.Remove(item);
-            if (inventoryPanel != null && inventoryPanel.activeSelf)
-            {
-                RefreshInventoryUI();
-            }
+            RefreshInventoryUI();
         }
     }
 
     public bool HasItem(ItemData item)
     {
-        return item != null && items.Contains(item);
+        if (item == null) return false;
+        return items.Contains(item);
     }
 
-    private void ShowItemObtainedPopup(ItemData item)
-    {
-        if (obtainedPopupPanel == null) return;
-
-        if (popupItemIcon != null) popupItemIcon.sprite = item.itemIcon;
-        if (popupItemNameText != null) popupItemNameText.text = "Obtained " + item.itemName;
-
-        obtainedPopupPanel.SetActive(true);
-
-        // Reset timer jika mendapat item berturut-turut
-        if (popupCoroutine != null)
-        {
-            StopCoroutine(popupCoroutine);
-        }
-        popupCoroutine = StartCoroutine(HidePopupRoutine());
-    }
-
-    private IEnumerator HidePopupRoutine()
-    {
-        yield return new WaitForSeconds(popupDuration);
-        if (obtainedPopupPanel != null)
-        {
-            obtainedPopupPanel.SetActive(false);
-        }
-    }
-
-    public void CloseObtainedPopup()
-    {
-        if (obtainedPopupPanel != null)
-            obtainedPopupPanel.SetActive(false);
-    }
-
-    public void ToggleInventoryPanel()
+    public void ToggleInventory()
     {
         if (inventoryPanel == null) return;
-        
         bool isActive = !inventoryPanel.activeSelf;
         inventoryPanel.SetActive(isActive);
-
-        if (isActive)
-        {
-            RefreshInventoryUI();
-        }
+        if (isActive) RefreshInventoryUI();
     }
 
     public void RefreshInventoryUI()
     {
-        if (itemSlotContainer == null) return;
+        if (itemSlotContainer == null || itemSlotPrefab == null) return;
 
-        // Bersihkan slot lama di grid
+        // Bersihkan slot lama
         foreach (Transform child in itemSlotContainer)
         {
             Destroy(child.gameObject);
         }
 
-        // Buat slot baru untuk setiap item di dalam list
+        // Spawn slot item baru
         foreach (ItemData item in items)
         {
-            if (itemSlotPrefab != null)
+            GameObject slot = Instantiate(itemSlotPrefab, itemSlotContainer);
+            Image icon = slot.GetComponentInChildren<Image>();
+            if (icon != null)
             {
-                GameObject slot = Instantiate(itemSlotPrefab, itemSlotContainer);
-                Image slotIcon = slot.GetComponentInChildren<Image>();
-                if (slotIcon != null)
-                {
-                    slotIcon.sprite = item.itemIcon;
-                    slotIcon.enabled = true;
-                }
+                icon.sprite = item.itemIcon;
+                icon.enabled = true;
             }
         }
+    }
+
+    public void ShowObtainedPopup(ItemData item)
+    {
+        if (popupPanel == null) return;
+
+        if (popupItemIcon != null) popupItemIcon.sprite = item.itemIcon;
+        if (popupItemNameText != null) popupItemNameText.text = "Obtained: " + item.itemName;
+
+        popupPanel.SetActive(true);
+
+        if (popupCoroutine != null) StopCoroutine(popupCoroutine);
+        popupCoroutine = StartCoroutine(HidePopupRoutine(1.8f));
+    }
+
+    private IEnumerator HidePopupRoutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (popupPanel != null) popupPanel.SetActive(false);
     }
 }

@@ -3,37 +3,29 @@ using UnityEngine;
 public class PedagangTrigger : MonoBehaviour
 {
     public ItemData yakitoriItem;
+    private bool alreadyGiven = false;
 
-    [Header("Dialog Pedagang")]
-    public DialogueLine[] pedagangDialogue = new DialogueLine[]
+    public DialogueSentence[] sellerDialogue = new DialogueSentence[]
     {
-        new DialogueLine { characterName = "Michelle Sato", sentence = "Give me two portions of Yakitori." },
-        new DialogueLine { characterName = "Seller", sentence = "Here is the Yakitori. Be careful out there!" }
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Give me two portions of yakitori." },
+        new DialogueSentence { speakerName = "Pedagang", sentence = "Here is the yakitori." }
     };
-
-    private bool isPlayerNearby = false;
-    private bool hasGivenItem = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !hasGivenItem)
+        if (collision.CompareTag("Player") && !alreadyGiven)
         {
-            isPlayerNearby = true;
-            BuyYakitori();
-        }
-    }
-
-    public void BuyYakitori()
-    {
-        if (DialogueManager.Instance != null)
-        {
-            DialogueManager.Instance.StartDialogue(pedagangDialogue);
-        }
-
-        if (InventoryManager.Instance != null && yakitoriItem != null)
-        {
-            InventoryManager.Instance.AddItem(yakitoriItem); // Muncul Pop-up Obtained & masuk tas
-            hasGivenItem = true;
+            if (DialogueManager.Instance != null)
+            {
+                DialogueManager.Instance.StartDialogue(sellerDialogue, () =>
+                {
+                    if (InventoryManager.Instance != null && yakitoriItem != null)
+                    {
+                        InventoryManager.Instance.AddItem(yakitoriItem);
+                        alreadyGiven = true;
+                    }
+                });
+            }
         }
     }
 }

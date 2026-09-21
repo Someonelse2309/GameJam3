@@ -4458,6 +4458,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232500272}
   m_CullTransparentMesh: 1
+--- !u!1 &336083711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336083714}
+  - component: {fileID: 336083713}
+  - component: {fileID: 336083712}
+  m_Layer: 0
+  m_Name: InteractionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &336083712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336083711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b335d095565435c9381c0e257b6561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSubmitUI
+  submitPanel: {fileID: 1377001910}
+  requiredItemIcon: {fileID: 848361783}
+  requiredItemNameText: {fileID: 1509876754}
+  deliverButton: {fileID: 731352529}
+  cancelButton: {fileID: 567888795}
+--- !u!114 &336083713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336083711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983d8d38925d84d319cd503819d628e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  items: []
+  inventoryPanel: {fileID: 850430306}
+  itemSlotContainer: {fileID: 1248285483}
+  itemSlotPrefab: {fileID: 766454489265679440, guid: be2d4788c946149039fd42e26faae85e, type: 3}
+  popupPanel: {fileID: 1136738983}
+  popupItemIcon: {fileID: 1120835879}
+  popupItemNameText: {fileID: 1782251797}
+--- !u!4 &336083714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336083711}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44143, y: 0.50625, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &383551996
 GameObject:
   m_ObjectHideFlags: 0
@@ -24140,13 +24209,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850430306}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1248285483}
-  m_Father: {fileID: 1613496295}
+  m_Father: {fileID: 953037768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24821,13 +24890,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PedagangTrigger
   yakitoriItem: {fileID: 11400000, guid: 93dd31dbe498e46668ce1f12ea58c39c, type: 2}
-  pedagangDialogue:
-  - characterName: Michelle Sato
-    characterPortrait: {fileID: 0}
-    sentence: Give me two portions of Yakitori.
-  - characterName: Seller
-    characterPortrait: {fileID: 0}
-    sentence: Here is the Yakitori. Be careful out there!
+  sellerDialogue:
+  - speakerName: Michelle Sato
+    sentence: Give me two portions of yakitori.
+  - speakerName: Pedagang
+    sentence: Here is the yakitori.
 --- !u!114 &989174845 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6877845425145365849, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
@@ -25011,36 +25078,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeggarTrigger
   yakitoriItem: {fileID: 11400000, guid: 93dd31dbe498e46668ce1f12ea58c39c, type: 2}
-  initialDialogue:
-  - characterName: Tanaka Koji
-    characterPortrait: {fileID: 0}
-    sentence: Well well well, look what we have here...
-  - characterName: Tanaka Koji
-    characterPortrait: {fileID: 0}
-    sentence: "\u9B3C\u6BBA\u3057 (Onikoroshi)\u2026. The ghost slayer\u2026."
-  - characterName: Michelle Sato
-    characterPortrait: {fileID: 0}
-    sentence: "I need your help\u2026."
-  - characterName: Tanaka Koji
-    characterPortrait: {fileID: 0}
-    sentence: "I'm hungry\u2026 Get me some Yakitori, then we'll talk."
-  noFoodDialogue:
-  - characterName: Tanaka Koji
-    characterPortrait: {fileID: 0}
-    sentence: Where's my Yakitori? I won't tell you anything until I get my food!
-  giveFoodDialogue:
-  - characterName: Michelle Sato
-    characterPortrait: {fileID: 0}
-    sentence: Here's your Yakitori.
-  - characterName: Tanaka Koji
-    characterPortrait: {fileID: 0}
-    sentence: What a feast! Now start listening...
-  - characterName: Tanaka Koji
-    characterPortrait: {fileID: 0}
-    sentence: Aoyama, the one who took your child... He's here in town.
-  - characterName: Tanaka Koji
-    characterPortrait: {fileID: 0}
-    sentence: Go to Ito Shun, the blacksmith, to get a weapon.
+  currentState: 0
+  dialoguePT1:
+  - speakerName: Tanaka Koji
+    sentence: Well well well, look what we have here
+  - speakerName: Tanaka Koji
+    sentence: Onikoroshi.... The ghost slayer....
+  - speakerName: Tanaka Koji
+    sentence: I thought you left this life behind....
+  - speakerName: Michelle Sato
+    sentence: I need your help....
+  - speakerName: Tanaka Koji
+    sentence: Why should I? You should just go home and....
+  - speakerName: Michelle Sato
+    sentence: You owe me one, Remember Nagoya?
+  - speakerName: Tanaka Koji
+    sentence: I remember....
+  - speakerName: Tanaka Koji
+    sentence: But I'm hungry....
+  - speakerName: Tanaka Koji
+    sentence: Get me something to eat, and we'll talk....
+  dialoguePT3:
+  - speakerName: Tanaka Koji
+    sentence: That was close... And I'm still hungry...
+  - speakerName: Michelle Sato
+    sentence: Here's your yakitori.
+  - speakerName: Tanaka Koji
+    sentence: What a feast!
+  - speakerName: Michelle Sato
+    sentence: Now start talking.
+  - speakerName: Tanaka Koji
+    sentence: Aoyama, the one who took away your child. He's here.
+  - speakerName: Tanaka Koji
+    sentence: But you need a weapon.
+  - speakerName: Tanaka Koji
+    sentence: Go to Ito Shun, he's the last blacksmith in town.
+  - speakerName: Tanaka Koji
+    sentence: Look for him in his house on the further side of town.
+  - speakerName: Tanaka Koji
+    sentence: And beware, the Yakuza knows you're here for revenge.
 --- !u!1 &1120835877
 GameObject:
   m_ObjectHideFlags: 0
@@ -25141,14 +25217,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136738983}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1120835878}
   - {fileID: 1782251796}
-  m_Father: {fileID: 1613496295}
+  m_Father: {fileID: 953037768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -25219,13 +25295,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141662444}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 232500273}
-  m_Father: {fileID: 1613496295}
+  m_Father: {fileID: 953037768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -25276,9 +25352,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1212965035}
+      - m_Target: {fileID: 336083713}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: ToggleInventoryPanel
+        m_MethodName: ToggleInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25428,7 +25504,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1212965033}
   - component: {fileID: 1212965034}
-  - component: {fileID: 1212965035}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -25468,33 +25543,12 @@ MonoBehaviour:
   dialogueText: {fileID: 1541575105}
   profileImage: {fileID: 66371545}
   characterProfiles:
-  - characterName: Tanaka Koji
-    portrait: {fileID: 871644944394960076, guid: dc1163cd58fa7498e9771d5895b88649, type: 3}
   - characterName: Michelle Sato
     portrait: {fileID: -7034116388857145810, guid: 37f5cd5a5b207408eb29c9a674e099bb, type: 3}
-  - characterName: Seller
+  - characterName: Tanaka Koji
+    portrait: {fileID: 871644944394960076, guid: dc1163cd58fa7498e9771d5895b88649, type: 3}
+  - characterName: Pedagang
     portrait: {fileID: 8274573067789081019, guid: 25e6fab154f2646f7804c7f613577b13, type: 3}
---- !u!114 &1212965035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212965032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983d8d38925d84d319cd503819d628e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  itemIconImage: {fileID: 875546519}
-  items: []
-  obtainedPopupPanel: {fileID: 1136738983}
-  popupItemIcon: {fileID: 1120835879}
-  popupItemNameText: {fileID: 1782251797}
-  popupDuration: 2.5
-  inventoryPanel: {fileID: 850430306}
-  itemSlotContainer: {fileID: 1248285483}
-  itemSlotPrefab: {fileID: 766454489265679440, guid: be2d4788c946149039fd42e26faae85e, type: 3}
 --- !u!1 &1248010830
 GameObject:
   m_ObjectHideFlags: 0
@@ -26337,7 +26391,6 @@ GameObject:
   - component: {fileID: 1377001911}
   - component: {fileID: 1377001913}
   - component: {fileID: 1377001912}
-  - component: {fileID: 1377001914}
   m_Layer: 5
   m_Name: ItemSubmitPanel
   m_TagString: Untagged
@@ -26352,7 +26405,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377001910}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26361,7 +26414,7 @@ RectTransform:
   - {fileID: 1509876753}
   - {fileID: 731352528}
   - {fileID: 567888794}
-  m_Father: {fileID: 1613496295}
+  m_Father: {fileID: 953037768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26406,23 +26459,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377001910}
   m_CullTransparentMesh: 1
---- !u!114 &1377001914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377001910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b335d095565435c9381c0e257b6561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemSubmitUI
-  submitPanel: {fileID: 1377001910}
-  requiredItemIcon: {fileID: 848361783}
-  requiredItemNameText: {fileID: 1509876754}
-  deliverButton: {fileID: 731352529}
-  cancelButton: {fileID: 567888795}
 --- !u!1 &1436466627
 GameObject:
   m_ObjectHideFlags: 0
@@ -27885,112 +27921,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541575103}
   m_CullTransparentMesh: 1
---- !u!1 &1613496291
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1613496295}
-  - component: {fileID: 1613496294}
-  - component: {fileID: 1613496293}
-  - component: {fileID: 1613496292}
-  m_Layer: 5
-  m_Name: Canvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1613496292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613496291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &1613496293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613496291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2778, y: 1284}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!223 &1613496294
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613496291}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_UseReflectionProbes: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!224 &1613496295
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613496291}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1141662445}
-  - {fileID: 850430307}
-  - {fileID: 1136738984}
-  - {fileID: 1377001911}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1673862416
 GameObject:
   m_ObjectHideFlags: 0
@@ -34668,6 +34598,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 875546520}
+    - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1141662445}
+    - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 850430307}
+    - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1136738984}
+    - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1377001911}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
 --- !u!1660057539 &9223372036854775807
@@ -34688,4 +34630,4 @@ SceneRoots:
   - {fileID: 2119745364}
   - {fileID: 845088588}
   - {fileID: 1212965033}
-  - {fileID: 1613496295}
+  - {fileID: 336083714}

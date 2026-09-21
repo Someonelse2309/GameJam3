@@ -14,7 +14,7 @@ public class CharacterProfile
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance;
+    public static DialogueManager Instance { get; private set; }
 
     [Header("UI References")]
     public GameObject dialoguePanel;
@@ -22,45 +22,22 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text dialogueText;
     public Image profileImage;
 
-    [Header("Character Profiles Database")]
-    public List<CharacterProfile> characterProfiles; // Daftarkan PP karakter di sini sekali saja
+    [Header("Central Character Database")]
+    public List<CharacterProfile> characterProfiles = new List<CharacterProfile>();
 
-    private Queue<DialogueLine> sentences = new Queue<DialogueLine>();
-    private Dictionary<string, Sprite> profileDict = new Dictionary<string, Sprite>();
-    private bool isDialogueActive = false;
-    private Action onDialogueComplete;
+    private Queue<DialogueSentence> sentences = new Queue<DialogueSentence>();
+    public bool isDialogueActive { get; private set; } = false;
+    private Action onDialogueCompleted;
 
-    void Awake()
-{
-    Instance = this;
-
-    // Kunci frame rate ke 60 FPS untuk iOS & Android
-    Application.targetFrameRate = 60;
-
-    // Matikan VSync agar targetFrameRate berfungsi dengan benar
-    QualitySettings.vSyncCount = 0;
-
-    if (dialoguePanel != null)
+    private void Awake()
     {
-        dialoguePanel.SetActive(false);
+        if (Instance == null) Instance = this;
+        else Destroy(this);
+
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
     }
 
-    InitProfileDictionary();
-}
-
-    void InitProfileDictionary()
-    {
-        profileDict.Clear();
-        foreach (var profile in characterProfiles)
-        {
-            if (!string.IsNullOrEmpty(profile.characterName) && !profileDict.ContainsKey(profile.characterName))
-            {
-                profileDict.Add(profile.characterName, profile.portrait);
-            }
-        }
-    }
-
-    void Update()
+    private void Update()
     {
         if (isDialogueActive && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
         {
@@ -68,7 +45,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueLine[] dialogue, Action onComplete = null)
+    public void StartDialogue(DialogueSentence[] dialogue, Action onComplete = null)
     {
         if (isDialogueActive)
         {
@@ -77,11 +54,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         isDialogueActive = true;
-        onDialogueComplete = onComplete;
+        onDialogueCompleted = onComplete;
+
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
         sentences.Clear();
 
-        foreach (DialogueLine line in dialogue)
+        foreach (DialogueSentence line in dialogue)
         {
             sentences.Enqueue(line);
         }
@@ -97,30 +75,18 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        DialogueLine current = sentences.Dequeue();
+        DialogueSentence current = sentences.Dequeue();
 
-        // 1. Set Nama Karakter
-        if (nameText != null) nameText.text = current.characterName;
+        // Tampilkan Nama
+        if (nameText != null) nameText.text = current.speakerName;
 
-        // 2. Cari Foto Profil Otomatis Berdasarkan Nama
-        Sprite portraitSprite = null;
-
-        // Gunakan custom portrait jika diisi khusus pada line, jika tidak cari di database
-        if (current.characterPortrait != null)
-        {
-            portraitSprite = current.characterPortrait;
-        }
-        else if (!string.IsNullOrEmpty(current.characterName) && profileDict.TryGetValue(current.characterName, out Sprite foundSprite))
-        {
-            portraitSprite = foundSprite;
-        }
-
-        // 3. Tampilkan Foto Profil
+        // Cari Foto Profil Otomatis Berdasarkan Nama
+        Sprite matchedPortrait = GetPortraitByName(current.speakerName);
         if (profileImage != null)
         {
-            if (portraitSprite != null)
+            if (matchedPortrait != null)
             {
-                profileImage.sprite = portraitSprite;
+                profileImage.sprite = matchedPortrait;
                 profileImage.gameObject.SetActive(true);
             }
             else
@@ -133,7 +99,13 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(current.sentence));
     }
 
-    IEnumerator TypeSentence(string sentence)
+    private Sprite GetPortraitByName(string name)
+    {
+        CharacterProfile profile = characterProfiles.Find(p => p.characterName.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase));
+        return profile != null ? profile.portrait : null;
+    }
+
+    private IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
@@ -147,7 +119,9 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
-        onDialogueComplete?.Invoke();
-        onDialogueComplete = null;
+
+        Action callback = onDialogueCompleted;
+        onDialogueCompleted = null;
+        callback?.Invoke();
     }
 }

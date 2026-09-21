@@ -5,39 +5,32 @@ using TMPro;
 
 public class ItemSubmitUI : MonoBehaviour
 {
-    private static ItemSubmitUI instance;
-    public static ItemSubmitUI Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindFirstObjectByType<ItemSubmitUI>(FindObjectsInactive.Include);
-            }
-            return instance;
-        }
-    }
+    public static ItemSubmitUI Instance { get; private set; }
 
-    [Header("UI Elements")]
+    [Header("Submit Modal")]
     public GameObject submitPanel;
     public Image requiredItemIcon;
     public TextMeshProUGUI requiredItemNameText;
     public Button deliverButton;
     public Button cancelButton;
 
-    private ItemData currentRequiredItem;
-    private Action onDeliverSuccess;
+    private ItemData currentItem;
+    private Action onSubmitSuccess;
+    private Action onCancel;
 
-    void Awake()
+    private void Awake()
     {
-        if (instance == null) instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
         if (submitPanel != null) submitPanel.SetActive(false);
     }
 
-    public void OpenSubmitScreen(ItemData requiredItem, Action onSuccess)
+    public void OpenSubmitScreen(ItemData requiredItem, Action onSuccess, Action onCancelled = null)
     {
-        currentRequiredItem = requiredItem;
-        onDeliverSuccess = onSuccess;
+        currentItem = requiredItem;
+        onSubmitSuccess = onSuccess;
+        onCancel = onCancelled;
 
         if (submitPanel != null) submitPanel.SetActive(true);
 
@@ -53,7 +46,7 @@ public class ItemSubmitUI : MonoBehaviour
         {
             deliverButton.interactable = hasItem;
             deliverButton.onClick.RemoveAllListeners();
-            deliverButton.onClick.AddListener(OnDeliverClicked);
+            deliverButton.onClick.AddListener(ConfirmDeliver);
         }
 
         if (cancelButton != null)
@@ -63,19 +56,19 @@ public class ItemSubmitUI : MonoBehaviour
         }
     }
 
-    private void OnDeliverClicked()
+    private void ConfirmDeliver()
     {
-        if (InventoryManager.Instance != null && InventoryManager.Instance.HasItem(currentRequiredItem))
+        if (InventoryManager.Instance != null && InventoryManager.Instance.HasItem(currentItem))
         {
-            InventoryManager.Instance.RemoveItem(currentRequiredItem);
+            InventoryManager.Instance.RemoveItem(currentItem);
             CloseScreen();
-            onDeliverSuccess?.Invoke();
+            onSubmitSuccess?.Invoke();
         }
     }
 
     public void CloseScreen()
     {
         if (submitPanel != null) submitPanel.SetActive(false);
-        onDeliverSuccess = null;
+        onCancel?.Invoke();
     }
 }

@@ -1,9 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item Data")]
 public class ItemData : ScriptableObject
 {
-    public string itemName = "Yakitori";
+    public string itemId;
+    public string itemName;
+    [TextArea(2, 4)]
+    public string description;
     public Sprite itemIcon;
-    [TextArea] public string description = "Dua porsi Yakitori lezat.";
 }
