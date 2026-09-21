@@ -768,7 +768,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 41375d96547a143f99777a19db5f0b9e, type: 3}
   sfxLibrary:
   - {fileID: 8300000, guid: 8505f0248c3c2426da5e7cb137c63226, type: 3}
-  voiceLibrary: []
+  voiceLibrary:
+  - {fileID: 8300000, guid: 1769144d7b4e44690b31508c96e77b7a, type: 3}
+  - {fileID: 8300000, guid: e6ab1fd2043c249398e64c2c273d7e6f, type: 3}
+  - {fileID: 8300000, guid: 02e4d83aa84484b6c8ad1f632643a51b, type: 3}
+  - {fileID: 8300000, guid: f93e216b0c22146738025d22aabe880f, type: 3}
+  - {fileID: 8300000, guid: 5d73f9f07306d438682c3070d60f7efb, type: 3}
+  - {fileID: 8300000, guid: c1d333f099c844b15af69d1de28a4b97, type: 3}
 --- !u!4 &963575488
 Transform:
   m_ObjectHideFlags: 0
