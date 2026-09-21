@@ -25076,6 +25076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268850be95b454e288bb18362a452e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeggarTrigger
+  dialogueManager: {fileID: 1212965034}
   yakitoriItem: {fileID: 11400000, guid: 93dd31dbe498e46668ce1f12ea58c39c, type: 2}
   currentState: 0
   dialoguePT1:

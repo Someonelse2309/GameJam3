@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class BeggarTrigger : MonoBehaviour
 {
+    [Header("Manager References")]
+    public DialogueManager dialogueManager;
+
+    [Header("Quest Item")]
     public ItemData yakitoriItem;
 
     public enum QuestState { NotStarted, LookingForFood, QuestCompleted }
+    [Header("Quest State")]
     public QuestState currentState = QuestState.NotStarted;
 
     private bool isPlayerNearby = false;
 
+    [Header("Dialogues")]
     public DialogueSentence[] dialoguePT1 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Well well well, look what we have here" },
@@ -30,10 +36,23 @@ public class BeggarTrigger : MonoBehaviour
         new DialogueSentence { speakerName = "Michelle Sato", sentence = "Now start talking." },
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Aoyama, the one who took away your child. He's here." },
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "But you need a weapon." },
-        new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Go to Ito Shun, he's the last blacksmith in town." },
-        new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Look for him in his house on the further side of town." },
-        new DialogueSentence { speakerName = "Tanaka Koji", sentence = "And beware, the Yakuza knows you're here for revenge." }
+        new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Go to Ito Shun, He's the last blacksmith in town." },
+        new DialogueSentence { speakerName = "Tanaka Koji", sentence = "He's on the further side of the town, Look for him in his house." },
+        new DialogueSentence { speakerName = "Tanaka Koji", sentence = "and beware, The Yakuza knows you're here for revenge." }
     };
+
+    private void Start()
+    {
+        EnsureDialogueManager();
+    }
+
+    private void EnsureDialogueManager()
+    {
+        if (dialogueManager == null)
+        {
+            dialogueManager = DialogueManager.Instance != null ? DialogueManager.Instance : FindFirstObjectByType<DialogueManager>();
+        }
+    }
 
     private void Update()
     {
@@ -62,41 +81,57 @@ public class BeggarTrigger : MonoBehaviour
 
     public void TriggerInteraction()
     {
-        if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive) return;
+        EnsureDialogueManager();
 
-        bool hasYakitori = InventoryManager.Instance != null && InventoryManager.Instance.HasItem(yakitoriItem);
+        if (dialogueManager == null)
+        {
+            Debug.LogError("[BeggarTrigger] DialogueManager tidak ditemukan di Scene!");
+            return;
+        }
+
+        if (dialogueManager.isDialogueActive) return;
+
+        bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
 
         if (currentState == QuestState.NotStarted)
         {
-            DialogueManager.Instance.StartDialogue(dialoguePT1, () =>
+            dialogueManager.StartDialogue(dialoguePT1, () =>
             {
                 currentState = QuestState.LookingForFood;
             });
         }
         else if (currentState == QuestState.LookingForFood && hasYakitori)
         {
-            // Buka panel submit/serahkan makanan ke beggar
-            ItemSubmitUI.Instance.OpenSubmitScreen(yakitoriItem, () =>
+            if (ItemSubmitUI.Instance != null)
             {
+                ItemSubmitUI.Instance.OpenSubmitScreen(yakitoriItem, () =>
+                {
+                    currentState = QuestState.QuestCompleted;
+                    dialogueManager.StartDialogue(dialoguePT3);
+                });
+            }
+            else
+            {
+                if (InventoryManager.Instance != null) InventoryManager.Instance.RemoveItem(yakitoriItem);
                 currentState = QuestState.QuestCompleted;
-                DialogueManager.Instance.StartDialogue(dialoguePT3);
-            });
+                dialogueManager.StartDialogue(dialoguePT3);
+            }
         }
         else if (currentState == QuestState.LookingForFood && !hasYakitori)
         {
             DialogueSentence[] remindDialog = new DialogueSentence[]
             {
-                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "I'm starving... Go get me that Yakitori from the vendor!" }
+                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Get me something to eat, and we'll talk..." }
             };
-            DialogueManager.Instance.StartDialogue(remindDialog);
+            dialogueManager.StartDialogue(remindDialog);
         }
         else if (currentState == QuestState.QuestCompleted)
         {
             DialogueSentence[] doneDialog = new DialogueSentence[]
             {
-                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Go see Ito Shun. He has what you need." }
+                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Go to Ito Shun, He's the last blacksmith in town." }
             };
-            DialogueManager.Instance.StartDialogue(doneDialog);
+            dialogueManager.StartDialogue(doneDialog);
         }
     }
 }

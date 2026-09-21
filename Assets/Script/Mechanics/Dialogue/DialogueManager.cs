@@ -28,15 +28,20 @@ public class DialogueManager : MonoBehaviour
     private Queue<DialogueSentence> sentences = new Queue<DialogueSentence>();
     public bool isDialogueActive { get; private set; } = false;
     private Action onDialogueCompleted;
+    private bool isTyping = false;
+    private string currentFullSentence = "";
 
     private void Awake()
-{
-    // 1. Nonaktifkan VSync agar targetFrameRate tidak diabaikan
-    QualitySettings.vSyncCount = 0;
+    {
+        // 1. Pastikan Instance singleton selalu terdaftar
+        Instance = this;
 
-    // 2. Kunci framerate ke 60 FPS
-    Application.targetFrameRate = 60;
-}
+        // 2. Kunci 60 FPS
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+    }
 
     private void Update()
     {
@@ -48,6 +53,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueSentence[] dialogue, Action onComplete = null)
     {
+        if (dialogue == null || dialogue.Length == 0) return;
+
         if (isDialogueActive)
         {
             DisplayNextSentence();
@@ -70,6 +77,15 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        // Jika sedang mengetik teks berjalan, tekan lagi untuk langsung menampilkan teks penuh
+        if (isTyping)
+        {
+            StopAllCoroutines();
+            if (dialogueText != null) dialogueText.text = currentFullSentence;
+            isTyping = false;
+            return;
+        }
+
         if (sentences.Count == 0)
         {
             EndDialogue();
@@ -78,10 +94,9 @@ public class DialogueManager : MonoBehaviour
 
         DialogueSentence current = sentences.Dequeue();
 
-        // Tampilkan Nama
         if (nameText != null) nameText.text = current.speakerName;
 
-        // Cari Foto Profil Otomatis Berdasarkan Nama
+        // Update foto profil karakter otomatis
         Sprite matchedPortrait = GetPortraitByName(current.speakerName);
         if (profileImage != null)
         {
@@ -102,23 +117,36 @@ public class DialogueManager : MonoBehaviour
 
     private Sprite GetPortraitByName(string name)
     {
-        CharacterProfile profile = characterProfiles.Find(p => p.characterName.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase));
+        if (characterProfiles == null || string.IsNullOrEmpty(name)) return null;
+
+        CharacterProfile profile = characterProfiles.Find(p => 
+            p != null && 
+            !string.IsNullOrEmpty(p.characterName) && 
+            p.characterName.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase));
+
         return profile != null ? profile.portrait : null;
     }
 
     private IEnumerator TypeSentence(string sentence)
     {
-        dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        isTyping = true;
+        currentFullSentence = sentence;
+        if (dialogueText != null)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(0.02f);
+            dialogueText.text = "";
+            foreach (char letter in sentence.ToCharArray())
+            {
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(0.02f);
+            }
         }
+        isTyping = false;
     }
 
     public void EndDialogue()
     {
         isDialogueActive = false;
+        isTyping = false;
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
         Action callback = onDialogueCompleted;
