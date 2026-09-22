@@ -4338,7 +4338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &232500273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24906,12 +24906,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a21ff2b29fbf4e03bdbae7bcbcc6138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PedagangTrigger
+  dialogueManager: {fileID: 1212965034}
+  beggarTrigger: {fileID: 991046965}
   yakitoriItem: {fileID: 11400000, guid: 93dd31dbe498e46668ce1f12ea58c39c, type: 2}
-  sellerDialogue:
+  dialogueBelumMinta:
+  - speakerName: Pedagang
+    sentence: Welcome! Fresh yakitori made with the finest recipe!
+  - speakerName: Michelle Sato
+    sentence: I don't have any appetite right now...
+  dialogueBeliYakitori:
   - speakerName: Michelle Sato
     sentence: Give me two portions of yakitori.
   - speakerName: Pedagang
     sentence: Here is the yakitori.
+  dialogueSudahBeli:
+  - speakerName: Pedagang
+    sentence: Eat it while it's still warm! Don't let it get cold.
 --- !u!114 &989174845 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6877845425145365849, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
@@ -26389,7 +26399,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6008602503000455829, guid: cb07ebd423333484f87bd96757400661, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.94, y: 1.28}

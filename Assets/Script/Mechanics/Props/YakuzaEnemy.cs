@@ -11,14 +11,14 @@ public class YakuzaEnemy : MonoBehaviour
     public float hitRadius = 0.35f;      // Radius jangkauan tinju
 
     [Header("Layer Detection")]
-    public LayerMask playerLayer;        // Pastikan dipilih "Player" atau "Default"
+    public LayerMask playerLayer;        // Pastikan di Inspector diubah dari Nothing ke Default / Player
 
     [Header("Sprites Animation")]
     public SpriteRenderer spriteRenderer;
     public Sprite[] idleSprites;
     public Sprite[] walkSprites;
     public Sprite[] attackSprites;
-    public float frameRate = 0.15f;      // Kecepatan frame jalan
+    public float frameRate = 0.15f;
 
     private Transform playerTarget;
     private CharacterHealth health;
@@ -49,11 +49,13 @@ public class YakuzaEnemy : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, playerTarget.position);
 
-        // Hadap kiri / kanan mengikuti posisi MC
-        bool facingRight = playerTarget.position.x > transform.position.x;
-        spriteRenderer.flipX = facingRight;
+        // Cek posisi MC: true jika MC ada di sebelah kanan Yakuza
+        bool isTargetOnRight = playerTarget.position.x > transform.position.x;
 
-        if (isAttacking) return; // Jangan ganti sprite jalan saat sedang memukul
+        // Balik flipX: jika target di kiri maka flipX = true, jika di kanan flipX = false
+        spriteRenderer.flipX = !isTargetOnRight;
+
+        if (isAttacking) return;
 
         if (distance > attackDistance)
         {
@@ -65,15 +67,14 @@ public class YakuzaEnemy : MonoBehaviour
         }
         else
         {
-            // 3. Jika sudah dalam jarak serang, lakukan pukulan
+            // 3. Pukul jika cooldown selesai
             if (Time.time >= nextAttackTime)
             {
-                StartCoroutine(PerformPunch(facingRight));
+                StartCoroutine(PerformPunch(isTargetOnRight));
                 nextAttackTime = Time.time + attackSpeed;
             }
             else
             {
-                // Idle saat menunggu jeda serangan
                 AnimateSprites(idleSprites);
             }
         }
@@ -92,11 +93,10 @@ public class YakuzaEnemy : MonoBehaviour
         }
     }
 
-    private IEnumerator PerformPunch(bool facingRight)
+    private IEnumerator PerformPunch(bool isTargetOnRight)
     {
         isAttacking = true;
 
-        // Jalankan frame animasi pukulan
         if (attackSprites != null && attackSprites.Length > 0)
         {
             for (int i = 0; i < attackSprites.Length; i++)
@@ -110,11 +110,11 @@ public class YakuzaEnemy : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        // Titik tinju di depan badan Yakuza
-        Vector2 punchOffset = facingRight ? new Vector2(0.25f, 0f) : new Vector2(-0.25f, 0f);
+        // Arahkan jangkauan tinju ke arah MC berada
+        Vector2 punchOffset = isTargetOnRight ? new Vector2(0.25f, 0f) : new Vector2(-0.25f, 0f);
         Vector2 punchPosition = (Vector2)transform.position + punchOffset;
 
-        // Deteksi MC (LayerMask + Fallback cek Tag "Player")
+        // Deteksi pukulan ke MC
         Collider2D hit = Physics2D.OverlapCircle(punchPosition, hitRadius, playerLayer);
         if (hit == null)
         {
@@ -146,11 +146,9 @@ public class YakuzaEnemy : MonoBehaviour
 
     private IEnumerator FadeOutAndDie()
     {
-        // Matikan collider agar tidak bisa dipukul lagi saat sekarat
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
 
-        // Efek fading transparan halus
         Color c = spriteRenderer.color;
         while (c.a > 0f)
         {
@@ -164,8 +162,8 @@ public class YakuzaEnemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Vector2 offset = (spriteRenderer != null && spriteRenderer.flipX) ? new Vector2(0.25f, 0f) : new Vector2(-0.25f, 0f);
+        float direction = (spriteRenderer != null && spriteRenderer.flipX) ? -0.25f : 0.25f;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere((Vector2)transform.position + offset, hitRadius);
+        Gizmos.DrawWireSphere((Vector2)transform.position + new Vector2(direction, 0f), hitRadius);
     }
 }

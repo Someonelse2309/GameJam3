@@ -33,10 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        // 1. Pastikan Instance singleton selalu terdaftar
         Instance = this;
-
-        // 2. Kunci 60 FPS
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
 
@@ -77,7 +74,6 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        // Jika sedang mengetik teks berjalan, tekan lagi untuk langsung menampilkan teks penuh
         if (isTyping)
         {
             StopAllCoroutines();
@@ -96,7 +92,6 @@ public class DialogueManager : MonoBehaviour
 
         if (nameText != null) nameText.text = current.speakerName;
 
-        // Update foto profil karakter otomatis
         Sprite matchedPortrait = GetPortraitByName(current.speakerName);
         if (profileImage != null)
         {
@@ -143,14 +138,27 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
+    // Dipanggil normal saat dialog selesai tuntas
     public void EndDialogue()
     {
         isDialogueActive = false;
         isTyping = false;
+        StopAllCoroutines();
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
         Action callback = onDialogueCompleted;
         onDialogueCompleted = null;
         callback?.Invoke();
+    }
+
+    // Dipanggil saat player berjalan menjauh dari NPC (Cancel)
+    public void CancelDialogue()
+    {
+        isDialogueActive = false;
+        isTyping = false;
+        StopAllCoroutines();
+        onDialogueCompleted = null; // Batalkan callback agar quest tidak jalan prematur
+        sentences.Clear();
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
     }
 }

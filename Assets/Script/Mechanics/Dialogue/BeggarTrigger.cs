@@ -79,7 +79,16 @@ public class BeggarTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) isPlayerNearby = false;
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
+
+            // Tutup dialog seketika saat MC menjauh dari Beggar
+            if (dialogueManager != null && dialogueManager.isDialogueActive)
+            {
+                dialogueManager.CancelDialogue();
+            }
+        }
     }
 
     public void TriggerInteraction()
