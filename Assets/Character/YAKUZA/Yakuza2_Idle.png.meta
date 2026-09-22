@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3a1953de235804b8b938c76c55c791d6
+guid: d5df770d009504352ad0e4d0788f05df
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2890402328765952870
-    second: MC_Happy_0
+      213: -841194614512354614
+    second: Yakuza2_Idle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,12 +128,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC_Happy_0
+      name: Yakuza2_Idle_0
       rect:
         serializedVersion: 2
-        x: 15
+        x: 27
         y: 0
-        width: 98
+        width: 74
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6637e00aa95cc1820800000000000000
-      internalID: 2890402328765952870
+      spriteID: acaf40774f97354f0800000000000000
+      internalID: -841194614512354614
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MC_Happy_0: 2890402328765952870
+      Yakuza2_Idle_0: -841194614512354614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

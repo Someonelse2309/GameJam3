@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3a1953de235804b8b938c76c55c791d6
+guid: 54d9e29df361a47c58819a24bda2e824
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2890402328765952870
-    second: MC_Happy_0
+      213: 7644351033386696186
+    second: NPCBlacksmith_Idle3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,12 +128,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC_Happy_0
+      name: NPCBlacksmith_Idle3_0
       rect:
         serializedVersion: 2
-        x: 15
+        x: 1
         y: 0
-        width: 98
+        width: 155
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6637e00aa95cc1820800000000000000
-      internalID: 2890402328765952870
+      spriteID: afd776b63c0361a60800000000000000
+      internalID: 7644351033386696186
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MC_Happy_0: 2890402328765952870
+      NPCBlacksmith_Idle3_0: 7644351033386696186
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
