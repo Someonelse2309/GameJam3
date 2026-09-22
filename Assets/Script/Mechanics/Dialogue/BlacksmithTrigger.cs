@@ -9,11 +9,11 @@ public class BlacksmithTrigger : MonoBehaviour
     public DialogueManager dialogueManager;
 
     [Header("Yakuza Enemies (Petarung)")]
-    [Tooltip("Tarik 2 Yakuza Botak yang akan menyerang MC di sini")]
+    [Tooltip("Masukkan 2 Yakuza botak yang menyerang MC")]
     public YakuzaEnemy[] fighterYakuza; 
 
     [Header("Yakuza Leader (Pengamat Jas Rapi)")]
-    [Tooltip("Tarik NPC_SuitYakuza di sini")]
+    [Tooltip("Masukkan NPC_SuitYakuza yang hanya mengamati")]
     public GameObject suitYakuzaLeader;
     public float leaderFleeSpeed = 6f;
 
@@ -26,28 +26,28 @@ public class BlacksmithTrigger : MonoBehaviour
     private bool isPlayerNearby = false;
     private Transform playerTransform;
 
-    [Header("Dialogue PT1 (Datang ke Blacksmith - Pembuktian Dimulai)")]
+    [Header("Dialogue PT1 (Sebelum Berantem - Pembuktian)")]
     public DialogueSentence[] dialoguePT1 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Michelle Sato", sentence = "Ito Shun?" },
-        new DialogueSentence { speakerName = "Ito Shun", sentence = "Michelle Sato... The Yakuza are scouring the streets for you." },
-        new DialogueSentence { speakerName = "Ito Shun", sentence = "I have your katana, but I won't hand a deadly blade to someone who lost their fire." },
-        new DialogueSentence { speakerName = "Suit Yakuza", sentence = "Michelle Sato! Cornered like a rat, and without a weapon!" },
+        new DialogueSentence { speakerName = "Ito Shun", sentence = "Michelle Sato... The ghost slayer. The Yakuza are tearing the city apart looking for you." },
+        new DialogueSentence { speakerName = "Ito Shun", sentence = "I have what you seek, but I won't hand a deadly blade to someone who's just looking for a grave." },
+        new DialogueSentence { speakerName = "Suit Yakuza", sentence = "Well, well. Michelle Sato cornered like a rat, and without a weapon!" },
         new DialogueSentence { speakerName = "Suit Yakuza", sentence = "Boys, break her limbs! The boss wants her breathing, but broken." },
-        new DialogueSentence { speakerName = "Ito Shun", sentence = "Show me your resolve, Sato! Prove to me that the 'Onikoroshi' is still alive in you!" },
-        new DialogueSentence { speakerName = "Michelle Sato", sentence = "I don't need steel to break your dogs." }
+        new DialogueSentence { speakerName = "Ito Shun", sentence = "Show me your resolve, Sato! Prove to me that the 'Onikoroshi' is still burning inside you!" },
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "I don't need a blade to crush your dogs." }
     };
 
-    [Header("Dialogue PT2 (Setelah Kroco Kalah - Suit Yakuza Kabur & Dapat Katana)")]
+    [Header("Dialogue PT2 (Setelah Kalahkan 2 Yakuza Botak)")]
     public DialogueSentence[] dialoguePT2 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Suit Yakuza", sentence = "W-what the hell?! Barehanded...?! You're a monster!" },
         new DialogueSentence { speakerName = "Michelle Sato", sentence = "Tell Aoyama I'm coming. Send him my regards." },
         new DialogueSentence { speakerName = "Suit Yakuza", sentence = "Aoyama-sama will tear you apart! This isn't over!" },
         new DialogueSentence { speakerName = "Ito Shun", sentence = "The legend was true... Even without steel, your edge never dulled." },
-        new DialogueSentence { speakerName = "Ito Shun", sentence = "Here is your katana, Onikoroshi. Go reclaim your revenge." },
+        new DialogueSentence { speakerName = "Ito Shun", sentence = "Here’s your katana, Onikoroshi. Go reclaim what was taken from you." },
         new DialogueSentence { speakerName = "Michelle Sato", sentence = "Thank you, Ito Shun." },
-        new DialogueSentence { speakerName = "Ito Shun", sentence = "Be careful. Aoyama won't fight with honor." }
+        new DialogueSentence { speakerName = "Ito Shun", sentence = "Be careful. Aoyama won't fight fair." }
     };
 
     private void Start()
@@ -58,12 +58,13 @@ public class BlacksmithTrigger : MonoBehaviour
         if (beggarTrigger == null)
             beggarTrigger = FindFirstObjectByType<BeggarTrigger>();
 
-        // Sembunyikan dan nonaktifkan Yakuza sebelum quest dipicu
+        // Cari PlayerTransform sejak awal agar tidak null
+        FindPlayerTransform();
+
+        // Sembunyikan objek di awal game
         if (suitYakuzaLeader != null)
         {
             suitYakuzaLeader.SetActive(false);
-            YakuzaEnemy leaderAi = suitYakuzaLeader.GetComponent<YakuzaEnemy>();
-            if (leaderAi != null) leaderAi.enabled = false; // Jas rapi hanya menonton
         }
 
         if (fighterYakuza != null)
@@ -72,12 +73,26 @@ public class BlacksmithTrigger : MonoBehaviour
             {
                 if (yakuza != null)
                 {
-                    yakuza.enabled = false;
                     yakuza.gameObject.SetActive(false);
                     CharacterHealth hp = yakuza.GetComponent<CharacterHealth>();
                     if (hp != null) hp.OnDeath += OnFighterKilled;
                 }
             }
+        }
+    }
+
+    private void FindPlayerTransform()
+    {
+        if (playerTransform != null) return;
+
+        if (PlayerMovement.Instance != null)
+        {
+            playerTransform = PlayerMovement.Instance.transform;
+        }
+        else
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null) playerTransform = playerObj.transform;
         }
     }
 
@@ -103,7 +118,6 @@ public class BlacksmithTrigger : MonoBehaviour
     {
         if (dialogueManager == null || dialogueManager.isDialogueActive) return;
 
-        // Cek apakah quest Beggar sudah tuntas
         bool beggarFinished = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.QuestCompleted;
 
         if (!beggarFinished)
@@ -118,7 +132,9 @@ public class BlacksmithTrigger : MonoBehaviour
 
         if (currentState == BlacksmithState.Locked || currentState == BlacksmithState.ReadyForTalk)
         {
-            // Munculkan Suit Yakuza & 2 Yakuza Botak ke scene
+            FindPlayerTransform();
+
+            // Tampilkan Suit Yakuza dan 2 Yakuza botak
             if (suitYakuzaLeader != null) suitYakuzaLeader.SetActive(true);
 
             if (fighterYakuza != null)
@@ -128,7 +144,7 @@ public class BlacksmithTrigger : MonoBehaviour
                     if (yakuza != null)
                     {
                         yakuza.gameObject.SetActive(true);
-                        yakuza.enabled = false; // Tahan agar tidak menyerang saat dialog
+                        yakuza.enabled = true; // Pastikan script AI aktif
                     }
                 }
             }
@@ -144,16 +160,13 @@ public class BlacksmithTrigger : MonoBehaviour
             {
                 currentState = BlacksmithState.QuestCompleted;
 
-                // 1. Yakuza jas rapi lari terbirit-birit keluar scene
                 StartCoroutine(MakeLeaderFlee());
 
-                // 2. Beri Katana ke inventory
                 if (InventoryManager.Instance != null && katanaItem != null)
                 {
                     InventoryManager.Instance.AddItem(katanaItem);
                 }
 
-                // 3. Otomatis pasang katana ke MC (Damage & Range naik)
                 if (PlayerMovement.Instance != null)
                 {
                     PlayerMovement.Instance.EquipSword(true);
@@ -167,8 +180,9 @@ public class BlacksmithTrigger : MonoBehaviour
         currentState = BlacksmithState.InCombat;
         combatStarted = true;
 
-        // Hanya anak buah botak yang menyerang MC
-        if (fighterYakuza != null)
+        FindPlayerTransform();
+
+        if (fighterYakuza != null && playerTransform != null)
         {
             foreach (var yakuza in fighterYakuza)
             {
@@ -185,7 +199,6 @@ public class BlacksmithTrigger : MonoBehaviour
     {
         defeatedCount++;
 
-        // Begitu 2 anak buah tumbang, masuki fase dialog selesai berantem
         if (defeatedCount >= (fighterYakuza != null ? fighterYakuza.Length : 2) && combatStarted)
         {
             combatStarted = false;
@@ -205,7 +218,7 @@ public class BlacksmithTrigger : MonoBehaviour
         if (suitYakuzaLeader == null) yield break;
 
         SpriteRenderer sr = suitYakuzaLeader.GetComponent<SpriteRenderer>();
-        if (sr != null) sr.flipX = true; // Menghadap ke arah kabur
+        if (sr != null) sr.flipX = true;
 
         float timer = 0f;
         while (timer < 1.8f)

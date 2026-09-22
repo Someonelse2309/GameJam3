@@ -28388,6 +28388,7 @@ GameObject:
   - component: {fileID: 1577981202}
   - component: {fileID: 1577981201}
   - component: {fileID: 1577981203}
+  - component: {fileID: 1577981204}
   m_Layer: 0
   m_Name: NPC_SuitYakuza
   m_TagString: Enemy
@@ -28541,6 +28542,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   idleSprites:
   - {fileID: 7829464861233414611, guid: 573b903203f984d72bfd5a2925a0c320, type: 3}
+  - {fileID: -7886359649443678600, guid: ec1ef1dbc1724481998f50172927b12c, type: 3}
   walkSprites:
   - {fileID: 5315336604675258258, guid: b46fd86d26aae49caa5a80efbf968c35, type: 3}
   - {fileID: -2686127395742058223, guid: 53a8e8bda122c44d3a5bc11957e9369f, type: 3}
@@ -28594,6 +28596,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1577981204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577981197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5602b3cc0044fefa3f3cd4448d2c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: 7829464861233414611, guid: 573b903203f984d72bfd5a2925a0c320, type: 3}
+  - {fileID: -7886359649443678600, guid: ec1ef1dbc1724481998f50172927b12c, type: 3}
+  frameRate: 0.15
 --- !u!1 &1673862416
 GameObject:
   m_ObjectHideFlags: 0
@@ -34741,8 +34760,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 22.1, y: -66.1}
+  m_SizeDelta: {x: 331.5, y: 42.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1782251797
 MonoBehaviour:
@@ -34766,8 +34785,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Obtained Yakitori x1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -34791,8 +34810,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -34984,7 +35003,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 1.29}
+    oldSize: {x: 0.94, y: 1.28}
     newSize: {x: 0.94, y: 1.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -35041,7 +35060,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
+  m_Sprite: {fileID: -6008602503000455829, guid: cb07ebd423333484f87bd96757400661, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -35061,7 +35080,7 @@ Transform:
   m_GameObject: {fileID: 1910669614}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.78, y: 0.21, z: 0}
+  m_LocalPosition: {x: 12.933, y: 0.21, z: 0}
   m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -35400,30 +35419,32 @@ MonoBehaviour:
   - speakerName: Michelle Sato
     sentence: Ito Shun?
   - speakerName: Ito Shun
-    sentence: I know you, The Yakuza are asking around about you.
+    sentence: Michelle Sato... The ghost slayer. The Yakuza are tearing the city apart looking for you.
   - speakerName: Ito Shun
-    sentence: I know what you're looking for and I have it somewhere here.
-  - speakerName: Ito Shun
-    sentence: But I need time to look for it, Wait here.
+    sentence: I have what you seek, but I won't hand a deadly blade to someone who's just looking for a grave.
   - speakerName: Suit Yakuza
-    sentence: Michelle Sato! You better stop whatever you're doing here.
+    sentence: Well, well. Michelle Sato cornered like a rat, and without a weapon!
+  - speakerName: Suit Yakuza
+    sentence: Boys, break her limbs! The boss wants her breathing, but broken.
+  - speakerName: Ito Shun
+    sentence: Show me your resolve, Sato! Prove to me that the 'Onikoroshi' is still burning inside you!
   - speakerName: Michelle Sato
-    sentence: I'm here for revenge and I won't go without it.
-  - speakerName: Suit Yakuza
-    sentence: Then we have no choice but to remove you.
+    sentence: I don't need a blade to crush your dogs.
   dialoguePT2:
   - speakerName: Suit Yakuza
-    sentence: Aoyama will get you
+    sentence: W-what the hell?! Barehanded...?! You're a monster!
   - speakerName: Michelle Sato
-    sentence: Send him my regards
+    sentence: Tell Aoyama I'm coming. Send him my regards.
+  - speakerName: Suit Yakuza
+    sentence: Aoyama-sama will tear you apart! This isn't over!
   - speakerName: Ito Shun
-    sentence: The legend was true, you're the ghostslayer.
+    sentence: The legend was true... Even without steel, your edge never dulled.
   - speakerName: Ito Shun
-    sentence: Here's your katana, Go get your revenge.
+    sentence: "Here\u2019s your katana, Onikoroshi. Go reclaim what was taken from you."
   - speakerName: Michelle Sato
     sentence: Thank you Ito Shun.
   - speakerName: Ito Shun
-    sentence: Be careful.
+    sentence: Be careful. Aoyama won't fight fair.
 --- !u!61 &2056924657
 BoxCollider2D:
   m_ObjectHideFlags: 0
