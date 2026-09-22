@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 78333936}
   - component: {fileID: 78333935}
   - component: {fileID: 78333934}
+  - component: {fileID: 78333937}
   m_Layer: 0
   m_Name: NPC_BigYakuza
   m_TagString: Enemy
@@ -261,7 +262,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -312,9 +313,17 @@ MonoBehaviour:
   beggarTarget: {fileID: 0}
   shakedownPosition: {x: 0.397, y: 1.277}
   spriteRenderer: {fileID: 0}
-  idleSprites: []
-  walkSprites: []
-  attackSprites: []
+  idleSprites:
+  - {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
+  - {fileID: 6421381375179079389, guid: fb3f1a3c36336480a9c4a6d4fcb077c2, type: 3}
+  - {fileID: 99797836390871179, guid: 5a36aeba4898b4b4f8174b3bf8ca9d85, type: 3}
+  walkSprites:
+  - {fileID: 4703995123541778657, guid: 03368afd386a14b5da649163617fe1ca, type: 3}
+  - {fileID: -6004980011581254953, guid: 09338f2a74c7d42b7a715b468c905a41, type: 3}
+  - {fileID: 8477497619846322172, guid: 92185333a368f479c91034a09666ae33, type: 3}
+  attackSprites:
+  - {fileID: 7054732860433737591, guid: 3f8cd1990b960487c8f92e6ebc5ba0c6, type: 3}
+  - {fileID: 1061287277523489110, guid: 55022538906db4529b253317280d2831, type: 3}
   frameRate: 0.15
 --- !u!114 &78333935
 MonoBehaviour:
@@ -365,7 +374,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -381,6 +390,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.94, y: 1.29}
   m_EdgeRadius: 0
+--- !u!50 &78333937
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78333931}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &171087459
 GameObject:
   m_ObjectHideFlags: 0
@@ -24836,10 +24872,8 @@ MonoBehaviour:
   attackDamage: 20
   attackRange: 0.9
   attackOffset: {x: 0.5, y: 0}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  attackCooldown: 0.35
+  attackCooldown: 1
+  damageDelay: 0.12
 --- !u!224 &953037768 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
@@ -28351,6 +28385,7 @@ GameObject:
   - component: {fileID: 1577981200}
   - component: {fileID: 1577981202}
   - component: {fileID: 1577981201}
+  - component: {fileID: 1577981203}
   m_Layer: 0
   m_Name: NPC_SuitYakuza
   m_TagString: Enemy
@@ -28405,7 +28440,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7829464861233414611, guid: 573b903203f984d72bfd5a2925a0c320, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -28463,7 +28498,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -28502,9 +28537,14 @@ MonoBehaviour:
   beggarTarget: {fileID: 0}
   shakedownPosition: {x: 0.397, y: 1.277}
   spriteRenderer: {fileID: 0}
-  idleSprites: []
-  walkSprites: []
-  attackSprites: []
+  idleSprites:
+  - {fileID: 7829464861233414611, guid: 573b903203f984d72bfd5a2925a0c320, type: 3}
+  walkSprites:
+  - {fileID: 5315336604675258258, guid: b46fd86d26aae49caa5a80efbf968c35, type: 3}
+  - {fileID: -2686127395742058223, guid: 53a8e8bda122c44d3a5bc11957e9369f, type: 3}
+  - {fileID: -6403014679712222400, guid: 70774ee41e67749bc84dee168f333a5d, type: 3}
+  attackSprites:
+  - {fileID: -7886359649443678600, guid: ec1ef1dbc1724481998f50172927b12c, type: 3}
   frameRate: 0.15
 --- !u!114 &1577981202
 MonoBehaviour:
@@ -28525,6 +28565,33 @@ MonoBehaviour:
   flashWhiteMaterial: {fileID: 2100000, guid: 381e3810d50844de383c7f7697b0c1a7, type: 2}
   flashDuration: 0.06
   flashBlinks: 2
+--- !u!50 &1577981203
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577981197}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &1673862416
 GameObject:
   m_ObjectHideFlags: 0

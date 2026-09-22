@@ -10,13 +10,13 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     [Header("UI Controls")]
-    public VirtualJoystick joystick; // Slot drag JoystickBase
+    public VirtualJoystick joystick; 
 
     [Header("Combat Animations Setup")]
-    public Sprite[] punchSprites;       // MOM_Punch1, MOM_Punch2
-    public Sprite[] swordSprites;       // MOM_Attack1, MOM_Attack2
-    public Sprite[] shurikenSprites;    // Animasi shuriken
-    public Sprite[] attackSprites;      // Sprites serangan aktif (otomatis berganti)
+    public Sprite[] punchSprites;       
+    public Sprite[] swordSprites;       
+    public Sprite[] shurikenSprites;    
+    public Sprite[] attackSprites;      
     public bool isSwordEquipped { get; private set; } = false;
 
     [Header("Sprite Animation Frames")]
@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private int currentFrame;
     private Sprite[] lastAnimation;
 
+    public bool IsAttacking => isAttacking;
     private bool isAttacking = false;
     private bool isThrowingShuriken = false;
 
@@ -44,69 +45,63 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Default awal menggunakan tinju (punch)
         if (punchSprites != null && punchSprites.Length > 0)
         {
             attackSprites = punchSprites;
         }
     }
 
-    // Fungsi ganti senjata (dipanggil saat Katana di-klik di Inventory)
     public void EquipSword(bool equip)
     {
         isSwordEquipped = equip;
         attackSprites = equip ? swordSprites : punchSprites;
-        Debug.Log(equip ? "Katana Berhasil Dipasang!" : "Kembali ke mode Tinju");
     }
 
     void Update()
     {
         // 1. Input Serangan Keyboard (J = Attack, K = Shuriken)
-    if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
-    {
-        PlayerCombat combat = GetComponent<PlayerCombat>();
-        if (combat != null)
+        if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
         {
-            combat.PerformAttack();
-        }
-        else
-        {
-            TriggerAttack();
-        }
-    }
-
-        // 2. Input Gerak (Keyboard WASD & Virtual Joystick Aman)
-        if (!isAttacking && !isThrowingShuriken)
-        {
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = Input.GetAxisRaw("Vertical");
-
-            if (joystick != null)
+            PlayerCombat combat = GetComponent<PlayerCombat>();
+            if (combat != null)
             {
-                float jX = GetJoystickAxis("Horizontal");
-                float jY = GetJoystickAxis("Vertical");
-
-                if (Mathf.Abs(jX) > 0.05f || Mathf.Abs(jY) > 0.05f)
-                {
-                    moveX = jX;
-                    moveY = jY;
-                }
+                combat.PerformAttack();
             }
-
-            movement.x = moveX;
-            movement.y = moveY;
-
-            if (movement.sqrMagnitude > 1f)
+            else
             {
-                movement = movement.normalized;
+                TriggerAttack();
             }
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !isThrowingShuriken)
         {
-            movement = Vector2.zero;
+            TriggerAction(shurikenSprites, false, true);
         }
 
-        // 3. Flip Badan Kiri / Kanan
+        // 2. Input Gerak (Tetap membaca analog/keyboard meski sedang menyerang)
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        if (joystick != null)
+        {
+            float jX = GetJoystickAxis("Horizontal");
+            float jY = GetJoystickAxis("Vertical");
+
+            if (Mathf.Abs(jX) > 0.05f || Mathf.Abs(jY) > 0.05f)
+            {
+                moveX = jX;
+                moveY = jY;
+            }
+        }
+
+        movement.x = moveX;
+        movement.y = moveY;
+
+        if (movement.sqrMagnitude > 1f)
+        {
+            movement = movement.normalized;
+        }
+
+        // 3. Flip Badan Kiri / Kanan sesuai arah jalan
         if (movement.x < 0) spriteRenderer.flipX = true;
         else if (movement.x > 0) spriteRenderer.flipX = false;
 
@@ -141,6 +136,14 @@ public class PlayerMovement : MonoBehaviour
         return 0f;
     }
 
+    public void TriggerAttack()
+    {
+        if (!isAttacking && !isThrowingShuriken)
+        {
+            TriggerAction(attackSprites, true, false);
+        }
+    }
+
     public void TriggerAction(Sprite[] actionSprites, bool attacking, bool throwing)
     {
         if (actionSprites == null || actionSprites.Length == 0) return;
@@ -161,6 +164,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Sprite[] currentAnimation;
 
+        // Prioritas visual: Animasi serang dimainkan di atas pergerakan
         if (isAttacking) currentAnimation = attackSprites;
         else if (isThrowingShuriken) currentAnimation = shurikenSprites;
         else currentAnimation = (movement.sqrMagnitude > 0) ? walkSprites : idleSprites;
@@ -199,15 +203,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Karakter tetap meluncur sesuai arah analog saat memukul
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
-
-    // Tambahkan fungsi ini di dalam PlayerMovement:
-    public void TriggerAttack()
-    {
-        if (!isAttacking && !isThrowingShuriken)
-        {
-            TriggerAction(attackSprites, true, false);
-        }
     }
 }
