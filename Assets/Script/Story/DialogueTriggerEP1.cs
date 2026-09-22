@@ -29,6 +29,10 @@ public class DialogueTriggerEP1 : MonoBehaviour
     [Header("Next Trigger (Sequential)")]
     public GameObject nextTriggerToActivate; // Trigger yang muncul setelah ini selesai
 
+    [Header("Scene Transition")]
+    public bool fadeToBlackOnEnter = false;
+    public float delayBeforeFade = 0f;
+
     private bool hasTriggered = false;
     private bool dialogueEndedHandled = false; // Prevent double trigger
 
@@ -49,6 +53,12 @@ public class DialogueTriggerEP1 : MonoBehaviour
 
             hasTriggered = true;
             dialogueEndedHandled = false; // Reset flag
+
+            // Fade to black if enabled
+            if (fadeToBlackOnEnter)
+            {
+                StartCoroutine(FadeToBlackSequence());
+            }
 
             if (deactivateAfterTrigger)
                 gameObject.SetActive(false);
@@ -295,5 +305,19 @@ public class DialogueTriggerEP1 : MonoBehaviour
     {
         hasTriggered = false;
         gameObject.SetActive(true);
+    }
+
+    private System.Collections.IEnumerator FadeToBlackSequence()
+    {
+        if (delayBeforeFade > 0)
+            yield return new WaitForSeconds(delayBeforeFade);
+
+        SceneTransition transition = UnityEngine.Object.FindAnyObjectByType<SceneTransition>();
+        if (transition != null)
+        {
+            transition.FadeInBlack(() => {
+                Debug.Log("Screen faded to black!");
+            });
+        }
     }
 }
