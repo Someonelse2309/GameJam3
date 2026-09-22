@@ -9,7 +9,7 @@ public class BlacksmithTrigger : MonoBehaviour
     public DialogueManager dialogueManager;
 
     [Header("Yakuza Wave (T.3)")]
-    public YakuzaEnemy[] yakuzaEnemies; // Masukkan 3 Yakuza
+    public YakuzaEnemy[] yakuzaEnemies; // Masukkan 3 Yakuza di sini
     private int defeatedYakuzaCount = 0;
     private bool combatStarted = false;
 
@@ -51,14 +51,15 @@ public class BlacksmithTrigger : MonoBehaviour
         if (beggarTrigger == null)
             beggarTrigger = FindFirstObjectByType<BeggarTrigger>();
 
-        // Pastikan 3 Yakuza nonaktif di awal
+        // Pastikan Yakuza terdaftar dan terhubung ke event OnDeath
         if (yakuzaEnemies != null)
         {
             foreach (var yakuza in yakuzaEnemies)
             {
                 if (yakuza != null)
                 {
-                    yakuza.gameObject.SetActive(false);
+                    yakuza.enabled = false; // Matikan AI menyerang di awal
+                    yakuza.gameObject.SetActive(false); // Sembunyikan dulu sebelum MC datang
                     CharacterHealth hp = yakuza.GetComponent<CharacterHealth>();
                     if (hp != null) hp.OnDeath += OnYakuzaKilled;
                 }
@@ -88,7 +89,6 @@ public class BlacksmithTrigger : MonoBehaviour
     {
         if (dialogueManager == null || dialogueManager.isDialogueActive) return;
 
-        // Cek apakah quest Beggar sudah selesai
         bool beggarFinished = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.QuestCompleted;
 
         if (!beggarFinished)
@@ -103,7 +103,9 @@ public class BlacksmithTrigger : MonoBehaviour
 
         if (currentState == BlacksmithState.Locked || currentState == BlacksmithState.ReadyForTalk)
         {
-            // Mulai Dialogue PT1
+            // Munculkan Yakuza di scene agar terlihat saat Suit Yakuza berbicara
+            ShowYakuzaInScene();
+
             dialogueManager.StartDialogue(dialoguePT1, () =>
             {
                 StartCombatWave();
@@ -111,15 +113,29 @@ public class BlacksmithTrigger : MonoBehaviour
         }
         else if (currentState == BlacksmithState.CombatFinished)
         {
-            // Mulai Dialogue PT2 & Berikan Katana
             dialogueManager.StartDialogue(dialoguePT2, () =>
             {
                 currentState = BlacksmithState.QuestCompleted;
                 if (InventoryManager.Instance != null && katanaItem != null)
                 {
-                    InventoryManager.Instance.AddItem(katanaItem); // Masuk ke Tas
+                    InventoryManager.Instance.AddItem(katanaItem);
                 }
             });
+        }
+    }
+
+    private void ShowYakuzaInScene()
+    {
+        if (yakuzaEnemies != null)
+        {
+            foreach (var yakuza in yakuzaEnemies)
+            {
+                if (yakuza != null)
+                {
+                    yakuza.gameObject.SetActive(true); // Tampilkan model Yakuza
+                    yakuza.enabled = false;           // Belum bergerak/menyerang
+                }
+            }
         }
     }
 
@@ -134,7 +150,7 @@ public class BlacksmithTrigger : MonoBehaviour
             {
                 if (yakuza != null)
                 {
-                    yakuza.gameObject.SetActive(true);
+                    yakuza.enabled = true; // Aktifkan AI
                     yakuza.StartCombat(playerTransform);
                 }
             }
@@ -145,7 +161,7 @@ public class BlacksmithTrigger : MonoBehaviour
     {
         defeatedYakuzaCount++;
 
-        // Jika 2 Yakuza tumbang, 1 Yakuza terakhir kabur sesuai storyboard
+        // 2 Yakuza kalah -> Yakuza ke-3 kabur
         if (defeatedYakuzaCount >= 2 && combatStarted)
         {
             combatStarted = false;
@@ -155,7 +171,6 @@ public class BlacksmithTrigger : MonoBehaviour
 
     private IEnumerator HandleLastYakuzaFlee()
     {
-        // Cari Yakuza yang masih hidup untuk kabur
         foreach (var yakuza in yakuzaEnemies)
         {
             if (yakuza != null && yakuza.gameObject.activeSelf)
@@ -163,9 +178,8 @@ public class BlacksmithTrigger : MonoBehaviour
                 CharacterHealth hp = yakuza.GetComponent<CharacterHealth>();
                 if (hp != null && !hp.isDead)
                 {
-                    // Efek kabur (matikan AI lalu menghilang)
                     yakuza.enabled = false;
-                    yakuza.gameObject.SetActive(false);
+                    yakuza.gameObject.SetActive(false); // Efek kabur
                     break;
                 }
             }
@@ -174,7 +188,6 @@ public class BlacksmithTrigger : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         currentState = BlacksmithState.CombatFinished;
 
-        // Otomatis jalankan dialog penyerahan senjata
         TriggerBlacksmithInteraction();
     }
 }
