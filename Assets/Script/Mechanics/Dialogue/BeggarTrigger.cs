@@ -4,17 +4,17 @@ public class BeggarTrigger : MonoBehaviour
 {
     [Header("Manager References")]
     public DialogueManager dialogueManager;
-
-    [Header("Quest Item")]
     public ItemData yakitoriItem;
+    public YakuzaEnemy yakuzaTarget; // Drag GameObject Yakuza botak ke sini
 
-    public enum QuestState { NotStarted, LookingForFood, QuestCompleted }
+    public enum QuestState { NotStarted, LookingForFood, YakuzaFight, QuestCompleted }
     [Header("Quest State")]
     public QuestState currentState = QuestState.NotStarted;
 
     private bool isPlayerNearby = false;
+    private Transform playerTransform;
 
-    [Header("Dialogues")]
+    // Dialogue PT1: Pertemuan awal
     public DialogueSentence[] dialoguePT1 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Well well well, look what we have here" },
@@ -28,6 +28,16 @@ public class BeggarTrigger : MonoBehaviour
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Get me something to eat, and we'll talk...." }
     };
 
+    // Dialogue PT2: Datang Yakuza memukuli Beggar
+    public DialogueSentence[] dialoguePT2 = new DialogueSentence[]
+    {
+        new DialogueSentence { speakerName = "Bald Yakuza", sentence = "You know the rule, no talking about the boss." },
+        new DialogueSentence { speakerName = "Bald Yakuza", sentence = "Last warning is your last warning, now you have to go." },
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "TANAKA!" },
+        new DialogueSentence { speakerName = "Bald Yakuza", sentence = "Stay away from this, your debt has been settled." }
+    };
+
+    // Dialogue PT3: Beggar berterima kasih & beri clue Blacksmith
     public DialogueSentence[] dialoguePT3 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "That was close... And I'm still hungry..." },
@@ -43,22 +53,17 @@ public class BeggarTrigger : MonoBehaviour
 
     private void Start()
     {
-        EnsureDialogueManager();
-    }
-
-    private void EnsureDialogueManager()
-    {
         if (dialogueManager == null)
-        {
             dialogueManager = DialogueManager.Instance != null ? DialogueManager.Instance : FindFirstObjectByType<DialogueManager>();
-        }
-    }
 
-    private void Update()
-    {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
+        if (yakuzaTarget != null)
         {
-            TriggerInteraction();
+            yakuzaTarget.gameObject.SetActive(false); // Sembunyikan Yakuza sebelum quest Yakitori selesai
+            CharacterHealth yakuzaHealth = yakuzaTarget.GetComponent<CharacterHealth>();
+            if (yakuzaHealth != null)
+            {
+                yakuzaHealth.OnDeath += OnYakuzaDefeated;
+            }
         }
     }
 
@@ -67,32 +72,23 @@ public class BeggarTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = true;
+            playerTransform = collision.transform;
             TriggerInteraction();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            isPlayerNearby = false;
-        }
+        if (collision.CompareTag("Player")) isPlayerNearby = false;
     }
 
     public void TriggerInteraction()
     {
-        EnsureDialogueManager();
-
-        if (dialogueManager == null)
-        {
-            Debug.LogError("[BeggarTrigger] DialogueManager tidak ditemukan di Scene!");
-            return;
-        }
-
-        if (dialogueManager.isDialogueActive) return;
+        if (dialogueManager == null || dialogueManager.isDialogueActive) return;
 
         bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
 
+        // State 1: Awal game
         if (currentState == QuestState.NotStarted)
         {
             dialogueManager.StartDialogue(dialoguePT1, () =>
@@ -100,38 +96,51 @@ public class BeggarTrigger : MonoBehaviour
                 currentState = QuestState.LookingForFood;
             });
         }
+        // State 2: Kembali bawa Yakitori -> Mulai Dialogue PT2 (Yakuza menghadang)
         else if (currentState == QuestState.LookingForFood && hasYakitori)
         {
-            if (ItemSubmitUI.Instance != null)
+            dialogueManager.StartDialogue(dialoguePT2, () =>
             {
-                ItemSubmitUI.Instance.OpenSubmitScreen(yakitoriItem, () =>
+                // Mulai mode bertarung
+                currentState = QuestState.YakuzaFight;
+                if (yakuzaTarget != null)
                 {
-                    currentState = QuestState.QuestCompleted;
-                    dialogueManager.StartDialogue(dialoguePT3);
-                });
-            }
-            else
-            {
-                if (InventoryManager.Instance != null) InventoryManager.Instance.RemoveItem(yakitoriItem);
-                currentState = QuestState.QuestCompleted;
-                dialogueManager.StartDialogue(dialoguePT3);
-            }
+                    yakuzaTarget.StartCombat(playerTransform);
+                }
+            });
         }
         else if (currentState == QuestState.LookingForFood && !hasYakitori)
         {
-            DialogueSentence[] remindDialog = new DialogueSentence[]
+            DialogueSentence[] remind = new DialogueSentence[]
             {
-                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Get me something to eat, and we'll talk..." }
+                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "I'm still hungry... Get me that yakitori from the food cart!" }
             };
-            dialogueManager.StartDialogue(remindDialog);
+            dialogueManager.StartDialogue(remind);
         }
         else if (currentState == QuestState.QuestCompleted)
         {
-            DialogueSentence[] doneDialog = new DialogueSentence[]
+            DialogueSentence[] completed = new DialogueSentence[]
             {
-                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Go to Ito Shun, He's the last blacksmith in town." }
+                new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Go find Ito Shun on the other side of town." }
             };
-            dialogueManager.StartDialogue(doneDialog);
+            dialogueManager.StartDialogue(completed);
+        }
+    }
+
+    private void OnYakuzaDefeated()
+    {
+        // Serahkan yakitori & hapus dari tas
+        if (InventoryManager.Instance != null && yakitoriItem != null)
+        {
+            InventoryManager.Instance.RemoveItem(yakitoriItem);
+        }
+
+        currentState = QuestState.QuestCompleted;
+
+        // Lanjut ke Dialogue PT3
+        if (dialogueManager != null)
+        {
+            dialogueManager.StartDialogue(dialoguePT3);
         }
     }
 }
