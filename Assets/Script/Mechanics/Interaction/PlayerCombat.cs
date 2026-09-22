@@ -3,43 +3,52 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Attack Settings")]
-    public int attackDamage = 25; // 4 kali hit mati jika HP Yakuza 100
-    public float attackRange = 0.8f;
-    public Transform attackPoint;
-    public LayerMask enemyLayer;
+    public int attackDamage = 25;
+    public float attackRange = 0.85f;
+    public Vector2 attackOffset = new Vector2(0.5f, 0f);
 
-    private PlayerMovement movementScript;
+    [Header("Cooldown")]
+    public float attackCooldown = 0.35f;
+    private float nextAttackTime = 0f;
+
+    private SpriteRenderer spriteRenderer;
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
-        movementScript = GetComponent<PlayerMovement>();
-    }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PerformAttack();
-        }
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     public void PerformAttack()
     {
-        if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive) return;
+        if (Time.time < nextAttackTime) return;
+        nextAttackTime = Time.time + attackCooldown;
 
-        // Picu animasi serangan MC (Punch atau Sword tergantung item yang di-equip)
-        if (movementScript != null)
+        // 1. Jalankan animasi serang pada MC
+        if (playerMovement != null)
         {
-            movementScript.TriggerAction(movementScript.attackSprites, true, false);
+            playerMovement.TriggerAttack();
         }
 
-        Vector3 point = attackPoint != null ? attackPoint.position : transform.position;
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(point, attackRange);
+        // 2. Hitung titik pukulan di depan MC
+        bool facingRight = (spriteRenderer != null) ? !spriteRenderer.flipX : true;
+        Vector2 punchOrigin = (Vector2)transform.position + new Vector2(
+            facingRight ? attackOffset.x : -attackOffset.x,
+            attackOffset.y
+        );
+
+        // 3. Deteksi musuh tanpa ketergantungan Layer (otomatis via Tag & Komponen)
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(punchOrigin, attackRange);
 
         foreach (Collider2D col in hitColliders)
         {
-            // Deteksi jika collider adalah musuh (berdasarkan Tag "Enemy" atau LayerMask)
-            if (col.CompareTag("Enemy") || (enemyLayer.value != 0 && ((1 << col.gameObject.layer) & enemyLayer) != 0))
+            if (col.gameObject == gameObject) continue;
+
+            if (col.CompareTag("Enemy") || col.GetComponent<YakuzaEnemy>() != null)
             {
                 CharacterHealth enemyHealth = col.GetComponent<CharacterHealth>();
                 if (enemyHealth != null && !enemyHealth.isDead)
@@ -52,8 +61,13 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 point = attackPoint != null ? attackPoint.position : transform.position;
+        bool facingRight = (spriteRenderer != null) ? !spriteRenderer.flipX : true;
+        Vector2 punchOrigin = (Vector2)transform.position + new Vector2(
+            facingRight ? attackOffset.x : -attackOffset.x,
+            attackOffset.y
+        );
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(point, attackRange);
+        Gizmos.DrawWireSphere(punchOrigin, attackRange);
     }
 }

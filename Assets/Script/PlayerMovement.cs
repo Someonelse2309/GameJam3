@@ -61,15 +61,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // 1. Input Serangan (J = Attack / Katana, K = Shuriken)
-        if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
+        // 1. Input Serangan Keyboard (J = Attack, K = Shuriken)
+    if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
+    {
+        PlayerCombat combat = GetComponent<PlayerCombat>();
+        if (combat != null)
         {
-            TriggerAction(attackSprites, true, false);
+            combat.PerformAttack();
         }
-        else if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !isThrowingShuriken)
+        else
         {
-            TriggerAction(shurikenSprites, false, true);
+            TriggerAttack();
         }
+    }
 
         // 2. Input Gerak (Keyboard WASD & Virtual Joystick Aman)
         if (!isAttacking && !isThrowingShuriken)
@@ -196,5 +200,14 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    // Tambahkan fungsi ini di dalam PlayerMovement:
+    public void TriggerAttack()
+    {
+        if (!isAttacking && !isThrowingShuriken)
+        {
+            TriggerAction(attackSprites, true, false);
+        }
     }
 }
