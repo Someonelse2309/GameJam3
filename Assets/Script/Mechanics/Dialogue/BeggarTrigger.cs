@@ -5,7 +5,7 @@ public class BeggarTrigger : MonoBehaviour
     [Header("Manager References")]
     public DialogueManager dialogueManager;
     public ItemData yakitoriItem;
-    public YakuzaEnemy yakuzaTarget; // Drag GameObject Yakuza botak ke sini
+    public YakuzaEnemy yakuzaTarget;
 
     public enum QuestState { NotStarted, LookingForFood, YakuzaFight, QuestCompleted }
     [Header("Quest State")]
@@ -14,7 +14,7 @@ public class BeggarTrigger : MonoBehaviour
     private bool isPlayerNearby = false;
     private Transform playerTransform;
 
-    // Dialogue PT1: Pertemuan awal
+    [Header("Dialogue PT1 (Pertemuan Awal)")]
     public DialogueSentence[] dialoguePT1 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Well well well, look what we have here" },
@@ -28,7 +28,7 @@ public class BeggarTrigger : MonoBehaviour
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "Get me something to eat, and we'll talk...." }
     };
 
-    // Dialogue PT2: Datang Yakuza memukuli Beggar
+    [Header("Dialogue PT2 (Yakuza Memalak)")]
     public DialogueSentence[] dialoguePT2 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Bald Yakuza", sentence = "You know the rule, no talking about the boss." },
@@ -37,7 +37,7 @@ public class BeggarTrigger : MonoBehaviour
         new DialogueSentence { speakerName = "Bald Yakuza", sentence = "Stay away from this, your debt has been settled." }
     };
 
-    // Dialogue PT3: Beggar berterima kasih & beri clue Blacksmith
+    [Header("Dialogue PT3 (Selesai Kalahkan Yakuza)")]
     public DialogueSentence[] dialoguePT3 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Tanaka Koji", sentence = "That was close... And I'm still hungry..." },
@@ -58,12 +58,32 @@ public class BeggarTrigger : MonoBehaviour
 
         if (yakuzaTarget != null)
         {
-            yakuzaTarget.gameObject.SetActive(false); // Sembunyikan Yakuza sebelum quest Yakitori selesai
+            yakuzaTarget.gameObject.SetActive(false); // Sembunyikan Yakuza di awal game
             CharacterHealth yakuzaHealth = yakuzaTarget.GetComponent<CharacterHealth>();
             if (yakuzaHealth != null)
             {
                 yakuzaHealth.OnDeath += OnYakuzaDefeated;
             }
+        }
+    }
+
+    private void Update()
+    {
+        // Safety check: jika player sudah obtain yakitori tapi yakuza belum aktif di scene
+        if (currentState == QuestState.LookingForFood && yakuzaTarget != null && !yakuzaTarget.gameObject.activeSelf)
+        {
+            if (InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem))
+            {
+                SpawnYakuzaBesideBeggar();
+            }
+        }
+    }
+
+    public void SpawnYakuzaBesideBeggar()
+    {
+        if (yakuzaTarget != null && !yakuzaTarget.gameObject.activeSelf)
+        {
+            yakuzaTarget.PrepareShakedown();
         }
     }
 
@@ -82,8 +102,6 @@ public class BeggarTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = false;
-
-            // Tutup dialog seketika saat MC menjauh dari Beggar
             if (dialogueManager != null && dialogueManager.isDialogueActive)
             {
                 dialogueManager.CancelDialogue();
@@ -97,7 +115,7 @@ public class BeggarTrigger : MonoBehaviour
 
         bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
 
-        // State 1: Awal game
+        // State 1: Awal game belum minta makan
         if (currentState == QuestState.NotStarted)
         {
             dialogueManager.StartDialogue(dialoguePT1, () =>
@@ -110,7 +128,6 @@ public class BeggarTrigger : MonoBehaviour
         {
             dialogueManager.StartDialogue(dialoguePT2, () =>
             {
-                // Mulai mode bertarung
                 currentState = QuestState.YakuzaFight;
                 if (yakuzaTarget != null)
                 {
@@ -138,7 +155,6 @@ public class BeggarTrigger : MonoBehaviour
 
     private void OnYakuzaDefeated()
     {
-        // Serahkan yakitori & hapus dari tas
         if (InventoryManager.Instance != null && yakitoriItem != null)
         {
             InventoryManager.Instance.RemoveItem(yakitoriItem);
@@ -146,7 +162,6 @@ public class BeggarTrigger : MonoBehaviour
 
         currentState = QuestState.QuestCompleted;
 
-        // Lanjut ke Dialogue PT3
         if (dialogueManager != null)
         {
             dialogueManager.StartDialogue(dialoguePT3);

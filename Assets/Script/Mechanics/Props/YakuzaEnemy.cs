@@ -5,13 +5,17 @@ public class YakuzaEnemy : MonoBehaviour
 {
     [Header("Combat Settings")]
     public int attackDamage = 15;
-    public float attackSpeed = 1.5f;     // Jeda antar serangan
-    public float moveSpeed = 1.6f;       // Kecepatan jalan
-    public float attackDistance = 0.45f; // Jarak serang rapat
-    public float hitRadius = 0.35f;      // Radius jangkauan tinju
+    public float attackSpeed = 1.5f;
+    public float moveSpeed = 1.6f;
+    public float attackDistance = 0.45f;
+    public float hitRadius = 0.35f;
 
     [Header("Layer Detection")]
-    public LayerMask playerLayer;        // Pastikan di Inspector diubah dari Nothing ke Default / Player
+    public LayerMask playerLayer;        // Pilih "Default" atau layer MC Anda
+
+    [Header("Shakedown / Pre-Combat Settings")]
+    public Transform beggarTarget;       // Drag NPC_Beggar ke sini (agar Yakuza menghadap Beggar)
+    public Vector2 shakedownPosition = new Vector2(0.397f, 1.277f); // Koordinat pas di samping Beggar
 
     [Header("Sprites Animation")]
     public SpriteRenderer spriteRenderer;
@@ -34,8 +38,35 @@ public class YakuzaEnemy : MonoBehaviour
         health = GetComponent<CharacterHealth>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         if (health != null) health.OnDeath += OnDefeated;
+
+        if (shakedownPosition == Vector2.zero)
+        {
+            shakedownPosition = transform.position;
+        }
     }
 
+    // Dipanggil saat Yakitori didapatkan dari pedagang
+    public void PrepareShakedown()
+    {
+        isFighting = false;
+        isAttacking = false;
+        transform.position = shakedownPosition;
+
+        // Menghadap ke arah Beggar
+        if (beggarTarget != null)
+        {
+            // Sprite Yakuza aslinya menghadap kanan. Jika Beggar di kiri, balik sprite (flipX = true)
+            spriteRenderer.flipX = (beggarTarget.position.x < transform.position.x);
+        }
+        else
+        {
+            spriteRenderer.flipX = false; // Default hadap kanan (ke Beggar)
+        }
+
+        gameObject.SetActive(true);
+    }
+
+    // Dipanggil setelah Dialogue PT2 selesai untuk mulai baku hantam
     public void StartCombat(Transform target)
     {
         playerTarget = target;
@@ -45,32 +76,37 @@ public class YakuzaEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (!isFighting || (health != null && health.isDead) || playerTarget == null) return;
+        if (health != null && health.isDead) return;
+
+        // 1. Kondisi saat sedang memalak Beggar (Belum masuk mode tempur)
+        if (!isFighting)
+        {
+            AnimateSprites(idleSprites);
+            return;
+        }
+
+        if (playerTarget == null || isAttacking) return;
 
         float distance = Vector2.Distance(transform.position, playerTarget.position);
 
-        // Cek posisi MC: true jika MC ada di sebelah kanan Yakuza
-        bool isTargetOnRight = playerTarget.position.x > transform.position.x;
-
-        // Balik flipX: jika target di kiri maka flipX = true, jika di kanan flipX = false
-        spriteRenderer.flipX = !isTargetOnRight;
-
-        if (isAttacking) return;
+        // 2. Arah hadap saat bertarung:
+        // Jika MC di sebelah kiri Yakuza -> flipX = true (hadap kiri)
+        // Jika MC di sebelah kanan Yakuza -> flipX = false (hadap kanan)
+        bool isPlayerOnLeft = playerTarget.position.x < transform.position.x;
+        spriteRenderer.flipX = isPlayerOnLeft;
 
         if (distance > attackDistance)
         {
-            // 1. Bergerak mendekati MC
+            // Kejar MC
             transform.position = Vector2.MoveTowards(transform.position, playerTarget.position, moveSpeed * Time.deltaTime);
-            
-            // 2. Jalankan animasi berjalan (Walk)
             AnimateSprites(walkSprites);
         }
         else
         {
-            // 3. Pukul jika cooldown selesai
+            // Pukul MC jika cooldown selesai
             if (Time.time >= nextAttackTime)
             {
-                StartCoroutine(PerformPunch(isTargetOnRight));
+                StartCoroutine(PerformPunch(isPlayerOnLeft));
                 nextAttackTime = Time.time + attackSpeed;
             }
             else
@@ -93,7 +129,7 @@ public class YakuzaEnemy : MonoBehaviour
         }
     }
 
-    private IEnumerator PerformPunch(bool isTargetOnRight)
+    private IEnumerator PerformPunch(bool isPlayerOnLeft)
     {
         isAttacking = true;
 
@@ -110,11 +146,10 @@ public class YakuzaEnemy : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        // Arahkan jangkauan tinju ke arah MC berada
-        Vector2 punchOffset = isTargetOnRight ? new Vector2(0.25f, 0f) : new Vector2(-0.25f, 0f);
+        // Pukulan mengarah ke posisi MC
+        Vector2 punchOffset = isPlayerOnLeft ? new Vector2(-0.25f, 0f) : new Vector2(0.25f, 0f);
         Vector2 punchPosition = (Vector2)transform.position + punchOffset;
 
-        // Deteksi pukulan ke MC
         Collider2D hit = Physics2D.OverlapCircle(punchPosition, hitRadius, playerLayer);
         if (hit == null)
         {
@@ -162,8 +197,8 @@ public class YakuzaEnemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        float direction = (spriteRenderer != null && spriteRenderer.flipX) ? -0.25f : 0.25f;
+        float dir = (spriteRenderer != null && spriteRenderer.flipX) ? -0.25f : 0.25f;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere((Vector2)transform.position + new Vector2(direction, 0f), hitRadius);
+        Gizmos.DrawWireSphere((Vector2)transform.position + new Vector2(dir, 0f), hitRadius);
     }
 }

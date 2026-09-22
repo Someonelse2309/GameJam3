@@ -91,6 +91,12 @@ public class PedagangTrigger : MonoBehaviour
                 {
                     InventoryManager.Instance.AddItem(yakitoriItem);
                 }
+
+                // Picu Yakuza muncul di samping Beggar tepat saat Yakitori selesai dibeli
+                if (beggarTrigger != null)
+                {
+                    beggarTrigger.SpawnYakuzaBesideBeggar();
+                }
             });
         }
         else
