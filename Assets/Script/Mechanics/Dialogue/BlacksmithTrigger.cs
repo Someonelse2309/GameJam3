@@ -116,9 +116,17 @@ public class BlacksmithTrigger : MonoBehaviour
             dialogueManager.StartDialogue(dialoguePT2, () =>
             {
                 currentState = BlacksmithState.QuestCompleted;
+                
+                // Tambahkan item ke inventory
                 if (InventoryManager.Instance != null && katanaItem != null)
                 {
                     InventoryManager.Instance.AddItem(katanaItem);
+                }
+
+                // Otomatis pasang pedang ke MC dan ubah stat serangan
+                if (PlayerMovement.Instance != null)
+                {
+                    PlayerMovement.Instance.EquipSword(true);
                 }
             });
         }

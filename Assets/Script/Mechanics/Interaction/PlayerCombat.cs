@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("Attack Settings")]
-    public int attackDamage = 25;
-    public float attackRange = 0.85f;
-    public Vector2 attackOffset = new Vector2(0.5f, 0f);
+    [Header("Punch Stats (Mode Tinju)")]
+    public int punchDamage = 20;
+    public float punchRange = 0.85f;
+    public Vector2 punchOffset = new Vector2(0.5f, 0f);
+
+    [Header("Sword Stats (Mode Katana)")]
+    public int swordDamage = 50;
+    public float swordRange = 1.4f;
+    public Vector2 swordOffset = new Vector2(0.75f, 0f);
 
     [Header("Cooldown & Delay")]
-    [Tooltip("Waktu jeda antar pukulan (detik)")]
-    public float attackCooldown = 0.8f;      // Nilai ideal jeda serangan
-    public float damageDelay = 0.12f;        // Delay agar damage masuk pas animasi memukul
+    public float attackCooldown = 0.8f;
+    public float damageDelay = 0.12f;
 
     private float nextAttackTime = 0f;
     private SpriteRenderer spriteRenderer;
@@ -28,22 +32,16 @@ public class PlayerCombat : MonoBehaviour
 
     public void PerformAttack()
     {
-        // 1. Cek timer cooldown
         if (Time.time < nextAttackTime) return;
-
-        // 2. Kunci: Jangan serang jika animasi pukulan sebelumnya belum selesai
         if (playerMovement != null && playerMovement.IsAttacking) return;
 
-        // Pasang waktu jeda berikutnya
         nextAttackTime = Time.time + attackCooldown;
 
-        // Jalankan animasi serang
         if (playerMovement != null)
         {
             playerMovement.TriggerAttack();
         }
 
-        // Berikan damage dengan timing yang pas
         StartCoroutine(DealDamageRoutine());
     }
 
@@ -51,13 +49,19 @@ public class PlayerCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(damageDelay);
 
+        // Pilih stat berdasarkan status equip pedang
+        bool isSword = (playerMovement != null && playerMovement.isSwordEquipped);
+        int damage = isSword ? swordDamage : punchDamage;
+        float range = isSword ? swordRange : punchRange;
+        Vector2 offset = isSword ? swordOffset : punchOffset;
+
         bool facingRight = (spriteRenderer != null) ? !spriteRenderer.flipX : true;
-        Vector2 punchOrigin = (Vector2)transform.position + new Vector2(
-            facingRight ? attackOffset.x : -attackOffset.x,
-            attackOffset.y
+        Vector2 attackOrigin = (Vector2)transform.position + new Vector2(
+            facingRight ? offset.x : -offset.x,
+            offset.y
         );
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(punchOrigin, attackRange);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackOrigin, range);
 
         foreach (Collider2D col in hitColliders)
         {
@@ -68,7 +72,7 @@ public class PlayerCombat : MonoBehaviour
                 CharacterHealth enemyHealth = col.GetComponent<CharacterHealth>();
                 if (enemyHealth != null && !enemyHealth.isDead)
                 {
-                    enemyHealth.TakeDamage(attackDamage);
+                    enemyHealth.TakeDamage(damage);
                 }
             }
         }
@@ -76,13 +80,20 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+
+        bool isSword = (playerMovement != null && playerMovement.isSwordEquipped);
+        float range = isSword ? swordRange : punchRange;
+        Vector2 offset = isSword ? swordOffset : punchOffset;
+
         bool facingRight = (spriteRenderer != null) ? !spriteRenderer.flipX : true;
-        Vector2 punchOrigin = (Vector2)transform.position + new Vector2(
-            facingRight ? attackOffset.x : -attackOffset.x,
-            attackOffset.y
+        Vector2 attackOrigin = (Vector2)transform.position + new Vector2(
+            facingRight ? offset.x : -offset.x,
+            offset.y
         );
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(punchOrigin, attackRange);
+        Gizmos.color = isSword ? Color.cyan : Color.red;
+        Gizmos.DrawWireSphere(attackOrigin, range);
     }
 }
