@@ -8,6 +8,7 @@ public class DialogueTriggerEP1 : MonoBehaviour
     [Header("Settings")]
     public bool triggerOnce = true;
     public bool deactivateAfterTrigger = false;
+    public int momenIndex = 0; // Index untuk tracking save file
 
     [Header("AutoWalk - Character yang auto jalan")]
     public AutoWalk autoWalkTarget;
