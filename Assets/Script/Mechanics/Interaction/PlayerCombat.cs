@@ -27,10 +27,10 @@ public class PlayerCombat : MonoBehaviour
     {
         if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive) return;
 
-        // Picu animasi kick MC
+        // Picu animasi serangan MC (Punch atau Sword tergantung item yang di-equip)
         if (movementScript != null)
         {
-            movementScript.TriggerActionFromExternal(movementScript.attackSprites, true, false);
+            movementScript.TriggerAction(movementScript.attackSprites, true, false);
         }
 
         Vector3 point = attackPoint != null ? attackPoint.position : transform.position;

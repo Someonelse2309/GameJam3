@@ -2,19 +2,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+
     public float moveSpeed = 5f;
 
     [Header("Components")]
     public SpriteRenderer spriteRenderer;
 
     [Header("UI Controls")]
-    public VirtualJoystick joystick; // Langsung menggunakan class VirtualJoystick
+    public VirtualJoystick joystick; // Slot drag JoystickBase
+
+    [Header("Combat Animations Setup")]
+    public Sprite[] punchSprites;       // MOM_Punch1, MOM_Punch2
+    public Sprite[] swordSprites;       // MOM_Attack1, MOM_Attack2
+    public Sprite[] shurikenSprites;    // Animasi shuriken
+    public Sprite[] attackSprites;      // Sprites serangan aktif (otomatis berganti)
+    public bool isSwordEquipped { get; private set; } = false;
 
     [Header("Sprite Animation Frames")]
     public Sprite[] idleSprites;
     public Sprite[] walkSprites;
-    public Sprite[] attackSprites;
-    public Sprite[] shurikenSprites;
     public float frameRate = 0.12f;
 
     private Rigidbody2D rb;
@@ -26,15 +33,35 @@ public class PlayerMovement : MonoBehaviour
     private bool isAttacking = false;
     private bool isThrowingShuriken = false;
 
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Default awal menggunakan tinju (punch)
+        if (punchSprites != null && punchSprites.Length > 0)
+        {
+            attackSprites = punchSprites;
+        }
+    }
+
+    // Fungsi ganti senjata (dipanggil saat Katana di-klik di Inventory)
+    public void EquipSword(bool equip)
+    {
+        isSwordEquipped = equip;
+        attackSprites = equip ? swordSprites : punchSprites;
+        Debug.Log(equip ? "Katana Berhasil Dipasang!" : "Kembali ke mode Tinju");
     }
 
     void Update()
     {
-        // 1. Input Serangan (J = Attack, K = Shuriken)
+        // 1. Input Serangan (J = Attack / Katana, K = Shuriken)
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
         {
             TriggerAction(attackSprites, true, false);
@@ -44,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             TriggerAction(shurikenSprites, false, true);
         }
 
-        // 2. Input Gerak
+        // 2. Input Gerak (Keyboard WASD & Virtual Joystick Aman)
         if (!isAttacking && !isThrowingShuriken)
         {
             float moveX = Input.GetAxisRaw("Horizontal");
@@ -75,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
             movement = Vector2.zero;
         }
 
-        // 3. Flip Badan
+        // 3. Flip Badan Kiri / Kanan
         if (movement.x < 0) spriteRenderer.flipX = true;
         else if (movement.x > 0) spriteRenderer.flipX = false;
 
@@ -87,7 +114,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (joystick == null) return 0f;
 
-        // Coba baca properti atau variabel umum pada VirtualJoystick
         var prop = joystick.GetType().GetProperty(axis) ?? joystick.GetType().GetProperty(axis.ToLower());
         if (prop != null) return (float)prop.GetValue(joystick);
 
@@ -111,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         return 0f;
     }
 
-    void TriggerAction(Sprite[] actionSprites, bool attacking, bool throwing)
+    public void TriggerAction(Sprite[] actionSprites, bool attacking, bool throwing)
     {
         if (actionSprites == null || actionSprites.Length == 0) return;
 
@@ -120,6 +146,11 @@ public class PlayerMovement : MonoBehaviour
         currentFrame = 0;
         animTimer = 0f;
         lastAnimation = actionSprites;
+    }
+
+    public void TriggerActionFromExternal(Sprite[] sprites, bool attacking, bool throwing)
+    {
+        TriggerAction(sprites, attacking, throwing);
     }
 
     void HandleAnimation()
@@ -166,10 +197,4 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
-
-    public void TriggerActionFromExternal(Sprite[] sprites, bool attacking, bool throwing)
-{
-    TriggerAction(sprites, attacking, throwing);
-}
-
 }
