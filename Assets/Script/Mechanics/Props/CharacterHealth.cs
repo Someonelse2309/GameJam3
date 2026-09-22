@@ -37,8 +37,14 @@ public class CharacterHealth : MonoBehaviour
     public void Heal(int amount)
     {
         if (isDead) return;
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        UpdateHealthBar();
+
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+
+        // Update tampilan bar merah
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = (float)currentHealth / maxHealth;
+        }
     }
 
     private void UpdateHealthBar()
