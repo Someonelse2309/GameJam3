@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         // 1. Input Serangan Keyboard (J = Attack, K = Shuriken)
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
         {
