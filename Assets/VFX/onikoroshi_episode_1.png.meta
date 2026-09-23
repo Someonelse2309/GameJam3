@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: b61d2efa7cadf469c8ba78a4b74c1838
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4600395372592084476
+    second: onikoroshi_episode_1_0
+  - first:
+      213: -954764297021964801
+    second: onikoroshi_episode_1_1
+  - first:
+      213: -3576314640135801715
+    second: onikoroshi_episode_1_2
+  - first:
+      213: -1001478220893811954
+    second: onikoroshi_episode_1_3
+  - first:
+      213: -3724819611076763946
+    second: onikoroshi_episode_1_4
+  - first:
+      213: -4105791980625526529
+    second: onikoroshi_episode_1_5
+  - first:
+      213: 5428610869554633951
+    second: onikoroshi_episode_1_6
+  - first:
+      213: -6325914220375800579
+    second: onikoroshi_episode_1_7
+  - first:
+      213: 7793882354246695681
+    second: onikoroshi_episode_1_8
+  - first:
+      213: 2649053126255442144
+    second: onikoroshi_episode_1_9
+  - first:
+      213: -7890170457523281428
+    second: onikoroshi_episode_1_10
+  - first:
+      213: 6157044074902058829
+    second: onikoroshi_episode_1_11
+  - first:
+      213: -808066488728016423
+    second: onikoroshi_episode_1_12
+  - first:
+      213: -5963354719974908410
+    second: onikoroshi_episode_1_13
+  - first:
+      213: 5367477762666267712
+    second: onikoroshi_episode_1_14
+  - first:
+      213: -4371776422629925712
+    second: onikoroshi_episode_1_15
+  - first:
+      213: -6247574554156361005
+    second: onikoroshi_episode_1_16
+  - first:
+      213: 9080454428100727392
+    second: onikoroshi_episode_1_17
+  - first:
+      213: -3416382700582387640
+    second: onikoroshi_episode_1_18
+  - first:
+      213: 8297661073778065701
+    second: onikoroshi_episode_1_19
+  - first:
+      213: 2995527122411642027
+    second: onikoroshi_episode_1_20
+  - first:
+      213: 545634604808149091
+    second: onikoroshi_episode_1_21
+  - first:
+      213: -8224989481171021786
+    second: onikoroshi_episode_1_22
+  - first:
+      213: -8819959948702185794
+    second: onikoroshi_episode_1_23
+  - first:
+      213: -6040549118729385641
+    second: onikoroshi_episode_1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_0
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 529
+        width: 350
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf5b3b9a733e7df30800000000000000
+      internalID: 4600395372592084476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_1
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 485
+        width: 542
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffdb7cf2eeeffb2f0800000000000000
+      internalID: -954764297021964801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_2
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 485
+        width: 542
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d843dad68c06e5ec0800000000000000
+      internalID: -3576314640135801715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_3
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 302
+        width: 110
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0b85593dd80a12f0800000000000000
+      internalID: -1001478220893811954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_4
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 302
+        width: 111
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6de5c557c48ce4cc0800000000000000
+      internalID: -3724819611076763946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_5
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 302
+        width: 71
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff00b2172fb4507c0800000000000000
+      internalID: -4105791980625526529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_6
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 302
+        width: 111
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdcd0a7e2dc465b40800000000000000
+      internalID: 5428610869554633951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_7
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 302
+        width: 110
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df488ee5886d538a0800000000000000
+      internalID: -6325914220375800579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_8
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 302
+        width: 110
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10b3f0a15be692c60800000000000000
+      internalID: 7793882354246695681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_9
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 302
+        width: 111
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e8f79578c353c420800000000000000
+      internalID: 2649053126255442144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_10
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 302
+        width: 111
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce12b06d5cb708290800000000000000
+      internalID: -7890170457523281428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_11
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 302
+        width: 110
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d47f5f6f6f6327550800000000000000
+      internalID: 6157044074902058829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_12
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 302
+        width: 72
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d928705fcb29c4f0800000000000000
+      internalID: -808066488728016423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_13
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 267
+        width: 946
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e1f363a78ed3da0800000000000000
+      internalID: -5963354719974908410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_14
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 184
+        width: 42
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0440887469c1d7a40800000000000000
+      internalID: 5367477762666267712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_15
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 184
+        width: 242
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bc17bb91845453c0800000000000000
+      internalID: -4371776422629925712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_16
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 210
+        width: 17
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3da9db74b082c49a0800000000000000
+      internalID: -6247574554156361005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_17
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 184
+        width: 43
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 062111a2131440e70800000000000000
+      internalID: 9080454428100727392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_18
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 184
+        width: 281
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8404ffad8029690d0800000000000000
+      internalID: -3416382700582387640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_19
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 125
+        width: 838
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 521c021a8c6372370800000000000000
+      internalID: 8297661073778065701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_20
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 75
+        width: 418
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bacd46efb00429920800000000000000
+      internalID: 2995527122411642027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_21
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 22
+        width: 99
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36810cc38cb729700800000000000000
+      internalID: 545634604808149091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_22
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 75
+        width: 418
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6201a7d05a7fadd80800000000000000
+      internalID: -8224989481171021786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_23
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 67
+        width: 330
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb60f642825399580800000000000000
+      internalID: -8819959948702185794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onikoroshi_episode_1_24
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 67
+        width: 330
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75906d9a498ab2ca0800000000000000
+      internalID: -6040549118729385641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      onikoroshi_episode_1_0: 4600395372592084476
+      onikoroshi_episode_1_1: -954764297021964801
+      onikoroshi_episode_1_10: -7890170457523281428
+      onikoroshi_episode_1_11: 6157044074902058829
+      onikoroshi_episode_1_12: -808066488728016423
+      onikoroshi_episode_1_13: -5963354719974908410
+      onikoroshi_episode_1_14: 5367477762666267712
+      onikoroshi_episode_1_15: -4371776422629925712
+      onikoroshi_episode_1_16: -6247574554156361005
+      onikoroshi_episode_1_17: 9080454428100727392
+      onikoroshi_episode_1_18: -3416382700582387640
+      onikoroshi_episode_1_19: 8297661073778065701
+      onikoroshi_episode_1_2: -3576314640135801715
+      onikoroshi_episode_1_20: 2995527122411642027
+      onikoroshi_episode_1_21: 545634604808149091
+      onikoroshi_episode_1_22: -8224989481171021786
+      onikoroshi_episode_1_23: -8819959948702185794
+      onikoroshi_episode_1_24: -6040549118729385641
+      onikoroshi_episode_1_3: -1001478220893811954
+      onikoroshi_episode_1_4: -3724819611076763946
+      onikoroshi_episode_1_5: -4105791980625526529
+      onikoroshi_episode_1_6: 5428610869554633951
+      onikoroshi_episode_1_7: -6325914220375800579
+      onikoroshi_episode_1_8: 7793882354246695681
+      onikoroshi_episode_1_9: 2649053126255442144
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

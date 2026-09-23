@@ -44,6 +44,11 @@
             "Title" : "New Hero in Town",
             "Creator" : "Kevin MacLeod",
             "Link" : "incompetech.com"
+        },
+        "10" : {
+            "Title" : "The Zen Moment",
+            "Creator" : "Kevin MacLeod",
+            "Link" : "incompetech.com"
         }
     },
     "SFX" : {
@@ -88,6 +93,11 @@
             "Title" : "Pixel FX - Fire",
             "Creator" : "Admurin",
             "Link" : "https://assetstore.unity.com/packages/vfx/pixel-fx-fire-221146"
+        },
+        "3" : {
+            "Title" : "Pixel Interior",
+            "Creator" : "bitglow",
+            "Link" : "https://bitglow.itch.io/pixelinterior-livingroomkitchen"
         }
     }
 }
