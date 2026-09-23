@@ -5167,6 +5167,112 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &391737504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391737507}
+  - component: {fileID: 391737506}
+  - component: {fileID: 391737505}
+  m_Layer: 0
+  m_Name: Arrow_To_Pedagang
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &391737505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391737504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a510c61305d2a4b908cf999fd825738a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArrowIndicator
+  mode: 0
+  targetNPC: {fileID: 973180197}
+  fixedAngle: -90
+  customArrowSprite: {fileID: 0}
+  offsetY: 0
+  arrowScale: 0.5
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  sortingLayerName: Default
+  sortingOrder: 10
+  pulseSpeed: 2
+  minAlpha: 0.3
+  maxAlpha: 0.9
+  bobDistance: 0.15
+  nextArrow: {fileID: 0}
+  finalTrigger: {fileID: 0}
+--- !u!61 &391737506
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391737504}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &391737507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391737504}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.70091, y: 2.44756, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &426428250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5887495343976495157, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
@@ -25341,6 +25447,112 @@ Transform:
   - {fileID: 947877684}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &925885352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925885355}
+  - component: {fileID: 925885354}
+  - component: {fileID: 925885353}
+  m_Layer: 0
+  m_Name: Arrow_To_Beggar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &925885353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925885352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a510c61305d2a4b908cf999fd825738a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArrowIndicator
+  mode: 0
+  targetNPC: {fileID: 991046961}
+  fixedAngle: -90
+  customArrowSprite: {fileID: 0}
+  offsetY: 0
+  arrowScale: 0.5
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  sortingLayerName: Default
+  sortingOrder: 10
+  pulseSpeed: 2
+  minAlpha: 0.3
+  maxAlpha: 0.9
+  bobDistance: 0.15
+  nextArrow: {fileID: 925885352}
+  finalTrigger: {fileID: 0}
+--- !u!61 &925885354
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925885352}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &925885355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925885352}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.70091, y: 2.44756, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &947877680
 GameObject:
   m_ObjectHideFlags: 0
@@ -26699,23 +26911,23 @@ MonoBehaviour:
   blacksmithTrigger: {fileID: 0}
   yakitoriItem: {fileID: 11400000, guid: 93dd31dbe498e46668ce1f12ea58c39c, type: 2}
   q1Title: A Hungry Stanger
-  q1Desc: Bicara dengan pengemis di pinggir jalan (Tanaka Koji).
+  q1Desc: Look for the beggar on the street (Tanaka Koji).
   q2Title: Finding Food
-  q2Desc: Cari dan beli 2 porsi Yakitori dari pedagang makanan (Seller).
+  q2Desc: Find and buy 2 portions of Yakitori from the food vendor (Seller).
   q3Title: Deliver Yakitori
-  q3Desc: Bawa Yakitori kembali ke Tanaka Koji.
+  q3Desc: Bring the Yakitori back to Tanaka Koji.
   q4Title: Street Brawl
-  q4Desc: Kalahkan Yakuza botak yang memalak Tanaka Koji!
+  q4Desc: Beat the bald Yakuza that is harassing Tanaka Koji!
   q5Title: Deliver Food
-  q5Desc: Bicara kembali dengan Tanaka Koji untuk memberikan makanannya.
+  q5Desc: Speak with Tanaka Koji to deliver the food.
   q6Title: The Blacksmith
-  q6Desc: Temui Ito Shun si pandai besi (Blacksmith) di seberang jalan.
+  q6Desc: Find Ito Shun the blacksmith around the town.
   q7Title: Prove Your Resolve
-  q7Desc: Kalahkan kroco Yakuza yang menyerang untuk membuktikan kemampuanmu!
+  q7Desc: Defeat the Yakuza associates that is attacking to prove your strength!
   q8Title: Claim The Blade
-  q8Desc: Bicara dengan Ito Shun untuk mengambil kembali Katana milikmu.
+  q8Desc: Speak with Ito Shun to claim your Katana back.
   q9Title: Onikoroshi Awakened
-  q9Desc: Katana telah kembali. Bersiaplah menghadapi keluarga Yakuza Aoyama!
+  q9Desc: You've obtained the Katana, Prepare to face the Aoyama's family!
 --- !u!1 &1141662444
 GameObject:
   m_ObjectHideFlags: 0
@@ -35756,7 +35968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -206.1, y: 212.5}
+  m_AnchoredPosition: {x: -307, y: 315}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1724880399
@@ -37055,7 +37267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3199589276705089571, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 315.9
+      value: 315
       objectReference: {fileID: 0}
     - target: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
       propertyPath: m_Pivot.x
@@ -37215,3 +37427,5 @@ SceneRoots:
   - {fileID: 1910669620}
   - {fileID: 795995356}
   - {fileID: 1073033157}
+  - {fileID: 391737507}
+  - {fileID: 925885355}

@@ -24,31 +24,31 @@ public class QuestTrackerUI : MonoBehaviour
 
     [Header("Quest Descriptions (Bisa diedit di Inspector)")]
     public string q1Title = "A Hungry Stanger";
-    public string q1Desc = "Bicara dengan pengemis di pinggir jalan (Tanaka Koji).";
+    public string q1Desc = "Look for the beggar on the street (Tanaka Koji).";
 
     public string q2Title = "Finding Food";
-    public string q2Desc = "Cari dan beli 2 porsi Yakitori dari pedagang makanan (Seller).";
+    public string q2Desc = "Find and buy 2 portions of Yakitori from the food vendor (Seller).";
 
     public string q3Title = "Deliver Yakitori";
-    public string q3Desc = "Bawa Yakitori kembali ke Tanaka Koji.";
+    public string q3Desc = "Bring the Yakitori back to Tanaka Koji.";
 
     public string q4Title = "Street Brawl";
-    public string q4Desc = "Kalahkan Yakuza botak yang memalak Tanaka Koji!";
+    public string q4Desc = "Beat the bald Yakuza that is harassing Tanaka Koji!";
 
     public string q5Title = "Deliver Food";
-    public string q5Desc = "Bicara kembali dengan Tanaka Koji untuk memberikan makanannya.";
+    public string q5Desc = "Speak with Tanaka Koji to deliver the food.";
 
     public string q6Title = "The Blacksmith";
-    public string q6Desc = "Temui Ito Shun si pandai besi (Blacksmith) di seberang jalan.";
+    public string q6Desc = "Find Ito Shun the blacksmith around the town.";
 
     public string q7Title = "Prove Your Resolve";
-    public string q7Desc = "Kalahkan kroco Yakuza yang menyerang untuk membuktikan kemampuanmu!";
+    public string q7Desc = "Defeat the Yakuza associates that is attacking to prove your strength!";
 
     public string q8Title = "Claim The Blade";
-    public string q8Desc = "Bicara dengan Ito Shun untuk mengambil kembali Katana milikmu.";
+    public string q8Desc = "Speak with Ito Shun to claim your Katana back.";
 
     public string q9Title = "Onikoroshi Awakened";
-    public string q9Desc = "Katana telah kembali. Bersiaplah menghadapi keluarga Yakuza Aoyama!";
+    public string q9Desc = "You've obtained the Katana, Prepare to face the Aoyama's family!";
 
     private void Start()
     {
