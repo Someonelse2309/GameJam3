@@ -8,8 +8,11 @@ public class BlacksmithTrigger : MonoBehaviour
     public ItemData katanaItem;
     public DialogueManager dialogueManager;
 
-    [Header("Quest Indicator")]
+    [Header("Quest Indicator (Bubble Atas Kepala)")]
     public QuestIndicator questIndicator;
+
+    [Header("Guiding Bubble (Pinggir Layar)")]
+    public GameObject arrowToBlacksmith;
 
     [Header("Yakuza Enemies (Petarung)")]
     public YakuzaEnemy[] fighterYakuza; 
@@ -84,27 +87,49 @@ public class BlacksmithTrigger : MonoBehaviour
 
     private void RefreshIndicator()
     {
-        if (questIndicator == null) return;
-
-        if ((dialogueManager != null && dialogueManager.isDialogueActive) || currentState == BlacksmithState.InCombat)
-        {
-            questIndicator.SetVisible(false);
-            return;
-        }
-
         bool beggarFinished = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.QuestCompleted;
+        bool isDialogActive = (dialogueManager != null && dialogueManager.isDialogueActive);
 
-        if ((currentState == BlacksmithState.Locked || currentState == BlacksmithState.ReadyForTalk) && beggarFinished)
+        // 1. Bubble di atas kepala Blacksmith
+        if (questIndicator != null)
         {
-            questIndicator.SetVisible(true);
+            if (isDialogActive || currentState == BlacksmithState.InCombat || currentState == BlacksmithState.QuestCompleted)
+            {
+                questIndicator.SetVisible(false);
+            }
+            else if ((currentState == BlacksmithState.Locked || currentState == BlacksmithState.ReadyForTalk) && beggarFinished)
+            {
+                questIndicator.SetVisible(true);
+            }
+            else if (currentState == BlacksmithState.CombatFinished)
+            {
+                questIndicator.SetVisible(true);
+            }
+            else
+            {
+                questIndicator.SetVisible(false);
+            }
         }
-        else if (currentState == BlacksmithState.CombatFinished)
+
+        // 2. Bubble penunjuk jalan di pinggir layar
+        if (arrowToBlacksmith != null)
         {
-            questIndicator.SetVisible(true);
-        }
-        else
-        {
-            questIndicator.SetVisible(false);
+            if (isDialogActive || currentState == BlacksmithState.InCombat || currentState == BlacksmithState.QuestCompleted)
+            {
+                arrowToBlacksmith.SetActive(false);
+            }
+            else if ((currentState == BlacksmithState.Locked || currentState == BlacksmithState.ReadyForTalk) && beggarFinished)
+            {
+                arrowToBlacksmith.SetActive(true);
+            }
+            else if (currentState == BlacksmithState.CombatFinished)
+            {
+                arrowToBlacksmith.SetActive(true);
+            }
+            else
+            {
+                arrowToBlacksmith.SetActive(false);
+            }
         }
     }
 
@@ -198,6 +223,8 @@ public class BlacksmithTrigger : MonoBehaviour
                 {
                     PlayerCombat.Instance.EquipSword(true);
                 }
+
+                RefreshIndicator();
             });
         }
     }
