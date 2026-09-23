@@ -227,5 +227,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Karakter tetap meluncur sesuai arah analog saat memukul
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+        if (GameAudioManager.Instance != null)
+{
+    GameAudioManager.Instance.PlayFootstep();
+}
     }
 }

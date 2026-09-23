@@ -5,14 +5,9 @@ public class GameAudioManager : MonoBehaviour
 {
     public static GameAudioManager Instance { get; private set; }
 
-    [Header("Audio Sources (Assign dari GameObject ini)")]
-    public AudioSource bgmSource;
-    public AudioSource sfxSource;
-    public AudioSource footstepSource;
-
-    [Header("Volume Controls (0.0 to 1.0)")]
+    [Header("Volume Controls (Geser ini, langsung berubah)")]
     [Range(0f, 1f)] public float masterVolume = 1f;
-    [Range(0f, 1f)] public float bgmVolume = 0.8f;
+    [Range(0f, 1f)] public float bgmVolume = 0.5f;
     [Range(0f, 1f)] public float sfxVolume = 1f;
 
     [Header("BGM Tracks")]
@@ -26,13 +21,18 @@ public class GameAudioManager : MonoBehaviour
 
     [Header("Movement SFX")]
     public AudioClip footstepSFX;
-    public float footstepInterval = 0.35f;
+    public float footstepInterval = 0.32f;
 
-    [Header("UI SFX")]
+    [Header("UI SFX (Dibutuhkan UISoundTrigger)")]
     public AudioClip uiClickDefault;
     public AudioClip dialogueAdvanceSFX;
     public AudioClip questTrackerSFX;
     public AudioClip inventoryToggleSFX;
+
+    // Channel audio independen dibuat otomatis via kode
+    private AudioSource bgmSource;
+    private AudioSource sfxSource;
+    private AudioSource footstepSource;
 
     private Coroutine bgmFadeCoroutine;
     private float footstepTimer;
@@ -43,8 +43,7 @@ public class GameAudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            ValidateAudioSources();
-            LoadVolumeSettings();
+            InitializeAudioChannels();
         }
         else
         {
@@ -52,91 +51,91 @@ public class GameAudioManager : MonoBehaviour
         }
     }
 
+    private void InitializeAudioChannels()
+    {
+        // Matikan AudioSource manual yang menempel di GameObject utama agar tidak bentrok
+        foreach (var src in GetComponents<AudioSource>())
+        {
+            src.playOnAwake = false;
+            src.Stop();
+            src.enabled = false;
+        }
+
+        // Buat 3 channel terpisah sebagai child object agar volume tidak saling menimpa
+        GameObject bgmObj = new GameObject("Channel_BGM");
+        bgmObj.transform.SetParent(transform);
+        bgmSource = bgmObj.AddComponent<AudioSource>();
+        bgmSource.loop = true;
+        bgmSource.playOnAwake = false;
+
+        GameObject sfxObj = new GameObject("Channel_SFX");
+        sfxObj.transform.SetParent(transform);
+        sfxSource = sfxObj.AddComponent<AudioSource>();
+        sfxSource.loop = false;
+        sfxSource.playOnAwake = false;
+
+        GameObject footstepObj = new GameObject("Channel_Footstep");
+        footstepObj.transform.SetParent(transform);
+        footstepSource = footstepObj.AddComponent<AudioSource>();
+        footstepSource.loop = false;
+        footstepSource.playOnAwake = false;
+
+        ApplyVolumes();
+    }
+
     private void Start()
     {
-        PlayExplorationBGM();
+        if (explorationBGM != null)
+        {
+            PlayExplorationBGM();
+        }
+    }
+
+    private void OnValidate()
+    {
+        ApplyVolumes();
     }
 
     private void Update()
     {
-        // Update volume secara real-time saat slider digeser di Inspector/UI
         ApplyVolumes();
     }
 
-    private void ValidateAudioSources()
+    public void ApplyVolumes()
     {
-        // Otomatis pasang AudioSource jika slot kosong di Inspector
-        AudioSource[] sources = GetComponents<AudioSource>();
-        
-        if (bgmSource == null)
-        {
-            bgmSource = sources.Length > 0 ? sources[0] : gameObject.AddComponent<AudioSource>();
-            bgmSource.loop = true;
-            bgmSource.playOnAwake = false;
-        }
-
-        if (sfxSource == null)
-        {
-            sfxSource = sources.Length > 1 ? sources[1] : gameObject.AddComponent<AudioSource>();
-            sfxSource.loop = false;
-            sfxSource.playOnAwake = false;
-        }
-
-        if (footstepSource == null)
-        {
-            footstepSource = sources.Length > 2 ? sources[2] : gameObject.AddComponent<AudioSource>();
-            footstepSource.loop = false;
-            footstepSource.playOnAwake = false;
-        }
+        if (bgmSource != null) bgmSource.volume = bgmVolume * masterVolume;
+        if (sfxSource != null) sfxSource.volume = sfxVolume * masterVolume;
+        if (footstepSource != null) footstepSource.volume = sfxVolume * masterVolume * 0.4f;
     }
 
     public void SetMasterVolume(float volume)
     {
         masterVolume = Mathf.Clamp01(volume);
-        PlayerPrefs.SetFloat("MasterVol", masterVolume);
         ApplyVolumes();
     }
 
     public void SetBGMVolume(float volume)
     {
         bgmVolume = Mathf.Clamp01(volume);
-        PlayerPrefs.SetFloat("BGMVol", bgmVolume);
         ApplyVolumes();
     }
 
     public void SetSFXVolume(float volume)
     {
         sfxVolume = Mathf.Clamp01(volume);
-        PlayerPrefs.SetFloat("SFXVol", sfxVolume);
         ApplyVolumes();
     }
 
-    private void ApplyVolumes()
-    {
-        if (bgmSource != null)
-        {
-            bgmSource.volume = bgmVolume * masterVolume;
-        }
-        if (sfxSource != null)
-        {
-            sfxSource.volume = sfxVolume * masterVolume;
-        }
-        if (footstepSource != null)
-        {
-            footstepSource.volume = 0.4f * sfxVolume * masterVolume;
-        }
-    }
-
-    private void LoadVolumeSettings()
-    {
-        masterVolume = PlayerPrefs.GetFloat("MasterVol", 1f);
-        bgmVolume = PlayerPrefs.GetFloat("BGMVol", 0.8f);
-        sfxVolume = PlayerPrefs.GetFloat("SFXVol", 1f);
-        ApplyVolumes();
-    }
+    // ==================== BGM CONTROLS (Mendukung 0 atau 1 argumen) ====================
 
     public void PlayExplorationBGM(float fadeDuration = 1f)
     {
+        SwitchBGM(explorationBGM, fadeDuration);
+    }
+
+    public void PlayExplorationBGM(AudioClip clip, float fadeDuration = 1f)
+    {
+        if (clip != null) explorationBGM = clip;
         SwitchBGM(explorationBGM, fadeDuration);
     }
 
@@ -145,16 +144,25 @@ public class GameAudioManager : MonoBehaviour
         SwitchBGM(combatBGM, fadeDuration);
     }
 
-    public void SwitchBGM(AudioClip newClip, float fadeDuration = 1f)
+    public void PlayCombatBGM(AudioClip clip, float fadeDuration = 0.5f)
     {
-        if (newClip == null || bgmSource.clip == newClip) return;
-
-        if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine);
-        bgmFadeCoroutine = StartCoroutine(CrossfadeBGM(newClip, fadeDuration));
+        if (clip != null) combatBGM = clip;
+        SwitchBGM(combatBGM, fadeDuration);
     }
 
-    private IEnumerator CrossfadeBGM(AudioClip targetClip, float duration)
+    public void SwitchBGM(AudioClip targetClip, float duration = 1f)
     {
+        if (targetClip == null || bgmSource == null) return;
+        if (bgmSource.clip == targetClip && bgmSource.isPlaying) return;
+
+        if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine);
+        bgmFadeCoroutine = StartCoroutine(CrossfadeRoutine(targetClip, duration));
+    }
+
+    private IEnumerator CrossfadeRoutine(AudioClip targetClip, float duration)
+    {
+        float targetVol = bgmVolume * masterVolume;
+
         if (bgmSource.isPlaying)
         {
             float startVol = bgmSource.volume;
@@ -169,42 +177,50 @@ public class GameAudioManager : MonoBehaviour
         bgmSource.clip = targetClip;
         bgmSource.Play();
 
-        float finalTargetVol = bgmVolume * masterVolume;
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
             if (bgmSource == null) yield break;
-            bgmSource.volume = Mathf.Lerp(0f, finalTargetVol, t / duration);
+            bgmSource.volume = Mathf.Lerp(0f, targetVol, t / duration);
             yield return null;
         }
 
-        bgmSource.volume = finalTargetVol;
+        if (bgmSource != null) bgmSource.volume = targetVol;
     }
 
-    public void PlaySFX(AudioClip clip, float volumeScale = 1f)
+    // ==================== SFX CONTROLS ====================
+
+    public void PlaySFX(AudioClip clip)
     {
         if (clip != null && sfxSource != null)
         {
-            sfxSource.PlayOneShot(clip, volumeScale * sfxVolume * masterVolume);
+            sfxSource.PlayOneShot(clip, sfxVolume * masterVolume);
         }
     }
 
     public void PlayPunchSFX() => PlaySFX(punchSFX);
     public void PlaySwordSFX() => PlaySFX(swordSFX);
     public void PlayHitImpactSFX() => PlaySFX(hitImpactSFX);
-    public void PlayDialogueNextSFX() => PlaySFX(dialogueAdvanceSFX);
+
+    public void PlayClickSFX() => PlaySFX(uiClickDefault);
     public void PlayQuestTrackerSFX() => PlaySFX(questTrackerSFX);
     public void PlayInventoryToggleSFX() => PlaySFX(inventoryToggleSFX);
+    public void PlayDialogueNextSFX() => PlaySFX(dialogueAdvanceSFX);
 
-    public void ProcessFootstep(bool isMoving)
+    public void PlayFootstep()
     {
-        if (!isMoving || footstepSFX == null) return;
+        if (footstepSFX == null || footstepSource == null) return;
 
         footstepTimer += Time.deltaTime;
         if (footstepTimer >= footstepInterval)
         {
             footstepTimer = 0f;
-            footstepSource.pitch = Random.Range(0.9f, 1.1f);
-            footstepSource.PlayOneShot(footstepSFX, 0.4f * sfxVolume * masterVolume);
+            footstepSource.pitch = Random.Range(0.85f, 1.15f);
+            footstepSource.PlayOneShot(footstepSFX, sfxVolume * masterVolume * 0.4f);
         }
+    }
+
+    public void ProcessFootstep(bool isMoving)
+    {
+        if (isMoving) PlayFootstep();
     }
 }
