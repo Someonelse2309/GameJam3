@@ -5,7 +5,7 @@ public class GameAudioManager : MonoBehaviour
 {
     public static GameAudioManager Instance { get; private set; }
 
-    [Header("Volume Controls (Geser ini, langsung berubah)")]
+    [Header("Volume Controls (0.0 to 1.0)")]
     [Range(0f, 1f)] public float masterVolume = 1f;
     [Range(0f, 1f)] public float bgmVolume = 0.5f;
     [Range(0f, 1f)] public float sfxVolume = 1f;
@@ -29,7 +29,6 @@ public class GameAudioManager : MonoBehaviour
     public AudioClip questTrackerSFX;
     public AudioClip inventoryToggleSFX;
 
-    // Channel audio independen dibuat otomatis via kode
     private AudioSource bgmSource;
     private AudioSource sfxSource;
     private AudioSource footstepSource;
@@ -43,6 +42,12 @@ public class GameAudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Kunci 60 FPS dan matikan vSync
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
             InitializeAudioChannels();
         }
         else
@@ -53,7 +58,6 @@ public class GameAudioManager : MonoBehaviour
 
     private void InitializeAudioChannels()
     {
-        // Matikan AudioSource manual yang menempel di GameObject utama agar tidak bentrok
         foreach (var src in GetComponents<AudioSource>())
         {
             src.playOnAwake = false;
@@ -61,7 +65,6 @@ public class GameAudioManager : MonoBehaviour
             src.enabled = false;
         }
 
-        // Buat 3 channel terpisah sebagai child object agar volume tidak saling menimpa
         GameObject bgmObj = new GameObject("Channel_BGM");
         bgmObj.transform.SetParent(transform);
         bgmSource = bgmObj.AddComponent<AudioSource>();
@@ -126,24 +129,16 @@ public class GameAudioManager : MonoBehaviour
         ApplyVolumes();
     }
 
-    // ==================== BGM CONTROLS (Mendukung 0 atau 1 argumen) ====================
+    // ==================== BGM CONTROLS ====================
 
-    public void PlayExplorationBGM(float fadeDuration = 1f)
-    {
-        SwitchBGM(explorationBGM, fadeDuration);
-    }
-
+    public void PlayExplorationBGM(float fadeDuration = 1f) => SwitchBGM(explorationBGM, fadeDuration);
     public void PlayExplorationBGM(AudioClip clip, float fadeDuration = 1f)
     {
         if (clip != null) explorationBGM = clip;
         SwitchBGM(explorationBGM, fadeDuration);
     }
 
-    public void PlayCombatBGM(float fadeDuration = 0.5f)
-    {
-        SwitchBGM(combatBGM, fadeDuration);
-    }
-
+    public void PlayCombatBGM(float fadeDuration = 0.5f) => SwitchBGM(combatBGM, fadeDuration);
     public void PlayCombatBGM(AudioClip clip, float fadeDuration = 0.5f)
     {
         if (clip != null) combatBGM = clip;
@@ -206,21 +201,22 @@ public class GameAudioManager : MonoBehaviour
     public void PlayInventoryToggleSFX() => PlaySFX(inventoryToggleSFX);
     public void PlayDialogueNextSFX() => PlaySFX(dialogueAdvanceSFX);
 
-    public void PlayFootstep()
+    // ==================== FOOTSTEP CONTROLS ====================
+
+    public void ProcessFootstep(bool isMoving)
     {
-        if (footstepSFX == null || footstepSource == null) return;
+        if (!isMoving || footstepSFX == null || footstepSource == null)
+        {
+            footstepTimer = 0f;
+            return;
+        }
 
         footstepTimer += Time.deltaTime;
         if (footstepTimer >= footstepInterval)
         {
             footstepTimer = 0f;
-            footstepSource.pitch = Random.Range(0.85f, 1.15f);
+            footstepSource.pitch = UnityEngine.Random.Range(0.85f, 1.15f);
             footstepSource.PlayOneShot(footstepSFX, sfxVolume * masterVolume * 0.4f);
         }
-    }
-
-    public void ProcessFootstep(bool isMoving)
-    {
-        if (isMoving) PlayFootstep();
     }
 }

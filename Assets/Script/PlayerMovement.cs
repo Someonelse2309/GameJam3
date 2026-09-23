@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -35,10 +36,19 @@ public class PlayerMovement : MonoBehaviour
     private bool isThrowingShuriken = false;
     public bool isFrozen { get; private set; } = false;
 
+    // Cache fungsi joystick agar tidak lag di HP
+    private Func<float> getJoyX;
+    private Func<float> getJoyY;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        // Kunci 60 FPS langsung di dalam scene
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
 
     void Start()
@@ -49,6 +59,47 @@ public class PlayerMovement : MonoBehaviour
         if (punchSprites != null && punchSprites.Length > 0)
         {
             attackSprites = punchSprites;
+        }
+
+        SetupJoystickReader();
+    }
+
+    private void SetupJoystickReader()
+    {
+        if (joystick == null) return;
+        var t = joystick.GetType();
+
+        var vecProp = t.GetProperty("InputVector") ?? t.GetProperty("inputVector");
+        if (vecProp != null)
+        {
+            getJoyX = () => ((Vector2)vecProp.GetValue(joystick)).x;
+            getJoyY = () => ((Vector2)vecProp.GetValue(joystick)).y;
+            return;
+        }
+
+        var vecField = t.GetField("InputVector") ?? t.GetField("inputVector");
+        if (vecField != null)
+        {
+            getJoyX = () => ((Vector2)vecField.GetValue(joystick)).x;
+            getJoyY = () => ((Vector2)vecField.GetValue(joystick)).y;
+            return;
+        }
+
+        var hProp = t.GetProperty("Horizontal") ?? t.GetProperty("horizontal");
+        var vProp = t.GetProperty("Vertical") ?? t.GetProperty("vertical");
+        if (hProp != null && vProp != null)
+        {
+            getJoyX = () => (float)hProp.GetValue(joystick);
+            getJoyY = () => (float)vProp.GetValue(joystick);
+            return;
+        }
+
+        var hField = t.GetField("Horizontal") ?? t.GetField("horizontal");
+        var vField = t.GetField("Vertical") ?? t.GetField("vertical");
+        if (hField != null && vField != null)
+        {
+            getJoyX = () => (float)hField.GetValue(joystick);
+            getJoyY = () => (float)vField.GetValue(joystick);
         }
     }
 
@@ -71,40 +122,34 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Jika sedang dibekukan (misalnya saat dialog aktif), hentikan input dan mainkan animasi idle
         if (isFrozen)
         {
             movement = Vector2.zero;
             HandleAnimation();
+            if (GameAudioManager.Instance != null) GameAudioManager.Instance.ProcessFootstep(false);
             return;
         }
 
-        // 1. Input Serangan Keyboard (J = Attack, K = Shuriken)
+        // 1. Input Serang
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
         {
             PlayerCombat combat = GetComponent<PlayerCombat>();
-            if (combat != null)
-            {
-                combat.PerformAttack();
-            }
-            else
-            {
-                TriggerAttack();
-            }
+            if (combat != null) combat.PerformAttack();
+            else TriggerAttack();
         }
         else if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !isThrowingShuriken)
         {
             TriggerAction(shurikenSprites, false, true);
         }
 
-        // 2. Input Gerak (Tetap membaca analog/keyboard meski sedang menyerang)
+        // 2. Input Gerak
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
         if (joystick != null)
         {
-            float jX = GetJoystickAxis("Horizontal");
-            float jY = GetJoystickAxis("Vertical");
+            float jX = getJoyX != null ? getJoyX() : 0f;
+            float jY = getJoyY != null ? getJoyY() : 0f;
 
             if (Mathf.Abs(jX) > 0.05f || Mathf.Abs(jY) > 0.05f)
             {
@@ -121,39 +166,19 @@ public class PlayerMovement : MonoBehaviour
             movement = movement.normalized;
         }
 
-        // 3. Flip Badan Kiri / Kanan sesuai arah jalan
+        // 3. Audio Footstep (Hanya aktif saat bergerak dan tidak menyerang)
+        bool isMoving = movement.sqrMagnitude > 0.05f && !isAttacking;
+        if (GameAudioManager.Instance != null)
+        {
+            GameAudioManager.Instance.ProcessFootstep(isMoving);
+        }
+
+        // 4. Flip Visual
         if (movement.x < 0) spriteRenderer.flipX = true;
         else if (movement.x > 0) spriteRenderer.flipX = false;
 
-        // 4. Jalankan Animasi
+        // 5. Animasi
         HandleAnimation();
-    }
-
-    float GetJoystickAxis(string axis)
-    {
-        if (joystick == null) return 0f;
-
-        var prop = joystick.GetType().GetProperty(axis) ?? joystick.GetType().GetProperty(axis.ToLower());
-        if (prop != null) return (float)prop.GetValue(joystick);
-
-        var field = joystick.GetType().GetField(axis) ?? joystick.GetType().GetField(axis.ToLower());
-        if (field != null) return (float)field.GetValue(joystick);
-
-        var vecProp = joystick.GetType().GetProperty("InputVector") ?? joystick.GetType().GetProperty("inputVector");
-        if (vecProp != null)
-        {
-            Vector2 vec = (Vector2)vecProp.GetValue(joystick);
-            return axis == "Horizontal" ? vec.x : vec.y;
-        }
-
-        var vecField = joystick.GetType().GetField("InputVector") ?? joystick.GetType().GetField("inputVector");
-        if (vecField != null)
-        {
-            Vector2 vec = (Vector2)vecField.GetValue(joystick);
-            return axis == "Horizontal" ? vec.x : vec.y;
-        }
-
-        return 0f;
     }
 
     public void TriggerAttack()
@@ -184,7 +209,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Sprite[] currentAnimation;
 
-        // Prioritas visual: Animasi serang dimainkan di atas pergerakan
         if (isAttacking) currentAnimation = attackSprites;
         else if (isThrowingShuriken) currentAnimation = shurikenSprites;
         else currentAnimation = (movement.sqrMagnitude > 0) ? walkSprites : idleSprites;
@@ -225,12 +249,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFrozen) return;
 
-        // Karakter tetap meluncur sesuai arah analog saat memukul
+        // Posisi bergerak mulus tanpa penumpukan audio di thread fisika
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        if (GameAudioManager.Instance != null)
-{
-    GameAudioManager.Instance.PlayFootstep();
-}
     }
 }

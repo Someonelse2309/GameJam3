@@ -5307,6 +5307,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1073033156}
+        m_TargetAssemblyTypeName: GameAudioManager, Assembly-CSharp
+        m_MethodName: PlayDialogueNextSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &517522809
 GameObject:
   m_ObjectHideFlags: 0
@@ -26061,12 +26073,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11faedc15ef8a42598c8cc08edcad542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
-  bgmSource: {fileID: 1073033160}
-  sfxSource: {fileID: 1073033159}
-  footstepSource: {fileID: 1073033158}
   masterVolume: 1
-  bgmVolume: 1
-  sfxVolume: 1
+  bgmVolume: 0.3
+  sfxVolume: 0.35
   explorationBGM: {fileID: 0}
   combatBGM: {fileID: 8300000, guid: c599e55dd784c4b458f888bcff3c1577, type: 3}
   punchSFX: {fileID: 8300000, guid: 85ee4c89c2ee34bdb8057915d74db298, type: 3}
@@ -26106,7 +26115,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -26619,7 +26628,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1137109933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1073033156}
+        m_TargetAssemblyTypeName: GameAudioManager, Assembly-CSharp
+        m_MethodName: PlayQuestTrackerSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1137109933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26781,6 +26802,18 @@ MonoBehaviour:
       - m_Target: {fileID: 336083713}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: ToggleInventory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1073033156}
+        m_TargetAssemblyTypeName: GameAudioManager, Assembly-CSharp
+        m_MethodName: PlayInventoryToggleSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35782,6 +35815,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1073033156}
+        m_TargetAssemblyTypeName: GameAudioManager, Assembly-CSharp
+        m_MethodName: PlayPunchSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1724880400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36710,7 +36755,7 @@ Transform:
   m_GameObject: {fileID: 2056924653}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.42, y: 1.7, z: 0}
+  m_LocalPosition: {x: 14.75, y: 1.84, z: 0}
   m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
   m_ConstrainProportionsScale: 1
   m_Children:

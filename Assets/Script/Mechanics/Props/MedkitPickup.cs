@@ -4,54 +4,53 @@ public class MedkitPickup : MonoBehaviour
 {
     [Header("Pengaturan Heal")]
     public int healAmount = 50;
-    public bool pickupOnlyIfDamaged = true; // Tidak terambil jika HP MC masih penuh
+    public bool pickupOnlyIfDamaged = true;
 
     [Header("Efek Melayang")]
     public float floatSpeed = 4f;
     public float floatHeight = 0.08f;
-    private Vector3 startPos;
 
     [Header("Efek Suara")]
     public AudioClip collectSound;
 
-    private bool isCollected = false;
+    private Vector3 startPos;
 
-    void Start()
+    private void Start()
     {
         startPos = transform.position;
     }
 
-    void Update()
+    private void Update()
     {
-        if (isCollected) return;
-
-        // Gerakan melayang vertikal halus
         float newY = startPos.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
         transform.position = new Vector3(startPos.x, newY, startPos.z);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isCollected) return;
-
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            CharacterHealth playerHealth = other.GetComponent<CharacterHealth>();
+            CharacterHealth playerHealth = collision.GetComponent<CharacterHealth>();
             if (playerHealth != null)
             {
-                // Lewati jika HP player sudah maksimal
                 if (pickupOnlyIfDamaged && playerHealth.currentHealth >= playerHealth.maxHealth)
                 {
                     return;
                 }
 
-                isCollected = true;
                 playerHealth.Heal(healAmount);
 
-                // Bunyikan audio saat ditabrak
+                // Mainkan suara via GameAudioManager agar volumenya ikut slider SFX
                 if (collectSound != null)
                 {
-                    AudioSource.PlayClipAtPoint(collectSound, transform.position);
+                    if (GameAudioManager.Instance != null)
+                    {
+                        GameAudioManager.Instance.PlaySFX(collectSound);
+                    }
+                    else
+                    {
+                        AudioSource.PlayClipAtPoint(collectSound, transform.position);
+                    }
                 }
 
                 Destroy(gameObject);
