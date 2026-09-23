@@ -27,15 +27,13 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<DialogueSentence> sentences = new Queue<DialogueSentence>();
     public bool isDialogueActive { get; private set; } = false;
+    public bool isEngaged { get; private set; } = false; // Player sudah menekan untuk lanjut dialog
     private Action onDialogueCompleted;
-    private bool isTyping = false;
-    private string currentFullSentence = "";
 
     private void Awake()
     {
-        Instance = this;
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
 
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
     }
@@ -50,8 +48,6 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueSentence[] dialogue, Action onComplete = null)
     {
-        if (dialogue == null || dialogue.Length == 0) return;
-
         if (isDialogueActive)
         {
             DisplayNextSentence();
@@ -59,6 +55,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         isDialogueActive = true;
+        isEngaged = false; // Reset: Player belum konfirmasi ngobrol
         onDialogueCompleted = onComplete;
 
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
@@ -69,17 +66,26 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(line);
         }
 
-        DisplayNextSentence();
+        // Tampilkan kalimat pertama (MC belum diam, masih bisa jalan lewat)
+        if (sentences.Count > 0)
+        {
+            DialogueSentence first = sentences.Dequeue();
+            RenderSentence(first);
+        }
     }
 
     public void DisplayNextSentence()
     {
-        if (isTyping)
+        if (!isDialogueActive) return;
+
+        // Saat player menekan E/klik pertama kali: bekukan gerakan MC
+        if (!isEngaged)
         {
-            StopAllCoroutines();
-            if (dialogueText != null) dialogueText.text = currentFullSentence;
-            isTyping = false;
-            return;
+            isEngaged = true;
+            if (PlayerMovement.Instance != null)
+            {
+                PlayerMovement.Instance.SetFreeze(true);
+            }
         }
 
         if (sentences.Count == 0)
@@ -89,7 +95,11 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueSentence current = sentences.Dequeue();
+        RenderSentence(current);
+    }
 
+    private void RenderSentence(DialogueSentence current)
+    {
         if (nameText != null) nameText.text = current.speakerName;
 
         Sprite matchedPortrait = GetPortraitByName(current.speakerName);
@@ -112,53 +122,53 @@ public class DialogueManager : MonoBehaviour
 
     private Sprite GetPortraitByName(string name)
     {
-        if (characterProfiles == null || string.IsNullOrEmpty(name)) return null;
-
-        CharacterProfile profile = characterProfiles.Find(p => 
-            p != null && 
-            !string.IsNullOrEmpty(p.characterName) && 
-            p.characterName.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase));
-
+        CharacterProfile profile = characterProfiles.Find(p => p.characterName.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase));
         return profile != null ? profile.portrait : null;
     }
 
     private IEnumerator TypeSentence(string sentence)
     {
-        isTyping = true;
-        currentFullSentence = sentence;
-        if (dialogueText != null)
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
         {
-            dialogueText.text = "";
-            foreach (char letter in sentence.ToCharArray())
-            {
-                dialogueText.text += letter;
-                yield return new WaitForSeconds(0.02f);
-            }
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(0.02f);
         }
-        isTyping = false;
     }
 
-    // Dipanggil normal saat dialog selesai tuntas
     public void EndDialogue()
     {
         isDialogueActive = false;
-        isTyping = false;
-        StopAllCoroutines();
+        isEngaged = false;
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
+
+        // Buka kembali gerakan MC
+        if (PlayerMovement.Instance != null)
+        {
+            PlayerMovement.Instance.SetFreeze(false);
+        }
 
         Action callback = onDialogueCompleted;
         onDialogueCompleted = null;
         callback?.Invoke();
     }
 
-    // Dipanggil saat player berjalan menjauh dari NPC (Cancel)
+    // Dipanggil saat player jalan menjauh tanpa menekan dialog
     public void CancelDialogue()
     {
         isDialogueActive = false;
-        isTyping = false;
-        StopAllCoroutines();
-        onDialogueCompleted = null; // Batalkan callback agar quest tidak jalan prematur
+        isEngaged = false;
         sentences.Clear();
+        StopAllCoroutines();
+
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
+
+        if (PlayerMovement.Instance != null)
+        {
+            PlayerMovement.Instance.SetFreeze(false);
+        }
+
+        // Hapus callback agar quest tidak tertrigger
+        onDialogueCompleted = null;
     }
 }

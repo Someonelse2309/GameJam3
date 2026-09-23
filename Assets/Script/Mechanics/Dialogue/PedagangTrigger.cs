@@ -24,6 +24,8 @@ public class PedagangTrigger : MonoBehaviour
         new DialogueSentence { speakerName = "Seller", sentence = "Fresh skewers every day! Watch out for the Yakuza around here." }
     };
 
+    private bool isPlayerNearby = false; // Deklarasi variabel yang sebelumnya terlewat
+
     private void Start()
     {
         if (dialogueManager == null)
@@ -68,7 +70,22 @@ public class PedagangTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            isPlayerNearby = true;
             TriggerPedagangInteraction();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
+
+            // Jika player cuma lewat lalu menjauh, tutup dialog dan batalkan trigger quest
+            if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive && !DialogueManager.Instance.isEngaged)
+            {
+                DialogueManager.Instance.CancelDialogue();
+            }
         }
     }
 

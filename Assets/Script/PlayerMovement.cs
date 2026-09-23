@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsAttacking => isAttacking;
     private bool isAttacking = false;
     private bool isThrowingShuriken = false;
+    public bool isFrozen { get; private set; } = false;
 
     void Awake()
     {
@@ -51,6 +52,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SetFreeze(bool freeze)
+    {
+        isFrozen = freeze;
+        if (isFrozen)
+        {
+            movement = Vector2.zero;
+            isAttacking = false;
+            isThrowingShuriken = false;
+        }
+    }
+
     public void EquipSword(bool equip)
     {
         isSwordEquipped = equip;
@@ -59,7 +71,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
+        // Jika sedang dibekukan (misalnya saat dialog aktif), hentikan input dan mainkan animasi idle
+        if (isFrozen)
+        {
+            movement = Vector2.zero;
+            HandleAnimation();
+            return;
+        }
+
         // 1. Input Serangan Keyboard (J = Attack, K = Shuriken)
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
         {
@@ -139,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TriggerAttack()
     {
-        if (!isAttacking && !isThrowingShuriken)
+        if (!isAttacking && !isThrowingShuriken && !isFrozen)
         {
             TriggerAction(attackSprites, true, false);
         }
@@ -147,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TriggerAction(Sprite[] actionSprites, bool attacking, bool throwing)
     {
-        if (actionSprites == null || actionSprites.Length == 0) return;
+        if (isFrozen || actionSprites == null || actionSprites.Length == 0) return;
 
         isAttacking = attacking;
         isThrowingShuriken = throwing;
@@ -204,6 +223,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isFrozen) return;
+
         // Karakter tetap meluncur sesuai arah analog saat memukul
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }

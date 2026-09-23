@@ -149,6 +149,12 @@ public class BlacksmithTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = false;
+
+            // Jika player cuma lewat lalu menjauh, tutup dialog dan batalkan trigger quest
+            if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive && !DialogueManager.Instance.isEngaged)
+            {
+                DialogueManager.Instance.CancelDialogue();
+            }
         }
     }
 
