@@ -26074,12 +26074,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
   masterVolume: 1
-  bgmVolume: 0.3
+  bgmVolume: 0.2
   sfxVolume: 0.35
-  explorationBGM: {fileID: 0}
+  explorationBGM: {fileID: 8300000, guid: 976fcd426b3004c608967e9efbd94b04, type: 3}
   combatBGM: {fileID: 8300000, guid: c599e55dd784c4b458f888bcff3c1577, type: 3}
-  punchSFX: {fileID: 8300000, guid: 85ee4c89c2ee34bdb8057915d74db298, type: 3}
-  swordSFX: {fileID: 0}
+  punchSFX: {fileID: 8300000, guid: 4aea75344c7c6494188f29c8f3d31770, type: 3}
+  swordSFX: {fileID: 8300000, guid: 04face893da4b464b9d9d1ea88a05c18, type: 3}
   hitImpactSFX: {fileID: 0}
   footstepSFX: {fileID: 8300000, guid: ec6e18fcf482f4071a1e7d187e034eca, type: 3}
   footstepInterval: 0.35
@@ -36964,6 +36964,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2993075603278756996, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
+      propertyPath: collectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 47d86dd01232b4487885ee21dd6c69b3, type: 3}
     - target: {fileID: 5887495343976495157, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
       propertyPath: m_Name
       value: Medkit
