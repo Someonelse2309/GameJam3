@@ -113,7 +113,7 @@ public class StoryEP1 : MonoBehaviour
             default:
                 yield return new WaitForSeconds(1f);
                 SceneController.instance.LoadSceneByName("InGameEP1", true);
-                break;
+                yield break;
         }
 
         index++;
