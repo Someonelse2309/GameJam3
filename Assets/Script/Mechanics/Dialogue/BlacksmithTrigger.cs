@@ -193,6 +193,11 @@ public class BlacksmithTrigger : MonoBehaviour
                 {
                     PlayerMovement.Instance.EquipSword(true);
                 }
+
+                if (PlayerCombat.Instance != null)
+                {
+                    PlayerCombat.Instance.EquipSword(true);
+                }
             });
         }
     }
@@ -241,7 +246,6 @@ public class BlacksmithTrigger : MonoBehaviour
         currentState = BlacksmithState.InCombat;
         combatStarted = true;
 
-        // Pemicu BGM Pertempuran
         if (GameAudioManager.Instance != null)
         {
             GameAudioManager.Instance.PlayCombatBGM(0.4f);
@@ -273,7 +277,6 @@ public class BlacksmithTrigger : MonoBehaviour
         {
             combatStarted = false;
 
-            // Kembalikan ke BGM Eksplorasi
             if (GameAudioManager.Instance != null)
             {
                 GameAudioManager.Instance.PlayExplorationBGM(1.2f);

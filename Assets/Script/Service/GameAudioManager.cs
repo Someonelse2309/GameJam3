@@ -228,4 +228,11 @@ public class GameAudioManager : MonoBehaviour
             footstepSource.PlayOneShot(footstepSFX, sfxVolume * masterVolume * 0.4f);
         }
     }
+    public void PlayFootstep()
+{
+    if (footstepSFX != null && footstepSource != null)
+    {
+        footstepSource.PlayOneShot(footstepSFX, sfxVolume * masterVolume);
+    }
+}
 }

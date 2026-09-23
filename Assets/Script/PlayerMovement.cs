@@ -133,9 +133,7 @@ public class PlayerMovement : MonoBehaviour
         // 1. Input Serang
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
         {
-            PlayerCombat combat = GetComponent<PlayerCombat>();
-            if (combat != null) combat.PerformAttack();
-            else TriggerAttack();
+            TriggerAttack();
         }
         else if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !isThrowingShuriken)
         {
@@ -181,11 +179,39 @@ public class PlayerMovement : MonoBehaviour
         HandleAnimation();
     }
 
+    // Dipanggil baik dari tombol keyboard J maupun tombol KickButton di layar
     public void TriggerAttack()
     {
-        if (!isAttacking && !isThrowingShuriken && !isFrozen)
+        if (isFrozen || isAttacking || isThrowingShuriken) return;
+
+        PlayerCombat combat = GetComponent<PlayerCombat>();
+        if (combat != null)
         {
-            TriggerAction(attackSprites, true, false);
+            combat.PerformAttack();
+        }
+        else
+        {
+            ExecuteAttack();
+        }
+    }
+
+    // Menjalankan animasi dan memainkan audio yang sesuai dengan senjata
+    public void ExecuteAttack()
+    {
+        if (isFrozen) return;
+
+        TriggerAction(attackSprites, true, false);
+
+        if (GameAudioManager.Instance != null)
+        {
+            if (isSwordEquipped)
+            {
+                GameAudioManager.Instance.PlaySwordSFX();
+            }
+            else
+            {
+                GameAudioManager.Instance.PlayPunchSFX();
+            }
         }
     }
 

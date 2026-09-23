@@ -2,35 +2,64 @@ using UnityEngine;
 
 public class PlayerAudioBridge : MonoBehaviour
 {
-    private Rigidbody2D rb;
     private PlayerMovement playerMovement;
-    private bool wasAttacking = false;
 
-    private void Start()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponentInParent<PlayerMovement>();
     }
 
-    private void Update()
+    // Dipanggil oleh Animation Event saat animasi menyerang/memukul berjalan
+    public void PlayAttackSound()
     {
-        if (GameAudioManager.Instance == null) return;
+        PlayAttackOrPunchSound();
+    }
 
-        // 1. Suara Langkah Kaki saat Berjalan
-        bool isMoving = rb != null && rb.linearVelocity.sqrMagnitude > 0.05f;
-        GameAudioManager.Instance.ProcessFootstep(isMoving);
+    public void PlayPunchSound()
+    {
+        PlayAttackOrPunchSound();
+    }
 
-        // 2. Deteksi Ayunan Pukulan / Pedang
-        if (playerMovement != null)
+    public void PlaySwordSound()
+    {
+        if (GameAudioManager.Instance != null)
         {
-            if (playerMovement.IsAttacking && !wasAttacking)
+            GameAudioManager.Instance.PlaySwordSFX();
+        }
+    }
+
+    private void PlayAttackOrPunchSound()
+    {
+        bool isSword = false;
+
+        if (PlayerMovement.Instance != null)
+        {
+            isSword = PlayerMovement.Instance.isSwordEquipped;
+        }
+        else if (playerMovement != null)
+        {
+            isSword = playerMovement.isSwordEquipped;
+        }
+
+        if (GameAudioManager.Instance != null)
+        {
+            if (isSword)
             {
-                if (playerMovement.isSwordEquipped)
-                    GameAudioManager.Instance.PlaySwordSFX();
-                else
-                    GameAudioManager.Instance.PlayPunchSFX();
+                GameAudioManager.Instance.PlaySwordSFX();
             }
-            wasAttacking = playerMovement.IsAttacking;
+            else
+            {
+                GameAudioManager.Instance.PlayPunchSFX();
+            }
+        }
+    }
+
+    // Dipanggil oleh Animation Event saat langkah kaki
+    public void PlayFootstep()
+    {
+        if (GameAudioManager.Instance != null)
+        {
+            GameAudioManager.Instance.PlayFootstep();
         }
     }
 }

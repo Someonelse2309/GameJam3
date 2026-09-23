@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public static PlayerCombat Instance { get; private set; }
+
     [Header("Punch Stats (Mode Tinju)")]
     public int punchDamage = 20;
     public float punchRange = 0.85f;
@@ -23,6 +25,9 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -37,12 +42,21 @@ public class PlayerCombat : MonoBehaviour
 
         nextAttackTime = Time.time + attackCooldown;
 
+        // Picu animasi visual dan suara serang (Sword / Punch) di PlayerMovement
         if (playerMovement != null)
         {
-            playerMovement.TriggerAttack();
+            playerMovement.ExecuteAttack();
         }
 
         StartCoroutine(DealDamageRoutine());
+    }
+
+    public void EquipSword(bool equip)
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.EquipSword(equip);
+        }
     }
 
     private IEnumerator DealDamageRoutine()
