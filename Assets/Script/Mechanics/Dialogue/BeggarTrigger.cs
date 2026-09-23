@@ -14,7 +14,6 @@ public class BeggarTrigger : MonoBehaviour
     public YakuzaEnemy yakuzaTarget;
 
     [Header("Quest Indicator")]
-    [Tooltip("Tarik child QuestBubble milik Beggar ke sini")]
     public QuestIndicator questIndicator;
 
     [Header("Dialogue PT1 (Pertemuan Awal)")]
@@ -34,10 +33,14 @@ public class BeggarTrigger : MonoBehaviour
         if (dialogueManager == null)
             dialogueManager = DialogueManager.Instance != null ? DialogueManager.Instance : FindFirstObjectByType<DialogueManager>();
 
-        // Sembunyikan Yakuza di awal permainan
         if (yakuzaTarget != null)
         {
             yakuzaTarget.gameObject.SetActive(false);
+            yakuzaTarget.enabled = false;
+
+            Collider2D col = yakuzaTarget.GetComponent<Collider2D>();
+            if (col != null) col.enabled = false;
+
             CharacterHealth hp = yakuzaTarget.GetComponent<CharacterHealth>();
             if (hp != null) hp.OnDeath += OnYakuzaDefeated;
         }
@@ -51,7 +54,6 @@ public class BeggarTrigger : MonoBehaviour
         RefreshIndicator();
     }
 
-    // Memeriksa apakah makanan sudah didapat agar Yakuza langsung spawn memalak Beggar dari kejauhan
     private void CheckYakuzaArrival()
     {
         if (currentState == QuestState.LookingForFood)
@@ -61,9 +63,15 @@ public class BeggarTrigger : MonoBehaviour
             if (hasYakitori && yakuzaTarget != null && !yakuzaTarget.gameObject.activeSelf)
             {
                 yakuzaTarget.gameObject.SetActive(true);
-                yakuzaTarget.enabled = true; // Memutar animasi idle
+                yakuzaTarget.enabled = false; // Matikan AI agar tidak menyerang MC saat baru tiba
 
-                // Balik sprite agar Yakuza selalu menghadap ke Beggar
+                // Matikan collider & health sementara agar tidak bisa dipukul saat sedang memalak
+                Collider2D col = yakuzaTarget.GetComponent<Collider2D>();
+                if (col != null) col.enabled = false;
+
+                CharacterHealth hp = yakuzaTarget.GetComponent<CharacterHealth>();
+                if (hp != null) hp.enabled = false;
+
                 SpriteRenderer yakuzaSr = yakuzaTarget.GetComponent<SpriteRenderer>();
                 if (yakuzaSr != null)
                 {
@@ -91,7 +99,6 @@ public class BeggarTrigger : MonoBehaviour
         }
         else if (currentState == QuestState.LookingForFood)
         {
-            // Bubble menyala di Beggar hanya jika makanan sudah di tangan
             questIndicator.SetVisible(hasYakitori);
         }
         else if (currentState == QuestState.CombatFinished)
@@ -119,7 +126,7 @@ public class BeggarTrigger : MonoBehaviour
         {
             isPlayerNearby = false;
 
-            // Jika player cuma lewat lalu menjauh, tutup dialog dan batalkan trigger quest
+            // Jika player cuma melintas, tutup dialog dan batalkan perubahan quest
             if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive && !DialogueManager.Instance.isEngaged)
             {
                 DialogueManager.Instance.CancelDialogue();
@@ -135,11 +142,13 @@ public class BeggarTrigger : MonoBehaviour
 
         if (currentState == QuestState.NotStarted)
         {
-            dialogueManager.StartDialogue(dialoguePT1, () =>
-            {
-                currentState = QuestState.LookingForFood;
-                RefreshIndicator();
-            });
+            dialogueManager.StartDialogue(dialoguePT1, 
+                onComplete: () =>
+                {
+                    currentState = QuestState.LookingForFood;
+                    RefreshIndicator();
+                }
+            );
         }
         else if (currentState == QuestState.LookingForFood)
         {
@@ -153,13 +162,17 @@ public class BeggarTrigger : MonoBehaviour
             }
             else
             {
-                // Player tiba membawa makanan saat Yakuza sedang memalak
-                currentState = QuestState.YakuzaEncounter;
-
-                dialogueManager.StartDialogue(dialoguePT2, () =>
-                {
-                    StartBeggarCombat();
-                });
+                // Jangan ubah state quest ke YakuzaEncounter jika player baru sekadar lewat
+                dialogueManager.StartDialogue(dialoguePT2, 
+                    onComplete: () =>
+                    {
+                        StartBeggarCombat();
+                    },
+                    onEngage: () =>
+                    {
+                        currentState = QuestState.YakuzaEncounter;
+                    }
+                );
             }
         }
         else if (currentState == QuestState.CombatFinished)
@@ -192,13 +205,18 @@ public class BeggarTrigger : MonoBehaviour
 
         if (yakuzaTarget != null)
         {
+            // Buka collider & health agar sekarang bisa dipukul
+            Collider2D col = yakuzaTarget.GetComponent<Collider2D>();
+            if (col != null) col.enabled = true;
+
+            CharacterHealth hp = yakuzaTarget.GetComponent<CharacterHealth>();
+            if (hp != null) hp.enabled = true;
+
             yakuzaTarget.enabled = true;
 
             Transform playerTransform = null;
             if (PlayerMovement.Instance != null)
-            {
                 playerTransform = PlayerMovement.Instance.transform;
-            }
             else
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");

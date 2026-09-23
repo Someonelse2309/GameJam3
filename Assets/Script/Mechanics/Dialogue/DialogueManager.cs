@@ -27,15 +27,22 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<DialogueSentence> sentences = new Queue<DialogueSentence>();
     public bool isDialogueActive { get; private set; } = false;
-    public bool isEngaged { get; private set; } = false; // Player sudah menekan untuk lanjut dialog
+    public bool isEngaged { get; private set; } = false; // True jika player sudah menekan untuk lanjut bicara
     private Action onDialogueCompleted;
+    private Action onDialogueEngaged;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(false);
+            // Tambahkan listener jika DialoguePanel menggunakan komponen Button
+            Button panelBtn = dialoguePanel.GetComponent<Button>();
+            if (panelBtn != null) panelBtn.onClick.AddListener(DisplayNextSentence);
+        }
     }
 
     private void Update()
@@ -46,7 +53,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueSentence[] dialogue, Action onComplete = null)
+    public void StartDialogue(DialogueSentence[] dialogue, Action onComplete = null, Action onEngage = null)
     {
         if (isDialogueActive)
         {
@@ -55,8 +62,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         isDialogueActive = true;
-        isEngaged = false; // Reset: Player belum konfirmasi ngobrol
+        isEngaged = false; // Player belum menekan tombol (hanya preview lewat)
         onDialogueCompleted = onComplete;
+        onDialogueEngaged = onEngage;
 
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
         sentences.Clear();
@@ -66,7 +74,7 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(line);
         }
 
-        // Tampilkan kalimat pertama (MC belum diam, masih bisa jalan lewat)
+        // Tampilkan kalimat pertama (MC masih bebas jalan jika belum engaged)
         if (sentences.Count > 0)
         {
             DialogueSentence first = sentences.Dequeue();
@@ -78,14 +86,19 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isDialogueActive) return;
 
-        // Saat player menekan E/klik pertama kali: bekukan gerakan MC
+        // Saat player menekan tombol pertama kali: Bekukan MC & picu onEngage
         if (!isEngaged)
         {
             isEngaged = true;
+
             if (PlayerMovement.Instance != null)
             {
                 PlayerMovement.Instance.SetFreeze(true);
             }
+
+            Action engageCallback = onDialogueEngaged;
+            onDialogueEngaged = null;
+            engageCallback?.Invoke();
         }
 
         if (sentences.Count == 0)
@@ -122,6 +135,7 @@ public class DialogueManager : MonoBehaviour
 
     private Sprite GetPortraitByName(string name)
     {
+        if (string.IsNullOrEmpty(name)) return null;
         CharacterProfile profile = characterProfiles.Find(p => p.characterName.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase));
         return profile != null ? profile.portrait : null;
     }
@@ -142,7 +156,6 @@ public class DialogueManager : MonoBehaviour
         isEngaged = false;
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
-        // Buka kembali gerakan MC
         if (PlayerMovement.Instance != null)
         {
             PlayerMovement.Instance.SetFreeze(false);
@@ -150,10 +163,11 @@ public class DialogueManager : MonoBehaviour
 
         Action callback = onDialogueCompleted;
         onDialogueCompleted = null;
+        onDialogueEngaged = null;
         callback?.Invoke();
     }
 
-    // Dipanggil saat player jalan menjauh tanpa menekan dialog
+    // Dipanggil saat player berjalan keluar dari area trigger tanpa menekan dialog
     public void CancelDialogue()
     {
         isDialogueActive = false;
@@ -168,7 +182,7 @@ public class DialogueManager : MonoBehaviour
             PlayerMovement.Instance.SetFreeze(false);
         }
 
-        // Hapus callback agar quest tidak tertrigger
         onDialogueCompleted = null;
+        onDialogueEngaged = null;
     }
 }

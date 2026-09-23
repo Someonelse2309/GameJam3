@@ -9,15 +9,12 @@ public class BlacksmithTrigger : MonoBehaviour
     public DialogueManager dialogueManager;
 
     [Header("Quest Indicator")]
-    [Tooltip("Tarik child GameObject QuestBubble milik Blacksmith di sini")]
     public QuestIndicator questIndicator;
 
     [Header("Yakuza Enemies (Petarung)")]
-    [Tooltip("Masukkan 2 Yakuza botak yang menyerang MC")]
     public YakuzaEnemy[] fighterYakuza; 
 
     [Header("Yakuza Leader (Pengamat Jas Rapi)")]
-    [Tooltip("Masukkan NPC_SuitYakuza yang hanya mengamati")]
     public GameObject suitYakuzaLeader;
     public float leaderFleeSpeed = 6f;
 
@@ -30,7 +27,7 @@ public class BlacksmithTrigger : MonoBehaviour
     private bool isPlayerNearby = false;
     private Transform playerTransform;
 
-    [Header("Dialogue PT1 (Sebelum Berantem - Pembuktian)")]
+    [Header("Dialogue PT1 (Sebelum Berantem)")]
     public DialogueSentence[] dialoguePT1 = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Michelle Sato", sentence = "Ito Shun?" },
@@ -64,10 +61,8 @@ public class BlacksmithTrigger : MonoBehaviour
 
         FindPlayerTransform();
 
-        if (suitYakuzaLeader != null)
-        {
-            suitYakuzaLeader.SetActive(false);
-        }
+        // Pastikan Yakuza tersembunyi di awal game
+        HideYakuzaAmbush();
 
         if (fighterYakuza != null)
         {
@@ -75,7 +70,6 @@ public class BlacksmithTrigger : MonoBehaviour
             {
                 if (yakuza != null)
                 {
-                    yakuza.gameObject.SetActive(false);
                     CharacterHealth hp = yakuza.GetComponent<CharacterHealth>();
                     if (hp != null) hp.OnDeath += OnFighterKilled;
                 }
@@ -94,7 +88,6 @@ public class BlacksmithTrigger : MonoBehaviour
     {
         if (questIndicator == null) return;
 
-        // Sembunyikan saat sedang dialog atau sedang bertarung
         if ((dialogueManager != null && dialogueManager.isDialogueActive) || currentState == BlacksmithState.InCombat)
         {
             questIndicator.SetVisible(false);
@@ -103,7 +96,6 @@ public class BlacksmithTrigger : MonoBehaviour
 
         bool beggarFinished = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.QuestCompleted;
 
-        // Hanya menyala jika quest Ito Shun benar-benar siap dipicu
         if ((currentState == BlacksmithState.Locked || currentState == BlacksmithState.ReadyForTalk) && beggarFinished)
         {
             questIndicator.SetVisible(true);
@@ -114,7 +106,6 @@ public class BlacksmithTrigger : MonoBehaviour
         }
         else
         {
-            // Quest belum terbuka (masih yapping) atau sudah tuntas
             questIndicator.SetVisible(false);
         }
     }
@@ -124,9 +115,7 @@ public class BlacksmithTrigger : MonoBehaviour
         if (playerTransform != null) return;
 
         if (PlayerMovement.Instance != null)
-        {
             playerTransform = PlayerMovement.Instance.transform;
-        }
         else
         {
             GameObject p = GameObject.FindGameObjectWithTag("Player");
@@ -150,10 +139,11 @@ public class BlacksmithTrigger : MonoBehaviour
         {
             isPlayerNearby = false;
 
-            // Jika player cuma lewat lalu menjauh, tutup dialog dan batalkan trigger quest
+            // Jika player hanya melintas tanpa menekan dialog, tutup dialog dan sembunyikan kembali Yakuza
             if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive && !DialogueManager.Instance.isEngaged)
             {
                 DialogueManager.Instance.CancelDialogue();
+                HideYakuzaAmbush();
             }
         }
     }
@@ -164,7 +154,6 @@ public class BlacksmithTrigger : MonoBehaviour
 
         bool beggarFinished = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.QuestCompleted;
 
-        // Jika quest Beggar belum tuntas -> hanya dialog yapping biasa
         if (!beggarFinished)
         {
             DialogueSentence[] busyDialog = new DialogueSentence[]
@@ -179,24 +168,17 @@ public class BlacksmithTrigger : MonoBehaviour
         {
             FindPlayerTransform();
 
-            if (suitYakuzaLeader != null) suitYakuzaLeader.SetActive(true);
-
-            if (fighterYakuza != null)
-            {
-                foreach (var yakuza in fighterYakuza)
+            // Yakuza HANYA dimunculkan saat player menekan dialog pertama (onEngage)
+            dialogueManager.StartDialogue(dialoguePT1, 
+                onComplete: () =>
                 {
-                    if (yakuza != null)
-                    {
-                        yakuza.gameObject.SetActive(true);
-                        yakuza.enabled = true;
-                    }
+                    StartCombatWave();
+                },
+                onEngage: () =>
+                {
+                    SpawnYakuzaAmbush();
                 }
-            }
-
-            dialogueManager.StartDialogue(dialoguePT1, () =>
-            {
-                StartCombatWave();
-            });
+            );
         }
         else if (currentState == BlacksmithState.CombatFinished)
         {
@@ -219,6 +201,46 @@ public class BlacksmithTrigger : MonoBehaviour
         }
     }
 
+    private void SpawnYakuzaAmbush()
+    {
+        if (suitYakuzaLeader != null) suitYakuzaLeader.SetActive(true);
+
+        if (fighterYakuza != null)
+        {
+            foreach (var yakuza in fighterYakuza)
+            {
+                if (yakuza != null)
+                {
+                    yakuza.gameObject.SetActive(true);
+                    yakuza.enabled = false; // Matikan AI agar tidak jalan/menyerang saat dialog
+
+                    // Matikan collider agar tidak bisa dipukul saat dialog berlangsung
+                    Collider2D col = yakuza.GetComponent<Collider2D>();
+                    if (col != null) col.enabled = false;
+                }
+            }
+        }
+    }
+
+    private void HideYakuzaAmbush()
+    {
+        if (suitYakuzaLeader != null) suitYakuzaLeader.SetActive(false);
+
+        if (fighterYakuza != null)
+        {
+            foreach (var yakuza in fighterYakuza)
+            {
+                if (yakuza != null)
+                {
+                    yakuza.gameObject.SetActive(false);
+                    yakuza.enabled = false;
+                    Collider2D col = yakuza.GetComponent<Collider2D>();
+                    if (col != null) col.enabled = false;
+                }
+            }
+        }
+    }
+
     private void StartCombatWave()
     {
         currentState = BlacksmithState.InCombat;
@@ -232,6 +254,10 @@ public class BlacksmithTrigger : MonoBehaviour
             {
                 if (yakuza != null)
                 {
+                    // Nyalakan collider & AI sekarang untuk bertarung
+                    Collider2D col = yakuza.GetComponent<Collider2D>();
+                    if (col != null) col.enabled = true;
+
                     yakuza.enabled = true;
                     yakuza.StartCombat(playerTransform);
                 }
