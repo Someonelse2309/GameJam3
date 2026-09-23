@@ -63,9 +63,8 @@ public class BeggarTrigger : MonoBehaviour
             if (hasYakitori && yakuzaTarget != null && !yakuzaTarget.gameObject.activeSelf)
             {
                 yakuzaTarget.gameObject.SetActive(true);
-                yakuzaTarget.enabled = false; // Matikan AI agar tidak menyerang MC saat baru tiba
+                yakuzaTarget.enabled = false;
 
-                // Matikan collider & health sementara agar tidak bisa dipukul saat sedang memalak
                 Collider2D col = yakuzaTarget.GetComponent<Collider2D>();
                 if (col != null) col.enabled = false;
 
@@ -126,7 +125,6 @@ public class BeggarTrigger : MonoBehaviour
         {
             isPlayerNearby = false;
 
-            // Jika player cuma melintas, tutup dialog dan batalkan perubahan quest
             if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive && !DialogueManager.Instance.isEngaged)
             {
                 DialogueManager.Instance.CancelDialogue();
@@ -162,7 +160,6 @@ public class BeggarTrigger : MonoBehaviour
             }
             else
             {
-                // Jangan ubah state quest ke YakuzaEncounter jika player baru sekadar lewat
                 dialogueManager.StartDialogue(dialoguePT2, 
                     onComplete: () =>
                     {
@@ -203,9 +200,14 @@ public class BeggarTrigger : MonoBehaviour
     {
         inCombat = true;
 
+        // Pemicu BGM Pertempuran
+        if (GameAudioManager.Instance != null)
+        {
+            GameAudioManager.Instance.PlayCombatBGM(0.4f);
+        }
+
         if (yakuzaTarget != null)
         {
-            // Buka collider & health agar sekarang bisa dipukul
             Collider2D col = yakuzaTarget.GetComponent<Collider2D>();
             if (col != null) col.enabled = true;
 
@@ -234,6 +236,13 @@ public class BeggarTrigger : MonoBehaviour
     {
         inCombat = false;
         currentState = QuestState.CombatFinished;
+
+        // Kembalikan ke BGM Eksplorasi
+        if (GameAudioManager.Instance != null)
+        {
+            GameAudioManager.Instance.PlayExplorationBGM(1.2f);
+        }
+
         StartCoroutine(PostCombatDialogueDelay());
     }
 

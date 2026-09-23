@@ -60,8 +60,6 @@ public class BlacksmithTrigger : MonoBehaviour
             beggarTrigger = FindFirstObjectByType<BeggarTrigger>();
 
         FindPlayerTransform();
-
-        // Pastikan Yakuza tersembunyi di awal game
         HideYakuzaAmbush();
 
         if (fighterYakuza != null)
@@ -139,7 +137,6 @@ public class BlacksmithTrigger : MonoBehaviour
         {
             isPlayerNearby = false;
 
-            // Jika player hanya melintas tanpa menekan dialog, tutup dialog dan sembunyikan kembali Yakuza
             if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive && !DialogueManager.Instance.isEngaged)
             {
                 DialogueManager.Instance.CancelDialogue();
@@ -168,7 +165,6 @@ public class BlacksmithTrigger : MonoBehaviour
         {
             FindPlayerTransform();
 
-            // Yakuza HANYA dimunculkan saat player menekan dialog pertama (onEngage)
             dialogueManager.StartDialogue(dialoguePT1, 
                 onComplete: () =>
                 {
@@ -212,9 +208,8 @@ public class BlacksmithTrigger : MonoBehaviour
                 if (yakuza != null)
                 {
                     yakuza.gameObject.SetActive(true);
-                    yakuza.enabled = false; // Matikan AI agar tidak jalan/menyerang saat dialog
+                    yakuza.enabled = false;
 
-                    // Matikan collider agar tidak bisa dipukul saat dialog berlangsung
                     Collider2D col = yakuza.GetComponent<Collider2D>();
                     if (col != null) col.enabled = false;
                 }
@@ -246,6 +241,12 @@ public class BlacksmithTrigger : MonoBehaviour
         currentState = BlacksmithState.InCombat;
         combatStarted = true;
 
+        // Pemicu BGM Pertempuran
+        if (GameAudioManager.Instance != null)
+        {
+            GameAudioManager.Instance.PlayCombatBGM(0.4f);
+        }
+
         FindPlayerTransform();
 
         if (fighterYakuza != null && playerTransform != null)
@@ -254,7 +255,6 @@ public class BlacksmithTrigger : MonoBehaviour
             {
                 if (yakuza != null)
                 {
-                    // Nyalakan collider & AI sekarang untuk bertarung
                     Collider2D col = yakuza.GetComponent<Collider2D>();
                     if (col != null) col.enabled = true;
 
@@ -272,6 +272,13 @@ public class BlacksmithTrigger : MonoBehaviour
         if (defeatedCount >= (fighterYakuza != null ? fighterYakuza.Length : 2) && combatStarted)
         {
             combatStarted = false;
+
+            // Kembalikan ke BGM Eksplorasi
+            if (GameAudioManager.Instance != null)
+            {
+                GameAudioManager.Instance.PlayExplorationBGM(1.2f);
+            }
+
             StartCoroutine(FinishCombatRoutine());
         }
     }
