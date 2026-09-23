@@ -26074,11 +26074,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
   masterVolume: 1
-  bgmVolume: 0.2
-  sfxVolume: 0.35
+  bgmVolume: 0.1
+  sfxVolume: 0.4
   explorationBGM: {fileID: 8300000, guid: 976fcd426b3004c608967e9efbd94b04, type: 3}
   combatBGM: {fileID: 8300000, guid: c599e55dd784c4b458f888bcff3c1577, type: 3}
-  punchSFX: {fileID: 8300000, guid: 4aea75344c7c6494188f29c8f3d31770, type: 3}
+  punchSFX: {fileID: 8300000, guid: 85ee4c89c2ee34bdb8057915d74db298, type: 3}
   swordSFX: {fileID: 8300000, guid: 04face893da4b464b9d9d1ea88a05c18, type: 3}
   hitImpactSFX: {fileID: 0}
   footstepSFX: {fileID: 8300000, guid: ec6e18fcf482f4071a1e7d187e034eca, type: 3}
@@ -26582,8 +26582,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1176, y: 351}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchoredPosition: {x: 1176.6, y: 346.4}
+  m_SizeDelta: {x: 55, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137109932
 MonoBehaviour:
@@ -26661,7 +26661,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3433902125535667390, guid: b4fbbc3114ef44a3d8504a0da0a8213d, type: 3}
+  m_Sprite: {fileID: -5144710936891664730, guid: 38242a1952bb64e1bb73543a9f401ed4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28072,7 +28072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1381409305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28089,8 +28089,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.95, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 3.4, y: -0}
+  m_SizeDelta: {x: 100, y: 197.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1381409306
 MonoBehaviour:
@@ -28112,7 +28112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -946000942377729262, guid: 284e94ec97dfd604ba0cc871504d5876, type: 3}
+  m_Sprite: {fileID: -4127362367906421856, guid: 378d5717e8fc74474a0de3093785a2a6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -35847,7 +35847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6605267188334319497, guid: 984a9bd18b60c4fddb9361ffee698d5f, type: 3}
+  m_Sprite: {fileID: -4127362367906421856, guid: 378d5717e8fc74474a0de3093785a2a6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -36973,8 +36973,24 @@ PrefabInstance:
       value: Medkit
       objectReference: {fileID: 0}
     - target: {fileID: 7314756615522819447, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3826845409251182802, guid: b1e62d38eec234761b19437f5e91d8d1, type: 3}
+    - target: {fileID: 7314756615522819447, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589694699024691640, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589694699024691640, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589694699024691640, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8589694699024691640, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37015,6 +37031,10 @@ PrefabInstance:
     - target: {fileID: 8589694699024691640, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589694699024691640, guid: 78d33da81ca914249b3fedb8f7c3d800, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
