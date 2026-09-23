@@ -8,6 +8,10 @@ public class BlacksmithTrigger : MonoBehaviour
     public ItemData katanaItem;
     public DialogueManager dialogueManager;
 
+    [Header("Quest Indicator")]
+    [Tooltip("Tarik child GameObject QuestBubble milik Blacksmith di sini")]
+    public QuestIndicator questIndicator;
+
     [Header("Yakuza Enemies (Petarung)")]
     [Tooltip("Masukkan 2 Yakuza botak yang menyerang MC")]
     public YakuzaEnemy[] fighterYakuza; 
@@ -58,10 +62,8 @@ public class BlacksmithTrigger : MonoBehaviour
         if (beggarTrigger == null)
             beggarTrigger = FindFirstObjectByType<BeggarTrigger>();
 
-        // Cari PlayerTransform sejak awal agar tidak null
         FindPlayerTransform();
 
-        // Sembunyikan objek di awal game
         if (suitYakuzaLeader != null)
         {
             suitYakuzaLeader.SetActive(false);
@@ -79,6 +81,42 @@ public class BlacksmithTrigger : MonoBehaviour
                 }
             }
         }
+
+        RefreshIndicator();
+    }
+
+    private void Update()
+    {
+        RefreshIndicator();
+    }
+
+    private void RefreshIndicator()
+    {
+        if (questIndicator == null) return;
+
+        // Sembunyikan saat sedang dialog atau sedang bertarung
+        if ((dialogueManager != null && dialogueManager.isDialogueActive) || currentState == BlacksmithState.InCombat)
+        {
+            questIndicator.SetVisible(false);
+            return;
+        }
+
+        bool beggarFinished = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.QuestCompleted;
+
+        // Hanya menyala jika quest Ito Shun benar-benar siap dipicu
+        if ((currentState == BlacksmithState.Locked || currentState == BlacksmithState.ReadyForTalk) && beggarFinished)
+        {
+            questIndicator.SetVisible(true);
+        }
+        else if (currentState == BlacksmithState.CombatFinished)
+        {
+            questIndicator.SetVisible(true);
+        }
+        else
+        {
+            // Quest belum terbuka (masih yapping) atau sudah tuntas
+            questIndicator.SetVisible(false);
+        }
     }
 
     private void FindPlayerTransform()
@@ -91,8 +129,8 @@ public class BlacksmithTrigger : MonoBehaviour
         }
         else
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null) playerTransform = playerObj.transform;
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) playerTransform = p.transform;
         }
     }
 
@@ -120,6 +158,7 @@ public class BlacksmithTrigger : MonoBehaviour
 
         bool beggarFinished = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.QuestCompleted;
 
+        // Jika quest Beggar belum tuntas -> hanya dialog yapping biasa
         if (!beggarFinished)
         {
             DialogueSentence[] busyDialog = new DialogueSentence[]
@@ -134,7 +173,6 @@ public class BlacksmithTrigger : MonoBehaviour
         {
             FindPlayerTransform();
 
-            // Tampilkan Suit Yakuza dan 2 Yakuza botak
             if (suitYakuzaLeader != null) suitYakuzaLeader.SetActive(true);
 
             if (fighterYakuza != null)
@@ -144,7 +182,7 @@ public class BlacksmithTrigger : MonoBehaviour
                     if (yakuza != null)
                     {
                         yakuza.gameObject.SetActive(true);
-                        yakuza.enabled = true; // Pastikan script AI aktif
+                        yakuza.enabled = true;
                     }
                 }
             }

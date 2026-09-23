@@ -2,32 +2,26 @@ using UnityEngine;
 
 public class PedagangTrigger : MonoBehaviour
 {
-    [Header("References")]
-    public DialogueManager dialogueManager;
+    [Header("Dependencies")]
     public BeggarTrigger beggarTrigger;
     public ItemData yakitoriItem;
+    public DialogueManager dialogueManager;
 
-    private bool isPlayerNearby = false;
+    [Header("Quest Indicator")]
+    [Tooltip("Tarik child QuestBubble milik Pedagang ke sini")]
+    public QuestIndicator questIndicator;
 
-    [Header("Dialogues")]
-    // Dialog jika belum bicara dengan Beggar
-    public DialogueSentence[] dialogueBelumMinta = new DialogueSentence[]
+    [Header("Dialogue (Beli/Minta Yakitori)")]
+    public DialogueSentence[] dialoguePT1 = new DialogueSentence[]
     {
-        new DialogueSentence { speakerName = "Pedagang", sentence = "Welcome! Fresh yakitori made with the finest recipe!" },
-        new DialogueSentence { speakerName = "Michelle Sato", sentence = "I don't have any appetite right now..." }
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Give me two portion of yakitori." },
+        new DialogueSentence { speakerName = "Seller", sentence = "Here is the yakitori." }
     };
 
-    // Dialog T.1 PT1: Saat disuruh Beggar cari makanan
-    public DialogueSentence[] dialogueBeliYakitori = new DialogueSentence[]
+    [Header("Dialogue Yapping (Sebelum / Sesudah Quest)")]
+    public DialogueSentence[] idleDialogue = new DialogueSentence[]
     {
-        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Give me two portions of yakitori." },
-        new DialogueSentence { speakerName = "Pedagang", sentence = "Here is the yakitori." }
-    };
-
-    // Dialog jika sudah bawa Yakitori di tas
-    public DialogueSentence[] dialogueSudahBeli = new DialogueSentence[]
-    {
-        new DialogueSentence { speakerName = "Pedagang", sentence = "Eat it while it's still warm! Don't let it get cold." }
+        new DialogueSentence { speakerName = "Seller", sentence = "Fresh skewers every day! Watch out for the Yakuza around here." }
     };
 
     private void Start()
@@ -37,13 +31,36 @@ public class PedagangTrigger : MonoBehaviour
 
         if (beggarTrigger == null)
             beggarTrigger = FindFirstObjectByType<BeggarTrigger>();
+
+        RefreshIndicator();
     }
 
     private void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
+        RefreshIndicator();
+    }
+
+    private void RefreshIndicator()
+    {
+        if (questIndicator == null) return;
+
+        if (dialogueManager != null && dialogueManager.isDialogueActive)
         {
-            TriggerInteraction();
+            questIndicator.SetVisible(false);
+            return;
+        }
+
+        // Syarat bubble Pedagang aktif: Beggar butuh makanan & player belum punya makanannya
+        bool beggarNeedsFood = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.LookingForFood;
+        bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
+
+        if (beggarNeedsFood && !hasYakitori)
+        {
+            questIndicator.SetVisible(true);
+        }
+        else
+        {
+            questIndicator.SetVisible(false); // Mode yapping biasa
         }
     }
 
@@ -51,58 +68,33 @@ public class PedagangTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerNearby = true;
-            TriggerInteraction();
+            TriggerPedagangInteraction();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            isPlayerNearby = false;
-            // Tutup dialog seketika saat MC menjauh
-            if (dialogueManager != null && dialogueManager.isDialogueActive)
-            {
-                dialogueManager.CancelDialogue();
-            }
-        }
-    }
-
-    public void TriggerInteraction()
+    public void TriggerPedagangInteraction()
     {
         if (dialogueManager == null || dialogueManager.isDialogueActive) return;
 
-        // 1. Cek apakah sudah disuruh oleh Beggar
-        bool isBeggarQuestActive = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.LookingForFood;
+        bool beggarNeedsFood = beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.LookingForFood;
         bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
 
-        if (!isBeggarQuestActive && beggarTrigger != null && beggarTrigger.currentState == BeggarTrigger.QuestState.NotStarted)
+        if (beggarNeedsFood && !hasYakitori)
         {
-            // Belum ketemu Beggar -> Pedagang hanya menyapa biasa, tidak kasih item
-            dialogueManager.StartDialogue(dialogueBelumMinta);
-        }
-        else if (isBeggarQuestActive && !hasYakitori)
-        {
-            // Sedang disuruh Beggar dan belum punya Yakitori -> Beli Yakitori
-            dialogueManager.StartDialogue(dialogueBeliYakitori, () =>
+            // Ambil yakitori untuk Beggar
+            dialogueManager.StartDialogue(dialoguePT1, () =>
             {
                 if (InventoryManager.Instance != null && yakitoriItem != null)
                 {
                     InventoryManager.Instance.AddItem(yakitoriItem);
                 }
-
-                // Picu Yakuza muncul di samping Beggar tepat saat Yakitori selesai dibeli
-                if (beggarTrigger != null)
-                {
-                    beggarTrigger.SpawnYakuzaBesideBeggar();
-                }
+                RefreshIndicator();
             });
         }
         else
         {
-            // Sudah punya Yakitori di tas atau quest sudah lewat
-            dialogueManager.StartDialogue(dialogueSudahBeli);
+            // Yapping biasa
+            dialogueManager.StartDialogue(idleDialogue);
         }
     }
 }
