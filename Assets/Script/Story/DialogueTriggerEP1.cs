@@ -33,6 +33,20 @@ public class DialogueTriggerEP1 : MonoBehaviour
     public bool fadeToBlackOnEnter = false;
     public float delayBeforeFade = 0f;
 
+    [Header("Screen Shake (untuk momen tragedi)")]
+    public bool enableScreenShake = false;
+    public int shakeOnLineIndex = 8; // Line ke berapa shake aktif
+    public float shakeDuration = 0.8f;
+    public float shakeIntensity = 1.5f;
+
+    [Header("Effects After Dialogue End")]
+    public bool playSFXOnEnd = false;
+    public AudioClip sfxToPlayOnEnd;
+    public bool fadeToBlackOnEnd = false;
+    public float fadeToBlackDelay = 0f;
+    public bool fadeBackAfterBlack = false; // Fade dari hitam balik ke normal
+    public float fadeBackDelay = 2f; // Waktu sebelum fade back
+
     private bool hasTriggered = false;
     private bool dialogueEndedHandled = false; // Prevent double trigger
 
@@ -94,6 +108,9 @@ public class DialogueTriggerEP1 : MonoBehaviour
             // Subscribe to dialogue end
             DialogueManagerEP1.instanceEP1.OnDialogueEnd += OnDialogueEnded;
 
+            // Subscribe to line change (untuk screen shake)
+            DialogueManagerEP1.instanceEP1.OnLineChanged += OnLineChanged;
+
             DialogueManagerEP1.instanceEP1.StartDialogue(dialogueData, this);
             Debug.Log($"TriggerDialogue: Started dialogue with trigger={gameObject.name}");
         }
@@ -127,13 +144,91 @@ public class DialogueTriggerEP1 : MonoBehaviour
         Debug.Log("DialogueTriggerEP1: Processing dialogue end - " + gameObject.name);
 
         // Unsubscribe
-        DialogueManagerEP1.instanceEP1.OnDialogueEnd -= OnDialogueEnded;
-
-        // Deactivate this trigger
-        if (deactivateAfterTrigger)
+        if (DialogueManagerEP1.instanceEP1 != null)
         {
-            gameObject.SetActive(false);
-            Debug.Log("Deactivated trigger: " + gameObject.name);
+            DialogueManagerEP1.instanceEP1.OnDialogueEnd -= OnDialogueEnded;
+            DialogueManagerEP1.instanceEP1.OnLineChanged -= OnLineChanged;
+        }
+
+        // ===== EFFECTS AFTER DIALOGUE END - JALANKAN TERLEBIH DAHULU =====
+
+        Debug.Log($"OnDialogueEnded Effects: enableScreenShake={enableScreenShake}, playSFXOnEnd={playSFXOnEnd}, fadeToBlackOnEnd={fadeToBlackOnEnd}");
+
+        // Screen shake on end
+        if (enableScreenShake)
+        {
+            ScreenShake shaker = UnityEngine.Object.FindAnyObjectByType<ScreenShake>();
+            if (shaker != null)
+            {
+                Debug.Log("DialogueTriggerEP1: Triggering screen shake on dialogue end");
+                shaker.TriggerShake(shakeDuration, shakeIntensity);
+            }
+        }
+
+        // Play SFX on end
+        if (playSFXOnEnd && sfxToPlayOnEnd != null)
+        {
+            if (AudioManager.instance != null)
+            {
+                Debug.Log("DialogueTriggerEP1: Playing SFX on dialogue end - " + sfxToPlayOnEnd.name);
+                AudioManager.instance.PlaySFX(sfxToPlayOnEnd);
+            }
+        }
+
+        // Fade to black on end - LANGSUNG CALL TANPA COROUTINE
+        if (fadeToBlackOnEnd)
+        {
+            Debug.Log("DialogueTriggerEP1: Calling FadeToBlack DIRECT...");
+
+            SceneTransition transition = null;
+            SceneTransition[] allTransitions = FindObjectsByType<SceneTransition>(FindObjectsInactive.Exclude);
+            foreach (var t in allTransitions)
+            {
+                if (t != null)
+                {
+                    transition = t;
+                    break;
+                }
+            }
+
+            if (transition != null)
+            {
+                Debug.Log($"DialogueTriggerEP1: Calling FadeInBlack on {transition.name}");
+                transition.FadeInBlack(null);
+
+                // Fade back to normal setelah beberapa waktu
+                if (fadeBackAfterBlack)
+                {
+                    Debug.Log($"DialogueTriggerEP1: Scheduling fade back in {fadeBackDelay}s...");
+                    // Pakai Invoke untuk jadwalkan fade back
+                    Invoke(nameof(FadeBackToNormal), fadeBackDelay);
+                }
+            }
+            else
+            {
+                Debug.LogError("DialogueTriggerEP1: SceneTransition NOT FOUND!");
+            }
+        }
+
+        // ===== DEACTIVATE SETELAH EFFECTS =====
+
+        // Deactivate trigger AFTER effects complete
+        if (fadeToBlackOnEnd && fadeBackAfterBlack)
+        {
+            // Tunggu fade back selesai baru deactivate
+            float totalDelay = fadeBackDelay + 1f; // +1f untuk fade out duration
+            Debug.Log($"DialogueTriggerEP1: Scheduling deactivation in {totalDelay}s...");
+            Invoke(nameof(DeactivateTrigger), totalDelay);
+        }
+        else if (fadeToBlackOnEnd)
+        {
+            // Tanpa fade back, deactivate setelah fade in selesai (~1s)
+            Debug.Log("DialogueTriggerEP1: Scheduling deactivation in 1.5s...");
+            Invoke(nameof(DeactivateTrigger), 1.5f);
+        }
+        else if (deactivateAfterTrigger)
+        {
+            DeactivateTrigger();
         }
 
         // Activate next trigger
@@ -166,6 +261,49 @@ public class DialogueTriggerEP1 : MonoBehaviour
         else
         {
             HideNPCs();
+        }
+    }
+
+    private System.Collections.IEnumerator DeactivateAfterDelay(float delay)
+    {
+        Debug.Log($"DeactivateAfterDelay: Waiting {delay}s before deactivating");
+        yield return new WaitForSeconds(delay);
+
+        if (deactivateAfterTrigger)
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Deactivated trigger after delay: " + gameObject.name);
+        }
+    }
+
+    private void DeactivateTrigger()
+    {
+        if (deactivateAfterTrigger)
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Deactivated trigger: " + gameObject.name);
+        }
+    }
+
+    private void FadeBackToNormal()
+    {
+        Debug.Log("DialogueTriggerEP1: FadeBackToNormal called");
+
+        SceneTransition transition = null;
+        SceneTransition[] allTransitions = FindObjectsByType<SceneTransition>(FindObjectsInactive.Exclude);
+        foreach (var t in allTransitions)
+        {
+            if (t != null)
+            {
+                transition = t;
+                break;
+            }
+        }
+
+        if (transition != null)
+        {
+            Debug.Log("DialogueTriggerEP1: Fading back to normal...");
+            transition.FadeOutBlack(null);
         }
     }
 
@@ -317,6 +455,64 @@ public class DialogueTriggerEP1 : MonoBehaviour
         {
             transition.FadeInBlack(() => {
                 Debug.Log("Screen faded to black!");
+            });
+        }
+    }
+
+    private void OnLineChanged(int lineIndex)
+    {
+        // Cek apakah ini trigger yang sedang aktif
+        if (DialogueManagerEP1.instanceEP1 != null)
+        {
+            DialogueTriggerEP1 currentTrigger = DialogueManagerEP1.instanceEP1.GetCurrentTrigger();
+            if (currentTrigger != this) return;
+        }
+
+        // Ambil line data
+        if (dialogueData == null || dialogueData.lines == null || lineIndex >= dialogueData.lines.Length)
+            return;
+
+        DialogueDataEP1.DialogueLine line = dialogueData.lines[lineIndex];
+
+        // ===== TRIGGER EFFECTS =====
+
+        // Screen Shake
+        if (line.triggerScreenShake || (enableScreenShake && lineIndex == shakeOnLineIndex))
+        {
+            Debug.Log($"DialogueTriggerEP1: Triggering screen shake on line {lineIndex}");
+            ScreenShake shaker = UnityEngine.Object.FindAnyObjectByType<ScreenShake>();
+            if (shaker != null)
+            {
+                shaker.TriggerShake(shakeDuration, shakeIntensity);
+            }
+        }
+
+        // Sound Effect (SFX)
+        if (line.soundEffect != null && AudioManager.instance != null)
+        {
+            Debug.Log($"DialogueTriggerEP1: Playing SFX - {line.soundEffect.name}");
+            AudioManager.instance.PlaySFX(line.soundEffect);
+        }
+
+        // Fade to Black
+        if (line.triggerFadeToBlack)
+        {
+            Debug.Log($"DialogueTriggerEP1: Triggering fade to black on line {lineIndex}");
+            StartCoroutine(FadeToBlackAfterLine());
+        }
+    }
+
+    private System.Collections.IEnumerator FadeToBlackAfterLine()
+    {
+        // Tunggu sedikit biar dialogue selesai
+        yield return new WaitForSeconds(1f);
+
+        SceneTransition transition = UnityEngine.Object.FindAnyObjectByType<SceneTransition>();
+        if (transition != null)
+        {
+            transition.FadeInBlack(() => {
+                Debug.Log("Faded to black!");
+                // Bisa trigger next momen atau scene transition di sini
             });
         }
     }

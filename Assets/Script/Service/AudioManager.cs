@@ -90,6 +90,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // Overload: Accept AudioClip langsung
+    public void PlaySFX(AudioClip clip, float volume = 1f)
+    {
+        if (clip != null)
+        {
+            sfxSource.PlayOneShot(clip, volume);
+        }
+    }
+
     public bool isSFXPlaying()
     {
         return sfxSource.isPlaying;
