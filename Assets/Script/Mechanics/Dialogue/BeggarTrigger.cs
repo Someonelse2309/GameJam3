@@ -13,8 +13,12 @@ public class BeggarTrigger : MonoBehaviour
     public ItemData yakitoriItem;
     public YakuzaEnemy yakuzaTarget;
 
-    [Header("Quest Indicator")]
+    [Header("Quest Indicator (Bubble Atas Kepala Beggar)")]
     public QuestIndicator questIndicator;
+
+    [Header("Guiding Bubbles (Pinggir Layar)")]
+    public GameObject arrowToBeggar;
+    public GameObject arrowToPedagang;
 
     [Header("Dialogue PT1 (Pertemuan Awal)")]
     public DialogueSentence[] dialoguePT1;
@@ -82,31 +86,64 @@ public class BeggarTrigger : MonoBehaviour
 
     private void RefreshIndicator()
     {
-        if (questIndicator == null) return;
+        bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
+        bool isDialogActive = (dialogueManager != null && dialogueManager.isDialogueActive);
 
-        if ((dialogueManager != null && dialogueManager.isDialogueActive) || inCombat)
+        // 1. Bubble di atas kepala Beggar
+        if (questIndicator != null)
         {
-            questIndicator.SetVisible(false);
-            return;
+            if (isDialogActive || inCombat)
+            {
+                questIndicator.SetVisible(false);
+            }
+            else if (currentState == QuestState.NotStarted)
+            {
+                questIndicator.SetVisible(true);
+            }
+            else if (currentState == QuestState.LookingForFood)
+            {
+                questIndicator.SetVisible(hasYakitori);
+            }
+            else if (currentState == QuestState.CombatFinished)
+            {
+                questIndicator.SetVisible(true);
+            }
+            else
+            {
+                questIndicator.SetVisible(false);
+            }
         }
 
-        bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
-
-        if (currentState == QuestState.NotStarted)
+        // 2. Bubble penunjuk jalan di pinggir layar
+        if (isDialogActive || inCombat || currentState == QuestState.QuestCompleted)
         {
-            questIndicator.SetVisible(true);
+            if (arrowToBeggar != null) arrowToBeggar.SetActive(false);
+            if (arrowToPedagang != null) arrowToPedagang.SetActive(false);
+        }
+        else if (currentState == QuestState.NotStarted)
+        {
+            if (arrowToBeggar != null) arrowToBeggar.SetActive(true);
+            if (arrowToPedagang != null) arrowToPedagang.SetActive(false);
         }
         else if (currentState == QuestState.LookingForFood)
         {
-            questIndicator.SetVisible(hasYakitori);
+            if (!hasYakitori)
+            {
+                // Belum beli makan: arahkan ke Pedagang
+                if (arrowToBeggar != null) arrowToBeggar.SetActive(false);
+                if (arrowToPedagang != null) arrowToPedagang.SetActive(true);
+            }
+            else
+            {
+                // Sudah dapat Yakitori: arahkan kembali ke Beggar
+                if (arrowToPedagang != null) arrowToPedagang.SetActive(false);
+                if (arrowToBeggar != null) arrowToBeggar.SetActive(true);
+            }
         }
         else if (currentState == QuestState.CombatFinished)
         {
-            questIndicator.SetVisible(true);
-        }
-        else
-        {
-            questIndicator.SetVisible(false);
+            if (arrowToBeggar != null) arrowToBeggar.SetActive(true);
+            if (arrowToPedagang != null) arrowToPedagang.SetActive(false);
         }
     }
 
@@ -200,7 +237,6 @@ public class BeggarTrigger : MonoBehaviour
     {
         inCombat = true;
 
-        // Pemicu BGM Pertempuran
         if (GameAudioManager.Instance != null)
         {
             GameAudioManager.Instance.PlayCombatBGM(0.4f);
@@ -237,7 +273,6 @@ public class BeggarTrigger : MonoBehaviour
         inCombat = false;
         currentState = QuestState.CombatFinished;
 
-        // Kembalikan ke BGM Eksplorasi
         if (GameAudioManager.Instance != null)
         {
             GameAudioManager.Instance.PlayExplorationBGM(1.2f);
