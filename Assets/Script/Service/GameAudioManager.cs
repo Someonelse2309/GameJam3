@@ -70,18 +70,27 @@ public class GameAudioManager : MonoBehaviour
         bgmSource = bgmObj.AddComponent<AudioSource>();
         bgmSource.loop = true;
         bgmSource.playOnAwake = false;
+        bgmSource.spatialBlend = 0f;
+        bgmSource.enabled = true;
+        Debug.Log("[GameAudio] BGM channel ready, clip: " + (explorationBGM != null ? explorationBGM.name : "null"));
 
         GameObject sfxObj = new GameObject("Channel_SFX");
         sfxObj.transform.SetParent(transform);
         sfxSource = sfxObj.AddComponent<AudioSource>();
         sfxSource.loop = false;
         sfxSource.playOnAwake = false;
+        sfxSource.spatialBlend = 0f;
+        sfxSource.enabled = true;
+        Debug.Log("[GameAudio] SFX channel ready");
 
         GameObject footstepObj = new GameObject("Channel_Footstep");
         footstepObj.transform.SetParent(transform);
         footstepSource = footstepObj.AddComponent<AudioSource>();
         footstepSource.loop = false;
         footstepSource.playOnAwake = false;
+        footstepSource.spatialBlend = 0f;
+        footstepSource.enabled = true;
+        Debug.Log("[GameAudio] Footstep channel ready");
 
         ApplyVolumes();
     }

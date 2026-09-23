@@ -5203,13 +5203,13 @@ MonoBehaviour:
   customArrowSprite: {fileID: 0}
   offsetY: 0
   arrowScale: 0.5
-  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  arrowColor: {r: 1, g: 0.85, b: 0.1, a: 1}
   sortingLayerName: Default
   sortingOrder: 10
   pulseSpeed: 2
   minAlpha: 0.3
   maxAlpha: 0.9
-  bobDistance: 0.15
+  bounceDistance: 0.18
   nextArrow: {fileID: 0}
   finalTrigger: {fileID: 0}
 --- !u!61 &391737506
@@ -5267,7 +5267,7 @@ Transform:
   m_GameObject: {fileID: 391737504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.70091, y: 2.44756, z: 0}
+  m_LocalPosition: {x: 6.67, y: 2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25483,13 +25483,13 @@ MonoBehaviour:
   customArrowSprite: {fileID: 0}
   offsetY: 0
   arrowScale: 0.5
-  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  arrowColor: {r: 1, g: 0.85, b: 0.1, a: 1}
   sortingLayerName: Default
   sortingOrder: 10
   pulseSpeed: 2
   minAlpha: 0.3
   maxAlpha: 0.9
-  bobDistance: 0.15
+  bounceDistance: 0.18
   nextArrow: {fileID: 925885352}
   finalTrigger: {fileID: 0}
 --- !u!61 &925885354
@@ -25547,7 +25547,7 @@ Transform:
   m_GameObject: {fileID: 925885352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.70091, y: 2.44756, z: 0}
+  m_LocalPosition: {x: 8.39, y: 3.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
