@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
-  maxHealth: 100
+  maxHealth: 125
   currentHealth: 0
   isDead: 0
   healthBarFill: {fileID: 0}
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
-  maxHealth: 100
+  maxHealth: 125
   currentHealth: 0
   isDead: 0
   healthBarFill: {fileID: 0}
@@ -6220,7 +6220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
-  maxHealth: 100
+  maxHealth: 125
   currentHealth: 0
   isDead: 0
   healthBarFill: {fileID: 0}
@@ -27689,7 +27689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
-  maxHealth: 100
+  maxHealth: 150
   currentHealth: 0
   isDead: 0
   healthBarFill: {fileID: 272576663}
@@ -27711,7 +27711,7 @@ MonoBehaviour:
   punchDamage: 20
   punchRange: 0.85
   punchOffset: {x: 0.5, y: 0}
-  swordDamage: 35
+  swordDamage: 30
   swordRange: 1.4
   swordOffset: {x: 0.75, y: 0}
   attackCooldown: 0.5
@@ -38164,7 +38164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
-  maxHealth: 100
+  maxHealth: 125
   currentHealth: 0
   isDead: 0
   healthBarFill: {fileID: 0}
