@@ -4,6 +4,8 @@ using TMPro;
 
 public class QuestTrackerUI : MonoBehaviour
 {
+    public static QuestTrackerUI Instance { get; private set; }
+
     [Header("UI References")]
     [Tooltip("Tombol tanda seru (!)")]
     public Button toggleButton;
@@ -20,10 +22,11 @@ public class QuestTrackerUI : MonoBehaviour
     [Header("Quest Sources (Otomatis dicari jika kosong)")]
     public BeggarTrigger beggarTrigger;
     public BlacksmithTrigger blacksmithTrigger;
+    public StreetAmbushTrigger streetAmbushTrigger;
     public ItemData yakitoriItem;
 
     [Header("Quest Descriptions (Bisa diedit di Inspector)")]
-    public string q1Title = "A Hungry Stanger";
+    public string q1Title = "A Hungry Stranger";
     public string q1Desc = "Look for the beggar on the street (Tanaka Koji).";
 
     public string q2Title = "Finding Food";
@@ -42,26 +45,37 @@ public class QuestTrackerUI : MonoBehaviour
     public string q6Desc = "Find Ito Shun the blacksmith around the town.";
 
     public string q7Title = "Prove Your Resolve";
-    public string q7Desc = "Defeat the Yakuza associates that is attacking to prove your strength!";
+    public string q7Desc = "Defeat the Yakuza associates that are attacking to prove your strength!";
 
     public string q8Title = "Claim The Blade";
     public string q8Desc = "Speak with Ito Shun to claim your Katana back.";
 
-    public string q9Title = "Onikoroshi Awakened";
-    public string q9Desc = "You've obtained the Katana, Prepare to face the Aoyama's family!";
+    public string q9Title = "Syndicate Ambush";
+    public string q9Desc = "Survive the street ambush and defeat the Suit Yakuza leader!";
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
-        // Cari referensi otomatis jika belum di-drag di Inspector
         if (beggarTrigger == null) beggarTrigger = FindFirstObjectByType<BeggarTrigger>();
         if (blacksmithTrigger == null) blacksmithTrigger = FindFirstObjectByType<BlacksmithTrigger>();
+        if (streetAmbushTrigger == null) streetAmbushTrigger = FindFirstObjectByType<StreetAmbushTrigger>();
 
         if (toggleButton != null)
         {
             toggleButton.onClick.AddListener(ToggleQuestPanel);
         }
 
-        // Mulai dengan panel info tertutup
         if (questInfoPanel != null)
         {
             questInfoPanel.SetActive(false);
@@ -72,7 +86,6 @@ public class QuestTrackerUI : MonoBehaviour
 
     private void Update()
     {
-        // Perbarui teks jika panel sedang terbuka agar selalu real-time
         if (questInfoPanel != null && questInfoPanel.activeSelf)
         {
             UpdateQuestInfo();
@@ -92,6 +105,11 @@ public class QuestTrackerUI : MonoBehaviour
         }
     }
 
+    public void UpdateObjective(string desc, string title = "Memory Disk")
+    {
+        UpdateQuestInfo();
+    }
+
     public void UpdateQuestInfo()
     {
         string title = "Active Objective";
@@ -99,7 +117,7 @@ public class QuestTrackerUI : MonoBehaviour
 
         bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
 
-        // 1. Cek State Beggar Quest
+        // 1. Quest Pengemis (Tanaka Koji)
         if (beggarTrigger != null && beggarTrigger.currentState != BeggarTrigger.QuestState.QuestCompleted)
         {
             switch (beggarTrigger.currentState)
@@ -133,8 +151,8 @@ public class QuestTrackerUI : MonoBehaviour
                     break;
             }
         }
-        // 2. Beggar Selesai -> Cek State Blacksmith Quest
-        else if (blacksmithTrigger != null)
+        // 2. Quest Pandai Besi (Ito Shun)
+        else if (blacksmithTrigger != null && blacksmithTrigger.currentState != BlacksmithTrigger.BlacksmithState.QuestCompleted)
         {
             switch (blacksmithTrigger.currentState)
             {
@@ -153,11 +171,27 @@ public class QuestTrackerUI : MonoBehaviour
                     title = q8Title;
                     desc = q8Desc;
                     break;
-
-                case BlacksmithTrigger.BlacksmithState.QuestCompleted:
-                    title = q9Title;
-                    desc = q9Desc;
-                    break;
+            }
+        }
+        // 3. Quest Ambush Jalanan (2 Wave + Duel Suit Yakuza)
+        else if (streetAmbushTrigger != null && streetAmbushTrigger.currentState != StreetAmbushTrigger.AmbushState.Completed)
+        {
+            title = q9Title;
+            desc = q9Desc;
+        }
+        // 4. SETELAH SUIT YAKUZA KALAH: Masuk Misi Memory Disk Ryu
+        else if (MemoryDiskManager.Instance != null)
+        {
+            int disks = MemoryDiskManager.Instance.collectedDisks;
+            if (disks < MemoryDiskManager.REQUIRED_EXPLORATION_DISKS)
+            {
+                title = "Memory Disks";
+                desc = $"Find and collect the remaining Ryu Memory Disks ({disks}/4) before facing Aoyama!";
+            }
+            else
+            {
+                title = "Showdown at Rooftop";
+                desc = "All Memory Disks collected! Enter the gate and face Aoyama on the Rooftop!";
             }
         }
 

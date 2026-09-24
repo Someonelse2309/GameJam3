@@ -288,8 +288,18 @@ public class StreetAmbushTrigger : MonoBehaviour
             currentState = AmbushState.Completed;
             StartCoroutine(MakeSuitYakuzaFlee());
 
-            if (arrowToBossGate != null)
-                arrowToBossGate.SetActive(true);
+            // Perbarui Quest Tracker langsung saat Suit Yakuza kabur
+            if (QuestTrackerUI.Instance != null)
+                QuestTrackerUI.Instance.UpdateQuestInfo();
+
+            // Cek apakah 4 disk sudah terkumpul
+            if (MemoryDiskManager.Instance != null)
+            {
+                if (MemoryDiskManager.Instance.HasCollectedAllExplorationDisks())
+                {
+                    if (arrowToBossGate != null) arrowToBossGate.SetActive(true);
+                }
+            }
         });
     }
 

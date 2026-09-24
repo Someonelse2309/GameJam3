@@ -10,7 +10,6 @@ public class BossEncounterTrigger : MonoBehaviour
     [Header("Boss Setup")]
     public YakuzaEnemy bossEnemy;
     public CharacterHealth bossHealth;
-    [Tooltip("Opsional: Jika ada pengawal elit pendamping boss")]
     public YakuzaEnemy[] bossMinions;
 
     public enum BossState { WaitingForPlayer, IntroDialogue, InCombat, OutroDialogue, Completed }
@@ -19,6 +18,13 @@ public class BossEncounterTrigger : MonoBehaviour
 
     private bool hasTriggered = false;
     private Transform playerTransform;
+
+    [Header("Dialogue: Jika Belum Kumpul 4 CD")]
+    public DialogueSentence[] dialogueNeedDisksFirst = new DialogueSentence[]
+    {
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "The rooftop gate is heavily barricaded..." },
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "I can't face Aoyama yet. I need to recover all 4 of Ryu's memory disks scattered in this sector first!" }
+    };
 
     [Header("Dialogue: Konfrontasi Sebelum Duel")]
     public DialogueSentence[] dialogueIntro = new DialogueSentence[]
@@ -34,7 +40,7 @@ public class BossEncounterTrigger : MonoBehaviour
     {
         new DialogueSentence { speakerName = "Aoyama", sentence = "I-impossible... That blade... You truly haven't lost your edge..." },
         new DialogueSentence { speakerName = "Michelle Sato", sentence = "This was for everyone you took from me. It's over, Aoyama." },
-        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Ryu... Mother is here. You're safe now." }
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Ryu... Mother is here. The final memory disk is recovered. You're safe now." }
     };
 
     private void Start()
@@ -44,7 +50,6 @@ public class BossEncounterTrigger : MonoBehaviour
 
         FindPlayer();
 
-        // Pastikan Boss diam dan kebal sebelum dialog intro selesai
         if (bossEnemy != null)
         {
             bossEnemy.enabled = false;
@@ -89,11 +94,21 @@ public class BossEncounterTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !hasTriggered && currentState == BossState.WaitingForPlayer)
+        if (collision.CompareTag("Player") && currentState == BossState.WaitingForPlayer)
         {
-            hasTriggered = true;
-            playerTransform = collision.transform;
-            StartBossIntro();
+            // CEK PERSYARATAN 4 DISK
+            if (MemoryDiskManager.Instance != null && !MemoryDiskManager.Instance.HasCollectedAllExplorationDisks())
+            {
+                dialogueManager.StartDialogue(dialogueNeedDisksFirst);
+                return;
+            }
+
+            if (!hasTriggered)
+            {
+                hasTriggered = true;
+                playerTransform = collision.transform;
+                StartBossIntro();
+            }
         }
     }
 
@@ -101,11 +116,9 @@ public class BossEncounterTrigger : MonoBehaviour
     {
         currentState = BossState.IntroDialogue;
 
-        // Matikan panah penunjuk karena pemain sudah sampai di arena
         if (arrowToBoss != null)
             arrowToBoss.SetActive(false);
 
-        // Bekukan gerakan pemain saat berhadapan
         if (PlayerMovement.Instance != null)
             PlayerMovement.Instance.SetFreeze(true);
 
@@ -125,7 +138,6 @@ public class BossEncounterTrigger : MonoBehaviour
         if (GameAudioManager.Instance != null)
             GameAudioManager.Instance.PlayCombatBGM(0.4f);
 
-        // Aktifkan AI Boss
         if (bossEnemy != null)
         {
             Collider2D bossCol = bossEnemy.GetComponent<Collider2D>();
@@ -135,7 +147,6 @@ public class BossEncounterTrigger : MonoBehaviour
             bossEnemy.StartCombat(playerTransform);
         }
 
-        // Aktifkan pengawal (jika ada)
         SetMinionsActive(true);
         if (bossMinions != null && playerTransform != null)
         {
@@ -155,16 +166,18 @@ public class BossEncounterTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(0.6f);
 
+        // Ambil disk ke-5 dari Boss
+        if (MemoryDiskManager.Instance != null)
+            MemoryDiskManager.Instance.CollectBossDisk();
+
         if (GameAudioManager.Instance != null)
             GameAudioManager.Instance.PlayExplorationBGM(1.2f);
 
         currentState = BossState.OutroDialogue;
 
-        // Dialog kemenangan & penyelamatan anak
         dialogueManager.StartDialogue(dialogueOutro, onComplete: () =>
         {
             currentState = BossState.Completed;
-            // Akhir babak / misi selesai
         });
     }
 }
