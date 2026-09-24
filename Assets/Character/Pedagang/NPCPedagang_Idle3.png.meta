@@ -1,24 +1,10 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Character/Dialog Box/MC_Dialog Box.png.meta
 guid: de2194edbe8a94e74acc76905ffb5815
-|||||||| merged common ancestors:Assets/Character/NPC/NPC Pedagang_Idles.png.meta
-guid: 3c745554971d841ad80894c67a6995f8
-========
-guid: 083f446abf8a94ef7ab42b89d89e7e85
->>>>>>>> origin/main:Assets/Character/Pedagang/NPCPedagang_Idle3.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
-<<<<<<<< HEAD:Assets/Character/Dialog Box/MC_Dialog Box.png.meta
-      213: 696768212231895392
-    second: MC_Dialog Box_0
-|||||||| merged common ancestors:Assets/Character/NPC/NPC Pedagang_Idles.png.meta
-      213: 491899051937912484
-    second: NPC Pedagang_Idles_0
-========
       213: 8599047714308903091
     second: NPCPedagang_Idle3_0
->>>>>>>> origin/main:Assets/Character/Pedagang/NPCPedagang_Idle3.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -181,27 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-<<<<<<<< HEAD:Assets/Character/Dialog Box/MC_Dialog Box.png.meta
-      name: MC_Dialog Box_0
-|||||||| merged common ancestors:Assets/Character/NPC/NPC Pedagang_Idles.png.meta
-      name: NPC Pedagang_Idles_0
-========
       name: NPCPedagang_Idle3_0
->>>>>>>> origin/main:Assets/Character/Pedagang/NPCPedagang_Idle3.png.meta
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-<<<<<<<< HEAD:Assets/Character/Dialog Box/MC_Dialog Box.png.meta
-        width: 100
-        height: 150
-|||||||| merged common ancestors:Assets/Character/NPC/NPC Pedagang_Idles.png.meta
-        width: 54
-        height: 32
-========
         width: 213
         height: 128
->>>>>>>> origin/main:Assets/Character/Pedagang/NPCPedagang_Idle3.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,16 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-<<<<<<<< HEAD:Assets/Character/Dialog Box/MC_Dialog Box.png.meta
-      spriteID: 069bdd45ffa6ba900800000000000000
-      internalID: 696768212231895392
-|||||||| merged common ancestors:Assets/Character/NPC/NPC Pedagang_Idles.png.meta
-      spriteID: 4a65c10e49393d600800000000000000
-      internalID: 491899051937912484
-========
       spriteID: 3b054022654f55770800000000000000
       internalID: 8599047714308903091
->>>>>>>> origin/main:Assets/Character/Pedagang/NPCPedagang_Idle3.png.meta
       vertices: []
       indices: 
       edges: []
@@ -238,13 +202,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-<<<<<<<< HEAD:Assets/Character/Dialog Box/MC_Dialog Box.png.meta
-      MC_Dialog Box_0: 696768212231895392
-|||||||| merged common ancestors:Assets/Character/NPC/NPC Pedagang_Idles.png.meta
-      NPC Pedagang_Idles_0: 491899051937912484
-========
       NPCPedagang_Idle3_0: 8599047714308903091
->>>>>>>> origin/main:Assets/Character/Pedagang/NPCPedagang_Idle3.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

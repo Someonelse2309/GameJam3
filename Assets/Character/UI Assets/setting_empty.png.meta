@@ -1,27 +1,10 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
 guid: ca9a236942eaa4468ae80fe22f628609
-|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
-guid: 264ba0aaea969413eb41bb6790f7bebf
-========
-guid: c84479562bbaa46c79b2c3073c2de5ea
->>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
-<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
-      213: 5403902500659851321
-    second: MC MOM_Attack Shuriken 2@4x_0
-  - first:
-      213: 6335806938948821154
-    second: MC MOM_Attack Shuriken 2@4x_1
-|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
-      213: -2105518428048661092
-    second: Yakuza 2_Walk 1_0
-========
       213: -718515268269022807
     second: setting_empty_0
->>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -184,27 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
-      name: MC MOM_Attack Shuriken 2@4x_0
-|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
-      name: Yakuza 2_Walk 1_0
-========
       name: setting_empty_0
->>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
-        width: 97
-        height: 128
-|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
-        width: 30
-        height: 32
-========
         width: 116
         height: 116
->>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,38 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
-      spriteID: 930fca871b48efa40800000000000000
-      internalID: 5403902500659851321
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MC MOM_Attack Shuriken 2@4x_1
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 54
-        width: 30
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2a0ef79a7de4de750800000000000000
-      internalID: 6335806938948821154
-|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
-      spriteID: c95ee1c2522b7c2e0800000000000000
-      internalID: -2105518428048661092
-========
       spriteID: 9a1612d9b225706f0800000000000000
       internalID: -718515268269022807
->>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
       vertices: []
       indices: 
       edges: []
@@ -263,14 +202,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
-      MC MOM_Attack Shuriken 2@4x_0: 5403902500659851321
-      MC MOM_Attack Shuriken 2@4x_1: 6335806938948821154
-|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
-      Yakuza 2_Walk 1_0: -2105518428048661092
-========
       setting_empty_0: -718515268269022807
->>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
