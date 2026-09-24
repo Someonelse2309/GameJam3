@@ -25,36 +25,58 @@ public class DialogueTriggerEP1 : MonoBehaviour
     [Header("NPC Show/Hide")]
     public GameObject[] npcsToShow;
     public GameObject[] npcsToHide;
+    public bool autoStartAutoWalkOnShow = false;
 
     [Header("Next Trigger (Sequential)")]
-    public GameObject nextTriggerToActivate; // Trigger yang muncul setelah ini selesai
+    public GameObject nextTriggerToActivate;
+    public float delayBeforeActivateNext = 0f;
 
     [Header("Scene Transition")]
     public bool fadeToBlackOnEnter = false;
     public float delayBeforeFade = 0f;
 
-    [Header("Screen Shake (untuk momen tragedi)")]
+    [Header("Screen Shake")]
     public bool enableScreenShake = false;
-    public int shakeOnLineIndex = 8; // Line ke berapa shake aktif
+    public int shakeOnLineIndex = 8;
     public float shakeDuration = 0.8f;
     public float shakeIntensity = 1.5f;
+
+    [Header("Transformasi Setelah Dialogue")]
+    public GameObject[] objectsToHideAfterDialogue;
+    public GameObject[] objectsToShowAfterDialogue;
+
+    [Header("Line-Based Events")]
+    public GameObject objectToHideOnLine;
+    public int hideObjectOnLineIndex = 2;
+
+    [Header("AutoWalk NPCs on Line")]
+    public AutoWalk[] npcsToAutoWalkOnLine;
+    public int autoWalkOnLineIndex = 3;
+    public bool resumeDialogueAfterAutoWalk = true;
 
     [Header("Effects After Dialogue End")]
     public bool playSFXOnEnd = false;
     public AudioClip sfxToPlayOnEnd;
     public bool fadeToBlackOnEnd = false;
     public float fadeToBlackDelay = 0f;
-    public bool fadeBackAfterBlack = false; // Fade dari hitam balik ke normal
-    public float fadeBackDelay = 2f; // Waktu sebelum fade back
+    public bool fadeBackAfterBlack = false;
+    public float fadeBackDelay = 2f;
+
+    [Header("Pilih Sistem Fade")]
+    public bool useSceneTransition = true; // true = SceneTransition, false = TransitionEffects
+
+    [Header("Cinematic Text After Dialogue")]
+    public bool playCinematicAfterEnd = false;
+    public CinematicText cinematicText;
+    public bool fadeToBlackAfterCinematic = true;
 
     private bool hasTriggered = false;
-    private bool dialogueEndedHandled = false; // Prevent double trigger
+    private bool dialogueEndedHandled = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && CanTrigger())
         {
-            Debug.Log("DialogueTriggerEP1: Player masuk trigger - " + gameObject.name);
             TriggerDialogue();
         }
     }
@@ -63,12 +85,9 @@ public class DialogueTriggerEP1 : MonoBehaviour
     {
         if (CanTrigger())
         {
-            Debug.Log("DialogueTriggerEP1: Triggering dialogue - " + (dialogueData != null ? dialogueData.name : "NULL"));
-
             hasTriggered = true;
-            dialogueEndedHandled = false; // Reset flag
+            dialogueEndedHandled = false;
 
-            // Fade to black if enabled
             if (fadeToBlackOnEnter)
             {
                 StartCoroutine(FadeToBlackSequence());
@@ -77,71 +96,39 @@ public class DialogueTriggerEP1 : MonoBehaviour
             if (deactivateAfterTrigger)
                 gameObject.SetActive(false);
 
-            // Show NPCs
             ShowNPCs();
 
             if (autoWalkTarget != null)
             {
-                // Override waypoints jika ada
                 if (waypointsOverride != null && waypointsOverride.Length >= 2)
                 {
                     autoWalkTarget.SetWaypoints(waypointsOverride);
-                    Debug.Log("DialogueTriggerEP1: Using override waypoints - " + waypointsOverride.Length + " waypoints");
                 }
-
-                Debug.Log("DialogueTriggerEP1: Starting AutoWalk - " + autoWalkTarget.gameObject.name);
                 autoWalkTarget.StartWalking();
             }
 
-            if (DialogueManagerEP1.instanceEP1 == null)
-            {
-                Debug.LogError("DialogueTriggerEP1 ERROR: DialogueManagerEP1.instanceEP1 NULL!");
-                return;
-            }
+            if (DialogueManagerEP1.instanceEP1 == null) return;
+            if (dialogueData == null) return;
 
-            if (dialogueData == null)
-            {
-                Debug.LogError("DialogueTriggerEP1 ERROR: dialogueData NULL!");
-                return;
-            }
-
-            // Subscribe to dialogue end
             DialogueManagerEP1.instanceEP1.OnDialogueEnd += OnDialogueEnded;
-
-            // Subscribe to line change (untuk screen shake)
             DialogueManagerEP1.instanceEP1.OnLineChanged += OnLineChanged;
 
             DialogueManagerEP1.instanceEP1.StartDialogue(dialogueData, this);
-            Debug.Log($"TriggerDialogue: Started dialogue with trigger={gameObject.name}");
         }
     }
 
     private void OnDialogueEnded()
     {
-        Debug.Log($"OnDialogueEnded: Called by {gameObject.name}, handled={dialogueEndedHandled}");
-
-        // Prevent double trigger
-        if (dialogueEndedHandled)
-        {
-            Debug.Log($"OnDialogueEnded: Already handled, skipping - {gameObject.name}");
-            return;
-        }
+        if (dialogueEndedHandled) return;
 
         // Cek apakah ini trigger yang memulai dialogue ini
         if (DialogueManagerEP1.instanceEP1 != null)
         {
             DialogueTriggerEP1 currentTrigger = DialogueManagerEP1.instanceEP1.GetCurrentTrigger();
-            Debug.Log($"OnDialogueEnded: currentTrigger={currentTrigger?.name}, this={gameObject.name}");
-
-            if (currentTrigger != this)
-            {
-                Debug.Log($"OnDialogueEnded: Not my dialogue, skipping");
-                return;
-            }
+            if (currentTrigger != this) return;
         }
 
         dialogueEndedHandled = true;
-        Debug.Log("DialogueTriggerEP1: Processing dialogue end - " + gameObject.name);
 
         // Unsubscribe
         if (DialogueManagerEP1.instanceEP1 != null)
@@ -150,17 +137,12 @@ public class DialogueTriggerEP1 : MonoBehaviour
             DialogueManagerEP1.instanceEP1.OnLineChanged -= OnLineChanged;
         }
 
-        // ===== EFFECTS AFTER DIALOGUE END - JALANKAN TERLEBIH DAHULU =====
-
-        Debug.Log($"OnDialogueEnded Effects: enableScreenShake={enableScreenShake}, playSFXOnEnd={playSFXOnEnd}, fadeToBlackOnEnd={fadeToBlackOnEnd}");
-
         // Screen shake on end
         if (enableScreenShake)
         {
             ScreenShake shaker = UnityEngine.Object.FindAnyObjectByType<ScreenShake>();
             if (shaker != null)
             {
-                Debug.Log("DialogueTriggerEP1: Triggering screen shake on dialogue end");
                 shaker.TriggerShake(shakeDuration, shakeIntensity);
             }
         }
@@ -168,63 +150,63 @@ public class DialogueTriggerEP1 : MonoBehaviour
         // Play SFX on end
         if (playSFXOnEnd && sfxToPlayOnEnd != null)
         {
-            if (AudioManager.instance != null)
-            {
-                Debug.Log("DialogueTriggerEP1: Playing SFX on dialogue end - " + sfxToPlayOnEnd.name);
-                AudioManager.instance.PlaySFX(sfxToPlayOnEnd);
-            }
+            AudioManager.instance?.PlaySFX(sfxToPlayOnEnd);
         }
 
-        // Fade to black on end - LANGSUNG CALL TANPA COROUTINE
+        // Fade to black on end
         if (fadeToBlackOnEnd)
         {
-            Debug.Log("DialogueTriggerEP1: Calling FadeToBlack DIRECT...");
-
-            SceneTransition transition = null;
-            SceneTransition[] allTransitions = FindObjectsByType<SceneTransition>(FindObjectsInactive.Exclude);
-            foreach (var t in allTransitions)
+            if (useSceneTransition)
             {
-                if (t != null)
+                SceneTransition transition = null;
+                SceneTransition[] allTransitions = FindObjectsByType<SceneTransition>(FindObjectsInactive.Exclude);
+                foreach (var t in allTransitions)
                 {
-                    transition = t;
-                    break;
+                    if (t != null)
+                    {
+                        transition = t;
+                        break;
+                    }
                 }
-            }
-
-            if (transition != null)
-            {
-                Debug.Log($"DialogueTriggerEP1: Calling FadeInBlack on {transition.name}");
-                transition.FadeInBlack(null);
-
-                // Fade back to normal setelah beberapa waktu
-                if (fadeBackAfterBlack)
-                {
-                    Debug.Log($"DialogueTriggerEP1: Scheduling fade back in {fadeBackDelay}s...");
-                    // Pakai Invoke untuk jadwalkan fade back
-                    Invoke(nameof(FadeBackToNormal), fadeBackDelay);
-                }
+                transition?.FadeInBlack(null);
             }
             else
             {
-                Debug.LogError("DialogueTriggerEP1: SceneTransition NOT FOUND!");
+                TransitionEffects effects = null;
+                TransitionEffects[] allEffects = FindObjectsByType<TransitionEffects>(FindObjectsInactive.Exclude);
+                foreach (var e in allEffects)
+                {
+                    if (e != null)
+                    {
+                        effects = e;
+                        break;
+                    }
+                }
+                effects?.FadeToBlack(null);
+            }
+
+            if (fadeBackAfterBlack)
+            {
+                Invoke(nameof(FadeBackUsingSceneTransition), fadeBackDelay);
             }
         }
 
-        // ===== DEACTIVATE SETELAH EFFECTS =====
-
-        // Deactivate trigger AFTER effects complete
-        if (fadeToBlackOnEnd && fadeBackAfterBlack)
+        // Handle deactivation
+        if (playCinematicAfterEnd)
         {
-            // Tunggu fade back selesai baru deactivate
-            float totalDelay = fadeBackDelay + 1f; // +1f untuk fade out duration
-            Debug.Log($"DialogueTriggerEP1: Scheduling deactivation in {totalDelay}s...");
+            // Deactivation handled by cinematic callback
+        }
+        else if (fadeToBlackOnEnd && fadeBackAfterBlack)
+        {
+            SceneTransition transition = FindFirstObjectByType<SceneTransition>();
+            float totalDelay = fadeBackDelay + (transition != null ? transition.fadeOutSpeed : 1f);
             Invoke(nameof(DeactivateTrigger), totalDelay);
         }
         else if (fadeToBlackOnEnd)
         {
-            // Tanpa fade back, deactivate setelah fade in selesai (~1s)
-            Debug.Log("DialogueTriggerEP1: Scheduling deactivation in 1.5s...");
-            Invoke(nameof(DeactivateTrigger), 1.5f);
+            SceneTransition transition = FindFirstObjectByType<SceneTransition>();
+            float delay = transition != null ? (1f / transition.fadeInSpeed) : 0.8f;
+            Invoke(nameof(DeactivateTrigger), delay);
         }
         else if (deactivateAfterTrigger)
         {
@@ -234,8 +216,54 @@ public class DialogueTriggerEP1 : MonoBehaviour
         // Activate next trigger
         if (nextTriggerToActivate != null)
         {
-            nextTriggerToActivate.SetActive(true);
-            Debug.Log("Activated next trigger: " + nextTriggerToActivate.name);
+            if (delayBeforeActivateNext > 0)
+            {
+                Invoke(nameof(ActivateNextTriggerDelayed), delayBeforeActivateNext);
+            }
+            else
+            {
+                nextTriggerToActivate.SetActive(true);
+            }
+        }
+
+        // Cinematic Text - flow: fade to black -> fade out -> play cinematic -> fade to black final
+        if (playCinematicAfterEnd && cinematicText != null)
+        {
+            // Setup callback untuk fade to black final setelah cinematic selesai
+            cinematicText.onComplete = () => {
+                if (fadeToBlackAfterCinematic)
+                {
+                    if (useSceneTransition)
+                    {
+                        SceneTransition transition = FindFirstObjectByType<SceneTransition>();
+                        transition?.FadeInBlack(null);
+                    }
+                    else
+                    {
+                        TransitionEffects effects = FindFirstObjectByType<TransitionEffects>();
+                        effects?.FadeToBlack(null);
+                    }
+                }
+                Invoke(nameof(DeactivateTrigger), 1f);
+            };
+
+            // Initial fade to black
+            if (fadeToBlackOnEnd)
+            {
+                if (useSceneTransition)
+                {
+                    SceneTransition transition = FindFirstObjectByType<SceneTransition>();
+                    transition?.FadeInBlack(null);
+                }
+                else
+                {
+                    TransitionEffects effects = FindFirstObjectByType<TransitionEffects>();
+                    effects?.FadeToBlack(null);
+                }
+            }
+
+            // Fade out cepat, lalu play cinematic
+            Invoke(nameof(FadeOutThenPlayCinematic), 0.3f);
         }
 
         // Handle Ryu Separation
@@ -244,10 +272,9 @@ public class DialogueTriggerEP1 : MonoBehaviour
             StartRyuSeparation();
         }
 
-        // Hide NPCs - TAPI JANGAN hide Ryu kalau hideRyuAfterAutoWalk = true
+        // Hide NPCs
         if (hideRyuAfterAutoWalk && npcsToHide != null)
         {
-            // Filter out Ryu from npcsToHide
             List<GameObject> npcsToHideFiltered = new List<GameObject>();
             foreach (GameObject npc in npcsToHide)
             {
@@ -264,137 +291,171 @@ public class DialogueTriggerEP1 : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator DeactivateAfterDelay(float delay)
-    {
-        Debug.Log($"DeactivateAfterDelay: Waiting {delay}s before deactivating");
-        yield return new WaitForSeconds(delay);
-
-        if (deactivateAfterTrigger)
-        {
-            gameObject.SetActive(false);
-            Debug.Log("Deactivated trigger after delay: " + gameObject.name);
-        }
-    }
-
     private void DeactivateTrigger()
     {
         if (deactivateAfterTrigger)
         {
             gameObject.SetActive(false);
-            Debug.Log("Deactivated trigger: " + gameObject.name);
         }
     }
 
-    private void FadeBackToNormal()
+    private void FadeBackUsingSceneTransition()
     {
-        Debug.Log("DialogueTriggerEP1: FadeBackToNormal called");
+        TransformObjects();
 
-        SceneTransition transition = null;
-        SceneTransition[] allTransitions = FindObjectsByType<SceneTransition>(FindObjectsInactive.Exclude);
-        foreach (var t in allTransitions)
+        if (useSceneTransition)
         {
-            if (t != null)
+            SceneTransition transition = null;
+            SceneTransition[] allTransitions = FindObjectsByType<SceneTransition>(FindObjectsInactive.Exclude);
+            foreach (var t in allTransitions)
             {
-                transition = t;
-                break;
+                if (t != null)
+                {
+                    transition = t;
+                    break;
+                }
+            }
+            transition?.FadeOutBlack(null);
+        }
+        else
+        {
+            TransitionEffects effects = null;
+            TransitionEffects[] allEffects = FindObjectsByType<TransitionEffects>(FindObjectsInactive.Exclude);
+            foreach (var e in allEffects)
+            {
+                if (e != null)
+                {
+                    effects = e;
+                    break;
+                }
+            }
+            effects?.FadeFromBlack(null);
+        }
+    }
+
+    private void ActivateNextTriggerDelayed()
+    {
+        nextTriggerToActivate?.SetActive(true);
+    }
+
+    private void PlayCinematicWithDelay()
+    {
+        cinematicText?.Play();
+    }
+
+    // Fade out cepat, lalu play cinematic
+    private void FadeOutThenPlayCinematic()
+    {
+        if (useSceneTransition)
+        {
+            SceneTransition transition = FindFirstObjectByType<SceneTransition>();
+            if (transition != null)
+            {
+                transition.FadeOutBlack(() => {
+                    PlayCinematicWithDelay();
+                });
+                return;
+            }
+        }
+        else
+        {
+            TransitionEffects effects = FindFirstObjectByType<TransitionEffects>();
+            if (effects != null)
+            {
+                float originalDuration = effects.fadeDuration;
+                effects.fadeDuration = 0.3f; // Fast fade
+                effects.FadeFromBlack(() => {
+                    effects.fadeDuration = originalDuration;
+                    PlayCinematicWithDelay();
+                });
+                return;
             }
         }
 
-        if (transition != null)
+        // Fallback: play cinematic langsung
+        PlayCinematicWithDelay();
+    }
+
+    private void TransformObjects()
+    {
+        if (objectsToHideAfterDialogue != null)
         {
-            Debug.Log("DialogueTriggerEP1: Fading back to normal...");
-            transition.FadeOutBlack(null);
+            foreach (GameObject obj in objectsToHideAfterDialogue)
+            {
+                obj?.SetActive(false);
+            }
+        }
+
+        if (objectsToShowAfterDialogue != null)
+        {
+            foreach (GameObject obj in objectsToShowAfterDialogue)
+            {
+                obj?.SetActive(true);
+            }
         }
     }
 
     private void HideNPCsFiltered(GameObject[] npcs)
     {
-        if (npcs != null)
+        if (npcs == null) return;
+
+        foreach (GameObject npc in npcs)
         {
-            foreach (GameObject npc in npcs)
+            if (npc != null)
             {
-                if (npc != null)
+                AutoWalk npcAutoWalk = npc.GetComponent<AutoWalk>();
+                if (npcAutoWalk != null)
                 {
-                    AutoWalk npcAutoWalk = npc.GetComponent<AutoWalk>();
-                    if (npcAutoWalk != null)
-                    {
-                        npcAutoWalk.StopWalking();
-                    }
-                    npc.SetActive(false);
-                    Debug.Log("Hidden NPC: " + npc.name);
+                    npcAutoWalk.StopWalking();
                 }
+                npc.SetActive(false);
             }
         }
     }
 
     private void StartRyuSeparation()
     {
-        Debug.Log("DialogueTriggerEP1: Starting Ryu separation");
-
-        // Stop Ryu following Michelle
         if (ryuFollowTarget != null)
         {
             ryuFollowTarget.StopFollowing();
-            Debug.Log("Ryu stopped following Michelle");
         }
 
-        // Start Ryu AutoWalk
         if (ryuAutoWalk != null)
         {
             ryuAutoWalk.StartWalking();
-            Debug.Log("Ryu started AutoWalk");
-
-            // Subscribe to AutoWalk completion
             ryuAutoWalk.onAutoWalkComplete.AddListener(OnRyuAutoWalkComplete);
         }
     }
 
     private void OnRyuAutoWalkComplete()
     {
-        Debug.Log("DialogueTriggerEP1: Ryu AutoWalk complete");
-
-        // Unsubscribe
         if (ryuAutoWalk != null)
         {
             ryuAutoWalk.onAutoWalkComplete.RemoveListener(OnRyuAutoWalkComplete);
         }
 
-        // Hide Ryu
         if (hideRyuAfterAutoWalk && ryuAutoWalk != null)
         {
             ryuAutoWalk.gameObject.SetActive(false);
-            Debug.Log("Ryu hidden after AutoWalk complete");
         }
     }
 
     private void ShowNPCs()
     {
-        if (npcsToShow != null)
-        {
-            foreach (GameObject npc in npcsToShow)
-            {
-                if (npc != null)
-                {
-                    npc.SetActive(true);
-                    Debug.Log("Showed NPC: " + npc.name);
+        if (npcsToShow == null) return;
 
-                    // Start AutoWalk untuk NPC jika ada
+        foreach (GameObject npc in npcsToShow)
+        {
+            if (npc != null)
+            {
+                npc.SetActive(true);
+
+                if (autoStartAutoWalkOnShow)
+                {
                     AutoWalk npcAutoWalk = npc.GetComponent<AutoWalk>();
-                    if (npcAutoWalk != null)
+                    if (npcAutoWalk != null && npcAutoWalk.waypoints != null && npcAutoWalk.waypoints.Length > 0)
                     {
-                        if (npcAutoWalk.waypoints == null || npcAutoWalk.waypoints.Length == 0)
-                        {
-                            Debug.LogWarning($"NPC {npc.name} has AutoWalk but NO WAYPOINTS!");
-                        }
-                        else
-                        {
-                            npcAutoWalk.StartWalking();
-                            Debug.Log($"Started AutoWalk for {npc.name}, waypoints: {npcAutoWalk.waypoints.Length}");
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"NPC {npc.name} has NO AutoWalk component!");
+                        npcAutoWalk.StartWalking();
                     }
                 }
             }
@@ -403,39 +464,26 @@ public class DialogueTriggerEP1 : MonoBehaviour
 
     private void HideNPCs()
     {
-        if (npcsToHide != null)
-        {
-            foreach (GameObject npc in npcsToHide)
-            {
-                if (npc != null)
-                {
-                    // Stop AutoWalk dulu
-                    AutoWalk npcAutoWalk = npc.GetComponent<AutoWalk>();
-                    if (npcAutoWalk != null)
-                    {
-                        npcAutoWalk.StopWalking();
-                    }
+        if (npcsToHide == null) return;
 
-                    npc.SetActive(false);
-                    Debug.Log("Hidden NPC: " + npc.name);
+        foreach (GameObject npc in npcsToHide)
+        {
+            if (npc != null)
+            {
+                AutoWalk npcAutoWalk = npc.GetComponent<AutoWalk>();
+                if (npcAutoWalk != null)
+                {
+                    npcAutoWalk.StopWalking();
                 }
+                npc.SetActive(false);
             }
         }
     }
 
     private bool CanTrigger()
     {
-        if (triggerOnce && hasTriggered)
-        {
-            Debug.Log("DialogueTriggerEP1: Sudah pernah trigger, skip.");
-            return false;
-        }
-        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive())
-        {
-            Debug.Log("DialogueTriggerEP1: Dialogue sedang aktif, skip.");
-            return false;
-        }
-
+        if (triggerOnce && hasTriggered) return false;
+        if (DialogueManagerEP1.instanceEP1 != null && DialogueManagerEP1.instanceEP1.IsDialogueActive()) return false;
         return true;
     }
 
@@ -451,12 +499,7 @@ public class DialogueTriggerEP1 : MonoBehaviour
             yield return new WaitForSeconds(delayBeforeFade);
 
         SceneTransition transition = UnityEngine.Object.FindAnyObjectByType<SceneTransition>();
-        if (transition != null)
-        {
-            transition.FadeInBlack(() => {
-                Debug.Log("Screen faded to black!");
-            });
-        }
+        transition?.FadeInBlack(null);
     }
 
     private void OnLineChanged(int lineIndex)
@@ -468,52 +511,100 @@ public class DialogueTriggerEP1 : MonoBehaviour
             if (currentTrigger != this) return;
         }
 
-        // Ambil line data
         if (dialogueData == null || dialogueData.lines == null || lineIndex >= dialogueData.lines.Length)
             return;
 
         DialogueDataEP1.DialogueLine line = dialogueData.lines[lineIndex];
 
-        // ===== TRIGGER EFFECTS =====
-
         // Screen Shake
         if (line.triggerScreenShake || (enableScreenShake && lineIndex == shakeOnLineIndex))
         {
-            Debug.Log($"DialogueTriggerEP1: Triggering screen shake on line {lineIndex}");
             ScreenShake shaker = UnityEngine.Object.FindAnyObjectByType<ScreenShake>();
-            if (shaker != null)
-            {
-                shaker.TriggerShake(shakeDuration, shakeIntensity);
-            }
+            shaker?.TriggerShake(shakeDuration, shakeIntensity);
         }
 
-        // Sound Effect (SFX)
+        // Sound Effect
         if (line.soundEffect != null && AudioManager.instance != null)
         {
-            Debug.Log($"DialogueTriggerEP1: Playing SFX - {line.soundEffect.name}");
             AudioManager.instance.PlaySFX(line.soundEffect);
         }
 
         // Fade to Black
         if (line.triggerFadeToBlack)
         {
-            Debug.Log($"DialogueTriggerEP1: Triggering fade to black on line {lineIndex}");
             StartCoroutine(FadeToBlackAfterLine());
         }
+
+        // Hide object on specific line
+        if (objectToHideOnLine != null && lineIndex == hideObjectOnLineIndex)
+        {
+            objectToHideOnLine.SetActive(false);
+        }
+
+        // Trigger AutoWalk on specific line
+        if (npcsToAutoWalkOnLine != null && npcsToAutoWalkOnLine.Length > 0 && lineIndex == autoWalkOnLineIndex)
+        {
+            StartAutoWalkForNPCs();
+        }
+    }
+
+    private int autoWalkCompletedCount = 0;
+    private bool isWaitingForAutoWalk = false;
+
+    private void StartAutoWalkForNPCs()
+    {
+        if (npcsToAutoWalkOnLine == null || npcsToAutoWalkOnLine.Length == 0)
+            return;
+
+        isWaitingForAutoWalk = true;
+        autoWalkCompletedCount = 0;
+
+        foreach (AutoWalk npc in npcsToAutoWalkOnLine)
+        {
+            if (npc != null)
+            {
+                npc.StartWalking();
+                npc.onAutoWalkComplete.AddListener(OnNPCAutoWalkComplete);
+            }
+            else
+            {
+                autoWalkCompletedCount++;
+            }
+        }
+    }
+
+    private void OnNPCAutoWalkComplete()
+    {
+        autoWalkCompletedCount++;
+        int totalNPCs = npcsToAutoWalkOnLine != null ? npcsToAutoWalkOnLine.Length : 0;
+
+        if (isWaitingForAutoWalk && autoWalkCompletedCount >= totalNPCs)
+        {
+            isWaitingForAutoWalk = false;
+
+            foreach (AutoWalk npc in npcsToAutoWalkOnLine)
+            {
+                if (npc != null)
+                {
+                    npc.onAutoWalkComplete.RemoveListener(OnNPCAutoWalkComplete);
+                }
+            }
+
+            StartCoroutine(ResumeDialogueAfterDelay(0.5f));
+        }
+    }
+
+    private System.Collections.IEnumerator ResumeDialogueAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DialogueManagerEP1.instanceEP1?.ResumeDialogue();
     }
 
     private System.Collections.IEnumerator FadeToBlackAfterLine()
     {
-        // Tunggu sedikit biar dialogue selesai
         yield return new WaitForSeconds(1f);
 
         SceneTransition transition = UnityEngine.Object.FindAnyObjectByType<SceneTransition>();
-        if (transition != null)
-        {
-            transition.FadeInBlack(() => {
-                Debug.Log("Faded to black!");
-                // Bisa trigger next momen atau scene transition di sini
-            });
-        }
+        transition?.FadeInBlack(null);
     }
 }

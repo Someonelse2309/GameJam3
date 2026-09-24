@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f2ea0b13210423b860e003efc9029d, type: 3}
+  m_Name: Dialoge_Scene4_Momen2
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueDataEP1
+  lines:
+  - speakerName: Yakuza
+    text: (Yakuza 2 sees Ryu's disc fall)
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 2479784136142112536, guid: b9fc16e2188a64889ad94977fb0ac0d9, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Yakuza
+    text: '"...Found it."'
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 2479784136142112536, guid: b9fc16e2188a64889ad94977fb0ac0d9, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Yakuza
+    text: '"Ryu''s Memory CD is picked up, Boss."'
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 2479784136142112536, guid: b9fc16e2188a64889ad94977fb0ac0d9, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Aoyama
+    text: '"Good, Let''s Go."'
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Michelle
+    text: (Michelle gazes at Ryu sorrowfully)
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Michelle
+    text: '"Ryu... please... open your eyes..."'
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Michelle
+    text: '"No... no no no... Ryu... don''t leave me..."'
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0

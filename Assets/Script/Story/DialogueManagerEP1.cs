@@ -272,6 +272,25 @@ public class DialogueManagerEP1 : MonoBehaviour
         EndDialogue();
     }
 
+    public void PauseDialogue()
+    {
+        isDialogueActive = false;
+        Debug.Log("DialogueManagerEP1: Dialogue paused");
+    }
+
+    public void ResumeDialogue()
+    {
+        if (currentDialogue == null)
+        {
+            Debug.LogWarning("DialogueManagerEP1: ResumeDialogue called but currentDialogue is null");
+            return;
+        }
+
+        isDialogueActive = true;
+        Debug.Log($"DialogueManagerEP1: Resuming dialogue from line {currentLineIndex}");
+        ShowLine(currentLineIndex);
+    }
+
     public bool IsDialogueActive()
     {
         return isDialogueActive;
