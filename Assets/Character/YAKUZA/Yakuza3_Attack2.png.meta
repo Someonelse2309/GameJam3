@@ -1,0 +1,365 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+guid: b53e01e97096f4fbf923d4807095e32d
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+guid: 2992b8480fd294f4fa507a6637f19a8e
+========
+guid: d17fcf93abda444e0bdfe1e8794648c5
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+      213: -4838332271219339190
+    second: Yakuza 1_Attack@4x_0
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+      213: -2912134866077550657
+    second: Yakuza 3_Attack 2_0
+========
+      213: -358972339438835822
+    second: Yakuza3_Attack2_0
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+  - first:
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+      213: 2508964672603780807
+    second: Yakuza 1_Attack@4x_1
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+      213: 2175595241591959942
+    second: Yakuza 3_Attack 2_1
+  - first:
+      213: 1235228404058393587
+    second: Yakuza 3_Attack 2_2
+========
+      213: -6897118127544798551
+    second: Yakuza3_Attack2_1
+  - first:
+      213: 310177391694817411
+    second: Yakuza3_Attack2_2
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+      name: Yakuza 1_Attack@4x_0
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+      name: Yakuza 3_Attack 2_0
+========
+      name: Yakuza3_Attack2_0
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+        width: 125
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+        width: 32
+        height: 32
+========
+        width: 123
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+      spriteID: a4099a41f6acadcb0800000000000000
+      internalID: -4838332271219339190
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+      spriteID: fb7fa69b4c40697d0800000000000000
+      internalID: -2912134866077550657
+========
+      spriteID: 297ae872f8ca40bf0800000000000000
+      internalID: -358972339438835822
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+      name: Yakuza 1_Attack@4x_1
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+      name: Yakuza 3_Attack 2_1
+========
+      name: Yakuza3_Attack2_1
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+      rect:
+        serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+        x: 107
+        y: 19
+        width: 21
+        height: 42
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+        x: 30
+        y: 7
+        width: 9
+        height: 15
+========
+        x: 125
+        y: 31
+        width: 27
+        height: 54
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+      spriteID: 7c67d80a312a1d220800000000000000
+      internalID: 2508964672603780807
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+      spriteID: 6817e1e6854413e10800000000000000
+      internalID: 2175595241591959942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yakuza 3_Attack 2_2
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 5
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fb8f5060b9642110800000000000000
+      internalID: 1235228404058393587
+========
+      spriteID: 9a2f8c10b938840a0800000000000000
+      internalID: -6897118127544798551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yakuza3_Attack2_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 23
+        width: 35
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 388a351c1b8fd4400800000000000000
+      internalID: 310177391694817411
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+<<<<<<<< HEAD:Assets/Character/YAKUZA/Yakuza 1_Attack@4x.png.meta
+      Yakuza 1_Attack@4x_0: -4838332271219339190
+      Yakuza 1_Attack@4x_1: 2508964672603780807
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 3_Attack 2.png.meta
+      Yakuza 3_Attack 2_0: -2912134866077550657
+      Yakuza 3_Attack 2_1: 2175595241591959942
+      Yakuza 3_Attack 2_2: 1235228404058393587
+========
+      Yakuza3_Attack2_0: -358972339438835822
+      Yakuza3_Attack2_1: -6897118127544798551
+      Yakuza3_Attack2_2: 310177391694817411
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza3_Attack2.png.meta
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -44,6 +44,11 @@
             "Title" : "New Hero in Town",
             "Creator" : "Kevin MacLeod",
             "Link" : "incompetech.com"
+        },
+        "10" : {
+            "Title" : "The Zen Moment",
+            "Creator" : "Kevin MacLeod",
+            "Link" : "incompetech.com"
         }
     },
     "SFX" : {
@@ -71,7 +76,17 @@
             "Title" : "KG gun cock 02",
             "Creator" : "martian",
             "Link" : "https://freesound.org/people/martian/sounds/182276/"
-        }
+        },
+        "6" : {
+            "Title" : "Textured Low Drone - Loop",
+            "Creator" : "kkenny101",
+            "Link" : "https://freesound.org/people/kkenny101/sounds/871189/"
+        },
+        "7" : {
+            "Title" : "Unsettling Crescendo 4",
+            "Creator" : "SilverIllusionist",
+            "Link" : "https://freesound.org/people/SilverIllusionist/sounds/842936/"
+        },
     },
     "Visual" : {
         "1" : {

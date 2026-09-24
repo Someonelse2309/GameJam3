@@ -170,10 +170,10 @@ TextureImporter:
       name: MC MOM_Punch 1@4x_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 15
         y: 0
-        width: 122
-        height: 128
+        width: 0
+        height: 0
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

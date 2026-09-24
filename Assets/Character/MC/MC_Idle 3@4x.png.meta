@@ -1,10 +1,24 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC/MC_Idle 3@4x.png.meta
 guid: 99c1d5736bb2048a7826f10031be104e
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Idle 2.png.meta
+guid: 0266afad55d3d46d6af6f95970808ee5
+========
+guid: f20c8705a7f81416d988e39093529b08
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza_6_Idle_3.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
+<<<<<<<< HEAD:Assets/Character/MC/MC_Idle 3@4x.png.meta
       213: 3779546117580024008
     second: MC_Idle 3@4x_0
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Idle 2.png.meta
+      213: -5667889710134911916
+    second: MC MOM_Idle 2_0
+========
+      213: 5759934201783007021
+    second: Yakuza_6_Idle_3_0
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza_6_Idle_3.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -167,13 +181,27 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC/MC_Idle 3@4x.png.meta
       name: MC_Idle 3@4x_0
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Idle 2.png.meta
+      name: MC MOM_Idle 2_0
+========
+      name: Yakuza_6_Idle_3_0
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza_6_Idle_3.png.meta
       rect:
         serializedVersion: 2
         x: 19
         y: 0
+<<<<<<<< HEAD:Assets/Character/MC/MC_Idle 3@4x.png.meta
         width: 91
         height: 128
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Idle 2.png.meta
+        width: 27
+        height: 32
+========
+        width: 123
+        height: 129
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza_6_Idle_3.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +210,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Character/MC/MC_Idle 3@4x.png.meta
       spriteID: 8c860964b25a37430800000000000000
       internalID: 3779546117580024008
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Idle 2.png.meta
+      spriteID: 45c1151a65c9751b0800000000000000
+      internalID: -5667889710134911916
+========
+      spriteID: d2736ea93a56fef40800000000000000
+      internalID: 5759934201783007021
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza_6_Idle_3.png.meta
       vertices: []
       indices: 
       edges: []
@@ -202,7 +238,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Character/MC/MC_Idle 3@4x.png.meta
       MC_Idle 3@4x_0: 3779546117580024008
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Idle 2.png.meta
+      MC MOM_Idle 2_0: -5667889710134911916
+========
+      Yakuza_6_Idle_3_0: 5759934201783007021
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza_6_Idle_3.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

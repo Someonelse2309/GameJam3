@@ -1,10 +1,24 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC/MC_Walk 3@4x.png.meta
 guid: d59cdb37d0b3b44b89ab3029056aebfb
+|||||||| merged common ancestors:Assets/Character/MC/MC_Idle 2.png.meta
+guid: 6a3d22adf3f094b2fbb683d8e3246f3a
+========
+guid: e56966cb4dded46d8bb3a78763d5ad2b
+>>>>>>>> origin/main:Assets/Character/MC/MC_Idle3.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
+<<<<<<<< HEAD:Assets/Character/MC/MC_Walk 3@4x.png.meta
       213: 5413651985644827106
     second: MC_Walk 3@4x_0
+|||||||| merged common ancestors:Assets/Character/MC/MC_Idle 2.png.meta
+      213: 1450812184550347915
+    second: MC_Idle 2_0
+========
+      213: 2587344669298679904
+    second: MC_Idle3_0
+>>>>>>>> origin/main:Assets/Character/MC/MC_Idle3.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -167,12 +181,31 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC/MC_Walk 3@4x.png.meta
       name: MC_Walk 3@4x_0
+|||||||| merged common ancestors:Assets/Character/MC/MC_Idle 2.png.meta
+      name: MC_Idle 2_0
+========
+      name: MC_Idle3_0
+>>>>>>>> origin/main:Assets/Character/MC/MC_Idle3.png.meta
       rect:
         serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC/MC_Walk 3@4x.png.meta
         x: 15
+|||||||| merged common ancestors:Assets/Character/MC/MC_Idle 2.png.meta
+        x: 4
+========
+        x: 19
+>>>>>>>> origin/main:Assets/Character/MC/MC_Idle3.png.meta
         y: 0
+<<<<<<<< HEAD:Assets/Character/MC/MC_Walk 3@4x.png.meta
         width: 98
+|||||||| merged common ancestors:Assets/Character/MC/MC_Idle 2.png.meta
+        width: 25
+        height: 32
+========
+        width: 91
+>>>>>>>> origin/main:Assets/Character/MC/MC_Idle3.png.meta
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -182,8 +215,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Character/MC/MC_Walk 3@4x.png.meta
       spriteID: 2e1b2f55cc7212b40800000000000000
       internalID: 5413651985644827106
+|||||||| merged common ancestors:Assets/Character/MC/MC_Idle 2.png.meta
+      spriteID: b849eefbef1522410800000000000000
+      internalID: 1450812184550347915
+========
+      spriteID: 0606c05b44818e320800000000000000
+      internalID: 2587344669298679904
+>>>>>>>> origin/main:Assets/Character/MC/MC_Idle3.png.meta
       vertices: []
       indices: 
       edges: []
@@ -202,7 +243,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Character/MC/MC_Walk 3@4x.png.meta
       MC_Walk 3@4x_0: 5413651985644827106
+|||||||| merged common ancestors:Assets/Character/MC/MC_Idle 2.png.meta
+      MC_Idle 2_0: 1450812184550347915
+========
+      MC_Idle3_0: 2587344669298679904
+>>>>>>>> origin/main:Assets/Character/MC/MC_Idle3.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,20 +1,28 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+
     public float moveSpeed = 5f;
 
     [Header("Components")]
     public SpriteRenderer spriteRenderer;
 
     [Header("UI Controls")]
-    public VirtualJoystick joystick; // Langsung menggunakan class VirtualJoystick
+    public VirtualJoystick joystick; 
+
+    [Header("Combat Animations Setup")]
+    public Sprite[] punchSprites;       
+    public Sprite[] swordSprites;       
+    public Sprite[] shurikenSprites;    
+    public Sprite[] attackSprites;      
+    public bool isSwordEquipped { get; private set; } = false;
 
     [Header("Sprite Animation Frames")]
     public Sprite[] idleSprites;
     public Sprite[] walkSprites;
-    public Sprite[] attackSprites;
-    public Sprite[] shurikenSprites;
     public float frameRate = 0.12f;
 
     private Rigidbody2D rb;
@@ -23,21 +31,109 @@ public class PlayerMovement : MonoBehaviour
     private int currentFrame;
     private Sprite[] lastAnimation;
 
+    public bool IsAttacking => isAttacking;
     private bool isAttacking = false;
     private bool isThrowingShuriken = false;
+    public bool isFrozen { get; private set; } = false;
+
+    // Cache fungsi joystick agar tidak lag di HP
+    private Func<float> getJoyX;
+    private Func<float> getJoyY;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        // Kunci 60 FPS langsung di dalam scene
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (punchSprites != null && punchSprites.Length > 0)
+        {
+            attackSprites = punchSprites;
+        }
+
+        SetupJoystickReader();
+    }
+
+    private void SetupJoystickReader()
+    {
+        if (joystick == null) return;
+        var t = joystick.GetType();
+
+        var vecProp = t.GetProperty("InputVector") ?? t.GetProperty("inputVector");
+        if (vecProp != null)
+        {
+            getJoyX = () => ((Vector2)vecProp.GetValue(joystick)).x;
+            getJoyY = () => ((Vector2)vecProp.GetValue(joystick)).y;
+            return;
+        }
+
+        var vecField = t.GetField("InputVector") ?? t.GetField("inputVector");
+        if (vecField != null)
+        {
+            getJoyX = () => ((Vector2)vecField.GetValue(joystick)).x;
+            getJoyY = () => ((Vector2)vecField.GetValue(joystick)).y;
+            return;
+        }
+
+        var hProp = t.GetProperty("Horizontal") ?? t.GetProperty("horizontal");
+        var vProp = t.GetProperty("Vertical") ?? t.GetProperty("vertical");
+        if (hProp != null && vProp != null)
+        {
+            getJoyX = () => (float)hProp.GetValue(joystick);
+            getJoyY = () => (float)vProp.GetValue(joystick);
+            return;
+        }
+
+        var hField = t.GetField("Horizontal") ?? t.GetField("horizontal");
+        var vField = t.GetField("Vertical") ?? t.GetField("vertical");
+        if (hField != null && vField != null)
+        {
+            getJoyX = () => (float)hField.GetValue(joystick);
+            getJoyY = () => (float)vField.GetValue(joystick);
+        }
+    }
+
+    public void SetFreeze(bool freeze)
+    {
+        isFrozen = freeze;
+        if (isFrozen)
+        {
+            movement = Vector2.zero;
+            isAttacking = false;
+            isThrowingShuriken = false;
+        }
+    }
+
+    public void EquipSword(bool equip)
+    {
+        isSwordEquipped = equip;
+        attackSprites = equip ? swordSprites : punchSprites;
     }
 
     void Update()
     {
-        // 1. Input Serangan (J = Attack, K = Shuriken)
+        if (isFrozen)
+        {
+            movement = Vector2.zero;
+            HandleAnimation();
+            if (GameAudioManager.Instance != null) GameAudioManager.Instance.ProcessFootstep(false);
+            return;
+        }
+
+        // 1. Input Serang
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking && !isThrowingShuriken)
         {
-            TriggerAction(attackSprites, true, false);
+            TriggerAttack();
         }
         else if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !isThrowingShuriken)
         {
@@ -45,81 +141,94 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 2. Input Gerak
-        if (!isAttacking && !isThrowingShuriken)
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        if (joystick != null)
         {
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = Input.GetAxisRaw("Vertical");
+            float jX = getJoyX != null ? getJoyX() : 0f;
+            float jY = getJoyY != null ? getJoyY() : 0f;
 
-            if (joystick != null)
+            if (Mathf.Abs(jX) > 0.05f || Mathf.Abs(jY) > 0.05f)
             {
-                float jX = GetJoystickAxis("Horizontal");
-                float jY = GetJoystickAxis("Vertical");
-
-                if (Mathf.Abs(jX) > 0.05f || Mathf.Abs(jY) > 0.05f)
-                {
-                    moveX = jX;
-                    moveY = jY;
-                }
-            }
-
-            movement.x = moveX;
-            movement.y = moveY;
-
-            if (movement.sqrMagnitude > 1f)
-            {
-                movement = movement.normalized;
+                moveX = jX;
+                moveY = jY;
             }
         }
-        else
+
+        movement.x = moveX;
+        movement.y = moveY;
+
+        if (movement.sqrMagnitude > 1f)
         {
-            movement = Vector2.zero;
+            movement = movement.normalized;
         }
 
-        // 3. Flip Badan
+        // 3. Audio Footstep (Hanya aktif saat bergerak dan tidak menyerang)
+        bool isMoving = movement.sqrMagnitude > 0.05f && !isAttacking;
+        if (GameAudioManager.Instance != null)
+        {
+            GameAudioManager.Instance.ProcessFootstep(isMoving);
+        }
+
+        // 4. Flip Visual
         if (movement.x < 0) spriteRenderer.flipX = true;
         else if (movement.x > 0) spriteRenderer.flipX = false;
 
-        // 4. Jalankan Animasi
+        // 5. Animasi
         HandleAnimation();
     }
 
-    float GetJoystickAxis(string axis)
+    // Dipanggil baik dari tombol keyboard J maupun tombol KickButton di layar
+    public void TriggerAttack()
     {
-        if (joystick == null) return 0f;
+        if (isFrozen || isAttacking || isThrowingShuriken) return;
 
-        // Coba baca properti atau variabel umum pada VirtualJoystick
-        var prop = joystick.GetType().GetProperty(axis) ?? joystick.GetType().GetProperty(axis.ToLower());
-        if (prop != null) return (float)prop.GetValue(joystick);
-
-        var field = joystick.GetType().GetField(axis) ?? joystick.GetType().GetField(axis.ToLower());
-        if (field != null) return (float)field.GetValue(joystick);
-
-        var vecProp = joystick.GetType().GetProperty("InputVector") ?? joystick.GetType().GetProperty("inputVector");
-        if (vecProp != null)
+        PlayerCombat combat = GetComponent<PlayerCombat>();
+        if (combat != null)
         {
-            Vector2 vec = (Vector2)vecProp.GetValue(joystick);
-            return axis == "Horizontal" ? vec.x : vec.y;
+            combat.PerformAttack();
         }
-
-        var vecField = joystick.GetType().GetField("InputVector") ?? joystick.GetType().GetField("inputVector");
-        if (vecField != null)
+        else
         {
-            Vector2 vec = (Vector2)vecField.GetValue(joystick);
-            return axis == "Horizontal" ? vec.x : vec.y;
+            ExecuteAttack();
         }
-
-        return 0f;
     }
 
-    void TriggerAction(Sprite[] actionSprites, bool attacking, bool throwing)
+    // Menjalankan animasi dan memainkan audio yang sesuai dengan senjata
+    public void ExecuteAttack()
     {
-        if (actionSprites == null || actionSprites.Length == 0) return;
+        if (isFrozen) return;
+
+        TriggerAction(attackSprites, true, false);
+
+        if (GameAudioManager.Instance != null)
+        {
+            if (isSwordEquipped)
+            {
+                GameAudioManager.Instance.PlaySwordSFX();
+            }
+            else
+            {
+                GameAudioManager.Instance.PlayPunchSFX();
+            }
+        }
+    }
+
+    public void TriggerAction(Sprite[] actionSprites, bool attacking, bool throwing)
+    {
+        if (isFrozen || actionSprites == null || actionSprites.Length == 0) return;
 
         isAttacking = attacking;
         isThrowingShuriken = throwing;
         currentFrame = 0;
         animTimer = 0f;
         lastAnimation = actionSprites;
+    }
+
+    public void TriggerActionFromExternal(Sprite[] sprites, bool attacking, bool throwing)
+    {
+        TriggerAction(sprites, attacking, throwing);
     }
 
     void HandleAnimation()
@@ -164,6 +273,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isFrozen) return;
+
+        // Posisi bergerak mulus tanpa penumpukan audio di thread fisika
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }

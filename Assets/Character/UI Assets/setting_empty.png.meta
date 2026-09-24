@@ -1,0 +1,278 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
+guid: ca9a236942eaa4468ae80fe22f628609
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
+guid: 264ba0aaea969413eb41bb6790f7bebf
+========
+guid: c84479562bbaa46c79b2c3073c2de5ea
+>>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
+      213: 5403902500659851321
+    second: MC MOM_Attack Shuriken 2@4x_0
+  - first:
+      213: 6335806938948821154
+    second: MC MOM_Attack Shuriken 2@4x_1
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
+      213: -2105518428048661092
+    second: Yakuza 2_Walk 1_0
+========
+      213: -718515268269022807
+    second: setting_empty_0
+>>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
+      name: MC MOM_Attack Shuriken 2@4x_0
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
+      name: Yakuza 2_Walk 1_0
+========
+      name: setting_empty_0
+>>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
+        width: 97
+        height: 128
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
+        width: 30
+        height: 32
+========
+        width: 116
+        height: 116
+>>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
+      spriteID: 930fca871b48efa40800000000000000
+      internalID: 5403902500659851321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC MOM_Attack Shuriken 2@4x_1
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 54
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a0ef79a7de4de750800000000000000
+      internalID: 6335806938948821154
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
+      spriteID: c95ee1c2522b7c2e0800000000000000
+      internalID: -2105518428048661092
+========
+      spriteID: 9a1612d9b225706f0800000000000000
+      internalID: -718515268269022807
+>>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2@4x.png.meta
+      MC MOM_Attack Shuriken 2@4x_0: 5403902500659851321
+      MC MOM_Attack Shuriken 2@4x_1: 6335806938948821154
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 2_Walk 1.png.meta
+      Yakuza 2_Walk 1_0: -2105518428048661092
+========
+      setting_empty_0: -718515268269022807
+>>>>>>>> origin/main:Assets/Character/UI Assets/setting_empty.png.meta
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

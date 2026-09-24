@@ -1,10 +1,30 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/UI Assets/frame_panel 1.png.meta
 guid: 5809274cbccef46ec867eae739ba745e
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 1_Attack.png.meta
+guid: c36c5ea22256f48efbc239668637c02c
+========
+guid: ec1ef1dbc1724481998f50172927b12c
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza1_Attack.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
+<<<<<<<< HEAD:Assets/UI Assets/frame_panel 1.png.meta
       213: -7408163583825142751
     second: frame_panel 1_0
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 1_Attack.png.meta
+      213: -6844213793798805003
+    second: Yakuza 1_Attack_0
+  - first:
+      213: 2192386714759397924
+    second: Yakuza 1_Attack_1
+========
+      213: -7886359649443678600
+    second: Yakuza1_Attack_0
+  - first:
+      213: -7427873893137478657
+    second: Yakuza1_Attack_1
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza1_Attack.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -167,13 +187,27 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/UI Assets/frame_panel 1.png.meta
       name: frame_panel 1_0
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 1_Attack.png.meta
+      name: Yakuza 1_Attack_0
+========
+      name: Yakuza1_Attack_0
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza1_Attack.png.meta
       rect:
         serializedVersion: 2
         x: 0
         y: 0
+<<<<<<<< HEAD:Assets/UI Assets/frame_panel 1.png.meta
         width: 576
         height: 320
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 1_Attack.png.meta
+        width: 32
+        height: 32
+========
+        width: 125
+        height: 128
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza1_Attack.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +216,60 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/UI Assets/frame_panel 1.png.meta
       spriteID: 12c1e1c787ae03990800000000000000
       internalID: -7408163583825142751
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 1_Attack.png.meta
+      spriteID: 5f92bc511d77401a0800000000000000
+      internalID: -6844213793798805003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yakuza 1_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 4
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 422058fe91cec6e10800000000000000
+      internalID: 2192386714759397924
+========
+      spriteID: 8767febbea50e8290800000000000000
+      internalID: -7886359649443678600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yakuza1_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 19
+        width: 21
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffb842b7c04eae890800000000000000
+      internalID: -7427873893137478657
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza1_Attack.png.meta
       vertices: []
       indices: 
       edges: []
@@ -202,7 +288,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/UI Assets/frame_panel 1.png.meta
       frame_panel 1_0: -7408163583825142751
+|||||||| merged common ancestors:Assets/Character/YAKUZA/Yakuza 1_Attack.png.meta
+      Yakuza 1_Attack_0: -6844213793798805003
+      Yakuza 1_Attack_1: 2192386714759397924
+========
+      Yakuza1_Attack_0: -7886359649443678600
+      Yakuza1_Attack_1: -7427873893137478657
+>>>>>>>> origin/main:Assets/Character/YAKUZA/Yakuza1_Attack.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

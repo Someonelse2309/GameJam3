@@ -206,7 +206,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.040008545, y: -0.17, z: 0}
-  m_LocalScale: {x: 21.3, y: 10.865368, z: 1}
+  m_LocalScale: {x: 22.3, y: 10.865368, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -453,9 +453,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 68, y: -122}
+  m_AnchoredPosition: {x: -214, y: -410.7}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &429261150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,8 +503,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -305.25708, y: 0, z: -171.09048, w: 0}
+  m_margin: {x: -636.03723, y: -51.550236, z: -1266.5309, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -768,7 +768,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 41375d96547a143f99777a19db5f0b9e, type: 3}
   sfxLibrary:
   - {fileID: 8300000, guid: 8505f0248c3c2426da5e7cb137c63226, type: 3}
-  voiceLibrary: []
+  voiceLibrary:
+  - {fileID: 8300000, guid: 1769144d7b4e44690b31508c96e77b7a, type: 3}
+  - {fileID: 8300000, guid: e6ab1fd2043c249398e64c2c273d7e6f, type: 3}
+  - {fileID: 8300000, guid: 02e4d83aa84484b6c8ad1f632643a51b, type: 3}
+  - {fileID: 8300000, guid: f93e216b0c22146738025d22aabe880f, type: 3}
+  - {fileID: 8300000, guid: 5d73f9f07306d438682c3070d60f7efb, type: 3}
+  - {fileID: 8300000, guid: c1d333f099c844b15af69d1de28a4b97, type: 3}
 --- !u!4 &963575488
 Transform:
   m_ObjectHideFlags: 0

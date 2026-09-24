@@ -1,0 +1,252 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/UI Assets/dialog_panel.png.meta
+guid: a5ddeba739a854ef1bbead1d6db8c8d8
+|||||||| merged common ancestors:Assets/Character/NPC/NPC Blacksmith_Idle.png.meta
+guid: fd7929b077ed24fafa955d45f16be317
+========
+guid: 386bd6d995066414f961340a4ea6b173
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_Idle2.png.meta
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+<<<<<<<< HEAD:Assets/UI Assets/dialog_panel.png.meta
+      213: -86686868404713719
+    second: dialog_panel_0
+|||||||| merged common ancestors:Assets/Character/NPC/NPC Blacksmith_Idle.png.meta
+      213: 4745309695905378469
+    second: NPC Blacksmith_Idle_0
+========
+      213: 1386449568352103062
+    second: MOM_Idle2_0
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_Idle2.png.meta
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+<<<<<<<< HEAD:Assets/UI Assets/dialog_panel.png.meta
+      name: dialog_panel_0
+|||||||| merged common ancestors:Assets/Character/NPC/NPC Blacksmith_Idle.png.meta
+      name: NPC Blacksmith_Idle_0
+========
+      name: MOM_Idle2_0
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_Idle2.png.meta
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 0
+<<<<<<<< HEAD:Assets/UI Assets/dialog_panel.png.meta
+        width: 1040
+        height: 308
+|||||||| merged common ancestors:Assets/Character/NPC/NPC Blacksmith_Idle.png.meta
+        width: 40
+        height: 32
+========
+        width: 99
+        height: 128
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_Idle2.png.meta
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+<<<<<<<< HEAD:Assets/UI Assets/dialog_panel.png.meta
+      spriteID: 907cb02a0c60ccef0800000000000000
+      internalID: -86686868404713719
+|||||||| merged common ancestors:Assets/Character/NPC/NPC Blacksmith_Idle.png.meta
+      spriteID: 5a038a5d60abad140800000000000000
+      internalID: 4745309695905378469
+========
+      spriteID: 69aee946988ad3310800000000000000
+      internalID: 1386449568352103062
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_Idle2.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+<<<<<<<< HEAD:Assets/UI Assets/dialog_panel.png.meta
+      dialog_panel_0: -86686868404713719
+|||||||| merged common ancestors:Assets/Character/NPC/NPC Blacksmith_Idle.png.meta
+      NPC Blacksmith_Idle_0: 4745309695905378469
+========
+      MOM_Idle2_0: 1386449568352103062
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_Idle2.png.meta
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
