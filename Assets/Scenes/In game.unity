@@ -579,7 +579,7 @@ MonoBehaviour:
   attackDamage: 20
   attackSpeed: 1.5
   moveSpeed: 1.6
-  attackDistance: 0.45
+  attackDistance: 0.55
   hitRadius: 0.35
   playerLayer:
     serializedVersion: 2
@@ -587,17 +587,15 @@ MonoBehaviour:
   beggarTarget: {fileID: 0}
   shakedownPosition: {x: 0.397, y: 1.277}
   spriteRenderer: {fileID: 0}
-  idleSprites:
-  - {fileID: -6008602503000455829, guid: cb07ebd423333484f87bd96757400661, type: 3}
-  - {fileID: -9148185302342945552, guid: 9c6fbeb71da8544c89f86e8669194df4, type: 3}
-  - {fileID: 8014124927405256048, guid: 44d4d24e0408e4a338d599a8723cfcb0, type: 3}
+  idleSprites: []
   walkSprites:
-  - {fileID: 158584226428969295, guid: a50180eeb54d546e88f3baadaf4d5894, type: 3}
-  - {fileID: 4888825967157431615, guid: 547b68f5b568145c2a639d8c37d6c291, type: 3}
-  - {fileID: 6692860993746055326, guid: aaa0f3a93ba4b4b4e96b13fca9f878c0, type: 3}
+  - {fileID: -4592431770356532831, guid: 098e4c76b03db4a6e87f4d9e3a82410a, type: 3}
+  - {fileID: 6513930492109658322, guid: 72694772cea3340b9b77985a3bc2b2e4, type: 3}
+  - {fileID: 36467833687768363, guid: 04757e84c442d41d7b2adc18083e93fa, type: 3}
   attackSprites:
-  - {fileID: 1664892361523295985, guid: 1d343d6b9e67c40f58f1560e382481bd, type: 3}
-  - {fileID: -358972339438835822, guid: d17fcf93abda444e0bdfe1e8794648c5, type: 3}
+  - {fileID: 3659823079263042752, guid: 26adc8debd13e493f83be37ec27b5fc7, type: 3}
+  - {fileID: 1451098126827855752, guid: 769c6a22c5e394aa9bcdd9103e88b99d, type: 3}
+  - {fileID: 1270170926842375285, guid: 78deade61784e4aa5a3a9ed1d80f3c09, type: 3}
   frameRate: 0.15
 --- !u!50 &84213658
 Rigidbody2D:
@@ -683,7 +681,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 1.28}
+    oldSize: {x: 1.14, y: 1.29}
     newSize: {x: 0.94, y: 1.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -740,7 +738,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6008602503000455829, guid: cb07ebd423333484f87bd96757400661, type: 3}
+  m_Sprite: {fileID: 3659823079263042752, guid: 26adc8debd13e493f83be37ec27b5fc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -802,8 +800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
   spriteRenderer: {fileID: 0}
   idleSprites:
-  - {fileID: 7829464861233414611, guid: 573b903203f984d72bfd5a2925a0c320, type: 3}
-  - {fileID: -7886359649443678600, guid: ec1ef1dbc1724481998f50172927b12c, type: 3}
+  - {fileID: 1031184583733744070, guid: b480e1431786849e9a076a997a672fdf, type: 3}
+  - {fileID: 5759934201783007021, guid: f20c8705a7f81416d988e39093529b08, type: 3}
   frameRate: 0.15
 --- !u!50 &87988901
 Rigidbody2D:
@@ -844,7 +842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b680331f4618470098f61e5c00d3733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
-  attackDamage: 15
+  attackDamage: 20
   attackSpeed: 1.5
   moveSpeed: 1.6
   attackDistance: 0.45
@@ -855,16 +853,15 @@ MonoBehaviour:
   beggarTarget: {fileID: 0}
   shakedownPosition: {x: 0.397, y: 1.277}
   spriteRenderer: {fileID: 0}
-  idleSprites:
-  - {fileID: -841194614512354614, guid: d5df770d009504352ad0e4d0788f05df, type: 3}
-  - {fileID: -7805958317674748314, guid: a8a892b5c7b6a413a8ae9649f120f1cc, type: 3}
+  idleSprites: []
   walkSprites:
-  - {fileID: -1306470820507272025, guid: 761aaf652523246769b4bb02b39e503b, type: 3}
-  - {fileID: 6125683097748370129, guid: ac7b1a7f3b2a945898bb6944a802896f, type: 3}
-  - {fileID: -7805958317674748314, guid: a8a892b5c7b6a413a8ae9649f120f1cc, type: 3}
+  - {fileID: -6845125317427844572, guid: 1c3f21a5698134a9f9f17f09c6427d0a, type: 3}
+  - {fileID: -9144380075816956565, guid: 4ef42e5bcedb74fc9b390e06f8dccf31, type: 3}
+  - {fileID: -5346469878937952393, guid: c69bb6b84d1584f398e053de98c72fee, type: 3}
   attackSprites:
-  - {fileID: 6415133266888074997, guid: 6aca7c5a782a746088d786aeb715284e, type: 3}
-  - {fileID: -6706817488489893463, guid: ce472f1eb70a04b8bbf31e9076a275a1, type: 3}
+  - {fileID: -635859504809016851, guid: 7f8d1adc6ac3546ecaa9b54030794d14, type: 3}
+  - {fileID: -1456730494583331054, guid: 3492d20d9f708451f89b30efc5617cc1, type: 3}
+  - {fileID: -2985379800299297402, guid: c4228db5e508a44bfa3cf6eebdfadd47, type: 3}
   frameRate: 0.15
 --- !u!114 &87988903
 MonoBehaviour:
@@ -923,7 +920,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.74, y: 1.28}
+    oldSize: {x: 1.23, y: 1.29}
     newSize: {x: 0.98, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -980,7 +977,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -841194614512354614, guid: d5df770d009504352ad0e4d0788f05df, type: 3}
+  m_Sprite: {fileID: 1031184583733744070, guid: b480e1431786849e9a076a997a672fdf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -1897,11 +1894,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b680331f4618470098f61e5c00d3733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
-  attackDamage: 15
+  attackDamage: 25
   attackSpeed: 1.5
   moveSpeed: 1.6
-  attackDistance: 0.45
-  hitRadius: 0.35
+  attackDistance: 0.55
+  hitRadius: 0.4
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -1930,7 +1927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
-  maxHealth: 100
+  maxHealth: 150
   currentHealth: 0
   isDead: 0
   healthBarFill: {fileID: 0}
@@ -5738,6 +5735,7 @@ MonoBehaviour:
   popupPanel: {fileID: 1136738983}
   popupItemIcon: {fileID: 1120835879}
   popupItemNameText: {fileID: 1782251797}
+  defaultObtainSound: {fileID: 8300000, guid: 04face893da4b464b9d9d1ea88a05c18, type: 3}
 --- !u!4 &336083714
 Transform:
   m_ObjectHideFlags: 0
@@ -6188,10 +6186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b680331f4618470098f61e5c00d3733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
-  attackDamage: 15
+  attackDamage: 20
   attackSpeed: 1.5
   moveSpeed: 1.6
-  attackDistance: 0.45
+  attackDistance: 0.65
   hitRadius: 0.35
   playerLayer:
     serializedVersion: 2
@@ -6200,16 +6198,15 @@ MonoBehaviour:
   shakedownPosition: {x: 0.397, y: 1.277}
   spriteRenderer: {fileID: 0}
   idleSprites:
-  - {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
-  - {fileID: 6421381375179079389, guid: fb3f1a3c36336480a9c4a6d4fcb077c2, type: 3}
-  - {fileID: 99797836390871179, guid: 5a36aeba4898b4b4f8174b3bf8ca9d85, type: 3}
+  - {fileID: -5346469878937952393, guid: c69bb6b84d1584f398e053de98c72fee, type: 3}
   walkSprites:
-  - {fileID: 4703995123541778657, guid: 03368afd386a14b5da649163617fe1ca, type: 3}
-  - {fileID: -6004980011581254953, guid: 09338f2a74c7d42b7a715b468c905a41, type: 3}
-  - {fileID: 8477497619846322172, guid: 92185333a368f479c91034a09666ae33, type: 3}
+  - {fileID: -6845125317427844572, guid: 1c3f21a5698134a9f9f17f09c6427d0a, type: 3}
+  - {fileID: -9144380075816956565, guid: 4ef42e5bcedb74fc9b390e06f8dccf31, type: 3}
+  - {fileID: -5346469878937952393, guid: c69bb6b84d1584f398e053de98c72fee, type: 3}
   attackSprites:
-  - {fileID: 7054732860433737591, guid: 3f8cd1990b960487c8f92e6ebc5ba0c6, type: 3}
-  - {fileID: 1061287277523489110, guid: 55022538906db4529b253317280d2831, type: 3}
+  - {fileID: -635859504809016851, guid: 7f8d1adc6ac3546ecaa9b54030794d14, type: 3}
+  - {fileID: -1456730494583331054, guid: 3492d20d9f708451f89b30efc5617cc1, type: 3}
+  - {fileID: -2985379800299297402, guid: c4228db5e508a44bfa3cf6eebdfadd47, type: 3}
   frameRate: 0.15
 --- !u!114 &509662903
 MonoBehaviour:
@@ -6268,7 +6265,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 1.29}
+    oldSize: {x: 1.23, y: 1.29}
     newSize: {x: 0.94, y: 1.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6325,7 +6322,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
+  m_Sprite: {fileID: 1031184583733744070, guid: b480e1431786849e9a076a997a672fdf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -7529,6 +7526,7 @@ GameObject:
   - component: {fileID: 726714155}
   - component: {fileID: 726714153}
   - component: {fileID: 726714154}
+  - component: {fileID: 726714159}
   m_Layer: 0
   m_Name: NPC_WaveBigYakuza1
   m_TagString: Enemy
@@ -7548,7 +7546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b680331f4618470098f61e5c00d3733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
-  attackDamage: 15
+  attackDamage: 25
   attackSpeed: 1.5
   moveSpeed: 1.6
   attackDistance: 0.45
@@ -7559,17 +7557,15 @@ MonoBehaviour:
   beggarTarget: {fileID: 0}
   shakedownPosition: {x: 0.397, y: 1.277}
   spriteRenderer: {fileID: 0}
-  idleSprites:
-  - {fileID: -6008602503000455829, guid: cb07ebd423333484f87bd96757400661, type: 3}
-  - {fileID: -9148185302342945552, guid: 9c6fbeb71da8544c89f86e8669194df4, type: 3}
-  - {fileID: 8014124927405256048, guid: 44d4d24e0408e4a338d599a8723cfcb0, type: 3}
+  idleSprites: []
   walkSprites:
-  - {fileID: 158584226428969295, guid: a50180eeb54d546e88f3baadaf4d5894, type: 3}
-  - {fileID: 4888825967157431615, guid: 547b68f5b568145c2a639d8c37d6c291, type: 3}
-  - {fileID: 6692860993746055326, guid: aaa0f3a93ba4b4b4e96b13fca9f878c0, type: 3}
+  - {fileID: -4592431770356532831, guid: 098e4c76b03db4a6e87f4d9e3a82410a, type: 3}
+  - {fileID: 6513930492109658322, guid: 72694772cea3340b9b77985a3bc2b2e4, type: 3}
+  - {fileID: 36467833687768363, guid: 04757e84c442d41d7b2adc18083e93fa, type: 3}
   attackSprites:
-  - {fileID: 1664892361523295985, guid: 1d343d6b9e67c40f58f1560e382481bd, type: 3}
-  - {fileID: -358972339438835822, guid: d17fcf93abda444e0bdfe1e8794648c5, type: 3}
+  - {fileID: 3659823079263042752, guid: 26adc8debd13e493f83be37ec27b5fc7, type: 3}
+  - {fileID: 1451098126827855752, guid: 769c6a22c5e394aa9bcdd9103e88b99d, type: 3}
+  - {fileID: 1270170926842375285, guid: 78deade61784e4aa5a3a9ed1d80f3c09, type: 3}
   frameRate: 0.15
 --- !u!50 &726714154
 Rigidbody2D:
@@ -7655,7 +7651,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 1.28}
+    oldSize: {x: 1.26, y: 1.29}
     newSize: {x: 0.94, y: 1.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7712,7 +7708,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6008602503000455829, guid: cb07ebd423333484f87bd96757400661, type: 3}
+  m_Sprite: {fileID: -5848661380939941906, guid: ffe7fae30518e4d3da0029fa3728e320, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -7738,6 +7734,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &726714159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726714152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5602b3cc0044fefa3f3cd4448d2c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: -5848661380939941906, guid: ffe7fae30518e4d3da0029fa3728e320, type: 3}
+  - {fileID: 4795694827892625803, guid: d82d1af883cd34ddbb9d633c7e814b02, type: 3}
+  - {fileID: -3072038402066322050, guid: bad6662443f07495cbae9118ba47d808, type: 3}
+  frameRate: 0.12
 --- !u!1 &731352527
 GameObject:
   m_ObjectHideFlags: 0
@@ -8460,6 +8474,7 @@ GameObject:
   - component: {fileID: 777824756}
   - component: {fileID: 777824755}
   - component: {fileID: 777824754}
+  - component: {fileID: 777824760}
   m_Layer: 0
   m_Name: NPC_WaveBigYakuza2
   m_TagString: Enemy
@@ -8669,6 +8684,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &777824760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777824753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5602b3cc0044fefa3f3cd4448d2c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
+  - {fileID: 99797836390871179, guid: 5a36aeba4898b4b4f8174b3bf8ca9d85, type: 3}
+  frameRate: 0.12
 --- !u!1 &795995354
 GameObject:
   m_ObjectHideFlags: 0
@@ -25859,7 +25891,7 @@ MonoBehaviour:
   guards: []
   floatSpeed: 4
   floatHeight: 0.08
-  collectSound: {fileID: 8300000, guid: 47d86dd01232b4487885ee21dd6c69b3, type: 3}
+  collectSound: {fileID: 8300000, guid: 5d216b839014543db8f46e1e2bab8ddc, type: 3}
 --- !u!61 &818627023
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -25998,10 +26030,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
   attackDamage: 40
-  attackSpeed: 1.5
-  moveSpeed: 1.6
-  attackDistance: 0.45
-  hitRadius: 0.35
+  attackSpeed: 2
+  moveSpeed: 1.7
+  attackDistance: 0.55
+  hitRadius: 0.55
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -27345,7 +27377,7 @@ MonoBehaviour:
   - {fileID: 887904553}
   floatSpeed: 4
   floatHeight: 0.08
-  collectSound: {fileID: 8300000, guid: 47d86dd01232b4487885ee21dd6c69b3, type: 3}
+  collectSound: {fileID: 8300000, guid: 5d216b839014543db8f46e1e2bab8ddc, type: 3}
 --- !u!61 &935243696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38098,7 +38130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b680331f4618470098f61e5c00d3733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
-  attackDamage: 15
+  attackDamage: 20
   attackSpeed: 1.5
   moveSpeed: 1.6
   attackDistance: 0.45
@@ -38110,16 +38142,15 @@ MonoBehaviour:
   shakedownPosition: {x: 0.397, y: 1.277}
   spriteRenderer: {fileID: 0}
   idleSprites:
-  - {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
-  - {fileID: 6421381375179079389, guid: fb3f1a3c36336480a9c4a6d4fcb077c2, type: 3}
-  - {fileID: 99797836390871179, guid: 5a36aeba4898b4b4f8174b3bf8ca9d85, type: 3}
+  - {fileID: 1031184583733744070, guid: b480e1431786849e9a076a997a672fdf, type: 3}
   walkSprites:
-  - {fileID: 4703995123541778657, guid: 03368afd386a14b5da649163617fe1ca, type: 3}
-  - {fileID: -6004980011581254953, guid: 09338f2a74c7d42b7a715b468c905a41, type: 3}
-  - {fileID: 8477497619846322172, guid: 92185333a368f479c91034a09666ae33, type: 3}
+  - {fileID: -6845125317427844572, guid: 1c3f21a5698134a9f9f17f09c6427d0a, type: 3}
+  - {fileID: -9144380075816956565, guid: 4ef42e5bcedb74fc9b390e06f8dccf31, type: 3}
+  - {fileID: -5346469878937952393, guid: c69bb6b84d1584f398e053de98c72fee, type: 3}
   attackSprites:
-  - {fileID: 7054732860433737591, guid: 3f8cd1990b960487c8f92e6ebc5ba0c6, type: 3}
-  - {fileID: 1061287277523489110, guid: 55022538906db4529b253317280d2831, type: 3}
+  - {fileID: -635859504809016851, guid: 7f8d1adc6ac3546ecaa9b54030794d14, type: 3}
+  - {fileID: -1456730494583331054, guid: 3492d20d9f708451f89b30efc5617cc1, type: 3}
+  - {fileID: -2985379800299297402, guid: c4228db5e508a44bfa3cf6eebdfadd47, type: 3}
   frameRate: 0.15
 --- !u!114 &1408961728
 MonoBehaviour:
@@ -38178,7 +38209,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 1.29}
+    oldSize: {x: 1.23, y: 1.29}
     newSize: {x: 0.94, y: 1.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -38235,7 +38266,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
+  m_Sprite: {fileID: 1031184583733744070, guid: b480e1431786849e9a076a997a672fdf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -41085,7 +41116,7 @@ MonoBehaviour:
   guards: []
   floatSpeed: 4
   floatHeight: 0.08
-  collectSound: {fileID: 8300000, guid: 47d86dd01232b4487885ee21dd6c69b3, type: 3}
+  collectSound: {fileID: 8300000, guid: 5d216b839014543db8f46e1e2bab8ddc, type: 3}
 --- !u!61 &1640786957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -45989,7 +46020,7 @@ MonoBehaviour:
   - {fileID: 509662902}
   floatSpeed: 4
   floatHeight: 0.08
-  collectSound: {fileID: 8300000, guid: 47d86dd01232b4487885ee21dd6c69b3, type: 3}
+  collectSound: {fileID: 8300000, guid: 5d216b839014543db8f46e1e2bab8ddc, type: 3}
 --- !u!61 &1687598187
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -47265,6 +47296,7 @@ GameObject:
   - component: {fileID: 1910669617}
   - component: {fileID: 1910669616}
   - component: {fileID: 1910669615}
+  - component: {fileID: 1910669621}
   m_Layer: 0
   m_Name: NPC_BigYakuza2
   m_TagString: Enemy
@@ -47474,6 +47506,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1910669621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910669614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5602b3cc0044fefa3f3cd4448d2c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: -6008602503000455829, guid: cb07ebd423333484f87bd96757400661, type: 3}
+  - {fileID: -9148185302342945552, guid: 9c6fbeb71da8544c89f86e8669194df4, type: 3}
+  - {fileID: 8014124927405256048, guid: 44d4d24e0408e4a338d599a8723cfcb0, type: 3}
+  frameRate: 0.12
 --- !u!1 &1918078040
 GameObject:
   m_ObjectHideFlags: 0

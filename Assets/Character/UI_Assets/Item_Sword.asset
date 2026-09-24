@@ -17,3 +17,4 @@ MonoBehaviour:
   description: 
   itemIcon: {fileID: -3470841495592130850, guid: feb3d7c4c2983454398f9f506a5d1b37, type: 3}
   isWeapon: 1
+  customObtainSound: {fileID: 8300000, guid: 8f79a0f84dc4d457aa6c4f01550c9ec4, type: 3}

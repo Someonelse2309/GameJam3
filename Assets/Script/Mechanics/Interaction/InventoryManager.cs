@@ -10,17 +10,21 @@ public class InventoryManager : MonoBehaviour
 
     [Header("Inventory Data")]
     public List<ItemData> items = new List<ItemData>();
-    public int maxCapacity = 9; // Grid 3x3
+    public int maxCapacity = 9;
 
     [Header("UI References")]
     public GameObject inventoryPanel;
-    public Transform itemSlotContainer; // Tempat slot item (Grid Layout Group 3x3)
+    public Transform itemSlotContainer;
     public GameObject itemSlotPrefab;
 
     [Header("Obtained & Equip Popup (Toast)")]
     public GameObject popupPanel;
     public Image popupItemIcon;
     public TMP_Text popupItemNameText;
+
+    [Header("Audio SFX")]
+    [Tooltip("Suara default saat obtain item jika item tidak memiliki custom sound")]
+    public AudioClip defaultObtainSound;
 
     private void Awake()
     {
@@ -46,12 +50,36 @@ public class InventoryManager : MonoBehaviour
         if (items.Count >= maxCapacity) return;
 
         items.Add(item);
+
+        // Bunyikan efek suara obtain
+        PlayObtainSound(item);
+
         ShowObtainedPopup(item);
 
-        // Jika tas sedang terbuka, langsung perbarui tampilannya
         if (inventoryPanel != null && inventoryPanel.activeSelf)
         {
             RenderInventory();
+        }
+    }
+
+    private void PlayObtainSound(ItemData item)
+    {
+        // Prioritaskan suara custom item, jika kosong gunakan default sound
+        AudioClip soundToPlay = (item != null && item.customObtainSound != null) 
+                                ? item.customObtainSound 
+                                : defaultObtainSound;
+
+        if (soundToPlay != null)
+        {
+            if (GameAudioManager.Instance != null)
+            {
+                GameAudioManager.Instance.PlaySFX(soundToPlay);
+            }
+            else
+            {
+                Vector3 pos = Camera.main != null ? Camera.main.transform.position : transform.position;
+                AudioSource.PlayClipAtPoint(soundToPlay, pos);
+            }
         }
     }
 
@@ -73,18 +101,15 @@ public class InventoryManager : MonoBehaviour
     {
         if (itemSlotContainer == null || itemSlotPrefab == null) return;
 
-        // 1. Bersihkan slot lama
         foreach (Transform child in itemSlotContainer)
         {
             Destroy(child.gameObject);
         }
 
-        // 2. Buat slot berdasarkan item yang ada di list
         foreach (ItemData item in items)
         {
             GameObject slotObj = Instantiate(itemSlotPrefab, itemSlotContainer);
 
-            // Pasang ikon sprite item
             Image iconImage = slotObj.GetComponent<Image>() ?? slotObj.GetComponentInChildren<Image>();
             if (iconImage != null && item != null && item.itemIcon != null)
             {
@@ -93,7 +118,6 @@ public class InventoryManager : MonoBehaviour
                 iconImage.gameObject.SetActive(true);
             }
 
-            // 3. Pasang Button Click untuk memicu fungsi Use/Equip
             Button slotButton = slotObj.GetComponent<Button>();
             if (slotButton == null) slotButton = slotObj.AddComponent<Button>();
 
@@ -103,19 +127,15 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // Fungsi saat slot item di-klik
     public void OnItemClicked(ItemData item)
     {
         if (item == null) return;
 
-        // Jika item adalah Katana / Senjata
         if (item.isWeapon && PlayerMovement.Instance != null)
         {
-            // Toggle pasang / lepas pedang
             bool toggleState = !PlayerMovement.Instance.isSwordEquipped;
             PlayerMovement.Instance.EquipSword(toggleState);
 
-            // Tampilkan notifikasi toast di layar
             string statusMsg = toggleState ? "Equipped: " + item.itemName : "Unequipped: " + item.itemName;
             ShowStatusPopup(item, statusMsg);
         }

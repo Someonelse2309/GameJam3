@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190a95c9f9a2a4f5fa13d248d9069041, type: 3}
   m_Name: Item_Yakitori
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemId: 
   itemName: Item_Yakitori
-  itemIcon: {fileID: 2245098736436319872, guid: 55c3f5981cabd4d38ad97fec8b753a71, type: 3}
   description: Dua porsi Yakitori lezat.
+  itemIcon: {fileID: 2245098736436319872, guid: 55c3f5981cabd4d38ad97fec8b753a71, type: 3}
+  isWeapon: 0
+  customObtainSound: {fileID: 8300000, guid: fa470d917cc494a20afce782b1edb910, type: 3}

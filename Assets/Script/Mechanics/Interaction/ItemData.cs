@@ -10,5 +10,9 @@ public class ItemData : ScriptableObject
     public Sprite itemIcon;
 
     [Header("Item Type")]
-    public bool isWeapon = false; // Centang untuk Katana
+    public bool isWeapon = false;
+
+    [Header("Audio SFX")]
+    [Tooltip("Efek suara khusus saat item ini didapatkan (opsional)")]
+    public AudioClip customObtainSound;
 }
