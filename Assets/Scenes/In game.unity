@@ -38743,7 +38743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OutroCinematicManager
   slowmoTimeScale: 0.1
   slowmoDurationRealtime: 2
-  finalSlashSFX: {fileID: 8300000, guid: fa470d917cc494a20afce782b1edb910, type: 3}
+  finalSlashSFX: {fileID: 8300000, guid: 13bec75eddcc34a52b34be4bd6630dcc, type: 3}
   whiteFlashOverlay: {fileID: 1582890330}
   flashFadeSpeed: 4
   cinematicBarsPanel: {fileID: 1932445144}
@@ -38760,7 +38760,7 @@ MonoBehaviour:
   - {fileID: 1137109930}
   - {fileID: 826380064}
   emotionalBGM: {fileID: 8300000, guid: 12eaa3a9f44ae43c182a18f393ebbbf1, type: 3}
-  diskRestoredSFX: {fileID: 8300000, guid: 5d216b839014543db8f46e1e2bab8ddc, type: 3}
+  diskRestoredSFX: {fileID: 8300000, guid: 5ccb52cb60e3544b38e7ba1450d324bd, type: 3}
   typewriterSFX: {fileID: 0}
   targetCamera: {fileID: 755169151}
   cameraZoomDuration: 10
