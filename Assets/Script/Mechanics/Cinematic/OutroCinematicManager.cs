@@ -28,27 +28,35 @@ public class OutroCinematicManager : MonoBehaviour
     [Header("Audio")]
     public AudioClip emotionalBGM;
     public AudioClip diskRestoredSFX;
-    [Tooltip("SFX suara ketik untuk epilog (bisa pakai uisfx atau sfx klik pendek)")]
     public AudioClip typewriterSFX;
     private AudioSource endingAudioSource;
 
     [Header("Camera & Glitch Shake")]
     public Camera targetCamera;
-    public float cameraZoomDuration = 10f;
-    public float cameraTargetSize = 1.4f;
-    public float glitchShakeIntensity = 0.5f;
+    public float cameraZoomDuration = 8f;
+    public float cameraTargetSize = 1.6f;
+    public float glitchShakeIntensity = 0.45f;
 
     [Header("Memory Glitch Overlay")]
     public Image glitchOverlay;
     public Sprite[] glitchSprites;
 
-    [Header("Outro Dialogue")]
+    [Header("Autoplay Settings")]
+    [Tooltip("Kecepatan pengetikan dialog outro (detik per huruf).")]
+    public float dialogueTypingSpeed = 0.04f;
+    [Tooltip("Jeda baca setelah satu kalimat selesai sebelum otomatis pindah ke kalimat berikutnya.")]
+    public float dialogueSentencePause = 2.0f;
+
+    [Header("Outro Dialogue (Deep & Emotional)")]
     public DialogueManager dialogueManager;
     public DialogueSentence[] dialogueOutro = new DialogueSentence[]
     {
         new DialogueSentence { speakerName = "Aoyama", sentence = "I-impossible... That blade... You truly haven't lost your edge..." },
-        new DialogueSentence { speakerName = "Michelle Sato", sentence = "This was for everyone you took from me. It's over, Aoyama." },
-        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Ryu... Mother is here. The final memory disk is recovered. You're safe now." }
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "This was for every tear you forced my boy to shed. It ends here, Aoyama." },
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Ryu... My sweet, precious boy. Can you hear me?" },
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Mother fought her way through the dark just to reclaim your memory disks." },
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "Every fragment of your smile, every sound of your voice... I have them all back now." },
+        new DialogueSentence { speakerName = "Michelle Sato", sentence = "You will never be forgotten. Your story lives forever in my heart. Rest easy, my love." }
     };
 
     [Header("Fade to Black & Epilogue")]
@@ -56,8 +64,7 @@ public class OutroCinematicManager : MonoBehaviour
     public TMP_Text epilogueText;
     [TextArea(3, 5)]
     public string epilogueStory = "THE STEEL HAS TASTED VENGEANCE.\n\nTHE FRAGMENTS OF THE PAST ARE WHOLE ONCE MORE.\n\nREST EASY, RYU...\nMOTHER IS HOME.";
-    [Tooltip("Kecepatan muncul huruf per detik")]
-    public float typingSpeed = 0.05f;
+    public float epilogueTypingSpeed = 0.05f;
     public Button returnToMenuButton;
 
     private void Awake()
@@ -112,7 +119,7 @@ public class OutroCinematicManager : MonoBehaviour
 
     private IEnumerator CinematicOutroRoutine()
     {
-        // 1. Final Slash & Slow-mo
+        // 1. Tebasan Terakhir & Slow-mo
         StopAllGameplayAudio();
 
         if (finalSlashSFX != null && GameAudioManager.Instance != null)
@@ -128,7 +135,7 @@ public class OutroCinematicManager : MonoBehaviour
         if (PlayerMovement.Instance != null)
             PlayerMovement.Instance.SetFreeze(true);
 
-        // 2. Hide HUD & Bars
+        // 2. Sembunyikan HUD Gameplay & Tampilkan Bar Sinematik
         SetGameplayHUDVisible(false);
 
         if (cinematicBarsPanel != null)
@@ -137,27 +144,27 @@ public class OutroCinematicManager : MonoBehaviour
             StartCoroutine(AnimateBars(true));
         }
 
-        // 3. Audio & Camera Zoom
+        // 3. Audio Emosional & Zoom Kamera Halus
         PlayEmotionalBGM();
 
         if (targetCamera != null)
             StartCoroutine(ZoomCamera(targetCamera.orthographicSize, cameraTargetSize, cameraZoomDuration));
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
-        // 4. Outro Dialogue
+        // 4. Outro Dialog Sinematik (Autoplay tanpa skip)
         bool dialogueDone = false;
-        dialogueManager.StartDialogue(dialogueOutro, onComplete: () =>
+        dialogueManager.StartCinematicDialogue(dialogueOutro, dialogueTypingSpeed, dialogueSentencePause, onComplete: () =>
         {
             dialogueDone = true;
         });
 
         yield return new WaitUntil(() => dialogueDone);
 
+        // 5. Pemulihan Disk Terakhir & Efek Glitch Bergetar
         if (MemoryDiskManager.Instance != null)
             MemoryDiskManager.Instance.CollectBossDisk();
 
-        // 5. Glitch + Shake
         if (glitchOverlay != null && glitchSprites != null && glitchSprites.Length > 0)
         {
             glitchOverlay.gameObject.SetActive(true);
@@ -196,7 +203,7 @@ public class OutroCinematicManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        // 7. Epilogue Typewriter Effect
+        // 7. Pengetikan Teks Epilog Akhir
         if (epilogueText != null)
         {
             epilogueText.gameObject.SetActive(true);
@@ -217,19 +224,17 @@ public class OutroCinematicManager : MonoBehaviour
         {
             epilogueText.text += letter;
 
-            // Mainkan audio ketik jika karakter bukan spasi
             if (letter != ' ' && letter != '\n' && typewriterSFX != null && GameAudioManager.Instance != null)
             {
                 GameAudioManager.Instance.PlaySFX(typewriterSFX);
             }
 
-            // Jeda lebih lama jika tanda titik untuk memberi jeda kalimat
             if (letter == '.')
                 yield return new WaitForSeconds(0.35f);
             else if (letter == '\n')
                 yield return new WaitForSeconds(0.2f);
             else
-                yield return new WaitForSeconds(typingSpeed);
+                yield return new WaitForSeconds(epilogueTypingSpeed);
         }
     }
 
@@ -258,8 +263,8 @@ public class OutroCinematicManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            float x = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            float y = UnityEngine.Random.Range(-1f, 1f) * magnitude;
 
             targetCamera.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
             elapsed += Time.deltaTime;
