@@ -25,7 +25,7 @@ public class QuestTrackerUI : MonoBehaviour
     public StreetAmbushTrigger streetAmbushTrigger;
     public ItemData yakitoriItem;
 
-    [Header("Quest Descriptions (Bisa diedit di Inspector)")]
+    [Header("Quest Descriptions - Beggar & Blacksmith")]
     public string q1Title = "A Hungry Stranger";
     public string q1Desc = "Look for the beggar on the street (Tanaka Koji).";
 
@@ -50,8 +50,18 @@ public class QuestTrackerUI : MonoBehaviour
     public string q8Title = "Claim The Blade";
     public string q8Desc = "Speak with Ito Shun to claim your Katana back.";
 
+    [Header("Quest Descriptions - Ambush, Disks & Victory")]
     public string q9Title = "Syndicate Ambush";
     public string q9Desc = "Survive the street ambush and defeat the Suit Yakuza leader!";
+
+    public string qDisksTitle = "Ryu's Memory Disks";
+    public string qDisksDesc = "Search the town and recover Ryu's lost Memory Disks ({0}/4) before confronting Aoyama!";
+
+    public string qBossTitle = "Showdown at Rooftop";
+    public string qBossDesc = "All 4 exploration disks gathered! Head through the courtyard gate to the rooftop for the final confrontation!";
+
+    public string qVictoryTitle = "Memories Restored";
+    public string qVictoryDesc = "All 5 Memory Disks have been recovered! Ryu's memories are restored and your child is finally safe. Congratulations, Ghostslayer Michelle Sato!";
 
     private void Awake()
     {
@@ -113,11 +123,11 @@ public class QuestTrackerUI : MonoBehaviour
     public void UpdateQuestInfo()
     {
         string title = "Active Objective";
-        string desc = "Jelajahi area sekitar.";
+        string desc = "Explore the surrounding area.";
 
         bool hasYakitori = InventoryManager.Instance != null && yakitoriItem != null && InventoryManager.Instance.HasItem(yakitoriItem);
 
-        // 1. Quest Pengemis (Tanaka Koji)
+        // 1. Quest Pengemis
         if (beggarTrigger != null && beggarTrigger.currentState != BeggarTrigger.QuestState.QuestCompleted)
         {
             switch (beggarTrigger.currentState)
@@ -126,32 +136,21 @@ public class QuestTrackerUI : MonoBehaviour
                     title = q1Title;
                     desc = q1Desc;
                     break;
-
                 case BeggarTrigger.QuestState.LookingForFood:
-                    if (!hasYakitori)
-                    {
-                        title = q2Title;
-                        desc = q2Desc;
-                    }
-                    else
-                    {
-                        title = q3Title;
-                        desc = q3Desc;
-                    }
+                    title = !hasYakitori ? q2Title : q3Title;
+                    desc = !hasYakitori ? q2Desc : q3Desc;
                     break;
-
                 case BeggarTrigger.QuestState.YakuzaEncounter:
                     title = q4Title;
                     desc = q4Desc;
                     break;
-
                 case BeggarTrigger.QuestState.CombatFinished:
                     title = q5Title;
                     desc = q5Desc;
                     break;
             }
         }
-        // 2. Quest Pandai Besi (Ito Shun)
+        // 2. Quest Blacksmith
         else if (blacksmithTrigger != null && blacksmithTrigger.currentState != BlacksmithTrigger.BlacksmithState.QuestCompleted)
         {
             switch (blacksmithTrigger.currentState)
@@ -161,37 +160,42 @@ public class QuestTrackerUI : MonoBehaviour
                     title = q6Title;
                     desc = q6Desc;
                     break;
-
                 case BlacksmithTrigger.BlacksmithState.InCombat:
                     title = q7Title;
                     desc = q7Desc;
                     break;
-
                 case BlacksmithTrigger.BlacksmithState.CombatFinished:
                     title = q8Title;
                     desc = q8Desc;
                     break;
             }
         }
-        // 3. Quest Ambush Jalanan (2 Wave + Duel Suit Yakuza)
+        // 3. Quest Ambush Jalanan
         else if (streetAmbushTrigger != null && streetAmbushTrigger.currentState != StreetAmbushTrigger.AmbushState.Completed)
         {
             title = q9Title;
             desc = q9Desc;
         }
-        // 4. SETELAH SUIT YAKUZA KALAH: Masuk Misi Memory Disk Ryu
+        // 4. Setelah Ambush: Misi 4 Disk & Pertarungan Boss
         else if (MemoryDiskManager.Instance != null)
         {
             int disks = MemoryDiskManager.Instance.collectedDisks;
+
             if (disks < MemoryDiskManager.REQUIRED_EXPLORATION_DISKS)
             {
-                title = "Memory Disks";
-                desc = $"Find and collect the remaining Ryu Memory Disks ({disks}/4) before facing Aoyama!";
+                title = qDisksTitle;
+                desc = string.Format(qDisksDesc, disks);
+            }
+            else if (disks == MemoryDiskManager.REQUIRED_EXPLORATION_DISKS)
+            {
+                title = qBossTitle;
+                desc = qBossDesc;
             }
             else
             {
-                title = "Showdown at Rooftop";
-                desc = "All Memory Disks collected! Enter the gate and face Aoyama on the Rooftop!";
+                // Disks >= 5 (Boss Kalah & Memory Ryu Selesai)
+                title = qVictoryTitle;
+                desc = qVictoryDesc;
             }
         }
 

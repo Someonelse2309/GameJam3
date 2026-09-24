@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class MemoryDiskManager : MonoBehaviour
 {
@@ -11,6 +12,16 @@ public class MemoryDiskManager : MonoBehaviour
 
     [Header("Prerequisite")]
     public StreetAmbushTrigger streetAmbushTrigger;
+
+    [Header("UI Indicator (Under Bag Button)")]
+    [Tooltip("Panel UI CD di bawah tombol tas")]
+    public GameObject diskCounterRoot;
+
+    [Tooltip("Teks angka [X]/5")]
+    public TMP_Text diskCounterText;
+
+    [Tooltip("Sembunyikan indikator CD sampai street ambush selesai")]
+    public bool hideUntilAmbushDone = true;
 
     [Header("Navigation & Gate")]
     [Tooltip("Panah penunjuk jalan ke Boss Rooftop")]
@@ -27,21 +38,38 @@ public class MemoryDiskManager : MonoBehaviour
         if (streetAmbushTrigger == null)
             streetAmbushTrigger = FindFirstObjectByType<StreetAmbushTrigger>();
 
+        UpdateDiskUI();
         UpdateQuestTracker();
+    }
+
+    private void Update()
+    {
+        // Pastikan indikator CD otomatis muncul tepat setelah ambush selesai
+        if (diskCounterRoot != null && hideUntilAmbushDone)
+        {
+            bool isAmbushDone = streetAmbushTrigger != null && 
+                               streetAmbushTrigger.currentState == StreetAmbushTrigger.AmbushState.Completed;
+
+            if (diskCounterRoot.activeSelf != isAmbushDone)
+            {
+                diskCounterRoot.SetActive(isAmbushDone);
+            }
+        }
     }
 
     public void AddDisk()
     {
-        collectedDisks++;
+        collectedDisks = Mathf.Min(collectedDisks + 1, TOTAL_DISKS);
 
         if (GameAudioManager.Instance != null)
         {
-            GameAudioManager.Instance.PlayQuestTrackerSFX(); 
+            GameAudioManager.Instance.PlayQuestTrackerSFX();
         }
 
+        UpdateDiskUI();
         UpdateQuestTracker();
 
-        // Jika 4 disk sudah lengkap dan ambush sudah selesai, nyalakan panah ke boss
+        // Aktifkan panah boss jika 4 disk eksplorasi lengkap
         if (collectedDisks >= REQUIRED_EXPLORATION_DISKS)
         {
             if (streetAmbushTrigger != null && streetAmbushTrigger.currentState == StreetAmbushTrigger.AmbushState.Completed)
@@ -52,16 +80,31 @@ public class MemoryDiskManager : MonoBehaviour
         }
     }
 
+    // Dipanggil saat Boss Aoyama dikalahkan
+    public void CollectBossDisk()
+    {
+        collectedDisks = TOTAL_DISKS; // Menjadi 5/5
+
+        if (GameAudioManager.Instance != null)
+        {
+            GameAudioManager.Instance.PlayQuestTrackerSFX();
+        }
+
+        UpdateDiskUI();
+        UpdateQuestTracker();
+    }
+
     public bool HasCollectedAllExplorationDisks()
     {
         return collectedDisks >= REQUIRED_EXPLORATION_DISKS;
     }
 
-    public void CollectBossDisk()
+    public void UpdateDiskUI()
     {
-        collectedDisks = TOTAL_DISKS;
-        if (QuestTrackerUI.Instance != null)
-            QuestTrackerUI.Instance.UpdateQuestInfo();
+        if (diskCounterText != null)
+        {
+            diskCounterText.text = $"{collectedDisks}/{TOTAL_DISKS}";
+        }
     }
 
     public void UpdateQuestTracker()
