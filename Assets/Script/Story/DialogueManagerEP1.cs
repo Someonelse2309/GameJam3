@@ -40,12 +40,12 @@ public class DialogueManagerEP1 : MonoBehaviour
         if (instanceEP1 == null)
         {
             instanceEP1 = this;
-            Debug.Log("DialogueManagerEP1: Instance created");
+            // Debug.Log("DialogueManagerEP1: Instance created");
         }
         else
         {
             Destroy(gameObject);
-            Debug.LogWarning("DialogueManagerEP1: Instance already exists, destroying duplicate");
+            // Debug.LogWarning("DialogueManagerEP1: Instance already exists, destroying duplicate");
             return;
         }
 
@@ -72,7 +72,7 @@ public class DialogueManagerEP1 : MonoBehaviour
     {
         if (dialogue == null || dialogue.lines == null || dialogue.lines.Length == 0)
         {
-            Debug.LogError("DialogueManagerEP1.StartDialogue: dialogue NULL atau tidak punya lines!");
+            // Debug.LogError("DialogueManagerEP1.StartDialogue: dialogue NULL atau tidak punya lines!");
             return;
         }
 
@@ -81,7 +81,7 @@ public class DialogueManagerEP1 : MonoBehaviour
         isDialogueActive = true;
         currentTrigger = trigger;
 
-        Debug.Log($"DialogueManagerEP1: StartDialogue - dialogue={dialogue.name}, trigger={trigger?.name}");
+        // Debug.Log($"DialogueManagerEP1: StartDialogue - dialogue={dialogue.name}, trigger={trigger?.name}");
 
         if (dialoguePanel != null)
             dialoguePanel.SetActive(true);
@@ -106,7 +106,7 @@ public class DialogueManagerEP1 : MonoBehaviour
         // Safety check
         if (line == null || string.IsNullOrEmpty(line.text))
         {
-            Debug.LogWarning($"DialogueManagerEP1: Line {index} is null or empty, skipping");
+            // Debug.LogWarning($"DialogueManagerEP1: Line {index} is null or empty, skipping");
             NextLine();
             return;
         }
@@ -128,7 +128,7 @@ public class DialogueManagerEP1 : MonoBehaviour
             }
         }
 
-        Debug.Log($"DialogueManagerEP1: Showing line {index} - {line.speakerName}: {line.text}");
+        // Debug.Log($"DialogueManagerEP1: Showing line {index} - {line.speakerName}: {line.text}");
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -166,7 +166,7 @@ public class DialogueManagerEP1 : MonoBehaviour
         }
 
         isTyping = false;
-        Debug.Log($"TypeText: Completed typing line (text length: {text.Length})");
+        // Debug.Log($"TypeText: Completed typing line (text length: {text.Length})");
 
         if (continueIndicator != null)
         {
@@ -179,9 +179,9 @@ public class DialogueManagerEP1 : MonoBehaviour
 
     private IEnumerator AutoAdvanceAfterDelay(float delay)
     {
-        Debug.Log($"AutoAdvanceAfterDelay: Waiting {delay} seconds");
+        // Debug.Log($"AutoAdvanceAfterDelay: Waiting {delay} seconds");
         yield return new WaitForSeconds(delay);
-        Debug.Log("AutoAdvanceAfterDelay: Delay complete, advancing");
+        // Debug.Log("AutoAdvanceAfterDelay: Delay complete, advancing");
         AdvanceDialogue();
     }
 
@@ -235,11 +235,11 @@ public class DialogueManagerEP1 : MonoBehaviour
     private void NextLine()
     {
         currentLineIndex++;
-        Debug.Log($"DialogueManagerEP1: Moving to line {currentLineIndex} (total: {currentDialogue?.lines?.Length})");
+        // Debug.Log($"DialogueManagerEP1: Moving to line {currentLineIndex} (total: {currentDialogue?.lines?.Length})");
 
         if (currentLineIndex >= currentDialogue.lines.Length)
         {
-            Debug.Log("DialogueManagerEP1: All lines complete, ending dialogue");
+            // Debug.Log("DialogueManagerEP1: All lines complete, ending dialogue");
             EndDialogue();
         }
         else
@@ -254,7 +254,7 @@ public class DialogueManagerEP1 : MonoBehaviour
         currentDialogue = null;
         currentLineIndex = 0;
 
-        Debug.Log($"DialogueManagerEP1: EndDialogue - currentTrigger={currentTrigger?.name}");
+        // Debug.Log($"DialogueManagerEP1: EndDialogue - currentTrigger={currentTrigger?.name}");
 
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
@@ -264,7 +264,7 @@ public class DialogueManagerEP1 : MonoBehaviour
 
         currentTrigger = null; // Clear after invoking
 
-        Debug.Log("DialogueManagerEP1: Dialogue ended");
+        // Debug.Log("DialogueManagerEP1: Dialogue ended");
     }
 
     public void ForceEndDialogue()
@@ -275,19 +275,19 @@ public class DialogueManagerEP1 : MonoBehaviour
     public void PauseDialogue()
     {
         isDialogueActive = false;
-        Debug.Log("DialogueManagerEP1: Dialogue paused");
+        // Debug.Log("DialogueManagerEP1: Dialogue paused");
     }
 
     public void ResumeDialogue()
     {
         if (currentDialogue == null)
         {
-            Debug.LogWarning("DialogueManagerEP1: ResumeDialogue called but currentDialogue is null");
+            // Debug.LogWarning("DialogueManagerEP1: ResumeDialogue called but currentDialogue is null");
             return;
         }
 
         isDialogueActive = true;
-        Debug.Log($"DialogueManagerEP1: Resuming dialogue from line {currentLineIndex}");
+        // Debug.Log($"DialogueManagerEP1: Resuming dialogue from line {currentLineIndex}");
         ShowLine(currentLineIndex);
     }
 

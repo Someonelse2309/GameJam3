@@ -44,19 +44,10 @@ public class TilemapTintManager : MonoBehaviour
             }
         }
 
-        if (targetGrid == null)
-        {
-            Debug.LogWarning("TilemapTintManager: No Grid found!");
-            return;
-        }
+        if (targetGrid == null) return;
 
         tilemaps = targetGrid.GetComponentsInChildren<Tilemap>();
-
-        if (tilemaps == null || tilemaps.Length == 0)
-        {
-            Debug.LogWarning("TilemapTintManager: No Tilemaps found!");
-            return;
-        }
+        if (tilemaps == null || tilemaps.Length == 0) return;
 
         originalColors = new Color[tilemaps.Length];
         for (int i = 0; i < tilemaps.Length; i++)
@@ -66,8 +57,6 @@ public class TilemapTintManager : MonoBehaviour
                 originalColors[i] = tilemaps[i].color;
             }
         }
-
-        Debug.Log($"TilemapTintManager: Found {tilemaps.Length} Tilemaps");
     }
 
     public void ApplyTint(TintType type)
@@ -90,14 +79,12 @@ public class TilemapTintManager : MonoBehaviour
     {
         Color newColor = Color.Lerp(Color.white, tintColor, tintStrength);
         SetTilemapColors(newColor);
-        Debug.Log($"ApplyBrownTint: Color={newColor}");
     }
 
     public void ApplyBlackTint()
     {
         Color newColor = Color.Lerp(Color.white, blackTintColor, blackTintStrength);
         SetTilemapColors(newColor);
-        Debug.Log($"ApplyBlackTint: Color={newColor}");
     }
 
     public void ClearTint()
@@ -112,7 +99,6 @@ public class TilemapTintManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("ClearTint");
     }
 
     void SetTilemapColors(Color color)

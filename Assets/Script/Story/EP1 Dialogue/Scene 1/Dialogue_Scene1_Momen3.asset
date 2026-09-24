@@ -18,13 +18,22 @@ MonoBehaviour:
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Ryu
-    text: '"Mom! Let''s go to the toy store first!"'
+    text: Mom! Let's go to the toy store first!
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"Okay, okay."'
+    text: Okay, okay.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0

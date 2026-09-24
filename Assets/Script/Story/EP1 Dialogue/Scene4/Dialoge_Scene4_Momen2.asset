@@ -22,7 +22,7 @@ MonoBehaviour:
     triggerFadeToBlack: 0
     triggerScreenShake: 0
   - speakerName: Yakuza
-    text: '"...Found it."'
+    text: ...Found it.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 2479784136142112536, guid: b9fc16e2188a64889ad94977fb0ac0d9, type: 3}
@@ -30,7 +30,7 @@ MonoBehaviour:
     triggerFadeToBlack: 0
     triggerScreenShake: 0
   - speakerName: Yakuza
-    text: '"Ryu''s Memory CD is picked up, Boss."'
+    text: Ryu's Memory CD is picked up, Boss.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 2479784136142112536, guid: b9fc16e2188a64889ad94977fb0ac0d9, type: 3}
@@ -38,7 +38,7 @@ MonoBehaviour:
     triggerFadeToBlack: 0
     triggerScreenShake: 0
   - speakerName: Aoyama
-    text: '"Good, Let''s Go."'
+    text: Good, Let's Go.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
@@ -54,7 +54,7 @@ MonoBehaviour:
     triggerFadeToBlack: 0
     triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"Ryu... please... open your eyes..."'
+    text: Ryu... please... open your eyes...
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
@@ -62,7 +62,7 @@ MonoBehaviour:
     triggerFadeToBlack: 0
     triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"No... no no no... Ryu... don''t leave me..."'
+    text: No... no no no... Ryu... don't leave me...
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}

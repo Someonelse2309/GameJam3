@@ -14,17 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueDataEP1
   lines:
   - speakerName: Michelle
-    text: '"Ryu? Where are you?"'
+    text: Ryu? Where are you?
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"Ryu?!"'
+    text: Ryu?!
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: (Panic) "RYU?!"
+    text: (Panic) RYU?!
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0

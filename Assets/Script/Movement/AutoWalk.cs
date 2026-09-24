@@ -109,8 +109,6 @@ public class AutoWalk : MonoBehaviour
 
     void OnReachDestination()
     {
-        Debug.Log($"AutoWalk.OnReachDestination called on {gameObject.name}");
-
         if (disablePlayerControl && playerToDisable != null)
         {
             EnablePlayerControl();
@@ -129,7 +127,6 @@ public class AutoWalk : MonoBehaviour
 
     public void StartWalking()
     {
-        Debug.Log($"AutoWalk.StartWalking called on {gameObject.name}, waypoints={(waypoints?.Length ?? 0)}, isWalking={isWalking}");
         if (waypoints == null || waypoints.Length == 0) return;
 
         // Matikan player control
@@ -159,7 +156,6 @@ public class AutoWalk : MonoBehaviour
 
     public void StopWalking()
     {
-        Debug.Log($"AutoWalk.StopWalking called on {gameObject.name}");
         isWalking = false;
         StopRigidbody();
 

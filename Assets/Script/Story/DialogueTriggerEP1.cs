@@ -70,6 +70,9 @@ public class DialogueTriggerEP1 : MonoBehaviour
     public CinematicText cinematicText;
     public bool fadeToBlackAfterCinematic = true;
 
+    [Header("Hide UI During Cinematic")]
+    public GameObject[] uiToHideDuringCinematic; // UI yang di-hide pas cinematic (misal: joystick)
+
     [Header("Music")]
     public bool changeMusicOnTrigger = false;
     public int musicIndex = 0; // Index di AudioManager.musicLibrary
@@ -365,7 +368,28 @@ public class DialogueTriggerEP1 : MonoBehaviour
 
     private void PlayCinematicWithDelay()
     {
+        HideUICinematic();
         cinematicText?.Play();
+    }
+
+    private void HideUICinematic()
+    {
+        if (uiToHideDuringCinematic == null) return;
+        foreach (var ui in uiToHideDuringCinematic)
+        {
+            if (ui != null)
+                ui.SetActive(false);
+        }
+    }
+
+    private void ShowUICinematic()
+    {
+        if (uiToHideDuringCinematic == null) return;
+        foreach (var ui in uiToHideDuringCinematic)
+        {
+            if (ui != null)
+                ui.SetActive(true);
+        }
     }
 
     // Fade out cepat, lalu play cinematic

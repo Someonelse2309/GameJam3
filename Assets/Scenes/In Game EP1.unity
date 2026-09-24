@@ -933,6 +933,7 @@ MonoBehaviour:
   playCinematicAfterEnd: 0
   cinematicText: {fileID: 0}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic: []
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
@@ -1419,6 +1420,7 @@ MonoBehaviour:
   playCinematicAfterEnd: 0
   cinematicText: {fileID: 0}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic: []
   changeMusicOnTrigger: 1
   musicIndex: 1
   musicVolume: 1
@@ -1556,6 +1558,7 @@ MonoBehaviour:
   playCinematicAfterEnd: 0
   cinematicText: {fileID: 0}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic: []
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
@@ -2024,7 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca05165f107254d39944e912c6fc2f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementEP1
-  moveSpeed: 12
+  moveSpeed: 2
   joystick: {fileID: 426383197}
 --- !u!114 &293576613
 MonoBehaviour:
@@ -5467,7 +5470,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6877845425145365849, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
   m_PrefabInstance: {fileID: 426383195}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 496790959}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3679ccf1861da4756bf1ba7a5a483553, type: 3}
@@ -5785,6 +5788,11 @@ MonoBehaviour:
   rawImage: {fileID: 489747187}
   videoClip: {fileID: 32900000, guid: d9748df09a60e49288bdf1dcf1dd7ed2, type: 3}
   overlayAlpha: 0.1
+--- !u!1 &496790959 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6177780683611833470, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+  m_PrefabInstance: {fileID: 426383195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &566571718
 GameObject:
   m_ObjectHideFlags: 0
@@ -5978,6 +5986,7 @@ MonoBehaviour:
   playCinematicAfterEnd: 0
   cinematicText: {fileID: 0}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic: []
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
@@ -6674,6 +6683,7 @@ MonoBehaviour:
   playCinematicAfterEnd: 0
   cinematicText: {fileID: 0}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic: []
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
@@ -7705,6 +7715,8 @@ MonoBehaviour:
   playCinematicAfterEnd: 1
   cinematicText: {fileID: 669878983}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic:
+  - {fileID: 496790959}
   changeMusicOnTrigger: 1
   musicIndex: 2
   musicVolume: 1
@@ -17285,6 +17297,7 @@ MonoBehaviour:
   playCinematicAfterEnd: 0
   cinematicText: {fileID: 0}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic: []
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
@@ -17454,6 +17467,7 @@ MonoBehaviour:
   playCinematicAfterEnd: 0
   cinematicText: {fileID: 0}
   fadeToBlackAfterCinematic: 1
+  uiToHideDuringCinematic: []
   changeMusicOnTrigger: 0
   musicIndex: 1
   musicVolume: 1
@@ -37586,6 +37600,7 @@ GameObject:
   - component: {fileID: 2038666435}
   - component: {fileID: 2038666437}
   - component: {fileID: 2038666436}
+  - component: {fileID: 2038666438}
   m_Layer: 0
   m_Name: CD
   m_TagString: Untagged
@@ -37686,6 +37701,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &2038666438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038666434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850587f269324421cb31db0954b938f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimateEP1
+  idleSprites:
+  - {fileID: -8688524700820625353, guid: 30f32bdf4885f4ef983978b3da52ce8b, type: 3}
+  - {fileID: -313992858841608402, guid: 6a7d48c618fc34bc2a8e0231dc005013, type: 3}
+  - {fileID: 746297310829417492, guid: 7c794cb2564dc46619173852b87edac3, type: 3}
+  - {fileID: -6606280522648775507, guid: 7c08fcee663bb405297c9b304d435135, type: 3}
+  - {fileID: 1166506318301983649, guid: a8379bd1ead3540eb9b1b745e0af6a8b, type: 3}
+  - {fileID: -6054648105386646880, guid: 22420e42db2624778a3ce492c3caa3c4, type: 3}
+  walkSprites: []
+  happySprites: []
+  frameRate: 8
+  autoDetectMovement: 1
 --- !u!1 &2049084413
 GameObject:
   m_ObjectHideFlags: 0

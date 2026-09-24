@@ -14,32 +14,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueDataEP1
   lines:
   - speakerName: Michelle
-    text: '"So, Ryu. What do you want to buy today?" '
+    text: So, Ryu. What do you want to buy today?
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Ryu
-    text: '"I want to look at everything, Mom!" '
+    text: I want to look at everything, Mom!
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"That''s not very specific." '
+    text: That's not very specific.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Ryu
-    text: "\"I want to look at the toy store! And the bookstore! And\u2014\" "
+    text: "I want to look at the toy store! And the bookstore! And\u2014"
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"We only have one hour, sweetheart." '
+    text: We only have one hour, sweetheart.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Ryu
-    text: '"Okay..."'
+    text: Okay...
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0

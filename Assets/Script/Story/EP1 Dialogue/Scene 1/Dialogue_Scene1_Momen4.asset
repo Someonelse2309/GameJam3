@@ -14,32 +14,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueDataEP1
   lines:
   - speakerName: Ryu
-    text: '"Mom! The toy store is right ahead.'
+    text: Mom! The toy store is right ahead.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"But we''re already in front of the clothes shop."'
+    text: But we're already in front of the clothes shop.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Ryu
-    text: '"Aww..."'
+    text: Aww...
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"Meet me in front of the clothes shop in 10 minutes. Don''t talk to strangers, okay?"'
+    text: Meet me in front of the clothes shop in 10 minutes. Don't talk to strangers, okay?
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Ryu
-    text: '"Promise!"'
+    text: Promise!
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
   - speakerName: Michelle
-    text: '"Good boy."'
+    text: Good boy.
     voiceLine: {fileID: 0}
     delayAfter: 0.5
     characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
