@@ -31169,7 +31169,7 @@ MonoBehaviour:
     portrait: {fileID: 2479784136142112536, guid: 888bfecdfc7244795a8ea053fc097558, type: 3}
   - characterName: Aoyama
     portrait: {fileID: 4670912251789344206, guid: 3d90154f669f2448896c5ffc890a5591, type: 3}
-  typingSpeed: 0.02
+  defaultTypingSpeed: 0.02
   skipCooldown: 0.25
 --- !u!1 &1229883210
 GameObject:
@@ -32413,6 +32413,8 @@ MonoBehaviour:
   bottomBar: {fileID: 1229883211}
   barHeight: 120
   transitionSpeed: 3
+  typingSpeed: 0.02
+  sentencePause: 1.5
   gameplayUIElements:
   - {fileID: 495654081}
   - {fileID: 1724880397}
@@ -32423,15 +32425,29 @@ MonoBehaviour:
   dialogueManager: {fileID: 1212965034}
   openingMonologue:
   - speakerName: Michelle Sato
-    sentence: Ten years... Ten years I swore never to touch a blade again.
+    sentence: Ten years ago, I threw my katana into the river and swore I'd never stain my hands with blood again.
   - speakerName: Michelle Sato
-    sentence: I buried the bloody ghost of 'Onikoroshi' to give my son a peaceful life.
+    sentence: 'I erased ''Onikoroshi'' from existence... only to become what I cherished most in this cruel world: a mother.'
   - speakerName: Michelle Sato
-    sentence: Yet Aoyama's syndicate dragged my sins back into the light. They took Ryu.
+    sentence: 'Ryu was my sanctuary. '
   - speakerName: Michelle Sato
-    sentence: They think ten years of quiet motherhood made me soft. They forgot who ruled these streets.
+    sentence: His laughter was the only thing that drowned out the screams of my past.
   - speakerName: Michelle Sato
-    sentence: I have no sword right now... but fists will break bones just the same. Ryu, hold on... Mother is here.
+    sentence: 'And yet... Aoyama''s syndicate dragged my sins back into the moonlight. '
+  - speakerName: Michelle Sato
+    sentence: They tore him away from my arms.
+  - speakerName: Michelle Sato
+    sentence: They shattered his mind
+  - speakerName: Michelle Sato
+    sentence: Scattered his soul across cold silicon disks thinking a quiet mother would surrender.
+  - speakerName: Michelle Sato
+    sentence: They made a grave mistake. They forgot that when a demon lays down her blade to protect her child...
+  - speakerName: Michelle Sato
+    sentence: ' she becomes something far more terrifying.'
+  - speakerName: Michelle Sato
+    sentence: 'I will break every bone in this city with my bare fists if I have to. '
+  - speakerName: Michelle Sato
+    sentence: Hold on, Ryu... Mother is coming home.
 --- !u!4 &1327972272
 Transform:
   m_ObjectHideFlags: 0
@@ -38759,11 +38775,11 @@ MonoBehaviour:
   - {fileID: 670682413}
   - {fileID: 1137109930}
   - {fileID: 826380064}
-  emotionalBGM: {fileID: 8300000, guid: 12eaa3a9f44ae43c182a18f393ebbbf1, type: 3}
+  emotionalBGM: {fileID: 8300000, guid: e5f8b6e7717c74af6ac2c459636ee2e8, type: 3}
   diskRestoredSFX: {fileID: 8300000, guid: 5ccb52cb60e3544b38e7ba1450d324bd, type: 3}
   typewriterSFX: {fileID: 0}
   targetCamera: {fileID: 755169151}
-  cameraZoomDuration: 10
+  cameraZoomDuration: 30
   cameraTargetSize: 1.4
   glitchShakeIntensity: 0.5
   glitchOverlay: {fileID: 213145863}
@@ -38773,6 +38789,8 @@ MonoBehaviour:
   - {fileID: -4420806333224301317, guid: f94b26057ffd14e108443beac354813b, type: 3}
   - {fileID: 4541546989315405310, guid: f94b26057ffd14e108443beac354813b, type: 3}
   - {fileID: -9090678924544498251, guid: 1ba9a322f9a8d45bf89cfc50d363b31c, type: 3}
+  dialogueTypingSpeed: 0.02
+  dialogueSentencePause: 1.5
   dialogueManager: {fileID: 0}
   dialogueOutro:
   - speakerName: Aoyama
@@ -38780,7 +38798,15 @@ MonoBehaviour:
   - speakerName: Michelle Sato
     sentence: This was for everyone you took from me. It's over, Aoyama.
   - speakerName: Michelle Sato
-    sentence: Ryu... Mother is here. The final memory disk is recovered. You're safe now.
+    sentence: Ryu... My sweet, precious boy. Can you hear me?
+  - speakerName: Michelle Sato
+    sentence: Mother fought her way through the dark just to reclaim your memory disks.
+  - speakerName: Michelle Sato
+    sentence: Every fragment of your smile, every sound of your voice... I have them all back now.
+  - speakerName: Michelle Sato
+    sentence: 'You will never be forgotten. Your story lives forever in my heart. '
+  - speakerName: Michelle Sato
+    sentence: Rest easy, my love.
   fadeOverlay: {fileID: 489316066}
   epilogueText: {fileID: 1131856743}
   epilogueStory: 'The steel has tasted vengeance.
@@ -38790,7 +38816,7 @@ MonoBehaviour:
 
 
     Rest easy, Ryu... Mother is home.'
-  typingSpeed: 0.05
+  epilogueTypingSpeed: 0.05
   returnToMenuButton: {fileID: 0}
 --- !u!4 &1409125192
 Transform:

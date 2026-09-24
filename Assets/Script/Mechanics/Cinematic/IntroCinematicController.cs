@@ -4,47 +4,61 @@ using UnityEngine;
 public class IntroCinematicController : MonoBehaviour
 {
     [Header("Cinematic UI")]
-    [Tooltip("Panel atau GameObject penampung bar hitam atas & bawah")]
     public GameObject cinematicBarsPanel;
     public RectTransform topBar;
     public RectTransform bottomBar;
     public float barHeight = 120f;
     public float transitionSpeed = 3f;
 
+    [Header("Autoplay Settings")]
+    [Tooltip("Kecepatan ketik huruf (detik). Semakin kecil nilainya, semakin cepat.")]
+    public float typingSpeed = 0.038f;
+    [Tooltip("Jeda membaca setelah satu kalimat selesai diketik sebelum otomatis berganti.")]
+    public float sentencePause = 1.9f;
+
     [Header("Gameplay HUD to Hide")]
-    [Tooltip("Tarik elemen UI gameplay seperti Joystick, Tombol Serang, Healthbar, Bag, dll")]
     public GameObject[] gameplayUIElements;
 
     [Header("References")]
     public DialogueManager dialogueManager;
 
-    [Header("Opening Monologue Dialogue")]
+    [Header("Opening Monologue Dialogue (Deep & Dramatic)")]
     public DialogueSentence[] openingMonologue = new DialogueSentence[]
     {
         new DialogueSentence 
         { 
             speakerName = "Michelle Sato", 
-            sentence = "Ten years... Ten years I swore never to touch a blade again." 
+            sentence = "Ten years ago, I threw my katana into the river and swore I'd never stain my hands with blood again." 
         },
         new DialogueSentence 
         { 
             speakerName = "Michelle Sato", 
-            sentence = "I buried the bloody ghost of 'Onikoroshi' to give my son a peaceful life." 
+            sentence = "I erased 'Onikoroshi' from existence... only to become what I cherished most in this cruel world: a mother." 
         },
         new DialogueSentence 
         { 
             speakerName = "Michelle Sato", 
-            sentence = "Yet Aoyama's syndicate dragged my sins back into the light. They took Ryu." 
+            sentence = "Ryu was my sanctuary. His laughter was the only thing that drowned out the screams of my past." 
         },
         new DialogueSentence 
         { 
             speakerName = "Michelle Sato", 
-            sentence = "They think ten years of quiet motherhood made me soft. They forgot who ruled these streets." 
+            sentence = "And yet... Aoyama's syndicate dragged my sins back into the moonlight. They tore him away from my arms." 
         },
         new DialogueSentence 
         { 
             speakerName = "Michelle Sato", 
-            sentence = "I have no sword right now... but fists will break bones just the same. Ryu, hold on... Mother is here." 
+            sentence = "They shattered his mind, scattered his soul across cold silicon disks, thinking a quiet mother would surrender." 
+        },
+        new DialogueSentence 
+        { 
+            speakerName = "Michelle Sato", 
+            sentence = "They made a grave mistake. They forgot that when a demon lays down her blade to protect her child... she becomes something far more terrifying." 
+        },
+        new DialogueSentence 
+        { 
+            speakerName = "Michelle Sato", 
+            sentence = "I will break every bone in this city with my bare fists if I have to. Hold on, Ryu... Mother is coming home." 
         }
     };
 
@@ -58,25 +72,22 @@ public class IntroCinematicController : MonoBehaviour
 
     private IEnumerator PlayCinematicIntro()
     {
-        // 1. Bekukan pemain & sembunyikan UI gameplay
         if (PlayerMovement.Instance != null)
             PlayerMovement.Instance.SetFreeze(true);
 
         SetGameplayHUDVisible(false);
 
-        // 2. Tampilkan dan animasikan bar hitam cinematic (turun dari atas & naik dari bawah)
         if (cinematicBarsPanel != null)
         {
             cinematicBarsPanel.SetActive(true);
             yield return StartCoroutine(AnimateBars(true));
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
 
-        // 3. Mulai monolog MC lewat DialogueManager
         if (dialogueManager != null)
         {
-            dialogueManager.StartDialogue(openingMonologue, onComplete: () =>
+            dialogueManager.StartCinematicDialogue(openingMonologue, typingSpeed, sentencePause, onComplete: () =>
             {
                 StartCoroutine(EndCinematicIntro());
             });
@@ -89,14 +100,12 @@ public class IntroCinematicController : MonoBehaviour
 
     private IEnumerator EndCinematicIntro()
     {
-        // 4. Tutup bar hitam secara smooth
         if (cinematicBarsPanel != null)
         {
             yield return StartCoroutine(AnimateBars(false));
             cinematicBarsPanel.SetActive(false);
         }
 
-        // 5. Kembalikan kontrol pemain & tampilkan kembali UI gameplay
         SetGameplayHUDVisible(true);
 
         if (PlayerMovement.Instance != null)
