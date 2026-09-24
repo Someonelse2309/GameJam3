@@ -1,13 +1,35 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+guid: b33f1b923581e47dabb66c7ab8dc644f
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+guid: bac3dd6fc7bd74ff3820ba050fca5add
+========
 guid: 8ae74713fd21d4ffab2fd517f4fab028
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+      213: 2261173274351040113
+    second: MC MOM_Punch 2@4x_0
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+      213: -4521413158744506977
+    second: MC MOM_Attack Shuriken 2_0
+========
       213: -697535669788250683
     second: MOM_AttackShuriken2_0
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
   - first:
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+      213: 8691114260817708687
+    second: MC MOM_Punch 2@4x_1
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+      213: 2533208989069077742
+    second: MC MOM_Attack Shuriken 2_1
+========
       213: 6889985412157018627
     second: MOM_AttackShuriken2_1
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -80,6 +102,22 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+========
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -93,6 +131,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -127,16 +166,81 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+      name: MC MOM_Punch 2@4x_0
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+      name: MC MOM_Attack Shuriken 2_0
+========
       name: MOM_AttackShuriken2_0
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
       rect:
         serializedVersion: 2
-        x: 0
+        x: 11
         y: 0
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+        width: 102
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+        width: 25
+        height: 32
+========
         width: 97
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -146,20 +250,46 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+      spriteID: 176fc41ec1d416f10800000000000000
+      internalID: 2261173274351040113
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+      spriteID: f9db14600b6b041c0800000000000000
+      internalID: -4521413158744506977
+========
       spriteID: 5cd6b18010bd156f0800000000000000
       internalID: -697535669788250683
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+      name: MC MOM_Punch 2@4x_1
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+      name: MC MOM_Attack Shuriken 2_1
+========
       name: MOM_AttackShuriken2_1
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
       rect:
         serializedVersion: 2
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+        x: 103
+        y: 47
+        width: 14
+        height: 6
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+        x: 23
+        y: 12
+        width: 9
+        height: 10
+========
         x: 98
         y: 54
         width: 30
         height: 31
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,8 +298,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+      spriteID: f860f5a6f5a0d9870800000000000000
+      internalID: 8691114260817708687
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+      spriteID: eece94f6724c72320800000000000000
+      internalID: 2533208989069077742
+========
       spriteID: 3021e374a352e9f50800000000000000
       internalID: 6889985412157018627
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
       vertices: []
       indices: 
       edges: []
@@ -188,8 +326,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Character/MC MOM/MC MOM_Punch 2@4x.png.meta
+      MC MOM_Punch 2@4x_0: 2261173274351040113
+      MC MOM_Punch 2@4x_1: 8691114260817708687
+|||||||| merged common ancestors:Assets/Character/MC MOM/MC MOM_Attack Shuriken 2.png.meta
+      MC MOM_Attack Shuriken 2_0: -4521413158744506977
+      MC MOM_Attack Shuriken 2_1: 2533208989069077742
+========
       MOM_AttackShuriken2_0: -697535669788250683
       MOM_AttackShuriken2_1: 6889985412157018627
+>>>>>>>> origin/main:Assets/Character/MC MOM/MOM_AttackShuriken2.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
