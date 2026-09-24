@@ -70,6 +70,11 @@ public class DialogueTriggerEP1 : MonoBehaviour
     public CinematicText cinematicText;
     public bool fadeToBlackAfterCinematic = true;
 
+    [Header("Music")]
+    public bool changeMusicOnTrigger = false;
+    public int musicIndex = 0; // Index di AudioManager.musicLibrary
+    public float musicVolume = 1f;
+
     private bool hasTriggered = false;
     private bool dialogueEndedHandled = false;
 
@@ -97,6 +102,12 @@ public class DialogueTriggerEP1 : MonoBehaviour
                 gameObject.SetActive(false);
 
             ShowNPCs();
+
+            // Play music jika di-set
+            if (changeMusicOnTrigger && AudioManager.instance != null)
+            {
+                AudioManager.instance.PlayMusic(musicIndex, musicVolume);
+            }
 
             if (autoWalkTarget != null)
             {
@@ -413,8 +424,12 @@ public class DialogueTriggerEP1 : MonoBehaviour
         }
     }
 
+    private bool ryuSeparationStarted = false;
     private void StartRyuSeparation()
     {
+        if (ryuSeparationStarted) return;
+        ryuSeparationStarted = true;
+
         if (ryuFollowTarget != null)
         {
             ryuFollowTarget.StopFollowing();

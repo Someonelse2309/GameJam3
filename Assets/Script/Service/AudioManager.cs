@@ -11,6 +11,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] sfxLibrary;
     public AudioClip[] voiceLibrary;
 
+    [Header("Default Music")]
+    public bool playDefaultMusicOnStart = false;
+    public int defaultMusicIndex = 0;
+    public float defaultMusicVolume = 1f;
+
     public static AudioManager instance;
 
     private void Awake()
@@ -24,6 +29,14 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (playDefaultMusicOnStart && defaultMusicIndex >= 0)
+        {
+            PlayMusic(defaultMusicIndex, defaultMusicVolume);
         }
     }
     

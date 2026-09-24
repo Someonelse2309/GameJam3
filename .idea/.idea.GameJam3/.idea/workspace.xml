@@ -11,10 +11,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c02bf0e1-070c-44c4-8a50-df43f578aaad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameJam3/.idea/indexLayout.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameJam3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameJam3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Additive.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Additive.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Additive.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Additive.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Effect.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Effect.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Path.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Path.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Path.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Path.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Path.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Path.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/ReadMe.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/ReadMe.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Slime.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/Slime.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/SlimeA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/SlimeA.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/StateRandom.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreePixelEffect/StateRandom.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/In Game EP1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/In Game EP1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Shader/VignetteMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shader/VignetteMaterial.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Service/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Service/AudioManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Story/DialogueDataEP1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Story/DialogueDataEP1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Story/DialogueTriggerEP1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Story/DialogueTriggerEP1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +48,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Story/DialogueTriggerEP1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Story/DialogueManagerEP1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Story/DialogueTriggerEP1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Visual/ArrowIndicator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Shader/OldFilmOverlay.shader" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -75,6 +101,14 @@
       <workItem from="1789706399481" duration="1248000" />
       <workItem from="1789976412171" duration="603000" />
       <workItem from="1790060537933" duration="119000" />
+      <workItem from="1790148077119" duration="18000" />
+      <workItem from="1790148262962" duration="1687000" />
+      <workItem from="1790150559406" duration="479000" />
+      <workItem from="1790151297694" duration="22000" />
+      <workItem from="1790151368426" duration="866000" />
+      <workItem from="1790154384542" duration="150000" />
+      <workItem from="1790155039714" duration="62000" />
+      <workItem from="1790156145584" duration="606000" />
     </task>
     <servers />
   </component>

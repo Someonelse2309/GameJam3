@@ -109,19 +109,18 @@ public class AutoWalk : MonoBehaviour
 
     void OnReachDestination()
     {
-        // Matikan player control kalau diperlukan
+        Debug.Log($"AutoWalk.OnReachDestination called on {gameObject.name}");
+
         if (disablePlayerControl && playerToDisable != null)
         {
             EnablePlayerControl();
         }
 
-        // Invoke completion event
         if (onAutoWalkComplete != null)
         {
             onAutoWalkComplete.Invoke();
         }
 
-        // Play dialogue kalau ada
         if (dialogueToPlayOnReach != null && DialogueManagerEP1.instanceEP1 != null)
         {
             DialogueManagerEP1.instanceEP1.StartDialogue(dialogueToPlayOnReach);
@@ -130,6 +129,7 @@ public class AutoWalk : MonoBehaviour
 
     public void StartWalking()
     {
+        Debug.Log($"AutoWalk.StartWalking called on {gameObject.name}, waypoints={(waypoints?.Length ?? 0)}, isWalking={isWalking}");
         if (waypoints == null || waypoints.Length == 0) return;
 
         // Matikan player control
@@ -139,7 +139,6 @@ public class AutoWalk : MonoBehaviour
         }
 
         // Jangan teleport - mulai dari posisi sekarang
-        // currentWaypointIndex = 0 artinya jalan ke waypoints[0] dari posisi sekarang
         currentWaypointIndex = 0;
 
         isWalking = true;
@@ -152,7 +151,6 @@ public class AutoWalk : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Kinematic;
         }
 
-        // Play dialogue kalau ada
         if (dialogueToPlayOnStart != null && DialogueManagerEP1.instanceEP1 != null)
         {
             DialogueManagerEP1.instanceEP1.StartDialogue(dialogueToPlayOnStart);
@@ -161,16 +159,15 @@ public class AutoWalk : MonoBehaviour
 
     public void StopWalking()
     {
+        Debug.Log($"AutoWalk.StopWalking called on {gameObject.name}");
         isWalking = false;
         StopRigidbody();
 
-        // Kembalikan Rigidbody ke type asli
         if (rb != null)
         {
             rb.bodyType = originalBodyType;
         }
 
-        // Kembalikan player control setelah selesai AutoWalk
         if (disablePlayerControl && playerToDisable != null)
         {
             EnablePlayerControl();
