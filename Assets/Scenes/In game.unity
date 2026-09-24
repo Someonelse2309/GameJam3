@@ -939,7 +939,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 50
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8323288641196240216, guid: e41f06a6b506e4876b3ce0cbe63ae87c, type: 3}
+  m_Sprite: {fileID: 4915620324684567951, guid: 8e2de2dd290da40e98adba7c02c4da71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -962,11 +962,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a510c61305d2a4b908cf999fd825738a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArrowIndicator
-  targetNPC: {fileID: 2056924655}
+  targetNPC: {fileID: 822550869}
   edgePadding: 0.01
   headOffsetY: 0.75
   hideWhenOnScreen: 1
-  bubbleSprite: {fileID: 8323288641196240216, guid: e41f06a6b506e4876b3ce0cbe63ae87c, type: 3}
+  bubbleSprite: {fileID: 4915620324684567951, guid: 8e2de2dd290da40e98adba7c02c4da71, type: 3}
   bubbleColor: {r: 1, g: 1, b: 1, a: 1}
   bubbleScale: {x: 0.15, y: 0.15}
   sortingLayerName: Default
@@ -1012,7 +1012,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.74, y: 2.8933334}
+    oldSize: {x: 5.96, y: 6.62}
     newSize: {x: 2.74, y: 2.8933334}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1030,8 +1030,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.67, y: 2.13, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.09, y: 0.09, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24992,6 +24992,228 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &822550868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822550869}
+  - component: {fileID: 822550874}
+  - component: {fileID: 822550873}
+  - component: {fileID: 822550872}
+  - component: {fileID: 822550871}
+  - component: {fileID: 822550870}
+  m_Layer: 0
+  m_Name: NPC_BossYakuza
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822550869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822550868}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 77.78999, y: 4.8159995, z: 0}
+  m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &822550870
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822550868}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &822550871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822550868}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b680331f4618470098f61e5c00d3733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
+  attackDamage: 20
+  attackSpeed: 1.5
+  moveSpeed: 1.6
+  attackDistance: 0.45
+  hitRadius: 0.35
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  beggarTarget: {fileID: 0}
+  shakedownPosition: {x: 0.397, y: 1.277}
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: -841194614512354614, guid: d5df770d009504352ad0e4d0788f05df, type: 3}
+  - {fileID: -1306470820507272025, guid: 761aaf652523246769b4bb02b39e503b, type: 3}
+  walkSprites:
+  - {fileID: -1306470820507272025, guid: 761aaf652523246769b4bb02b39e503b, type: 3}
+  - {fileID: 6125683097748370129, guid: ac7b1a7f3b2a945898bb6944a802896f, type: 3}
+  - {fileID: -7805958317674748314, guid: a8a892b5c7b6a413a8ae9649f120f1cc, type: 3}
+  attackSprites:
+  - {fileID: 6415133266888074997, guid: 6aca7c5a782a746088d786aeb715284e, type: 3}
+  - {fileID: -6706817488489893463, guid: ce472f1eb70a04b8bbf31e9076a275a1, type: 3}
+  frameRate: 0.15
+--- !u!114 &822550872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822550868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
+  maxHealth: 200
+  currentHealth: 0
+  isDead: 0
+  healthBarFill: {fileID: 0}
+  flashWhiteMaterial: {fileID: 2100000, guid: 381e3810d50844de383c7f7697b0c1a7, type: 2}
+  flashDuration: 0.06
+  flashBlinks: 2
+--- !u!61 &822550873
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822550868}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.74, y: 1.28}
+    newSize: {x: 0.94, y: 1.29}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.94, y: 1.29}
+  m_EdgeRadius: 0
+--- !u!212 &822550874
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822550868}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: -841194614512354614, guid: d5df770d009504352ad0e4d0788f05df, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.94, y: 1.29}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &826380064
 GameObject:
   m_ObjectHideFlags: 0
@@ -28850,6 +29072,10 @@ MonoBehaviour:
     portrait: {fileID: -8564918777310975625, guid: ff4f68d24aca943f383181a4daccb2a8, type: 3}
   - characterName: Suit Yakuza
     portrait: {fileID: 2479784136142112536, guid: 888bfecdfc7244795a8ea053fc097558, type: 3}
+  - characterName: Boss Yakuza
+    portrait: {fileID: 4670912251789344206, guid: 3d90154f669f2448896c5ffc890a5591, type: 3}
+  typingSpeed: 0.02
+  skipCooldown: 0.25
 --- !u!1 &1248010830
 GameObject:
   m_ObjectHideFlags: 0
@@ -66293,6 +66519,11 @@ MonoBehaviour:
     sentence: Thank you Ito Shun.
   - speakerName: Ito Shun
     sentence: Be careful. Aoyama won't fight fair.
+  dialogueCompleted:
+  - speakerName: Ito Shun
+    sentence: What are you waiting for, Sato? Go find Aoyama and take your child back!
+  - speakerName: Ito Shun
+    sentence: Make them remember why they feared the name 'Onikoroshi'. Don't look back!
 --- !u!61 &2056924657
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -66983,6 +67214,7 @@ SceneRoots:
   - {fileID: 973180197}
   - {fileID: 1295603901}
   - {fileID: 2056924655}
+  - {fileID: 822550869}
   - {fileID: 1212965033}
   - {fileID: 336083714}
   - {fileID: 8151104561108650422}
