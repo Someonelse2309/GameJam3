@@ -1035,31 +1035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossEncounterTrigger
   dialogueManager: {fileID: 1212965034}
   arrowToBoss: {fileID: 153904929}
-  cinematicBars: {fileID: 1932445144}
-  topBar: {fileID: 1200385946}
-  bottomBar: {fileID: 1229883211}
-  barHeight: 120
-  transitionSpeed: 3
-  gameplayUIElements:
-  - {fileID: 495654081}
-  - {fileID: 1724880397}
-  - {fileID: 1141662444}
-  - {fileID: 1964067695}
-  - {fileID: 1137109930}
-  - {fileID: 670682413}
-  - {fileID: 826380064}
-  fadeOverlay: {fileID: 489316066}
-  glitchOverlay: {fileID: 213145863}
-  glitchSprites:
-  - {fileID: -4420806333224301317, guid: f94b26057ffd14e108443beac354813b, type: 3}
-  - {fileID: -8220262717767702993, guid: 1ba9a322f9a8d45bf89cfc50d363b31c, type: 3}
-  - {fileID: 4252241910009784605, guid: f94b26057ffd14e108443beac354813b, type: 3}
-  - {fileID: 2935887321504194751, guid: 15e1c0f1722fb4ba1ba385bbc481e58a, type: 3}
-  epilogueText: {fileID: 1131856743}
-  returnToMenuButton: {fileID: 1834172242}
-  emotionalBGM: {fileID: 8300000, guid: 12eaa3a9f44ae43c182a18f393ebbbf1, type: 3}
-  diskRestoredSFX: {fileID: 8300000, guid: 5d216b839014543db8f46e1e2bab8ddc, type: 3}
-  targetCamera: {fileID: 0}
   bossEnemy: {fileID: 822550871}
   bossHealth: {fileID: 822550872}
   bossMinions: []
@@ -1078,13 +1053,6 @@ MonoBehaviour:
     sentence: Your legend ends on this rooftop. Ten years of peace made you soft, Sato!
   - speakerName: Michelle Sato
     sentence: You threatened my family, Aoyama. Soft or not... today you die.
-  dialogueOutro:
-  - speakerName: Aoyama
-    sentence: I-impossible... That blade... You truly haven't lost your edge...
-  - speakerName: Michelle Sato
-    sentence: This was for everyone you took from me. It's over, Aoyama.
-  - speakerName: Michelle Sato
-    sentence: Ryu... Mother is here. You're safe now.
 --- !u!61 &103364521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38744,6 +38712,101 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1409125190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409125192}
+  - component: {fileID: 1409125191}
+  m_Layer: 0
+  m_Name: OutroCinematicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1409125191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409125190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c01dfb65c2747ca8586c8b45b9c67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutroCinematicManager
+  slowmoTimeScale: 0.1
+  slowmoDurationRealtime: 2
+  finalSlashSFX: {fileID: 8300000, guid: fa470d917cc494a20afce782b1edb910, type: 3}
+  whiteFlashOverlay: {fileID: 1582890330}
+  flashFadeSpeed: 4
+  cinematicBarsPanel: {fileID: 1932445144}
+  topBar: {fileID: 1200385946}
+  bottomBar: {fileID: 1229883211}
+  barHeight: 120
+  barTransitionSpeed: 3
+  gameplayUIElements:
+  - {fileID: 495654081}
+  - {fileID: 1724880397}
+  - {fileID: 1141662444}
+  - {fileID: 1964067695}
+  - {fileID: 670682413}
+  - {fileID: 1137109930}
+  - {fileID: 826380064}
+  emotionalBGM: {fileID: 8300000, guid: 12eaa3a9f44ae43c182a18f393ebbbf1, type: 3}
+  diskRestoredSFX: {fileID: 8300000, guid: 5d216b839014543db8f46e1e2bab8ddc, type: 3}
+  typewriterSFX: {fileID: 0}
+  targetCamera: {fileID: 755169151}
+  cameraZoomDuration: 10
+  cameraTargetSize: 1.4
+  glitchShakeIntensity: 0.5
+  glitchOverlay: {fileID: 213145863}
+  glitchSprites:
+  - {fileID: 6233146286669648264, guid: 0667d26c632a245e8b826ccf4ab52e47, type: 3}
+  - {fileID: 4252241910009784605, guid: f94b26057ffd14e108443beac354813b, type: 3}
+  - {fileID: -4420806333224301317, guid: f94b26057ffd14e108443beac354813b, type: 3}
+  - {fileID: 4541546989315405310, guid: f94b26057ffd14e108443beac354813b, type: 3}
+  - {fileID: -9090678924544498251, guid: 1ba9a322f9a8d45bf89cfc50d363b31c, type: 3}
+  dialogueManager: {fileID: 0}
+  dialogueOutro:
+  - speakerName: Aoyama
+    sentence: I-impossible... That blade... You truly haven't lost your edge...
+  - speakerName: Michelle Sato
+    sentence: This was for everyone you took from me. It's over, Aoyama.
+  - speakerName: Michelle Sato
+    sentence: Ryu... Mother is here. The final memory disk is recovered. You're safe now.
+  fadeOverlay: {fileID: 489316066}
+  epilogueText: {fileID: 1131856743}
+  epilogueStory: 'The steel has tasted vengeance.
+
+
+    The fragments of the past are whole once more.
+
+
+    Rest easy, Ryu... Mother is home.'
+  typingSpeed: 0.05
+  returnToMenuButton: {fileID: 0}
+--- !u!4 &1409125192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409125190}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1678.0555, y: 1263.5311, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1436466627
 GameObject:
   m_ObjectHideFlags: 0
@@ -41533,6 +41596,81 @@ MonoBehaviour:
   - {fileID: 7829464861233414611, guid: 573b903203f984d72bfd5a2925a0c320, type: 3}
   - {fileID: -7886359649443678600, guid: ec1ef1dbc1724481998f50172927b12c, type: 3}
   frameRate: 0.15
+--- !u!1 &1582890328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1582890329}
+  - component: {fileID: 1582890331}
+  - component: {fileID: 1582890330}
+  m_Layer: 5
+  m_Name: WhiteFlashOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1582890329
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582890328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 953037768}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1582890330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582890328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1582890331
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582890328}
+  m_CullTransparentMesh: 1
 --- !u!1 &1640786955
 GameObject:
   m_ObjectHideFlags: 0
@@ -70432,6 +70570,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 489316065}
+    - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1582890329}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
 --- !u!1660057539 &9223372036854775807
@@ -70481,3 +70622,4 @@ SceneRoots:
   - {fileID: 1687598188}
   - {fileID: 935243697}
   - {fileID: 818627024}
+  - {fileID: 1409125192}
