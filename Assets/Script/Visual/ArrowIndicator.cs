@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArrowIndicator : MonoBehaviour
+public class ArrowIndicatorVisual : MonoBehaviour
 {
     [Header("Settings")]
     public float offsetY = 1.5f;
