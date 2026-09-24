@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f2ea0b13210423b860e003efc9029d, type: 3}
+  m_Name: Dialoge_Scene4_Momen1
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueDataEP1
+  lines:
+  - speakerName: Michelle
+    text: RYU!
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Yakuza
+    text: Don't move!
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 2479784136142112536, guid: b9fc16e2188a64889ad94977fb0ac0d9, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Michelle
+    text: Let him go. Please. He's just a child.
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Aoyama
+    text: You hear that, kid? Your mom wants you back.
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Ryu
+    text: (cried) Mom... Mom!
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 696768212231895392, guid: 9e46c057c0b004f2dafb727a18b8e9a6, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Aoyama
+    text: (coldly smiled) You know why we're here.
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Michelle
+    text: ...What do you want?
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Aoyama
+    text: Just a little reminder. For the life you left behind.
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Michelle
+    text: "You... you're from\u2014"
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Aoyama
+    text: Quiet!!!
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Aoyama
+    text: ' (Aoyama raises his gun and aims at Ryu)'
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
+    soundEffect: {fileID: 8300000, guid: 002b6348ea1144de8a4d44aa5e9f56db, type: 3}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Ryu
+    text: MOMMY!
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 696768212231895392, guid: 9e46c057c0b004f2dafb727a18b8e9a6, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Michelle
+    text: "NO! Don't\u2014"
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: -7034116388857145810, guid: d0361a5ec0b2548e9866f114f4ee1704, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0
+  - speakerName: Aoyama
+    text: Say goodbye, Mommy.
+    voiceLine: {fileID: 0}
+    delayAfter: 0.5
+    characterImage: {fileID: 4670912251789344206, guid: bb0edee8b4ad84d8c9014525f8929577, type: 3}
+    soundEffect: {fileID: 0}
+    triggerFadeToBlack: 0
+    triggerScreenShake: 0

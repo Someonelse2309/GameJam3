@@ -11,6 +11,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] sfxLibrary;
     public AudioClip[] voiceLibrary;
 
+    [Header("Default Music")]
+    public bool playDefaultMusicOnStart = false;
+    public int defaultMusicIndex = 0;
+    public float defaultMusicVolume = 1f;
+
     public static AudioManager instance;
 
     private void Awake()
@@ -24,6 +29,14 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (playDefaultMusicOnStart && defaultMusicIndex >= 0)
+        {
+            PlayMusic(defaultMusicIndex, defaultMusicVolume);
         }
     }
     
@@ -87,6 +100,15 @@ public class AudioManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Audio Manager: SFX index " + index + " is out of bounds!");
+        }
+    }
+
+    // Overload: Accept AudioClip langsung
+    public void PlaySFX(AudioClip clip, float volume = 1f)
+    {
+        if (clip != null)
+        {
+            sfxSource.PlayOneShot(clip, volume);
         }
     }
 
