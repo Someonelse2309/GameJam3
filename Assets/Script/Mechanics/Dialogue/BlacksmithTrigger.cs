@@ -54,6 +54,13 @@ public class BlacksmithTrigger : MonoBehaviour
         new DialogueSentence { speakerName = "Ito Shun", sentence = "Be careful. Aoyama won't fight fair." }
     };
 
+    [Header("Dialogue Encouragement (Setelah Quest Selesai)")]
+    public DialogueSentence[] dialogueCompleted = new DialogueSentence[]
+    {
+        new DialogueSentence { speakerName = "Ito Shun", sentence = "What are you waiting for, Sato? Go find Aoyama and take your child back!" },
+        new DialogueSentence { speakerName = "Ito Shun", sentence = "Make them remember why they feared the name 'Onikoroshi'. Don't look back!" }
+    };
+
     private void Start()
     {
         if (dialogueManager == null)
@@ -226,6 +233,10 @@ public class BlacksmithTrigger : MonoBehaviour
 
                 RefreshIndicator();
             });
+        }
+        else if (currentState == BlacksmithState.QuestCompleted)
+        {
+            dialogueManager.StartDialogue(dialogueCompleted);
         }
     }
 

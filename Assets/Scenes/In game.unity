@@ -1692,7 +1692,7 @@ Transform:
   m_GameObject: {fileID: 185107356}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.424, y: 8.9, z: 0}
+  m_LocalPosition: {x: 37.04, y: 9.09, z: 0}
   m_LocalScale: {x: 0.37, y: 0.37, z: 0.37}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7614,6 +7614,229 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &777824753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 777824759}
+  - component: {fileID: 777824758}
+  - component: {fileID: 777824757}
+  - component: {fileID: 777824756}
+  - component: {fileID: 777824755}
+  - component: {fileID: 777824754}
+  m_Layer: 0
+  m_Name: NPC_WaveBigYakuza2
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!50 &777824754
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777824753}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &777824755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777824753}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b680331f4618470098f61e5c00d3733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YakuzaEnemy
+  attackDamage: 15
+  attackSpeed: 1.5
+  moveSpeed: 1.6
+  attackDistance: 0.45
+  hitRadius: 0.35
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  beggarTarget: {fileID: 0}
+  shakedownPosition: {x: 0.397, y: 1.277}
+  spriteRenderer: {fileID: 0}
+  idleSprites:
+  - {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
+  - {fileID: 6421381375179079389, guid: fb3f1a3c36336480a9c4a6d4fcb077c2, type: 3}
+  - {fileID: 99797836390871179, guid: 5a36aeba4898b4b4f8174b3bf8ca9d85, type: 3}
+  walkSprites:
+  - {fileID: 4703995123541778657, guid: 03368afd386a14b5da649163617fe1ca, type: 3}
+  - {fileID: -6004980011581254953, guid: 09338f2a74c7d42b7a715b468c905a41, type: 3}
+  - {fileID: 8477497619846322172, guid: 92185333a368f479c91034a09666ae33, type: 3}
+  attackSprites:
+  - {fileID: 7054732860433737591, guid: 3f8cd1990b960487c8f92e6ebc5ba0c6, type: 3}
+  - {fileID: 1061287277523489110, guid: 55022538906db4529b253317280d2831, type: 3}
+  frameRate: 0.15
+--- !u!114 &777824756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777824753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48d114946b0f458bb29e6ab2e4dbf66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
+  maxHealth: 100
+  currentHealth: 0
+  isDead: 0
+  healthBarFill: {fileID: 0}
+  flashWhiteMaterial: {fileID: 2100000, guid: 381e3810d50844de383c7f7697b0c1a7, type: 2}
+  flashDuration: 0.06
+  flashBlinks: 2
+--- !u!61 &777824757
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777824753}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.94, y: 1.29}
+    newSize: {x: 0.94, y: 1.29}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.94, y: 1.29}
+  m_EdgeRadius: 0
+--- !u!212 &777824758
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777824753}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 5716627469995230188, guid: a7ca5e0ba8bb94e86914cebf491e3e83, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.94, y: 1.29}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!4 &777824759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777824753}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 36.03, y: 8.84, z: 0}
+  m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &795995354
 GameObject:
   m_ObjectHideFlags: 0
@@ -66408,13 +66631,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StreetAmbushTrigger
   blacksmithTrigger: {fileID: 2056924656}
   dialogueManager: {fileID: 1212965034}
-  suitYakuzaLeader: {fileID: 1577981197}
+  suitYakuzaBoss: {fileID: 185107359}
   leaderFleeSpeed: 7
   wave1Enemies:
   - {fileID: 726714153}
   - {fileID: 1542205706}
   wave2Enemies:
-  - {fileID: 185107359}
+  - {fileID: 777824755}
   - {fileID: 87988902}
   arrowToBossGate: {fileID: 0}
   currentState: 0
@@ -66429,6 +66652,13 @@ MonoBehaviour:
     sentence: You got lucky at the forge, but this is the full might of the syndicate! Kill her!
   - speakerName: Michelle Sato
     sentence: You ran once. You should have kept running.
+  dialogueBeforeDuel:
+  - speakerName: Suit Yakuza
+    sentence: Useless fools! All of them... dead?!
+  - speakerName: Suit Yakuza
+    sentence: Fine, Onikoroshi! I'll take your head to Aoyama-sama myself!
+  - speakerName: Michelle Sato
+    sentence: Step forward.
   dialogueInterrogation:
   - speakerName: Suit Yakuza
     sentence: N-no... stay back! All of them... in minutes... You really are the Onikoroshi...
@@ -66763,6 +66993,7 @@ SceneRoots:
   - {fileID: 1542205710}
   - {fileID: 185107363}
   - {fileID: 87988906}
+  - {fileID: 777824759}
   - {fileID: 795995356}
   - {fileID: 1073033157}
   - {fileID: 391737507}
