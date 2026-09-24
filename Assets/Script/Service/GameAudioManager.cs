@@ -235,4 +235,18 @@ public class GameAudioManager : MonoBehaviour
         footstepSource.PlayOneShot(footstepSFX, sfxVolume * masterVolume);
     }
 }
+
+public void PlayBGM(AudioClip clip, bool loop = true)
+    {
+        if (clip == null) return;
+
+        // Sesuaikan 'bgmSource' dengan nama variabel AudioSource BGM yang ada di script GameAudioManager Anda
+        if (bgmSource != null)
+        {
+            bgmSource.Stop();
+            bgmSource.clip = clip;
+            bgmSource.loop = loop;
+            bgmSource.Play();
+        }
+    }
 }
