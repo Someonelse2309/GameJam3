@@ -170,10 +170,10 @@ TextureImporter:
       name: MC_Idle 2@4x_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 19
         y: 0
-        width: 0
-        height: 0
+        width: 91
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

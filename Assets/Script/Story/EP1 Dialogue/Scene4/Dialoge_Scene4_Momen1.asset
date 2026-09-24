@@ -49,7 +49,7 @@ MonoBehaviour:
     text: (cried) Mom... Mom!
     voiceLine: {fileID: 0}
     delayAfter: 0.5
-    characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    characterImage: {fileID: 696768212231895392, guid: 9e46c057c0b004f2dafb727a18b8e9a6, type: 3}
     soundEffect: {fileID: 0}
     triggerFadeToBlack: 0
     triggerScreenShake: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
     text: MOMMY!
     voiceLine: {fileID: 0}
     delayAfter: 0.5
-    characterImage: {fileID: 696768212231895392, guid: 3270e9182e49c406fa99f25c371d7214, type: 3}
+    characterImage: {fileID: 696768212231895392, guid: 9e46c057c0b004f2dafb727a18b8e9a6, type: 3}
     soundEffect: {fileID: 0}
     triggerFadeToBlack: 0
     triggerScreenShake: 0
