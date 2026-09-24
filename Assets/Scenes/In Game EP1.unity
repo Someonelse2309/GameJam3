@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.39215687, g: 0.23529412, b: 0.078431375, a: 0.65882355}
+  m_Color: {r: 0.39215687, g: 0.23529412, b: 0.078431375, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -936,6 +936,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
+  applyTilemapTintOnEnter: 0
+  tintType: 0
 --- !u!61 &106654977
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1394,7 +1396,7 @@ MonoBehaviour:
   autoStartAutoWalkOnShow: 0
   nextTriggerToActivate: {fileID: 1435982676}
   delayBeforeActivateNext: 0
-  fadeToBlackOnEnter: 1
+  fadeToBlackOnEnter: 0
   delayBeforeFade: 0
   enableScreenShake: 0
   shakeOnLineIndex: 8
@@ -1420,6 +1422,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 1
   musicIndex: 1
   musicVolume: 1
+  applyTilemapTintOnEnter: 1
+  tintType: 2
 --- !u!61 &187489690
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1555,6 +1559,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
+  applyTilemapTintOnEnter: 0
+  tintType: 0
 --- !u!61 &231739179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5410,33 +5416,45 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 7792528249049056368, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4442467557183003850, guid: c7b9670e9e49740049cbde382b64b865, type: 3}
+    - target: {fileID: 8461796613192034902, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4442467557183003850, guid: c7b9670e9e49740049cbde382b64b865, type: 3}
+    - target: {fileID: 8461796613192034902, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1124892412}
-    - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 30989287}
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 344131245}
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
+      insertIndex: 3
       addedObject: {fileID: 489747185}
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
+      insertIndex: 4
       addedObject: {fileID: 566571719}
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
+      insertIndex: 5
       addedObject: {fileID: 244330691}
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
+      insertIndex: 6
       addedObject: {fileID: 669878982}
     - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
-      insertIndex: -1
+      insertIndex: 7
       addedObject: {fileID: 1785252593}
+    - targetCorrespondingSourceObject: {fileID: 4604095594301824288, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1124892412}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0685433d8fcd74d2183d2e84a2d276f2, type: 3}
 --- !u!224 &426383196 stripped
@@ -5455,6 +5473,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3679ccf1861da4756bf1ba7a5a483553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VirtualJoystick
+--- !u!1 &463630414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 463630415}
+  - component: {fileID: 463630416}
+  m_Layer: 0
+  m_Name: TilemapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &463630415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463630414}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 71.54, y: 1.58, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &463630416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463630414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355c3a11163d342a3963fca84b77e5e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TilemapTintManager
+  targetGrid: {fileID: 1808026755}
+  tintColor: {r: 0.28235295, g: 0.18431373, b: 0.1254902, a: 1}
+  tintStrength: 0.7
+  blackTintColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
+  blackTintStrength: 0.8
 --- !u!1 &471552611
 GameObject:
   m_ObjectHideFlags: 0
@@ -5611,7 +5678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &489747185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5914,6 +5981,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
+  applyTilemapTintOnEnter: 0
+  tintType: 0
 --- !u!61 &582629958
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6608,6 +6677,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
+  applyTilemapTintOnEnter: 0
+  tintType: 0
 --- !u!61 &843696472
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7637,6 +7708,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 1
   musicIndex: 2
   musicVolume: 1
+  applyTilemapTintOnEnter: 0
+  tintType: 0
 --- !u!61 &1155874599
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17215,6 +17288,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 0
   musicIndex: 0
   musicVolume: 1
+  applyTilemapTintOnEnter: 0
+  tintType: 0
 --- !u!61 &1411340147
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17382,6 +17457,8 @@ MonoBehaviour:
   changeMusicOnTrigger: 0
   musicIndex: 1
   musicVolume: 1
+  applyTilemapTintOnEnter: 0
+  tintType: 0
 --- !u!61 &1435982679
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36031,7 +36108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1785252593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38178,3 +38255,4 @@ SceneRoots:
   - {fileID: 1298352077}
   - {fileID: 1261726677}
   - {fileID: 1312338278}
+  - {fileID: 463630415}

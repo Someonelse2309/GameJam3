@@ -75,6 +75,10 @@ public class DialogueTriggerEP1 : MonoBehaviour
     public int musicIndex = 0; // Index di AudioManager.musicLibrary
     public float musicVolume = 1f;
 
+    [Header("Tilemap Tint")]
+    public bool applyTilemapTintOnEnter = false;
+    public TilemapTintManager.TintType tintType = TilemapTintManager.TintType.None;
+
     private bool hasTriggered = false;
     private bool dialogueEndedHandled = false;
 
@@ -96,6 +100,16 @@ public class DialogueTriggerEP1 : MonoBehaviour
             if (fadeToBlackOnEnter)
             {
                 StartCoroutine(FadeToBlackSequence());
+            }
+
+            // Apply tilemap tint if set
+            if (applyTilemapTintOnEnter)
+            {
+                TilemapTintManager tintMgr = FindFirstObjectByType<TilemapTintManager>();
+                if (tintMgr != null)
+                {
+                    tintMgr.ApplyTint(tintType);
+                }
             }
 
             if (deactivateAfterTrigger)
