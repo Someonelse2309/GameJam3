@@ -25,9 +25,21 @@ public class DialogueManager : MonoBehaviour
     [Header("Central Character Database")]
     public List<CharacterProfile> characterProfiles = new List<CharacterProfile>();
 
+    [Header("Typewriter & Skip Settings")]
+    [SerializeField] private float typingSpeed = 0.02f;
+    [Tooltip("Jeda waktu minimum setelah skip agar spam klik tidak langsung melompati dialog berikutnya.")]
+    [SerializeField] private float skipCooldown = 0.25f;
+
     private Queue<DialogueSentence> sentences = new Queue<DialogueSentence>();
     public bool isDialogueActive { get; private set; } = false;
-    public bool isEngaged { get; private set; } = false; // True jika player sudah menekan untuk lanjut bicara
+    public bool isEngaged { get; private set; } = false;
+
+    private bool isTyping = false;
+    private string currentFullSentence = "";
+    private Coroutine typingCoroutine;
+    private int lastInputFrame = -1;
+    private float lastCompleteTime = -1f;
+
     private Action onDialogueCompleted;
     private Action onDialogueEngaged;
 
@@ -39,7 +51,6 @@ public class DialogueManager : MonoBehaviour
         if (dialoguePanel != null)
         {
             dialoguePanel.SetActive(false);
-            // Tambahkan listener jika DialoguePanel menggunakan komponen Button
             Button panelBtn = dialoguePanel.GetComponent<Button>();
             if (panelBtn != null) panelBtn.onClick.AddListener(DisplayNextSentence);
         }
@@ -62,7 +73,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         isDialogueActive = true;
-        isEngaged = false; // Player belum menekan tombol (hanya preview lewat)
+        isEngaged = false;
         onDialogueCompleted = onComplete;
         onDialogueEngaged = onEngage;
 
@@ -74,7 +85,6 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(line);
         }
 
-        // Tampilkan kalimat pertama (MC masih bebas jalan jika belum engaged)
         if (sentences.Count > 0)
         {
             DialogueSentence first = sentences.Dequeue();
@@ -86,7 +96,10 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isDialogueActive) return;
 
-        // Saat player menekan tombol pertama kali: Bekukan MC & picu onEngage
+        // Cegah eksekusi ganda dalam 1 frame (misal: Space memicu Input.GetKeyDown sekaligus Button.onClick)
+        if (Time.frameCount == lastInputFrame) return;
+        lastInputFrame = Time.frameCount;
+
         if (!isEngaged)
         {
             isEngaged = true;
@@ -101,6 +114,20 @@ public class DialogueManager : MonoBehaviour
             engageCallback?.Invoke();
         }
 
+        // 1. Jika teks masih mengetik, klik pertama WAJIB menyelesaikan kalimat
+        if (isTyping)
+        {
+            CompleteCurrentSentence();
+            return;
+        }
+
+        // 2. Proteksi spam: jika baru saja skip paksa, klik kedua ditahan selama jeda cooldown
+        if (Time.unscaledTime - lastCompleteTime < skipCooldown)
+        {
+            return;
+        }
+
+        // 3. Jika teks sudah penuh dan cooldown selesai, baru buka dialog berikutnya
         if (sentences.Count == 0)
         {
             EndDialogue();
@@ -129,8 +156,15 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(current.sentence));
+        currentFullSentence = current.sentence;
+
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        typingCoroutine = StartCoroutine(TypeSentence(current.sentence));
     }
 
     private Sprite GetPortraitByName(string name)
@@ -142,18 +176,51 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator TypeSentence(string sentence)
     {
-        dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        isTyping = true;
+        dialogueText.text = sentence;
+        dialogueText.maxVisibleCharacters = 0;
+
+        yield return null; // Tunggu 1 frame agar TextMeshPro menghitung layout teks
+
+        int totalChars = sentence.Length;
+        for (int i = 0; i <= totalChars; i++)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(0.02f);
+            if (!isTyping) yield break;
+            dialogueText.maxVisibleCharacters = i;
+            yield return new WaitForSecondsRealtime(typingSpeed);
         }
+
+        dialogueText.maxVisibleCharacters = int.MaxValue;
+        isTyping = false;
+        lastCompleteTime = 0f; // Selesai alami tanpa paksaan, bebas klik kapan saja
+    }
+
+    private void CompleteCurrentSentence()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        dialogueText.text = currentFullSentence;
+        dialogueText.maxVisibleCharacters = int.MaxValue;
+        isTyping = false;
+        lastCompleteTime = Time.unscaledTime; // Catat waktu skip paksa untuk cooldown
     }
 
     public void EndDialogue()
     {
         isDialogueActive = false;
         isEngaged = false;
+        isTyping = false;
+
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
         if (PlayerMovement.Instance != null)
@@ -167,13 +234,18 @@ public class DialogueManager : MonoBehaviour
         callback?.Invoke();
     }
 
-    // Dipanggil saat player berjalan keluar dari area trigger tanpa menekan dialog
     public void CancelDialogue()
     {
         isDialogueActive = false;
         isEngaged = false;
+        isTyping = false;
         sentences.Clear();
-        StopAllCoroutines();
+
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
 
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
