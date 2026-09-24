@@ -7986,7 +7986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MedkitSpawner
   medkitPrefab: {fileID: 426428250}
   floorTilemap: {fileID: 812065399}
-  spawnCount: 40
+  spawnCount: 20
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -29163,9 +29163,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 645.5, y: 553.5308}
-  m_SizeDelta: {x: 5991, y: 542.9634}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -143.42499, y: 607}
+  m_SizeDelta: {x: 4110.85, y: 659.4}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1200385947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29303,9 +29303,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 641.99994, y: -533.4893}
-  m_SizeDelta: {x: 5986, y: 629.6038}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -103, y: -594}
+  m_SizeDelta: {x: 4007.6997, y: 650}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1229883212
 MonoBehaviour:
   m_ObjectHideFlags: 0
