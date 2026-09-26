@@ -139,8 +139,8 @@ public class CinematicText : MonoBehaviour
 
         isPlaying = false;
         onComplete?.Invoke();
-
+        
         GameState.toggleIsCompleteEP1();
-        SceneController.instance.LoadSceneByName("MainMenuEP2"); 
+        SceneController.instance.LoadSceneByName("MainMenuEP2", true);
     }
 }

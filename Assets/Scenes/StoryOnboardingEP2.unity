@@ -733,8 +733,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7bba056cdc9904fd49e23d01c3074dc8, type: 3}
   - {fileID: 8300000, guid: dfb8dae55f2be4baa8425a5add73934b, type: 3}
   - {fileID: 8300000, guid: 27a42a8d4e11740928373cb9ab0d797f, type: 3}
+  - {fileID: 8300000, guid: d38a8eb2add7241d29f66cd0a2635878, type: 3}
   - {fileID: 8300000, guid: a4251160f8e7f42dbba046c53b91fe38, type: 3}
   - {fileID: 8300000, guid: 37f446dd8082b4824a5a9e70be659ad8, type: 3}
+  playDefaultMusicOnStart: 0
+  defaultMusicIndex: 0
+  defaultMusicVolume: 1
 --- !u!4 &963575488
 Transform:
   m_ObjectHideFlags: 0
