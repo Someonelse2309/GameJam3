@@ -23,8 +23,29 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
+    m_path: Assets/Scenes/MainMenuEP2.unity
+    m_guid: e5544beba1d20412598553de39934081
+  - m_enabled: 1
     m_path: Assets/Scenes/In Game EP1.unity
     m_guid: e209d934aa66e434c8ce9b9b1c770ec7
+  - m_enabled: 1
+    m_path: Assets/Scenes/Credit.unity
+    m_guid: 8836088227c174fac8fdcc3f0fb77106
+  - m_enabled: 1
+    m_path: Assets/Scenes/EndingEP1.unity
+    m_guid: f2b7dd37f0cfa441daeed57eb2327d3e
+  - m_enabled: 1
+    m_path: Assets/Scenes/In game.unity
+    m_guid: 5c80ece2e0af44fec91e8ef1076a8d95
+  - m_enabled: 1
+    m_path: Assets/Scenes/MainMenuEP1.unity
+    m_guid: bb91493d2cea74b47895aeaab5531732
+  - m_enabled: 1
+    m_path: Assets/Scenes/StoryOnboardingEP1.unity
+    m_guid: 66328dbf81b8140e18c33364f162c615
+  - m_enabled: 1
+    m_path: Assets/Scenes/StoryOnboardingEP2.unity
+    m_guid: 5020549326efb44a0bb4b3796b3aeb7d
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
@@ -53,5 +74,5 @@ MonoBehaviour:
         m_AdaptivePerformanceEnabled: 0
         m_iOSXcodeBuildConfig: 1
         m_SymlinkSources: 0
-        m_PreferredXcode: 
+        m_PreferredXcode: 27.0_/Applications/Xcode.app
         m_SymlinkTrampoline: 0
