@@ -30,7 +30,7 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
     
-    public void LoadSceneByName(string sceneName, bool isFullscreen)
+    public void LoadSceneByName(string sceneName, bool isFullscreen = true)
     {
         Screen.fullScreen = isFullscreen;
         SceneManager.LoadScene(sceneName);

@@ -212,6 +212,9 @@ public class OutroCinematicManager : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
 
+        GameState.toggleIsCompleteEP1();
+        SceneController.instance.LoadSceneByName("MainMenuEP1");    
+
         if (returnToMenuButton != null)
             returnToMenuButton.gameObject.SetActive(true);
     }
